@@ -1,0 +1,24 @@
+﻿<H2> Vehículo </H2>
+
+<p>
+  <strong>Marca:</strong>
+  <%= @vehicle.brand %>
+</p>
+ 
+<p>
+  <strong>Modelo:</strong>
+  <%= @vehicle.model %>
+</p>
+
+<p>
+  <strong>Matrícula:</strong>
+  <%= @vehicle.number_plate %>
+</p>
+
+<p>
+  <strong>Comentarios:</strong>
+  <%= @vehicle.comments %>
+</p>
+
+
+<%= link_to 'Atrás', vehicles_path %>

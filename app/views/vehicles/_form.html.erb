@@ -1,0 +1,39 @@
+﻿  
+<%= form_for @vehicle do |v| %>
+ <% if @vehicle.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@vehicle.errors.count, "error") %> impiden guardar el vehículo:</h2>
+    <ul>
+    <% @vehicle.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <p>
+    <%= v.label :Marca %>:
+    <%= v.text_field :brand %>
+  </p>
+ 
+  <p>
+    <%= v.label :Modelo %>:
+    <%= v.text_field :model %>
+  </p>
+ 
+   <p>
+    <%= v.label :Matrícula %>:
+    <%= v.text_field :number_plate %>
+  </p>
+  <p>
+    <%= v.label :Comentarios %>:
+    <%= v.text_area :comments %>
+  </p>
+ 
+  <p>
+    <%= v.submit %>
+  </p>
+  
+<% end %>
+
+

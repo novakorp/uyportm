@@ -1,0 +1,24 @@
+﻿<h2>Listado de Recorridos</h2>
+
+ <%= link_to 'Nuevo Recorrido', new_trip_path %>
+<table>
+  <tr>
+    <th>Desde</th>
+    <th>Hacia</th>
+    <th>Distancia</th> 	
+  </tr>
+ 
+  <% @trips.each do |trip| %>
+    <tr>
+      <td><%= trip.from_location.name %></td>
+      <td><%= trip.to_location.name %></td>
+	  <td><%= trip.distance %></td>
+	  <td><%= link_to 'Ver', trip %></td>
+	  <td><%= link_to 'Editar', edit_trip_path(trip) %></td>
+	  <td><%= link_to 'Eliminar', trip_path(trip),
+                    method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<%= link_to 'Principal', "welcome/index" %>

@@ -1,0 +1,19 @@
+﻿<H2> Recorrido </H2>
+
+<p>
+  <strong>Desde:</strong>
+  <%= @trip.from_location.name %>
+</p>
+ 
+<p>
+  <strong>Hacia:</strong>
+  <%= @trip.to_location.name %>
+</p>
+
+<p>
+  <strong>Distancia:</strong>
+  <%= @trip.distance %>
+</p>
+
+
+<%= link_to 'Atrás', trips_path %>

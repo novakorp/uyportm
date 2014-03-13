@@ -1,0 +1,36 @@
+﻿
+<%= form_for @trip do |t| %>
+ <% if @trip.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@trip.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @trip.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <p>
+    <%= t.label :Desde %>:
+    <%= collection_select(:trip, :from_location_id, Location.all, :id, :name) %>
+  </p>
+ 
+  <p>
+    <%= t.label :Hacia %>:
+    <%= collection_select(:trip, :to_location_id, Location.all, :id, :name) %>
+  </p>
+ 
+ <p>
+    <%= t.label :Distancia %>:
+    <%= t.text_field :distance %>
+  </p>
+ 
+ 
+  <p>
+    <%= t.submit %>
+  </p>
+  
+<% end %>
+
+

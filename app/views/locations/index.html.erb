@@ -1,0 +1,25 @@
+﻿<h2>Ubicaciones</h2>
+
+<%= link_to 'Nueva Ubicación', new_location_path %>
+ 
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Coordenadas</th>
+  </tr>
+ 
+  <% @locations.each do |location| %>
+    <tr>
+      <td><%= location.name %></td>
+      <td><%= location.coords %></td>
+	  <td><%= link_to 'Ver', location %></td>
+	  <td><%= link_to 'Editar', edit_location_path(location) %></td>
+	  <td><%= link_to 'Eliminar', location_path(location),
+                    method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+		
+    </tr>
+  <% end %>
+  
+</table>
+<br>
+<%= link_to 'Principal', "welcome/index" %>
