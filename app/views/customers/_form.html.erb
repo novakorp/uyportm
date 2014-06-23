@@ -1,0 +1,33 @@
+﻿  
+<%= form_for @customer do |c| %>
+ <% if @customer.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@customer.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @customer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+    <th>Nombre:</td>
+    <td><%= c.text_field :name %></td>
+  </tr>
+  <tr>
+	<th>RUT:</td>
+    <td><%= c.text_field :rut %></td>
+  </tr>
+ 
+    
+  <tr><td colspan=2 class="acciones_form">
+  <%= c.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+  
+<% end %>
+
+

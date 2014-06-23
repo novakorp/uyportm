@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipping_request: 
+  vehicle: 
+  coupled_vehicle_id: 1
+  driver_id: 1
+  shipping_datetime: 2014-04-09 01:31:49
+  status: 1
+  comments: MyText
+
+two:
+  shipping_request: 
+  vehicle: 
+  coupled_vehicle_id: 1
+  driver_id: 1
+  shipping_datetime: 2014-04-09 01:31:49
+  status: 1
+  comments: MyText

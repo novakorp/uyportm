@@ -1,24 +1,23 @@
-﻿<h2>Listado de Recorridos</h2>
+﻿<h1>Listado de Recorridos</h1>
 
- <%= link_to 'Nuevo Recorrido', new_trip_path %>
-<table>
-  <tr>
-    <th>Desde</th>
+ <%= link_to 'Nuevo Recorrido', new_trip_path %> 
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+   <th>Desde</th>
     <th>Hacia</th>
     <th>Distancia</th> 	
+	<th></th>
   </tr>
  
   <% @trips.each do |trip| %>
-    <tr>
-      <td><%= trip.from_location.name %></td>
+    <tr class="tabla_listado_fila_contenido">
+     <td><%= trip.from_location.name %></td>
       <td><%= trip.to_location.name %></td>
-	  <td><%= trip.distance %></td>
-	  <td><%= link_to 'Ver', trip %></td>
-	  <td><%= link_to 'Editar', edit_trip_path(trip) %></td>
-	  <td><%= link_to 'Eliminar', trip_path(trip),
-                    method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+	  <td><%= trip.distance %></td>  
+	  <td><%= link_to 'Ver', trip %> &nbsp; <%= link_to 'Editar', edit_trip_path(trip) %> &nbsp; <%= link_to 'Eliminar', trip_path(trip), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
     </tr>
   <% end %>
 </table>
-<br>
-<%= link_to 'Principal', "welcome/index" %>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+ 
+ 

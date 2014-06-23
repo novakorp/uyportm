@@ -1,0 +1,38 @@
+﻿  
+<%= form_for @cargo_type do |c| %>
+ <% if @cargo_type.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@cargo_type.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @cargo_type.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Descripción:</th>
+  <td>  <%= c.text_field :description %> </td>
+  </tr>
+    
+  <tr>
+    <th> Categoría: </th>
+    <td> <%= c.collection_select :cargo_category_id, CargoCategory.all,  :id, :description %>   </td>
+  </tr>
+  
+  <tr>
+    <th> Unidad de Medida: </th>
+    <td> <%= c.collection_select :measure_unit_id, MeasureUnit.all,  :id, :symbol %>   </td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= c.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+  
+<% end %>
+
+

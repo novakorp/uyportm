@@ -1,0 +1,91 @@
+﻿  <%= form_tag("/shipping_requests_builder/fill_data", method: "post") do %>
+	
+  <%= hidden_field_tag :m_shipping_request_id, @mshipping.id %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr> 
+  <th>Fecha del Viaje:</th>
+  <td> <%= select_date Date.today, prefix: :required_shipment_date %> </td> 
+  </tr>
+  
+  <tr>
+    <th>Viaje Unico:</th>
+    <td> <%= select_tag :simple_shipment, options_for_select([['Si', 1], ['No', 0]])%>  </td>
+  </tr>
+  
+  
+  <% cargo_c = 1 %>
+  
+ <% @mshipping.m_requested_cargos.each do |req_cargo| %>
+	<tr>
+    <td colspan=2> <h3> Datos de Carga: </h3> </td>
+	</tr>
+	<tr>
+		<th> Tipo de Carga: </th>
+		<td> <%= select_tag("cargo[" + cargo_c.to_s + "][cargo_type_id]", options_from_collection_for_select(CargoType.all,  :id, :description, req_cargo.cargo_type_id)) %> </td>
+	</tr>
+
+	<tr>   
+	<th>Cantidad:</th>  
+	<td> <%= text_field_tag "cargo[" + cargo_c.to_s + "][ammount]", req_cargo.ammount %>  <%=  select_tag("cargo[" + cargo_c.to_s + "][measure_unit_id]", options_from_collection_for_select(MeasureUnit.all,  :id, :symbol, req_cargo.measure_unit_id)) %> </td>
+	</tr>
+  
+  
+  <% details_c = 1 %>
+  <% req_cargo.m_requested_supplies.each do |req_sup| %>
+	<tr>
+    <td colspan=2> <h4> Indicación de Carga: </h4> </td>
+	</tr>
+	
+	
+	<tr>   
+	<th>Cantidad:</th>  
+	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][supplies][" + details_c.to_s + "][ammount]", req_sup.ammount %> <%= req_cargo.measure_unit.symbol %> </td>
+	</tr> 
+	
+    <tr> 
+	<th>Lugar de Carga:</th>  
+	<td> <%= select_tag("cargo[" + cargo_c.to_s + "][supplies][" + details_c.to_s + "][address_id]", options_from_collection_for_select(@mshipping.account.customer.addresses,  :id, :description, req_sup.address_id)) %> </td>
+	</tr>
+	<th>Comentarios:</th>  
+	<td> <%= text_field_tag "cargo[" + cargo_c.to_s + "][supplies][" + details_c.to_s + "][comments]", req_sup.comments %> </td>
+	</tr>
+		
+	
+	<% details_c += 1 %>
+  <% end %>
+  
+  <% details_c = 1 %>
+  <% req_cargo.m_requested_deliveries.each do |req_deliv| %>
+	<tr>
+    <td colspan=2> <h4> Indicación de Entrega: </h4> </td>
+	</tr>
+	
+	<tr>   
+	<th>Cantidad:</th>  
+	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][deliveries][" + details_c.to_s + "][ammount]", req_deliv.ammount %> <%= req_cargo.measure_unit.symbol %> </td>
+	</tr>
+	
+	
+    <tr> 
+	<th>Lugar de Entrega:</th>  
+	<td> <%= select_tag("cargo[" + cargo_c.to_s + "][deliveries][" + details_c.to_s + "][address_id]", options_from_collection_for_select(@mshipping.account.customer.addresses,  :id, :description, req_deliv.address_id)) %> </td>
+	</tr>
+	<th>Comentarios:</th>  
+	<td> <%= text_field_tag "cargo[" + cargo_c.to_s + "][deliveries][" + details_c.to_s + "][comments]", req_deliv.comments %> </td>
+	</tr>
+	
+	<% details_c += 1 %>
+  <% end %>
+  
+	<% cargo_c += 1 %>
+    
+	<br>
+  <% end %>
+  
+  </table>
+   
+	<%= submit_tag("Siguiente") %>
+  <% end %>
+  
+ 

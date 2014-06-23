@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipment: 
+  requested_cargo: 
+  load_address_id: 1
+
+two:
+  shipment: 
+  requested_cargo: 
+  load_address_id: 1

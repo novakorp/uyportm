@@ -1,26 +1,27 @@
-﻿<h2>Listado de Vehículos</h2>
+﻿<h1Listado de Vehículos</h1>
 
  <%= link_to 'Nuevo Vehículo', new_vehicle_path %>
-<table>
-  <tr>
-    <th>Marca</th>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+	<th>Empresa</th>
+     <th>Marca</th>
     <th>Modelo</th> 
 	<th>Matrícula</th>
 	<th>Comentarios</th>
+	<th></th>
   </tr>
  
   <% @vehicles.each do |vehicle| %>
-    <tr>
-      <td><%= vehicle.brand %></td>
+    <tr class="tabla_listado_fila_contenido">
+	
+       <td><%= vehicle.company.company_name %></td>
+       <td><%= vehicle.brand %></td>
       <td><%= vehicle.model %></td>
       <td><%= vehicle.number_plate %></td>
-      <td><%= vehicle.comments %></td>
-	  <td><%= link_to 'Ver', vehicle %></td>
-	  <td><%= link_to 'Editar', edit_vehicle_path(vehicle) %></td>
-	  <td><%= link_to 'Eliminar', vehicle_path(vehicle),
-                    method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+      <td><%= vehicle.comments %></td>  
+	  <td><%= link_to 'Ver', vehicle %> &nbsp; <%= link_to 'Editar', edit_vehicle_path(vehicle) %> &nbsp; <%= link_to 'Eliminar', vehicle_path(vehicle), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
     </tr>
   <% end %>
 </table>
-<br>
-<%= link_to 'Principal', "welcome/index" %>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+ 

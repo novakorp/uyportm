@@ -1,0 +1,17 @@
+﻿   <%= form_tag("/shipping_requests_builder/select_service", method: "get") do %>
+	
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+
+  <tr>
+    <th> Tipo Pedido: </th>
+    <td> <%= select_tag :m_shipping_request_id , options_from_collection_for_select(@mshippings, :id, :name)  %> </td> 
+  </tr>
+  
+   <tr>
+    <td>  </td>     
+  </tr>
+  
+  </table>
+
+	<%= submit_tag("Siguiente") %>
+  <% end %>

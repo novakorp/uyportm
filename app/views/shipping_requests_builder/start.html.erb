@@ -1,0 +1,65 @@
+﻿   <%= form_tag do %>
+	
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+
+    <tr>
+    <th> Cliente:</th>
+	<td> <%= text_field_tag(:customer_select) %> 
+		<%= hidden_field_tag(:customer_id) %> 
+	</td>
+	</tr>
+	
+	<tr>
+    <th> Tipo Pedido:</th>
+	<td> <%= text_field_tag(:m_shipping_request_select) %> 
+		<%= hidden_field_tag(:m_shipping_request_id) %> 
+	</td>
+	</tr>
+  
+  </table>
+
+	<%= submit_tag("Siguiente") %>
+  <% end %>
+  
+ 
+<script>
+  
+  $(function() {    
+    $("#customer_select" ).autocomplete({
+	  minLength: 0,
+      source: "/customers/customers_ac.js",
+	  focus: function( event, ui ) {
+        $( "#customer_select" ).val( ui.item.label );
+        return false;
+      },
+	  select: function( event, ui ) {
+          if (ui.item) {		  
+			$("#customer_select").val (ui.item.label);
+			$("#customer_id").val (ui.item.value);		  
+			autocompTipoPedido (ui.item.value);
+		  };
+			return false;
+      } 
+    });
+  });
+    
+	
+   function autocompTipoPedido (customerID) {    
+    $("#m_shipping_request_select" ).autocomplete({
+	  minLength: 0,
+      source: "/m_shipping_requests/m_shipping_requests_ac.js?customer_id=" + customerID,
+	  focus: function( event, ui ) {
+        $( "#m_shipping_request_select" ).val( ui.item.label );
+        return false;
+      },
+	  select: function( event, ui ) {
+          if (ui.item) {		  
+			$("#m_shipping_request_select").val (ui.item.label);
+			$("#m_shipping_request_id").val (ui.item.value);
+		  };
+			return false;
+      } 
+    });
+  }
+  
+  </script>  

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ammount: 1
+  address: 
+  coments: MyText
+  requested_cargo: 
+
+two:
+  ammount: 1
+  address: 
+  coments: MyText
+  requested_cargo: 

@@ -1,14 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-  <title>UYPort</title>
+  <title>Gestión de Transportes</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'jquery-ui-1.8.21.custom.css' %>
+  
 </head>
 <body>
-
+<table class="tabla_principal" align=center cellpadding=0 cellspacing=0 border=0>
+<tr><td class="tabla_principal_encabezado">
+<div class="titulo_sistema">Gestión de Transportes</div> 
+<div class="links_autenticacion" width=100%>
+ <% if signed_in? %>
+	  <%= current_user.name %> &nbsp; | &nbsp; <%= link_to "Cerrar sesión", signout_path, method: "delete" %>
+  <% else %>
+     <%= link_to "Ingresar", signin_path %>
+  <% end %>
+</div>
+</td></tr>
+<tr>
+<td class="tabla_principal_contenido">
+	<!-- Mensajes del controller de su ultima invocacion -->
+	<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
 <%= yield %>
+
+</td>
+</tr>
+</table>
 
 </body>
 </html>

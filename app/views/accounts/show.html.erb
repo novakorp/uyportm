@@ -1,0 +1,18 @@
+﻿<H1> Cuenta </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Número:</th>
+  <td><%= @account.account_number %></td>
+  </tr>
+  <tr>
+  <th>Cliente:</th>
+  <td><%= @account.customer.name %></td>
+ </tr>
+  <tr>
+  <th>Descripción:</th>
+  <td><%= @account.description %></td>
+ </tr>
+</table>
+
+<div class="links_form"><%= link_to 'Atrás', accounts_path %></div>

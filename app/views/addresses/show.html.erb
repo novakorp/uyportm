@@ -1,0 +1,51 @@
+﻿<H1> Dirección </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+ 
+  <tr>
+  <th>Cliente:</th>
+  <td>  <%= @address.customer.name %>  </td> 
+  </tr>  
+  
+  <tr>
+  <th>Descripción:</th>
+  <td> <%= @address.description %> </td>
+  </tr>  
+  
+  <tr>
+  <th>Dirección 1:</th>
+  <td> <%= @address.address_detail_1 %></td>
+  </tr>   
+  
+  <tr>
+  <th>Dirección 2:</th>
+  <td> <%= @address.address_detail_2 %></td>
+  </tr>   
+  <tr> 
+  <th>Teléfono 1:</th>  
+	<td> <%=  @address.phone_number_1 %> </td>
+  </tr>
+  <tr>   
+   <tr> 
+  <th>Teléfono 2:</th>  
+	<td> <%=  @address.phone_number_2 %> </td>
+  </tr>
+  <tr>
+  <th>Código Postal:</th>
+  <td> <%= @address.postal_code %></td>
+  </tr> 
+
+	<tr>
+  <th>Localidad: </th>
+  <td> <%= @address.location.name %></td>
+  </tr>   
+  
+  	<tr>
+  <th>Comentarios: </th>
+  <td> <%= @address.comments %></td>
+  </tr>   
+     
+</table>
+
+<div class="links_form"><%= link_to 'Atrás', customer_path(@customer) %></div>
+

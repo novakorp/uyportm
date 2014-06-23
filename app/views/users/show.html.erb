@@ -1,0 +1,15 @@
+﻿<H1> Usuario </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Nombre:</th>
+  <td><%= @user.name %></td>
+  </tr>
+  <tr>
+  <th>E-mail:</th>
+  <td><%= @user.email %></td>
+  </tr>
+  
+</table>
+
+<div class="links_form"><%= link_to 'Atrás', users_path %></div>

@@ -1,0 +1,58 @@
+﻿
+
+<%= form_for ([@customer, @address])  do |a| %>
+ <% if @address.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@address.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @address.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>   
+  <th>Descripción:</th>  
+	<td> <%=  a.text_field :description %> </td>
+  </tr>
+    <tr> 
+  <th>Dirección:</th>  
+	<td> <%=  a.text_field :address_detail_1 %> </td>
+  </tr>
+  <tr> 
+  <th>Dirección:</th>  
+	<td> <%=  a.text_field :address_detail_2 %> </td>
+  </tr>
+  <tr> 
+  <th>Teléfono 1:</th>  
+	<td> <%=  a.text_field :phone_number_1 %> </td>
+  </tr>
+  <tr>   
+   <tr> 
+  <th>Teléfono 2:</th>  
+	<td> <%=  a.text_field :phone_number_2 %> </td>
+  </tr>
+  <tr>   
+  <tr> 
+  <th>Código Postal:</th>  
+	<td> <%=  a.text_field :postal_code %> </td>
+  </tr>
+  
+  <tr> 
+  <th>Localidad:</th>  
+	<td> <%= a.collection_select :location_id, Location.all,  :id, :name %> </td>
+  </tr>
+   <tr> 
+  <th>Comentarios:</th>  
+	<td> <%=  a.text_area :comments %> </td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= a.submit "Guardar" %>
+  </tr>
+  </table> 
+
+<% end %> 

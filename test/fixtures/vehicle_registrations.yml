@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  chassis: MyString
+  engine: MyString
+  registration_date: 2014-03-27 01:27:09
+  registration_number: MyString
+  dnt_id: MyString
+  vehicle: 
+
+two:
+  chassis: MyString
+  engine: MyString
+  registration_date: 2014-03-27 01:27:09
+  registration_number: MyString
+  dnt_id: MyString
+  vehicle: 

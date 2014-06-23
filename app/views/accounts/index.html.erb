@@ -1,0 +1,21 @@
+﻿<h1>Listado de Cuentas</h1>
+
+ <%= link_to 'Nueva Cuenta', new_account_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Nro Cuenta</th>
+    <th>Cliente</th> 
+	<th>Descripcion</th> 	
+	<th></th>
+  </tr>
+ 
+  <% @accounts.each do |account| %>
+     <tr class="tabla_listado_fila_contenido">
+      <td><%= account.account_number %></td>
+      <td><%= account.customer.name %></td>	  
+      <td><%= account.description %></td>
+	  <td><%= link_to 'Ver', account %> &nbsp; <%= link_to 'Editar', edit_account_path(account) %> &nbsp; <%= link_to 'Eliminar', account_path(account), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

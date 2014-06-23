@@ -1,0 +1,22 @@
+﻿<H2> Indicacion de Entrega de Modelo de Pedido</H2>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+     <tr>   
+  <th>Cantidad:</th>  
+	<td> <%=  m_requested_delivery.ammount %> </td>
+  </tr>
+    <tr> 
+  <th>Dirección de Entrega:</th>  
+	<td> <%=  m_requested_delivery.address.description %> </td>
+  </tr>
+  <th>Comentarios:</th>  
+	<td> <%=  m_requested_delivery.comments %> </td>
+  </tr>
+  
+  <tr>
+  <th> </th>
+  <td> <div class="links_form"> <%= link_to 'Modificar', edit_m_requested_delivery_path(m_requested_delivery) %> </div> </td>
+  <td> <div class="links_form"> <%= link_to 'Eliminar', m_requested_delivery_path(m_requested_delivery), method: :delete, data: { confirm: '¿Está seguro?' } %></div></td>
+  </tr> 
+</table>
+

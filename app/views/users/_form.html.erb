@@ -1,0 +1,44 @@
+﻿
+<%= form_for @user do |f| %>
+ <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Nombre:</th>
+  <td><%= f.text_field :name %></td>
+  </tr>
+    
+  <tr>
+    <th> E-mail: </th>
+    <td><%= f.text_field :email %></td>
+  </tr>
+  
+  <tr>
+    <th> Contraseña: </th>
+    <td><%= f.password_field :password %></td>
+  </tr>
+  
+   <tr>
+    <th> Confirmar contraseña: </th>
+    <td><%= f.password_field :password_confirmation %></td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= f.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+ 
+<% end %>
+
+

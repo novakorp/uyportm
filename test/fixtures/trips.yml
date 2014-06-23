@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  from_location_id: 
+  to_location_id: 
+  distance: 
+  route_itinerary: 
+  comments: MyString
+
+two:
+  from_location_id: 
+  to_location_id: 
+  distance: 
+  route_itinerary: 
+  comments: MyString

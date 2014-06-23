@@ -1,4 +1,4 @@
-UYPort::Application.routes.draw do
+﻿UYPort::Application.routes.draw do
   get "welcome/index"
   
   # The priority is based upon order of creation:
@@ -12,12 +12,94 @@ UYPort::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  resources :vehicles
+  
+ # ----  RUTAS  PARA  CONSULTAS  AJAX  ----
+ 
+ #  tipos de vehiculos
+ get 'vehicle_types/couplable_types_by_id', to: 'vehicle_types#couplable_types_by_id'
+ post 'vehicle_types/couplable_types_by_id', to: 'vehicle_types#couplable_types_by_id'
+ 
+ #  cuentas por cliente
+ get 'accounts/accounts_by_customer_id', to: 'accounts#accounts_by_customer_id'
+ post 'accounts/accounts_by_customer_id', to: 'accounts#accounts_by_customer_id'
+ 
+  
+ get 'shipping_requests_builder/start(.:format)', to: 'shipping_requests_builder#start'   
+ post 'shipping_requests_builder/start(.:format)', to: 'shipping_requests_builder#fill_data'  
+ post 'shipping_requests_builder/fill_data(.:format)', to: 'shipping_requests_builder#create_from_template'  
+  
+ get 'daily_shipping_requests/list(.:format)', to: 'daily_shipping_requests#list'  
+ post 'daily_shipping_requests/list(.:format)', to: 'daily_shipping_requests#list'   
+ 
+ 
+ get 'shipments/new/:id(.:format)', to: 'shipments#new'
+ 
+  
+ # Autocomplete clientes
+get 'customers/customers_ac', to: 'customers#customers_ac' 
+ # Autocomplete tipos pedido
+get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shipping_requests_ac' 
+  
+  # Sample resource route (maps HTTP verbs to controller actions automatically):   
+  
+  # ----  RECURSOS  ----
+  
+  resources :accounts
+  resources :billing_units
+  
+  resources :cargo_types
+  resources :cargo_categories
+  
+  resources :companies   
+  
+  resources :customers, shallow: true do 
+	 resources :addresses
+  end
+  
+  resources :document_types
+  resources :employees  
   resources :locations 
+  resources :measure_units
+  
+  resources :shipments  do
+	resources :shipment_supplies
+	resources :shipment_deliveries
+  end
+  
+  resources :shipping_requests, shallow: true do
+	resources :requested_cargos, shallow: true do
+		resources :requested_deliveries		
+		resources :requested_supplies
+	end	
+  end
+  
+  # pedidos modelo
+  resources :m_shipping_requests, shallow: true do
+	resources :m_requested_cargos, shallow: true do
+		resources :m_requested_deliveries		
+		resources :m_requested_supplies
+	end	
+  end
+ 
+  resources :services
+  resources :states 
+  
+  resources :vehicles, shallow: true do
+	 resources :sucta_registrations
+	resources :vehicle_registrations
+  end
+	
   resources :trips
-  resources :works
-
+  resources :vehicle_types  
+  
+  #  Manejo de usuarios
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users
+  
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do

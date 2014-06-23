@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bill_number: MyString
+  details: MyText
+  state: 1
+  request_date: 2014-04-02
+  requested_work_date: 2014-04-02
+  job_type: 
+  quantity: 1
+  requester: MyString
+  billing_unit: 
+  quantity: 1
+
+two:
+  bill_number: MyString
+  details: MyText
+  state: 1
+  request_date: 2014-04-02
+  requested_work_date: 2014-04-02
+  job_type: 
+  quantity: 1
+  requester: MyString
+  billing_unit: 
+  quantity: 1

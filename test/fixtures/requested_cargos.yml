@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ammount: 1
+  cargo_type: 
+  shipping_request: 
+  measure_unit: 
+
+two:
+  ammount: 1
+  cargo_type: 
+  shipping_request: 
+  measure_unit: 

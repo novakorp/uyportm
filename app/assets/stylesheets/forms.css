@@ -1,0 +1,38 @@
+.tabla_campos TH, .tabla_campos_lectura  TH{
+	width: 130px;
+	padding: 7px 5px 7px 7px;
+	font-size: 8pt;
+	text-align: right;
+	color: #909090;
+	border-style: solid;
+	border-width: 0px 0px 0px 0px;
+	border-color: #A0A0A0;
+}
+
+.tabla_campos  TD, .tabla_campos_lectura TD  {
+	padding: 7px 5px 7px 7px;
+}
+ 
+
+.tabla_campos TH, .tabla_campos_lectura TH{
+}
+
+.tabla_campos_lectura {
+	margin-bottom: 10px;
+	width: 400px;
+}
+
+.tabla_campos_lectura TD  {
+	font-weight: bold;
+}
+
+TD.acciones_form  {
+	padding-top: 20px;
+	padding-left: 0px;
+	padding-bottom: 15px;
+}
+
+.links_form {
+	padding-left: 5px;
+}
+

@@ -11,26 +11,29 @@
   </div>
   <% end %>
   
-  <p>
-    <%= t.label :Desde %>:
-    <%= collection_select(:trip, :from_location_id, Location.all, :id, :name) %>
-  </p>
- 
-  <p>
-    <%= t.label :Hacia %>:
-    <%= collection_select(:trip, :to_location_id, Location.all, :id, :name) %>
-  </p>
- 
- <p>
-    <%= t.label :Distancia %>:
-    <%= t.text_field :distance %>
-  </p>
- 
- 
-  <p>
-    <%= t.submit %>
-  </p>
   
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Desde:</th>
+  <td>  <%= collection_select(:trip, :from_location_id, Location.all, :id, :name) %> </td>
+  </tr>
+    
+  <tr>
+    <th> Hacia: </th>
+    <td>   <%= collection_select(:trip, :to_location_id, Location.all, :id, :name) %> </td>
+  </tr>
+  
+  <tr>
+    <th> Distancia: </th>
+    <td>  <%= t.text_field :distance %> </td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= t.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+ 
 <% end %>
 
 

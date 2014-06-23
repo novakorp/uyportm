@@ -1,15 +1,22 @@
-﻿<H2> Ubicación </H2>
+﻿<H1> Ubicación </H1>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @location.name %>
-</p>
- 
-<p>
-  <strong>Coordenadas:</strong>
-  <%= @location.coords %>
-</p>
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Nombre:</th>
+  <td>  <%= @location.name %></td>
+  </tr>
+  <tr>
+  <th>Departamento:</th>
+  <td> <%= @location.state.name %> </td>
+  </tr>
+   <tr>
+  <th>Coordenadas:</th>
+  <td> <%= @location.coords %> </td>
+  </tr>
+   <tr>
+  <th>Tipo:</th>
+  <td> <% if @location.location_type == 1 %>Ciudad<% else %>Lugar<% end %> </td>
+ </tr> 
+</table>
 
-
-
-<%= link_to 'Atrás', locations_path %>
+<div class="links_form"><%= link_to 'Atrás', locations_path %></div>

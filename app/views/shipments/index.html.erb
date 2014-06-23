@@ -1,0 +1,48 @@
+﻿<h1>Listado de Viajes</h1>
+
+ <%= link_to 'Nuevo Viaje', new_shipment_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Fecha</th>	
+	<th>Cliente</th>
+    <th>Servicio</th>
+    <th>Vehículo</th> 
+	<th>Acoplado</th> 
+	<th>Recorrido</th>	
+	<th>Chofer</th>
+	<th>Estado</th> 
+	<th></th>
+  </tr>
+ 
+  <% @shipments.each do |shipment| %>
+    <tr class="tabla_listado_fila_contenido">
+      <td><%= shipment.departure_time %></td>
+	  <td></td><td></td>
+	  <!-- shipment.shipping_request.account.customer.name  shipment.shipping_request.service.details -->
+	  
+	  
+     <td><%= shipment.vehicle.number_plate %></td> 	  
+      <td><%= shipment.coupled_vehicle.number_plate %></td> 
+      <td>shipment.shipping_request.trip.description  </td> 
+	  <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
+	  <td> <% if shipment.status == 1 %>
+			 Solicitado
+		   <% end %>
+			<% if shipment.status == 2 %>
+			 En Curso
+		   <% end %>
+		   <% if shipment.status == 3 %>
+			 Realizado
+		   <% end %>
+		   <% if shipment.status == 4 %>
+			 Cerrado
+		   <% end %>
+		   </td> 
+	  <td><%= link_to 'Ver', shipment %> &nbsp; <%= link_to 'Editar', edit_shipment_path(shipment) %> &nbsp; <%= link_to 'Eliminar', shipment_path(shipment), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+ 
+
+

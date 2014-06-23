@@ -1,0 +1,29 @@
+﻿<H2> Registro Sucta </H2>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Vencimiento:</th>
+  <td> <%= sucta_registration.expiration.to_date %></td>
+  </tr>  
+  
+  <tr>
+  <th>Prórroga 6 meses ?:</th>
+   <% if sucta_registration.extended == 1 %>
+  <td>Sí</td>
+  <% else %>
+  <td>No</td>
+   <% end %>    
+  </tr>  
+  
+  <tr>
+  <th>Comentarios:</th>
+  <td> <%= sucta_registration.comments %></td>
+  </tr>   
+	
+  <tr>
+  <th> </th>
+  <td> <div class="links_form"> <%= link_to 'Modificar', edit_sucta_registration_path(sucta_registration) %> </div> </td>
+  </tr> 
+	
+</table>
+

@@ -1,0 +1,20 @@
+﻿<H1> Indicación de Carga de Modelo de Pedido </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+ 
+  <tr>   
+  <th>Cantidad:</th>  
+	<td> <%=  @m_requested_supply.ammount %> </td>
+  </tr>
+    <tr> 
+  <th>Dirección de Carga:</th>  
+	<td> <%=  @m_requested_supply.address.description %> </td>
+  </tr>
+  <th>Comentarios:</th>  
+	<td> <%=  @m_requested_supply.comments %> </td>
+  </tr>
+    
+</table>
+
+<div class="links_form"><%= link_to 'Atrás', m_requested_cargo_path(@m_requested_cargo) %></div>
+

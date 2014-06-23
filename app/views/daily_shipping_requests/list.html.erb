@@ -1,0 +1,48 @@
+﻿<h1>Listado de Pedidos Diarios</h1>
+
+<%= form_tag do %>
+<%= select_date @listing_date, prefix: :listing_date %> 	<%= submit_tag("Ver") %> <br><br>
+
+<% if @listing_date.prev_day == Date.today %>
+	Mostrando Pedidos para el día de MAÑANA 
+<% end %>
+<% if @listing_date == Date.today %>
+	Mostrando Pedidos para el día de HOY 
+<% end %>
+<% if @listing_date.next_day == Date.today %>
+	Mostrando Pedidos para el día de AYER 
+<% end %>
+
+<% end %>
+<br>
+ <%= link_to 'Nuevo Pedido', new_shipping_request_path %>
+ 
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Fecha del Pedido</th>	
+	<th>Fecha del Viaje</th>
+    <th>Servicio</th>			
+	<th>Cliente</th>		
+	<th>Recorrido</th>
+	<th>Factura</th>
+	<th>Observaciones</th>
+	<th></th>
+  </tr>
+ 
+  <% @shipping_requests.each do |shipping_request| %>
+    <tr class="tabla_listado_fila_contenido">
+      <td><%= shipping_request.request_date %></td>
+      <td><%= shipping_request.required_shipment_date %></td>
+	  <td><%= shipping_request.service.description %></td>  	  
+	  <td><%= shipping_request.account.customer.name %> </td> 
+      <td><%= shipping_request.trip.description %></td> 
+	  <td><%= shipping_request.bill_number %> </td>   
+	  <td><%= shipping_request.details %> </td>   
+	  <td><%= link_to 'Ver', shipping_request %> &nbsp; <%= link_to 'Editar', edit_shipping_request_path(shipping_request) %> &nbsp; <%= link_to 'Eliminar', shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "/welcome/index" %></div>
+ 
+
+

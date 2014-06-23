@@ -1,0 +1,24 @@
+﻿<H2> Indicaciones de Carga de Modelo de Pedido </H2>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+     <tr>   
+  <th>Cantidad:</th>  
+	<td> <%=  m_requested_supply.ammount %> </td>
+  </tr>
+    <tr> 
+  <th>Dirección de Carga:</th>  
+	<td> <%=  m_requested_supply.address.description %> </td>
+  </tr>
+  <th>Comentarios:</th>  
+	<td> <%=  m_requested_supply.comments %> </td>
+  </tr>
+  
+  <tr>
+  <th> </th>
+  <td> <div class="links_form"> <%= link_to 'Modificar', edit_m_requested_supply_path(m_requested_supply) %> </div> </td>
+  <td> <div class="links_form"> <%= link_to 'Eliminar', m_requested_supply_path(m_requested_supply), method: :delete, data: { confirm: '¿Está seguro?' } %></div></td>
+  </tr> 
+  
+  
+</table>
+

@@ -1,0 +1,15 @@
+﻿<H1> Unidad de Facturación </H1>
+
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Descripción:</th>
+  <td><%= @billing_unit.description %></td>
+  </tr>
+  
+  <tr>
+  <th>Código:</th>
+  <td> <%= @billing_unit.code %></td>
+  </tr>
+
+<div class="links_form"><%= link_to 'Atrás', billing_units_path %></div>

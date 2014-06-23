@@ -1,0 +1,79 @@
+﻿<H1> Viaje </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Salida:</th>
+  <td><%= @shipment.departure_time %></td>
+  </tr>
+  <tr>
+  <th>Llegada:</th>
+  <td><%= @shipment.arrival_time %></td>
+  </tr>
+   <tr>
+  <th>Cliente:</th>
+  <td><%= @shipment.shipping_request.account.customer.name  %></td>
+  </tr>
+  <tr>
+  <th>Servicio:</th>
+  <td><%= @shipment.shipping_request.service.description %></td>
+  </tr>
+  <tr>
+  <th> <%= @shipment.vehicle.vehicle_type.description %>: </th>
+  <td><%= @shipment.vehicle.number_plate %></td>
+  </tr>
+  <tr>
+  <th> <%= @shipment.coupled_vehicle.vehicle_type.description %>: </th>
+  <td> <%= @shipment.coupled_vehicle.number_plate %></td>
+  </tr>
+  
+  <tr>
+  <th> Viaje:</th>
+  <td><%= @shipment.shipping_request.trip.description %> </td>
+  </tr>
+  
+  <tr>
+  <th>Chofer:</th>
+  <td><%= @shipment.driver.first_name + " " + @shipment.driver.last_name %></td>
+  </tr>
+   
+   <tr>
+		<th>Estado: </th>
+		<td> 
+			<% if @shipment.status == 1 %>
+			 Solicitado
+		   <% end %>
+			<% if @shipment.status == 2 %>
+			 En Curso
+		   <% end %>
+		   <% if @shipment.status == 3 %>
+			 Realizado
+		   <% end %>
+		   <% if @shipment.status == 4 %>
+			 Cerrado
+		   <% end %>
+		  </td> 
+   </tr>
+    
+	<tr><th>Cargas:</th>
+	<td>
+	 
+      <table> <tr><th>Lugar</th><th>Material</th><th>Cantidad</th></tr>
+       <%= render @supplies %> 
+      </table>
+	</td>
+	</tr>
+	
+	<tr><th>Entregas:</th>
+	<td>
+	 
+      <table> <tr><th>Lugar</th><th>Material</th><th>Cantidad</th></tr>
+       <%= render @deliveries %> 
+      </table>
+	</td>
+	</tr>
+	
+</table>
+
+
+<div class="links_form"><%= link_to 'Atrás', shipments_path %></div>
+ 

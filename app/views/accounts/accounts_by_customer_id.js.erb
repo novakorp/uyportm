@@ -1,0 +1,1 @@
+﻿$("#<%=@element_id%>").html('<% @accounts.each do |ac| %> <option value="<%= ac.id %>"> <%= ac.description %> </option> <% end %>')

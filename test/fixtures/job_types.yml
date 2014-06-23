@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  billing_unit: 
+  vehicle_type: 
+  couple_type_id: 1
+  couple_required: 1
+
+two:
+  description: MyString
+  billing_unit: 
+  vehicle_type: 
+  couple_type_id: 1
+  couple_required: 1

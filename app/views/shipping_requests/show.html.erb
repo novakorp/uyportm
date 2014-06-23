@@ -1,0 +1,59 @@
+﻿<H1> Pedido </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+    <th> Fecha del Pedido:</th>
+    <td> <%= @shipping_request.request_date %>   </td>
+  </tr>
+    
+  <tr>
+    <th> Fecha del Viaje:</th>
+    <td> <%= @shipping_request.required_shipment_date %>   </td>
+  </tr>
+  
+  <tr>
+    <th> Servicio:</th>
+    <td> <%= @shipping_request.service.description %>  </td>
+  </tr>
+  
+  <tr>
+    <th> Recorrido:</th>
+    <td> <%= @shipping_request.trip.description %>   </td>
+  </tr>
+
+  <tr>
+    <th> Cuenta Cliente:</th>
+    <td> <%= @shipping_request.account.account_number + ' - ' + @shipping_request.account.customer.name  %>  </td>
+  </tr>
+  
+    <tr>
+    <th> Viaje Unico:</th>
+	
+    <td>
+	<% if @shipping_request.simple_shipment == 1 %> 
+		SI
+	<% else %>
+	  NO
+	<% end %>
+	</td>
+  </tr>
+  
+  <tr>
+  <th> Número de Factura:</th>
+    <td> <%= @shipping_request.bill_number %> </td>
+  </tr>
+
+  <tr>
+    <th> Observaciones:</th>
+    <td> <%= @shipping_request.details %></td>
+  </tr>
+</table>
+
+
+<div class="links_form"><%= link_to 'Ingresar Detalles de Carga', new_shipping_request_requested_cargo_path(@shipping_request) %></div>
+
+
+<%= render @shipping_request.requested_cargos %>
+
+<div class="links_form"><%= link_to 'Atrás', shipping_requests_path %></div>
+ 

@@ -1,19 +1,18 @@
-﻿<H2> Recorrido </H2>
+﻿<H1> Recorrido </H1>
 
-<p>
-  <strong>Desde:</strong>
-  <%= @trip.from_location.name %>
-</p>
- 
-<p>
-  <strong>Hacia:</strong>
-  <%= @trip.to_location.name %>
-</p>
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Desde:</th>
+  <td><%= @trip.from_location.name %></td>
+  </tr>
+  <tr>
+  <th>Hacia:</th>
+  <td> <%= @trip.to_location.name %></td>
+  </tr>
+  <tr>
+   <th>Distancia:</th>
+  <td> <%= @trip.distance %></td>
+ </tr>
+</table>
 
-<p>
-  <strong>Distancia:</strong>
-  <%= @trip.distance %>
-</p>
-
-
-<%= link_to 'Atrás', trips_path %>
+<div class="links_form"><%= link_to 'Atrás', trips_path %></div>

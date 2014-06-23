@@ -1,0 +1,50 @@
+﻿<H1> Modelo de Pedido </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0> 
+
+  <tr>
+    <th> Nombre:</th>
+    <td> <%= @m_shipping_request.name %>  
+  </td>
+  </tr>
+
+  <tr>
+    <th> Servicio:</th>
+    <td> <%= @m_shipping_request.service.description %>  </td>
+  </tr>
+  
+  <tr>
+    <th> Recorrido:</th>
+    <td> <%= @m_shipping_request.trip.description %>   </td>
+  </tr>
+
+  <tr>
+    <th> Cuenta Cliente:</th>
+    <td> <%= @m_shipping_request.account.account_number + ' - ' + @m_shipping_request.account.customer.name  %>  </td>
+  </tr>
+  
+    <tr>
+    <th> Viaje Unico:</th>
+	
+    <td>
+	<% if @m_shipping_request.simple_shipment == 1 %> 
+		SI
+	<% else %>
+	  NO
+	<% end %>
+	</td>
+  </tr>
+
+  <tr>
+    <th> Observaciones:</th>
+    <td> <%= @m_shipping_request.details %></td>
+  </tr>
+</table>
+
+
+<div class="links_form"><%= link_to 'Ingresar Detalles de Carga', new_m_shipping_request_m_requested_cargo_path(@m_shipping_request) %></div>
+
+<%= render @m_shipping_request.m_requested_cargos %>
+
+<div class="links_form"><%= link_to 'Atrás', m_shipping_requests_path %></div>
+ 

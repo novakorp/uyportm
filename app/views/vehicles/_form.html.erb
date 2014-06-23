@@ -11,28 +11,42 @@
   </div>
   <% end %>
   
-  <p>
-    <%= v.label :Marca %>:
-    <%= v.text_field :brand %>
-  </p>
- 
-  <p>
-    <%= v.label :Modelo %>:
-    <%= v.text_field :model %>
-  </p>
- 
-   <p>
-    <%= v.label :Matrícula %>:
-    <%= v.text_field :number_plate %>
-  </p>
-  <p>
-    <%= v.label :Comentarios %>:
-    <%= v.text_area :comments %>
-  </p>
- 
-  <p>
-    <%= v.submit %>
-  </p>
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+    <th>Empresa:</th>
+    <td> <%= v.collection_select :company_id, Company.all,  :id, :company_name %>  </td>
+  </tr>
+  
+   <tr>
+    <th>Tipo de Vehículo:</th>
+    <td> <%= v.collection_select :vehicle_type_id, VehicleType.all,  :id, :description %>  </td>
+  </tr>
+  
+  <tr>
+  <th>Marca:</th>
+  <td>  <%= v.text_field :brand %> </td>
+  </tr>
+    
+  <tr>
+    <th> Modelo: </th>
+    <td> <%= v.text_field :model %></td>
+  </tr>
+  
+  <tr>    
+    <th> Matrícula: </th>
+    <td> <%= v.text_field :number_plate %></td>
+  </tr>
+  
+   <tr>    
+    <th> Comentarios: </th>
+    <td> <%= v.text_area :comments %></td>
+  </tr>
+    
+  <tr><td colspan=2 class="acciones_form">
+  <%= v.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
   
 <% end %>
 

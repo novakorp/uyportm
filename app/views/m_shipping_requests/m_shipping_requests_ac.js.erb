@@ -1,0 +1,1 @@
+﻿[ <%= raw (@shippings.map {|c| "{\"label\":\"" + c.name + "\", \"value\":\"" + c.id.to_s + "\"}"} ).join(",") %> ]

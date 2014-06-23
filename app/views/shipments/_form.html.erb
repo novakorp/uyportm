@@ -1,0 +1,111 @@
+﻿  
+<%= form_for @shipment do |s| %>
+ <% if @shipment.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@shipment.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @shipment.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <%= s.hidden_field :shipping_request_id %> 
+   
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+     
+  <tr>
+    <th> Solicitud:</th>
+   <!--  <td> <%= s.collection_select :shipping_request_id, ShippingRequest.all, :id, :details %>   </td> -->
+    <td> <%= @shipping_request.description %> </td>
+	
+  </tr>
+  
+  <tr>
+    <th> Estado:</th>
+    <td> <%= s.select  :status, [['Solicitado', 1], ['En Curso', 2], ['Realizado', 3], ['Cerrado', 4]] %>  </td>
+  </tr>   
+  
+   <tr>
+    <th> Salida:</th>
+    <td> <%= s.datetime_select :departure_time %>   </td> 
+  </tr>
+  
+    <tr>
+    <th> Llegada:</th>
+    <td> <%= s.datetime_select :arrival_time %>   </td> 
+  </tr>
+  
+  
+  <tr>
+    <th> Vehículo:</th>
+    <td> <%= s.collection_select :vehicle_id, Vehicle.all, :id, :number_plate %>   </td>
+  </tr>
+  
+   <tr>
+    <th> Acoplado:</th>
+    <td> <%= s.collection_select :coupled_vehicle_id, Vehicle.all, :id, :number_plate %>   </td>
+  </tr>
+  
+  <tr>
+    <th> Chofer:</th>
+    <td>  <%= s.collection_select :driver_id, Employee.all, :id, :last_name  %> </td>
+  </tr>
+  
+  <tr>
+  <th> Detalles de Carga: </th>
+  <td>
+  
+   <!--  TABLA DATOS DE CARGA -->
+
+   <% @shipping_request.requested_cargos.each do |req_cargo| %>
+
+	<%= req_cargo.cargo_type.description + ": " + req_cargo.ammount.to_s + " " + req_cargo.measure_unit.symbol %>
+	
+    <table>
+	
+    <tr> <th>Lugar de Carga</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+	
+	<% req_cargo.requested_supplies.each do |req_sup| %>
+	    <tr> <td> <%= req_sup.address.description %> </td>
+		  
+	    <td> <%=  text_field_tag "[supplies][" + req_sup.id.to_s + "][ammount]", req_sup.ammount %> </td>
+	 
+	<% end %>
+	</table>
+	
+	<br>
+	
+    <table>
+	
+    <tr> <th>Lugar de Entrega</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+	
+	<% req_cargo.requested_deliveries.each do |req_del| %>
+	   <tr> <td> <%= req_del.address.description %> </td>		
+	   <td> <%=  text_field_tag "[deliveries][" + req_del.id.to_s + "][ammount]", req_del.ammount %> </td>	
+	<% end %>
+	</table>
+	
+   <% end %>
+   
+   </td>
+  
+</tr>
+  
+  
+  <tr>
+    <th> Observaciones:</th>
+    <td> <%= s.text_area :comments %></td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= s.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+
+  
+<% end %>
+
+

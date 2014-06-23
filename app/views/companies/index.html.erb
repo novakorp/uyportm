@@ -1,0 +1,29 @@
+﻿<h1>Listado de Empresas</h1>
+
+ <%= link_to 'Nueva Empresa', new_company_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+     <th>Nombre</th>
+     <th>Razón Social</th>
+	 <th>RUT</th>
+     <th>MTOP</th>  
+     <th>BPS</th>
+     <th>MTSS</th>      
+  </tr>
+ 
+  <% @companies.each do |company| %>
+     <tr class="tabla_listado_fila_contenido">
+	 
+      <td><%= company.company_name %></td> 	  
+      <td><%= company.trade_name %></td> 	  
+      <td><%= company.rut %></td> 		  
+      <td><%= company.mtop %></td> 		  
+      <td><%= company.bps %></td> 
+      <td><%= company.mtss %></td> 
+	   
+	  <td><%= link_to 'Ver', company %> &nbsp; <%= link_to 'Editar', edit_company_path(company) %> &nbsp; <%= link_to 'Eliminar', company_path(company), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+

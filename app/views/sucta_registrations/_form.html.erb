@@ -1,0 +1,42 @@
+﻿  
+<%= form_for ([@vehicle, @sucta_registration])  do |s| %>
+ <% if @sucta_registration.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@sucta_registration.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @sucta_registration.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Empresa:</th>  
+	<td> <%=  @vehicle.company.company_name %> </td>
+  </tr>
+  <tr>
+  <th>Vehículo:</th>  
+	<td>  <%=  @vehicle.brand %> - <%= @vehicle.number_plate %> </td>
+  </tr>
+   <tr>
+  <th>Vencimiento:</th>
+  <td> <%= s.date_select :expiration %> </td>
+  </tr>
+  <tr>
+  <th>Prórroga:</th>
+  <td> <%= s.select :extended, [['Si', 1], ['No', 0]] %>  </td>
+  </tr>  
+  <th>Comentarios:</th>
+  <td> <%= s.text_area :comments %> </td>
+  </tr>
+  <tr><td colspan=2 class="acciones_form">
+  <%= s.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>  
+<% end %>
+
+

@@ -1,0 +1,27 @@
+﻿<h1>Listado de Empleados</h1>
+
+ <%= link_to 'Nuevo Empleado', new_employee_path %>
+ 
+ <table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Empresa</th>
+	<th>Nombre</th>
+    <th>Apellido</th> 
+	<th>Documento</th>
+	<th></th>
+  </tr>
+ 
+  <% @employees.each do |employee| %>
+    <tr class="tabla_listado_fila_contenido">
+	
+      <td><%= employee.company.company_name %></td>
+      <td><%= employee.first_name %></td>
+      <td><%= employee.last_name %></td>  
+      <td><%= employee.personal_id %></td>
+	  <td><%= link_to 'Ver', employee %> &nbsp; <%= link_to 'Editar', edit_employee_path(employee) %> &nbsp; <%= link_to 'Eliminar', employee_path(employee), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+ 
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+

@@ -1,0 +1,21 @@
+﻿<H1>Listado de Servicios</H1>
+
+ <%= link_to 'Nuevo Servicio', new_service_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Empresa</th>
+	<th>Descripción</th>
+    <th>Unidad de Facturación</th> 
+	<th></th>
+  </tr>
+ 
+  <% @services.each do |service| %>
+    <tr class="tabla_listado_fila_contenido">
+	  <td><%= service.company.company_name %></td>
+      <td><%= service.description %></td>
+      <td><%= service.billing_unit.description %></td>  
+	  <td><%= link_to 'Ver', service %> &nbsp; <%= link_to 'Editar', edit_service_path(service) %> &nbsp; <%= link_to 'Eliminar', service_path(service), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

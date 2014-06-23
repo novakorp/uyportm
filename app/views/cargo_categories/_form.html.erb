@@ -1,0 +1,28 @@
+﻿  
+<%= form_for @cargo_category do |c| %>
+ <% if @cargo_category.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@cargo_category.errors.count, "error") %> impiden guardar el formulario:</h2>
+    <ul>
+    <% @cargo_category.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Descripción:</th>
+  <td>  <%= c.text_field :description %> </td>
+  </tr>
+   
+  <tr><td colspan=2 class="acciones_form">
+  <%= c.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+  
+<% end %>
+
+

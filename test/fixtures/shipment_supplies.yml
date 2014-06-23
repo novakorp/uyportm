@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ammount: 1
+  shipment: 
+  requested_supply: 
+
+two:
+  ammount: 1
+  shipment: 
+  requested_supply: 

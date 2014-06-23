@@ -28,7 +28,7 @@
 	def update
 	  @location = Location.find(params[:id])
 	 
-	 if @location.update_attributes(params[:location].permit(:name, :coords))
+	 if @location.update_attributes(params[:location].permit(:name, :coords, :location_type, :state_id))
 		redirect_to @location
 	  else
 		render 'edit'

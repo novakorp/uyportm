@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  expiration: 2014-03-30 22:43:11
+  extended: 1
+  {1}: MyString
+  comments: MyText
+  vehicle: 
+
+two:
+  expiration: 2014-03-30 22:43:11
+  extended: 1
+  {1}: MyString
+  comments: MyText
+  vehicle: 

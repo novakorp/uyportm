@@ -11,25 +11,336 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140313030447) do
+ActiveRecord::Schema.define(:version => 20140616004028) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "account_number"
+    t.integer  "customer_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "description"
+  end
+
+  create_table "addresses", :force => true do |t|
+    t.integer  "location_id"
+    t.string   "description"
+    t.string   "address_detail_1"
+    t.string   "address_detail_2"
+    t.string   "postal_code"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "customer_id"
+    t.string   "phone_number_1"
+    t.string   "phone_number_2"
+    t.text     "comments"
+  end
+
+  add_index "addresses", ["customer_id"], :name => "index_addresses_on_customer_id"
+  add_index "addresses", ["location_id"], :name => "index_addresses_on_location_id"
+
+  create_table "billing_units", :force => true do |t|
+    t.string   "description"
+    t.string   "code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "cargo_categories", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "cargo_types", :force => true do |t|
+    t.string   "description"
+    t.integer  "cargo_category_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "measure_unit_id"
+  end
+
+  add_index "cargo_types", ["cargo_category_id"], :name => "index_cargo_types_on_cargo_category_id"
+  add_index "cargo_types", ["measure_unit_id"], :name => "index_addresses_on_measure_unit_id"
+
+  create_table "companies", :force => true do |t|
+    t.string   "company_name"
+    t.string   "trade_name"
+    t.string   "rut"
+    t.string   "bps"
+    t.string   "mtss"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "mtop"
+  end
+
+  create_table "customers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "rut"
+  end
+
+  create_table "document_types", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "employees", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "personal_id"
+    t.string   "personal_id_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "company_id"
+  end
+
+  add_index "employees", ["company_id"], :name => "index_employees_on_company_id"
 
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "coords"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "state_id"
+    t.integer  "location_type", :limit => 1
+  end
+
+  add_index "locations", ["state_id"], :name => "index_locations_on_state_id"
+
+  create_table "m_requested_cargos", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "cargo_type_id"
+    t.integer  "m_shipping_request_id"
+    t.integer  "measure_unit_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "m_requested_cargos", ["cargo_type_id"], :name => "index_m_requested_cargos_on_cargo_type_id"
+  add_index "m_requested_cargos", ["m_shipping_request_id"], :name => "index_m_requested_cargos_on_m_shipping_request_id"
+  add_index "m_requested_cargos", ["measure_unit_id"], :name => "index_m_requested_cargos_on_measure_unit_id"
+
+  create_table "m_requested_deliveries", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "address_id"
+    t.text     "comments"
+    t.integer  "m_requested_cargo_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "m_requested_deliveries", ["address_id"], :name => "index_m_requested_deliveries_on_address_id"
+  add_index "m_requested_deliveries", ["m_requested_cargo_id"], :name => "index_m_requested_deliveries_on_requested_cargo_id"
+
+  create_table "m_requested_supplies", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "address_id"
+    t.text     "comments"
+    t.integer  "m_requested_cargo_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "m_requested_supplies", ["address_id"], :name => "index_m_requested_supplies_on_address_id"
+  add_index "m_requested_supplies", ["m_requested_cargo_id"], :name => "index_m_requested_supplies_on_requested_cargo_id"
+
+  create_table "m_shipping_requests", :force => true do |t|
+    t.string   "contact"
+    t.string   "details"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "service_id"
+    t.integer  "account_id"
+    t.integer  "trip_id"
+    t.string   "name"
+    t.integer  "simple_shipment"
+  end
+
+  add_index "m_shipping_requests", ["account_id"], :name => "index_m_shipping_requests_on_account_id"
+  add_index "m_shipping_requests", ["service_id"], :name => "index_m_shipping_requests_on_service_id"
+  add_index "m_shipping_requests", ["trip_id"], :name => "index_m_shipping_requests_on_trip_id"
+
+  create_table "measure_units", :force => true do |t|
+    t.string   "name"
+    t.string   "symbol"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
+  create_table "requested_cargos", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "cargo_type_id"
+    t.integer  "shipping_request_id"
+    t.integer  "measure_unit_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "requested_cargos", ["cargo_type_id"], :name => "index_requested_cargos_on_cargo_type_id"
+  add_index "requested_cargos", ["measure_unit_id"], :name => "index_requested_cargos_on_measure_unit_id"
+  add_index "requested_cargos", ["shipping_request_id"], :name => "index_requested_cargos_on_shipping_request_id"
+
+  create_table "requested_deliveries", :force => true do |t|
+    t.integer  "address_id"
+    t.integer  "ammount"
+    t.integer  "requested_cargo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.text     "comments"
+  end
+
+  add_index "requested_deliveries", ["address_id"], :name => "index_requested_deliveries_on_address_id"
+  add_index "requested_deliveries", ["requested_cargo_id"], :name => "index_requested_deliveries_on_requested_cargo_id"
+
+  create_table "requested_supplies", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "address_id"
+    t.text     "comments"
+    t.integer  "requested_cargo_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "requested_supplies", ["address_id"], :name => "index_requested_supplies_on_address_id"
+  add_index "requested_supplies", ["requested_cargo_id"], :name => "index_requested_supplies_on_requested_cargo_id"
+
+  create_table "services", :force => true do |t|
+    t.string   "description"
+    t.integer  "billing_unit_id"
+    t.integer  "vehicle_type_id"
+    t.integer  "couple_type_id"
+    t.integer  "couple_required", :limit => 1
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "company_id"
+  end
+
+  add_index "services", ["billing_unit_id"], :name => "index_services_on_billing_unit_id"
+  add_index "services", ["company_id"], :name => "index_services_on_company_id"
+  add_index "services", ["couple_type_id"], :name => "index_services_on_couple_type_id"
+  add_index "services", ["vehicle_type_id"], :name => "index_services_on_vehicle_type_id"
+
+  create_table "shipment_deliveries", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "shipment_id"
+    t.integer  "requested_delivery_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "shipment_deliveries", ["requested_delivery_id"], :name => "index_shipment_deliveries_on_requested_delivery_id"
+  add_index "shipment_deliveries", ["shipment_id"], :name => "index_shipment_deliveries_on_shipment_id"
+
+  create_table "shipment_supplies", :force => true do |t|
+    t.integer  "ammount"
+    t.integer  "shipment_id"
+    t.integer  "requested_supply_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "shipment_supplies", ["requested_supply_id"], :name => "index_shipment_supplies_on_requested_supply_id"
+  add_index "shipment_supplies", ["shipment_id"], :name => "index_shipment_supplies_on_shipment_id"
+
+  create_table "shipments", :force => true do |t|
+    t.integer  "shipping_request_id"
+    t.integer  "vehicle_id"
+    t.integer  "coupled_vehicle_id"
+    t.integer  "driver_id"
+    t.integer  "status",              :limit => 1
+    t.text     "comments"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.datetime "departure_time"
+    t.datetime "arrival_time"
+  end
+
+  add_index "shipments", ["shipping_request_id"], :name => "index_shipments_on_shipping_request_id"
+  add_index "shipments", ["vehicle_id"], :name => "index_shipments_on_vehicle_id"
+
+  create_table "shipping_requests", :force => true do |t|
+    t.integer  "service_id"
+    t.integer  "account_id"
+    t.string   "bill_number"
+    t.date     "request_date"
+    t.date     "required_shipment_date"
+    t.string   "contact"
+    t.text     "details"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "trip_id"
+    t.integer  "simple_shipment"
+  end
+
+  add_index "shipping_requests", ["account_id"], :name => "index_shipping_requests_on_account_id"
+  add_index "shipping_requests", ["service_id"], :name => "index_shipping_requests_on_service_id"
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sucta_registrations", :force => true do |t|
+    t.datetime "expiration"
+    t.integer  "extended",   :limit => 1
+    t.text     "comments"
+    t.integer  "vehicle_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "sucta_registrations", ["vehicle_id"], :name => "index_sucta_registrations_on_vehicle_id"
+
   create_table "trips", :force => true do |t|
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
     t.integer  "from_location_id"
     t.integer  "to_location_id"
     t.integer  "distance"
+    t.string   "route_itinerary"
+    t.string   "comments"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "trips", ["from_location_id"], :name => "index_trips_on_from_location_id"
   add_index "trips", ["to_location_id"], :name => "index_trips_on_to_location_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+    t.string   "remember_token"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  create_table "vehicle_registrations", :force => true do |t|
+    t.string   "chassis"
+    t.string   "engine"
+    t.datetime "registration_date"
+    t.string   "registration_number"
+    t.string   "dnt_id"
+    t.integer  "vehicle_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.datetime "date_of_entry"
+  end
+
+  add_index "vehicle_registrations", ["vehicle_id"], :name => "index_vehicle_registrations_on_vehicle_id"
+
+  create_table "vehicle_types", :force => true do |t|
+    t.string   "description"
+    t.integer  "coupling_support",   :limit => 1
+    t.integer  "couples_to_type_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
 
   create_table "vehicles", :force => true do |t|
     t.string   "brand"
@@ -37,8 +348,10 @@ ActiveRecord::Schema.define(:version => 20140313030447) do
     t.string   "number_plate"
     t.string   "comments"
     t.string   "text"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "company_id"
+    t.integer  "vehicle_type_id"
   end
 
 end

@@ -1,5 +1,5 @@
 ﻿
-<%= form_for @location do |d| %>
+<%= form_for @location do |l| %>
  <% if @location.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@location.errors.count, "error") %> impiden guardar la Ubicación:</h2>
@@ -11,20 +11,34 @@
   </div>
   <% end %>
   
-  <p>
-    <%= d.label :nombre %>: 
-    <%= d.text_field :name %>
-  </p>
- 
-  <p>
-    <%= d.label :coordenadas %>: 
-    <%= d.text_field :coords %>
-  </p>
- 
-  <p>
-    <%= d.submit %>
-  </p>
   
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>nombre:</th>
+  <td> <%= l.text_field :name %> </td>
+  </tr>
+  
+  <tr>
+    <th> Departamento: </th>
+    <td> <%= l.collection_select :state_id, State.all,  :id, :name  %> </td>
+  </tr>
+  
+  <tr>
+    <th> Coordenadas: </th>
+    <td> <%= l.text_field :coords %> </td>
+  </tr>
+  
+   <tr>
+    <th> Tipo: </th>
+    <td> <%= l.select :location_type , [['Ciudad', 1], ['Lugar', 2]] %> </td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= l.submit "Guardar" %>
+  </td>
+  </tr>
+  </table>
+ 
 <% end %>
 
 

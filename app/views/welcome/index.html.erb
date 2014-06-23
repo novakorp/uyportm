@@ -2,14 +2,62 @@
 	Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
 </style>
 
-<h2>UYPort - Sistema de Gestión de Transportes </h2>
+<h2>UY Port | Sistema de Gestión de Transportes </h2>
 <br>
 
-Ver Trabajos 
+
+<%= link_to "Pedidos Diarios", controller: "daily_shipping_requests", action: "list" %> 
+<br>
+<%= link_to "Pedidos", controller: "shipping_requests" %> 
+<br>
+<%= link_to "Viajes", controller: "shipments" %> 
 
 <br><br>
 <hr>
 <h4>Configuración</h4>
-<%= link_to "Vehículos", controller: "vehicles" %> <br>
-<%= link_to "Ubicaciones", controller: "locations" %> <br>
-<%= link_to "Recorridos", controller: "trips" %>
+<table class="tabla_mantenimiento" cellpadding=0 cellspacing=0>
+<tr><th>Flota</th><th>Negocio</th><th>Datos Geográficos</th></tr>
+<tr>
+<td>
+	<%= link_to "Vehículos", controller: "vehicles" %><br>
+	<%= link_to "Tipos de Vehículos", controller: "vehicle_types" %>
+</td>
+<td>
+	<%= link_to "Servicios", controller: "services" %> <br>	 
+	<%= link_to "Clientes", controller: "customers" %> <br>
+	<%= link_to "Cuentas", controller: "accounts" %>  
+</td>
+<td>
+	<%= link_to "Ubicaciones", controller: "locations" %> <br>
+	<%= link_to "Recorridos", controller: "trips" %> <br>
+	<%= link_to "Departamentos", controller: "states" %>
+</td>
+</tr>
+<tr><th>Empresas</th><th>Unidades</th><th>Cargas</th></tr>
+<td> 
+	<%= link_to "Empresas", controller: "companies" %> <br> 
+	<%= link_to "Empleados", controller: "employees" %>
+</td>  
+<td>
+	<%= link_to "Unidades de Facturación", controller: "billing_units" %> <br>
+	<%= link_to "Unidades de Medida", controller: "measure_units" %>
+</td>
+<td>
+	<%= link_to "Tipos de Carga", controller: "cargo_types" %> <br>
+	<%= link_to "Categorias de Carga", controller: "cargo_categories" %>
+</td>
+
+</tr>
+<tr><th>Modelos</th><th>Usuarios</th><th>Tipos de Documento</th></tr>
+<td> 
+	<%= link_to "Modelos de Pedidos", controller: "m_shipping_requests" %> <br> 
+</td>  
+<td>
+	<%= link_to "Usuarios", controller: "users" %> <br> 
+</td>
+<td>
+	<%= link_to "Tipos de Documento", controller: "document_types" %> <br> 
+</td>
+</tr>
+</table>
+

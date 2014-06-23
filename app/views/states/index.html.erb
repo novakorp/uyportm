@@ -1,0 +1,19 @@
+﻿<h1>Listado de Departamentos</h1>
+
+ <%= link_to 'Nuevo Departamento', new_state_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Nombre</th>
+    <th>País</th>  
+	<th></th>
+  </tr>
+ 
+  <% @states.each do |state| %>
+     <tr class="tabla_listado_fila_contenido">
+      <td><%= state.name %></td>
+      <td><%= state.country %></td>
+	  <td><%= link_to 'Ver', state %> &nbsp; <%= link_to 'Editar', edit_state_path(state) %> &nbsp; <%= link_to 'Eliminar', state_path(state), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

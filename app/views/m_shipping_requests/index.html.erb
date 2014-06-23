@@ -1,0 +1,28 @@
+﻿<h1>Listado de Modelos de Pedidos</h1>
+
+ <%= link_to 'Nuevo Modelo de Pedido', new_m_shipping_request_path %>
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Nombre</th>			
+    <th>Servicio</th>			
+	<th>Cliente</th>		
+	<th>Recorrido</th>
+	<th>Observaciones</th>
+	<th></th>
+  </tr>
+ 
+  <% @m_shipping_requests.each do |m_shipping_request| %>
+    <tr class="tabla_listado_fila_contenido"> 
+	  <td><%= m_shipping_request.name %></td>  
+	  <td><%= m_shipping_request.service.description %></td>  	  
+	  <td> <%= m_shipping_request.account.customer.name %> </td> 
+      <td><%= m_shipping_request.trip.description %></td>  
+	  <td><%= m_shipping_request.details %> </td>   
+	  <td><%= link_to 'Ver', m_shipping_request %> &nbsp; <%= link_to 'Editar', edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to 'Eliminar', m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+ 
+
+

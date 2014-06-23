@@ -28,7 +28,7 @@
 	def update
 	  @vehicle = Vehicle.find(params[:id])
 	 
-	 if @vehicle.update_attributes(params[:vehicle].permit(:brand, :model, :number_plate, :comments))
+	 if @vehicle.update_attributes(params[:vehicle].permit(:company_id, :vehicle_type_id, :brand, :model, :number_plate, :comments))
 		redirect_to @vehicle
 	  else
 		render 'edit'

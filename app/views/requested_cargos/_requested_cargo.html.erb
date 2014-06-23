@@ -1,0 +1,26 @@
+﻿<H2>Carga</H2>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>   
+  <th>Tipo de Carga:</th>  
+	<td> <%= requested_cargo.cargo_type.description %> </td>
+  </tr>
+  <tr>
+   <th>Cantidad:</th>  
+	<td> <%= requested_cargo.ammount %> <%= requested_cargo.measure_unit.symbol %>  </td>
+  </tr>
+  
+
+</table>
+
+
+  
+
+<div class="links_form"><%= link_to 'Ingresar Indicacion de Carga', new_requested_cargo_requested_supply_path(requested_cargo) %></div>
+ 
+<%= render requested_cargo.requested_supplies %>
+ 
+<div class="links_form"><%= link_to 'Ingresar Indicacion de Entrega', new_requested_cargo_requested_delivery_path(requested_cargo) %></div>
+ 
+<%= render requested_cargo.requested_deliveries %>
+
