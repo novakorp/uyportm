@@ -11,8 +11,3 @@
  *= require_self
  *= require_tree .
 */
-
-// = require_self
-// = require 'general.css'
-// = require 'forms.css'
-// = require 'listados.css'
