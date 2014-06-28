@@ -12,6 +12,7 @@
  *= require_tree .
 */
 
-general.css.erb
-forms.css
-listados.css
+// = require_self
+// = require 'general.css'
+// = require 'forms.css'
+// = require 'listados.css'
