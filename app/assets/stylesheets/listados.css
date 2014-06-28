@@ -1,5 +1,4 @@
-
-.tabla_listado {
+﻿.tabla_listado {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
@@ -8,7 +7,7 @@
 	padding: 5px 10px 5px 10px;
 }
 
- .tabla_listado  TD {
+.tabla_listado  TD {
 	padding: 7px 10px 7px 10px;
  }
  
@@ -19,8 +18,7 @@
 }
 
 
-.tabla_listado_fila_contenido TD {
-	
+.tabla_listado_fila_contenido TD {	
 	border-style: solid;
 	border-color: #A0A0A0;
 	border-width: 0px 0px 1px 0px;	
@@ -28,4 +26,4 @@
 
 TR.tabla_listado_fila_contenido:Hover  TD{
 	background-color: #F5FFF4;
-}
+} 
