@@ -1,4 +1,5 @@
 ﻿source 'https://rubygems.org'
+ruby '1.9.3'
 
 LANG="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
