@@ -2,8 +2,8 @@
   protect_from_forgery
   include SessionsHelper
   
-  before_filter :require_login
- 
+  / before_filter :require_login /
+  
   private
  
   def require_login
