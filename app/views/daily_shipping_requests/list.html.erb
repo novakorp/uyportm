@@ -3,6 +3,9 @@
 <%= form_tag do %>
 <%= select_date @listing_date, prefix: :listing_date %> 	<%= submit_tag("Ver") %> <br><br>
 
+<div id='datepicker'> </div>
+<%= text_field_tag(:date_select) %>
+
 <% if @listing_date.prev_day == Date.today %>
 	Mostrando Pedidos para el día de MAÑANA 
 <% end %>
@@ -44,5 +47,9 @@
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "/welcome/index" %></div>
  
-
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 

@@ -1,12 +1,12 @@
 ﻿class VehicleRegistrationsController < ApplicationController
  
 	def new		
-		@vehicle = Veheicle.find(params[:vehicle_id])
+		@vehicle = Vehicle.find(params[:vehicle_id])
 		@vehicle_registration = @vehicle.build_vehicle_registration
 	end
 	
 	def create
-		@vehicle = Veheicle.find(params[:vehicle_id])
+		@vehicle = Vehicle.find(params[:vehicle_id])
 		@vehicle_registration = VehicleRegistration.new(params[:vehicle_registration])
 		@vehicle_registration.vehicle_id = @vehicle.id
 		
