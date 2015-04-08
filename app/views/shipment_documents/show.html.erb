@@ -1,0 +1,29 @@
+﻿<H1> Documento de Viaje </H1>
+
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Pedido:</th>  
+	<td> <%= @shipment_document.shipment.shipping_request.customer_shipping_order.order_number %> -  <%= @shipment_document.shipment.shipping_request.customer_shipping_order.customer.name %>  </td>
+  </tr>
+   
+  <tr>   
+  <th>Viaje:</th>  
+	<td>  <%= l @shipment_document.shipment.departure_time %> - <%= @shipment_document.shipment.driver.first_name %> <%= @shipment_document.shipment.driver.last_name %> -  <%= @shipment_document.shipment.vehicle.number_plate %> </td>
+  </tr>
+  <tr>   
+  
+  <th>Tipo Documento:</th>  
+	<td> <%=@shipment_document.document_type.description %> </td>
+  </tr>
+  <tr>   
+  <th>Numero:</th>  
+	<td> <%= @shipment_document.number_text %> </td>
+  </tr>
+  <tr>
+   <th>Comentarios:</th>  
+	<td> <%= @shipment_document.comments %> </td>
+  </tr>
+</table>
+<div class="links_form"><%= link_to 'Atrás', shipments_path(@shipment) %></div>
+  

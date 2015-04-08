@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for ([@vehicle, @vehicle_registration])  do |v| %>
+<%= form_for ([@vehicle, @vehicle_registration])  do |f| %>
  <% if @vehicle_registration.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@vehicle_registration.errors.count, "error") %> impiden guardar el formulario:</h2>
+   <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @vehicle_registration.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -15,34 +15,34 @@
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
    
-  <th>Chasis:</th>  
-	<td> <%=  v.text_field :chassis %> </td>
+  <th><%= f.label :chassis %></th> 
+	<td> <%=  f.text_field :chassis %> </td>
   </tr>
   
-  <th>Motor:</th>  
-	<td> <%=  v.text_field :engine %> </td>
+  <th><%= f.label :engine %></th>  
+	<td> <%=  f.text_field :engine %> </td>
   </tr>
   
   
-  <th>Identificación DNT:</th>  
-	<td> <%=  v.text_field :dnt_id %> </td>
+  <th><%= f.label :dnt_id %></th>
+	<td> <%=  f.text_field :dnt_id %> </td>
   </tr> 
   
   
-  <th>Fecha Empadronado:</th>  
-	<td> <%=  v.date_select :registration_date %> </td>
+  <th><%= f.label :registration_date %></th>  
+	<td> <%=  f.date_select :registration_date %> </td>
   </tr>
   
-  <th>Padrón:</th>  
-	<td> <%=  v.text_field :registration_number %> </td>
+  <th><%= f.label :registration_number %></th>  
+	<td> <%=  f.text_field :registration_number %> </td>
   </tr>
   
-  <th>Fecha de Ingreso:</th>  
-	<td> <%=  v.date_select :date_of_entry %> </td>
+  <th><%= f.label :date_of_entry %></th> 
+	<td> <%=  f.date_select :date_of_entry %> </td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= v.submit "Guardar" %>
+ <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>  

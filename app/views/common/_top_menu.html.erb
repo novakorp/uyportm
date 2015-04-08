@@ -1,0 +1,36 @@
+
+<table class="menu_superior" cellpadding=0 cellspacing=0> 
+  <tr> 
+    <% if @top_menu_selection == "Inicio" %>
+      <td class="link_inactivo">Inicio</td>
+    <% else %>
+      <td><%= link_to "Inicio",  "/welcome/index" %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @top_menu_selection == "Pedidos" %>
+      <td class="link_inactivo">Pedidos</td>
+    <% else %>
+      <td><%= link_to "Pedidos", controller: "customer_shipping_orders", action: "pending_requests"%> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+     <% if @top_menu_selection == "Viajes" %>
+      <td class="link_inactivo">Viajes</td>
+    <% else %>
+      <td><%= link_to "Viajes", controller: "shipments", action: "pending"%> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @top_menu_selection == "Configuracion" %>
+      <td class="link_inactivo">Configuración</td>
+    <% else %>
+      <td><%= link_to "Configuración",  "/welcome/configuration" %>  </td>
+    <% end %>
+       
+  </tr>
+</table>
+

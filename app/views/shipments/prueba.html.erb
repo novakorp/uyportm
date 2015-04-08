@@ -1,0 +1,73 @@
+ 
+  <style>
+    .toggler {width: 240px}
+    #button { padding: .5em 1em; text-decoration: none; }
+    #effect { width: 240px; padding: 0.4em; position: relative; }
+  </style>
+  
+ <style>
+  .ui-menu { width: 150px; }
+  </style>
+  
+  
+
+  <script>
+  
+    // IMPORTANTE
+    // Esta funcion debe definirse en cada pagina donde se usa un menu 
+    // para realizar el procesamiento correspondiente a cada una.
+    //
+    // Procesa una accion de menu. 
+    // Recibe un id de parametro (del objeto sobre el que se aplica el menu) 
+    // y el id del item de menu seleccionado.
+    function procesarAccionMenu (menuId, menuItemId, paramId) {
+       alert ('paramId = ' + paramId + ' , menuId = ' + menuItemId );
+    }
+    
+    $(function() {
+      
+      
+      // set effect from select menu value
+      $( "#button" ).click(function() {
+        desplegarMenuObjeto('menu', 'button', '1');
+      });
+   
+      $( "#menu" ).hide(); 
+      
+    });
+  </script>
+ 
+ 
+   
+ <button id="button" style="margin-left:100px" class="ui-state-default ui-corner-all">Opciones</button>
+   
+ <!-- Cada menu requiere un div que tenga un id con el mismo nombre del menu y el prefijo "toggler_" -->
+ <!-- para poder ser desplegado correctamente por las funciones -->
+ <div id="toggler_menu" style="width:153px">   
+    <ul id="menu" >
+      <li id=1 class="ui-state-disabled">Aberdeen</li>
+      <li id=2>Ada</li>
+      <li id=3>Adamsville</li>
+      <li id=4>Addyston</li>
+      <li id=5>Delphi</li>
+    </ul>   
+</div>
+
+
+   <br>
+   <h3> Consultar Flota </h3>
+   
+   <table>
+   <tr class="tabla_listado_fila_cabezal"> <th> Vehiculo </th> <th> Identificador </th> <th>Patente </th></tr>
+   
+   <% @wsdata.each do |data| %>
+      <tr><td> <%= data[:identificador] %> </td><td> <%= data[:movil_id].to_s %> </td> <td></td></tr>
+  <% end %>
+  
+   </table>
+   
+   
+<%= @wsdata.to_s %>
+
+ 
+ 

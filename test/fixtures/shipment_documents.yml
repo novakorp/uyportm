@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipment: 
+  document_type: 
+  comment: MyText
+
+two:
+  shipment: 
+  document_type: 
+  comment: MyText

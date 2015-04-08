@@ -1,0 +1,19 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      address:
+        one: "Dirección"
+        other: "Direcciones"
+    attributes:
+      address:
+        description: "Descripción"
+        address_detail_1: "Dirección 1"
+        address_detail_2: "Dirección 1"
+        phone_number_1: "Teléfono 1"
+        phone_number_2: "Teléfono 1"
+        postal_code: "Código Postal"
+        location_id: "Localidad"
+        comments: "Comentarios"

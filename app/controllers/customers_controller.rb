@@ -43,7 +43,7 @@ class CustomersController < ApplicationController
 	end
 	
 	def customers_ac
-		@customers  = Customer.find(:all,:conditions => ['name LIKE ?', "%#{params[:term]}%"])
+		@customers  = Customer.find(:all,:conditions => ['name iLIKE ?', "%#{params[:term]}%"])
 	end
 	
 end

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  company: 
+  order_number: 1
+  order_datetime: 2014-08-26 23:07:07
+  account: 
+  shipping_date: 2014-08-26
+  comments: MyText
+
+two:
+  company: 
+  order_number: 1
+  order_datetime: 2014-08-26 23:07:07
+  account: 
+  shipping_date: 2014-08-26
+  comments: MyText

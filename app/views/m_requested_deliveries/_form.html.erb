@@ -1,9 +1,9 @@
 ﻿  
-<%= form_for ([@m_requested_cargo, @m_requested_delivery])  do |r| %>
+<%= form_for ([@m_requested_cargo, @m_requested_delivery])  do |f| %>
  <% if @m_requested_delivery.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@m_requested_delivery.errors.count, "error") %> impiden guardar el formulario:</h2>
-    <ul>
+  <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
+     <ul>
     <% @m_requested_delivery.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -14,19 +14,21 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>   
-  <th>Cantidad:</th>  
-	<td> <%=  r.text_field :ammount %> </td>
+  <th><%= f.label :amount %></th>
+	<td> <%=  f.text_field :amount %> </td>
   </tr>
     <tr> 
-  <th>Dirección de Entrega:</th>  
-	<td> <%=  r.collection_select :address_id, @m_requested_delivery.m_requested_cargo.m_shipping_request.account.customer.addresses,  :id, :description %> </td>
+    <th><%= f.label :address_id %></th>
+	<td> <%=  f.collection_select :address_id, @m_requested_delivery.m_requested_cargo.m_shipping_request.customer.addresses,  :id, :description %> </td>
   </tr>
-  <th>Comentarios:</th>  
-	<td> <%=  r.text_field :comments %> </td>
+    <th><%= f.label :comments %></th>  
+	<td> <%=  f.text_field :comments %> </td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= r.submit "Guardar" %>
+
+  <%= f.submit t(:save) %>
+
   </td>
   </tr>
   </table>  

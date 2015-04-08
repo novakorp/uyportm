@@ -15,11 +15,12 @@
     <tr class="tabla_listado_fila_contenido"> 
 	  <td><%= m_shipping_request.name %></td>  
 	  <td><%= m_shipping_request.service.description %></td>  	  
-	  <td> <%= m_shipping_request.account.customer.name %> </td> 
+	  
       <td><%= m_shipping_request.trip.description %></td>  
 	  <td><%= m_shipping_request.details %> </td>   
 	  <td><%= link_to 'Ver', m_shipping_request %> &nbsp; <%= link_to 'Editar', edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to 'Eliminar', m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), m_shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

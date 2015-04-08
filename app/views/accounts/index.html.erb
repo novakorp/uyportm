@@ -14,8 +14,8 @@
       <td><%= account.account_number %></td>
       <td><%= account.customer.name %></td>	  
       <td><%= account.description %></td>
-	  <td><%= link_to 'Ver', account %> &nbsp; <%= link_to 'Editar', edit_account_path(account) %> &nbsp; <%= link_to 'Eliminar', account_path(account), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), account %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_account_path(account) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), account_path(account), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+   </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @company do |c| %>
+<%= form_for @company do |f| %>
  <% if @company.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@company.errors.count, "error") %> impiden guardar el formulario:</h2>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
     <ul>
     <% @company.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,31 +14,31 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Nombre:</th>
-  <td> <%= c.text_field :company_name%> </td>
+  <th><%= f.label :company_name %></th>
+  <td> <%= f.text_field :company_name%> </td>
   </tr>
   <tr>
-  <th>Razón Social:</th>
-  <td> <%= c.text_field :trade_name%> </td>
+  <th><%= f.label :trade_name %></th>
+  <td> <%= f.text_field :trade_name%> </td>
   </tr>
   <tr>
-  <th>RUT:</th>
-  <td> <%= c.text_field :rut%> </td>
+  <th><%= f.label :rut %></th>
+  <td> <%= f.text_field :rut%> </td>
   </tr>
   <tr>
   <tr>
-  <th>MTOP:</th>
-  <td> <%= c.text_field :mtop%> </td>
+  <th><%= f.label :mtop %></th>
+  <td> <%= f.text_field :mtop%> </td>
   </tr>    
-  <th>BPS:</th>
-  <td> <%= c.text_field :bps%> </td>
+  <th><%= f.label :bps %></th>
+  <td> <%= f.text_field :bps %> </td>
   </tr>
   <tr>
-  <th>MTSS:</th>
-  <td> <%= c.text_field :mtss%> </td>
+  <th><%= f.label :mtss %></th>
+  <td> <%= f.text_field :mtss%> </td>
   </tr>    
   <tr><td colspan=2 class="acciones_form">
-  <%= c.submit "Guardar" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>  

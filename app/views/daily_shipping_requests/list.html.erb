@@ -1,10 +1,7 @@
 ﻿<h1>Listado de Pedidos Diarios</h1>
 
 <%= form_tag do %>
-<%= select_date @listing_date, prefix: :listing_date %> 	<%= submit_tag("Ver") %> <br><br>
-
-<div id='datepicker'> </div>
-<%= text_field_tag(:date_select) %>
+<%= text_field_tag(:date_select, @date_select) %> <%= submit_tag("Ver") %> 
 
 <% if @listing_date.prev_day == Date.today %>
 	Mostrando Pedidos para el día de MAÑANA 
@@ -17,6 +14,7 @@
 <% end %>
 
 <% end %>
+
 <br>
  <%= link_to 'Nuevo Pedido', new_shipping_request_path %>
  
@@ -49,7 +47,10 @@
  
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( "#date_select" ).datepicker({
+	  dateFormat: "dd-mm-yy",
+	  defaultDate: '<%= @date_select %>'
+    });
   });
   </script>
 

@@ -5,5 +5,6 @@
   belongs_to :driver, class_name: "Employee"
   
   has_many :shipment_supplies
-  has_many :shipment_deliveries
+  has_many :shipment_deliveries  
+  has_many :shipment_documents
 end

@@ -1,0 +1,15 @@
+
+    
+   # client = Savon.client(wsdl: 'http://www.webservicex.com/globalweather.asmx?WSDL')
+   # client.operations
+   # response = client.call(:get_weather, :message => {'CityName' => 'Melilla', 'CountryName' => 'Uruguay'})
+    
+   # @weather_data = response.body[:get_weather_response][:get_weather_result]
+    
+   #client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl')
+   #client.operations.to_s
+   #response = client.call(:consultar_moviles_flota, :message => {'user' => 'usuario', 'pass' => 'pepe'})
+    
+   @weather_data = '' # response.body.to_s
+  
+  

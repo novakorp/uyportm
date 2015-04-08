@@ -1,0 +1,14 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      requested_supply:
+        one: "Indicación de Carga"
+        other: "Indicaciones de Carga"
+    attributes:
+      requested_supply:
+        ammount: "Cantidad"
+        address_id: "Dirección de Carga"
+        comments: "Comentarios"

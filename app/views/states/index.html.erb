@@ -12,7 +12,7 @@
      <tr class="tabla_listado_fila_contenido">
       <td><%= state.name %></td>
       <td><%= state.country %></td>
-	  <td><%= link_to 'Ver', state %> &nbsp; <%= link_to 'Editar', edit_state_path(state) %> &nbsp; <%= link_to 'Eliminar', state_path(state), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), state %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_state_path(state) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), state_path(state), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
     </tr>
   <% end %>
 </table>

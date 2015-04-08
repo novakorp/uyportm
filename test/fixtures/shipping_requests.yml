@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  customer_shipping_order: 
+  m_shipping_request: 
   service: 
-  journey: 
-  account: 
-  bill_number: MyString
-  request_date: 2014-04-09
-  required_shipment_date: 2014-04-09
-  contact: MyString
-  details: MyText
+  trip_quantity: 1
+  cargo_quantity: 1
+  trip: 
+  cargo_type: 
+  comments: MyText
 
 two:
+  customer_shipping_order: 
+  m_shipping_request: 
   service: 
-  journey: 
-  account: 
-  bill_number: MyString
-  request_date: 2014-04-09
-  required_shipment_date: 2014-04-09
-  contact: MyString
-  details: MyText
+  trip_quantity: 1
+  cargo_quantity: 1
+  trip: 
+  cargo_type: 
+  comments: MyText

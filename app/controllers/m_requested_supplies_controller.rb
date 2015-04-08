@@ -12,13 +12,12 @@ class MRequestedSuppliesController < ApplicationController
 	  if @m_requested_supply.save
 		 redirect_to  @m_requested_cargo 
 	  else
-		render 'new'
+		 render 'new'
 	  end
 	end
 
 	def show
 	  @m_requested_supply = MRequestedSupply.find(params[:id])
-	   
 	end
 
 	def edit
@@ -29,7 +28,7 @@ class MRequestedSuppliesController < ApplicationController
 	  @m_requested_supply = MRequestedSupply.find(params[:id])	
 	  @m_requested_cargo = @m_requested_supply.m_requested_cargo
 	 
-	 if @m_requested_supply.update_attributes(params[:m_requested_supply].permit(:ammount, :cargo_type_id, :measure_unit_id,  :address_id))
+	 if @m_requested_supply.update_attributes(params[:m_requested_supply].permit(:amount, :cargo_type_id, :measure_unit_id,  :address_id))
 		redirect_to @m_requested_cargo
 	  else
 		render 'edit'

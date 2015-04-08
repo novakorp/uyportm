@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://ws.wc.web.com.ar" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://response.bean.ws.wc.web.com.ar/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ws.wc.web.com.ar">
+    <wsdl:documentation>
+		Servicios de datos para empresas Bykom 
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://response.bean.ws.wc.web.com.ar/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.wc.web.com.ar">
+            <xs:import namespace="http://response.bean.ws.wc.web.com.ar/xsd"/>
+            <xs:complexType name="Exception">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Exception" nillable="true" type="xs:anyType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Exception">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="Exception" nillable="true" type="ns:Exception"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarDistanciaRecorrida">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaDesde" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaHasta" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarDistanciaRecorridaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaDistanciaRecorrida"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarMovilesFlota">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarMovilesFlotaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaMovilesFlota"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarOdometroFlota">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarOdometroFlotaResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaOdometro"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPosiciones">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaDesde" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaHasta" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarPosicionesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaPosiciones"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarTiempoDetenido">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaDesde" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fechaHasta" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="tiempo" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarTiempoDetenidoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaTiempoDetenido"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarUltimaPosicion">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="consultarUltimaPosicionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax22:DataResponseConsultaUltimaPosicion"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://response.bean.ws.wc.web.com.ar/xsd">
+            <xs:complexType name="DataResponseConsultaDistanciaRecorrida">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="distanciaTotal" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DataResponseConsultaMovilesFlota">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="identificador" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="patente" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DataResponseConsultaOdometro">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fechaGPS" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="identificador" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="odometroParcial" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="odometroTotal" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="patente" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DataResponseConsultaPosiciones">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fechaMensaje" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="historicoId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="identificador" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="latitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="longitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sentido" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="velocidad" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DataResponseConsultaTiempoDetenido">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="areaDetencionId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="areaDetencionNombre" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="contacto" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="fechaMensaje" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="identificador" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="latitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="longitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tiempoDetencion" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DataResponseConsultaUltimaPosicion">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fechaMensaje" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="identificador" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="latitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="longitud" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="movilId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sentido" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="velocidad" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="consultarDistanciaRecorridaRequest">
+        <wsdl:part name="parameters" element="ns:consultarDistanciaRecorrida"/>
+    </wsdl:message>
+    <wsdl:message name="consultarDistanciaRecorridaResponse">
+        <wsdl:part name="parameters" element="ns:consultarDistanciaRecorridaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="Exception">
+        <wsdl:part name="parameters" element="ns:Exception"/>
+    </wsdl:message>
+    <wsdl:message name="consultarMovilesFlotaRequest">
+        <wsdl:part name="parameters" element="ns:consultarMovilesFlota"/>
+    </wsdl:message>
+    <wsdl:message name="consultarMovilesFlotaResponse">
+        <wsdl:part name="parameters" element="ns:consultarMovilesFlotaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultarOdometroFlotaRequest">
+        <wsdl:part name="parameters" element="ns:consultarOdometroFlota"/>
+    </wsdl:message>
+    <wsdl:message name="consultarOdometroFlotaResponse">
+        <wsdl:part name="parameters" element="ns:consultarOdometroFlotaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultarUltimaPosicionRequest">
+        <wsdl:part name="parameters" element="ns:consultarUltimaPosicion"/>
+    </wsdl:message>
+    <wsdl:message name="consultarUltimaPosicionResponse">
+        <wsdl:part name="parameters" element="ns:consultarUltimaPosicionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultarTiempoDetenidoRequest">
+        <wsdl:part name="parameters" element="ns:consultarTiempoDetenido"/>
+    </wsdl:message>
+    <wsdl:message name="consultarTiempoDetenidoResponse">
+        <wsdl:part name="parameters" element="ns:consultarTiempoDetenidoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="consultarPosicionesRequest">
+        <wsdl:part name="parameters" element="ns:consultarPosiciones"/>
+    </wsdl:message>
+    <wsdl:message name="consultarPosicionesResponse">
+        <wsdl:part name="parameters" element="ns:consultarPosicionesResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ServiceDataBykomPortType">
+        <wsdl:operation name="consultarDistanciaRecorrida">
+            <wsdl:input message="ns:consultarDistanciaRecorridaRequest" wsaw:Action="urn:consultarDistanciaRecorrida"/>
+            <wsdl:output message="ns:consultarDistanciaRecorridaResponse" wsaw:Action="urn:consultarDistanciaRecorridaResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarDistanciaRecorridaException"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarMovilesFlota">
+            <wsdl:input message="ns:consultarMovilesFlotaRequest" wsaw:Action="urn:consultarMovilesFlota"/>
+            <wsdl:output message="ns:consultarMovilesFlotaResponse" wsaw:Action="urn:consultarMovilesFlotaResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarMovilesFlotaException"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarOdometroFlota">
+            <wsdl:input message="ns:consultarOdometroFlotaRequest" wsaw:Action="urn:consultarOdometroFlota"/>
+            <wsdl:output message="ns:consultarOdometroFlotaResponse" wsaw:Action="urn:consultarOdometroFlotaResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarOdometroFlotaException"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarUltimaPosicion">
+            <wsdl:input message="ns:consultarUltimaPosicionRequest" wsaw:Action="urn:consultarUltimaPosicion"/>
+            <wsdl:output message="ns:consultarUltimaPosicionResponse" wsaw:Action="urn:consultarUltimaPosicionResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarUltimaPosicionException"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarTiempoDetenido">
+            <wsdl:input message="ns:consultarTiempoDetenidoRequest" wsaw:Action="urn:consultarTiempoDetenido"/>
+            <wsdl:output message="ns:consultarTiempoDetenidoResponse" wsaw:Action="urn:consultarTiempoDetenidoResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarTiempoDetenidoException"/>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPosiciones">
+            <wsdl:input message="ns:consultarPosicionesRequest" wsaw:Action="urn:consultarPosiciones"/>
+            <wsdl:output message="ns:consultarPosicionesResponse" wsaw:Action="urn:consultarPosicionesResponse"/>
+            <wsdl:fault message="ns:Exception" name="Exception" wsaw:Action="urn:consultarPosicionesException"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ServiceDataBykomSoap11Binding" type="ns:ServiceDataBykomPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="consultarDistanciaRecorrida">
+            <soap:operation soapAction="urn:consultarDistanciaRecorrida" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarMovilesFlota">
+            <soap:operation soapAction="urn:consultarMovilesFlota" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarOdometroFlota">
+            <soap:operation soapAction="urn:consultarOdometroFlota" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarUltimaPosicion">
+            <soap:operation soapAction="urn:consultarUltimaPosicion" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarTiempoDetenido">
+            <soap:operation soapAction="urn:consultarTiempoDetenido" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPosiciones">
+            <soap:operation soapAction="urn:consultarPosiciones" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceDataBykomSoap12Binding" type="ns:ServiceDataBykomPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="consultarDistanciaRecorrida">
+            <soap12:operation soapAction="urn:consultarDistanciaRecorrida" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarMovilesFlota">
+            <soap12:operation soapAction="urn:consultarMovilesFlota" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarOdometroFlota">
+            <soap12:operation soapAction="urn:consultarOdometroFlota" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarUltimaPosicion">
+            <soap12:operation soapAction="urn:consultarUltimaPosicion" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarTiempoDetenido">
+            <soap12:operation soapAction="urn:consultarTiempoDetenido" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPosiciones">
+            <soap12:operation soapAction="urn:consultarPosiciones" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap12:fault use="literal" name="Exception"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceDataBykomHttpBinding" type="ns:ServiceDataBykomPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="consultarDistanciaRecorrida">
+            <http:operation location="ServiceDataBykom/consultarDistanciaRecorrida"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarDistanciaRecorrida"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarDistanciaRecorrida"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarMovilesFlota">
+            <http:operation location="ServiceDataBykom/consultarMovilesFlota"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarMovilesFlota"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarMovilesFlota"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarOdometroFlota">
+            <http:operation location="ServiceDataBykom/consultarOdometroFlota"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarOdometroFlota"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarOdometroFlota"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarUltimaPosicion">
+            <http:operation location="ServiceDataBykom/consultarUltimaPosicion"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarUltimaPosicion"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarUltimaPosicion"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarTiempoDetenido">
+            <http:operation location="ServiceDataBykom/consultarTiempoDetenido"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarTiempoDetenido"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarTiempoDetenido"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consultarPosiciones">
+            <http:operation location="ServiceDataBykom/consultarPosiciones"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="consultarPosiciones"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="consultarPosiciones"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ServiceDataBykom">
+        <wsdl:port name="ServiceDataBykomHttpSoap11Endpoint" binding="ns:ServiceDataBykomSoap11Binding">
+            <soap:address location="http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceDataBykomHttpSoap12Endpoint" binding="ns:ServiceDataBykomSoap12Binding">
+            <soap12:address location="http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceDataBykomHttpEndpoint" binding="ns:ServiceDataBykomHttpBinding">
+            <http:address location="http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

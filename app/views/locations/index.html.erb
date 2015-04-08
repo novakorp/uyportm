@@ -4,8 +4,9 @@
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
     <th>Nombre</th>
-	 <th>Departamento</th> 
-    <th>Coordenadas</th> 
+	 <th>Departamento</th>  
+     <th>Longitud</th> 
+     <th>Latitud</th> 
 	<th>Tipo</th> 
 	<th></th>
   </tr>
@@ -13,11 +14,12 @@
   <% @locations.each do |location| %>
     <tr class="tabla_listado_fila_contenido">
      <td><%= location.name %></td>
-      <td></td>
-      <td><%= location.coords %></td> 
+      <td><%=location.state.name%></td>
+      <td><%= location.longitude %></td> 
+       <td><%= location.latitude %></td> 
 	  <td><% if location.location_type == 1 %>Ciudad<% else %>Lugar<% end %></td> 
-	  <td><%= link_to 'Ver', location %> &nbsp; <%= link_to 'Editar', edit_location_path(location) %> &nbsp; <%= link_to 'Eliminar', location_path(location), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+   <td><%= link_to image_tag(asset_path ('buttons/view.gif')), location %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_location_path(location) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), location_path(location), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

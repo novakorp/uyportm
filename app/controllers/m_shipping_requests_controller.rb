@@ -28,7 +28,7 @@ class MShippingRequestsController < ApplicationController
 	def update
 	  @m_shipping_request = MShippingRequest.find(params[:id])
 	 
-	 if @m_shipping_request.update_attributes(params[:m_shipping_request].permit(:name, :service_id, :account_id, :bill_number, :request_date, :required_shipment_date, :contact, :details, :simple_shipment))
+	 if @m_shipping_request.update_attributes(params[:m_shipping_request].permit(:name, :service_id, :customer_id, :trip_id, :contact, :details, :simple_shipment))
 		redirect_to @m_shipping_request
 	  else
 		render 'edit'
@@ -43,11 +43,13 @@ class MShippingRequestsController < ApplicationController
 	end
 	
 	def m_shipping_requests_ac
-		
 		@shippings  =  MShippingRequest.find(:all, 
-			:conditions => ['customer_id = ? AND name LIKE ?', params[:customer_id] ,"%#{params[:term]}%"], 
-			:joins => [:account])
-		
+			:conditions => ['customer_id = ? AND name iLIKE ?', params[:customer_id] ,"%#{params[:term]}%"])
+	end
+    
+    def fill_request_order_line		
+		@line_num  =  params[:line_num]
+        @m_sr = MShippingRequest.find(params[:id])		
 	end
 	
 end

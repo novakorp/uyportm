@@ -1,4 +1,4 @@
-﻿# encoding: UTF-8
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140616004028) do
+ActiveRecord::Schema.define(:version => 20150318015201) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_number"
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
     t.string   "mtop"
   end
 
+  create_table "customer_shipping_orders", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "order_number"
+    t.datetime "order_datetime"
+    t.date     "shipping_date"
+    t.text     "comments"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "customer_id"
+  end
+
+  add_index "customer_shipping_orders", ["company_id"], :name => "index_customer_shipping_orders_on_company_id"
+  add_index "customer_shipping_orders", ["customer_id"], :name => "index_customer_shipping_orders_on_customer_id"
+
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -101,16 +115,18 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "coords"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.integer  "state_id"
-    t.integer  "location_type", :limit => 1
+    t.integer  "location_type", :limit => 2
+    t.decimal  "longitude",                  :precision => 7, :scale => 5
+    t.decimal  "latitude",                   :precision => 7, :scale => 5
   end
 
   add_index "locations", ["state_id"], :name => "index_locations_on_state_id"
 
   create_table "m_requested_cargos", :force => true do |t|
-    t.integer  "ammount"
+    t.integer  "amount"
     t.integer  "cargo_type_id"
     t.integer  "m_shipping_request_id"
     t.integer  "measure_unit_id"
@@ -123,7 +139,7 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
   add_index "m_requested_cargos", ["measure_unit_id"], :name => "index_m_requested_cargos_on_measure_unit_id"
 
   create_table "m_requested_deliveries", :force => true do |t|
-    t.integer  "ammount"
+    t.integer  "amount"
     t.integer  "address_id"
     t.text     "comments"
     t.integer  "m_requested_cargo_id"
@@ -135,7 +151,7 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
   add_index "m_requested_deliveries", ["m_requested_cargo_id"], :name => "index_m_requested_deliveries_on_requested_cargo_id"
 
   create_table "m_requested_supplies", :force => true do |t|
-    t.integer  "ammount"
+    t.integer  "amount"
     t.integer  "address_id"
     t.text     "comments"
     t.integer  "m_requested_cargo_id"
@@ -152,13 +168,13 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "service_id"
-    t.integer  "account_id"
     t.integer  "trip_id"
     t.string   "name"
     t.integer  "simple_shipment"
+    t.integer  "customer_id"
   end
 
-  add_index "m_shipping_requests", ["account_id"], :name => "index_m_shipping_requests_on_account_id"
+  add_index "m_shipping_requests", ["customer_id"], :name => "index_m_shipping_requests_on_customer_id"
   add_index "m_shipping_requests", ["service_id"], :name => "index_m_shipping_requests_on_service_id"
   add_index "m_shipping_requests", ["trip_id"], :name => "index_m_shipping_requests_on_trip_id"
 
@@ -169,49 +185,12 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "requested_cargos", :force => true do |t|
-    t.integer  "ammount"
-    t.integer  "cargo_type_id"
-    t.integer  "shipping_request_id"
-    t.integer  "measure_unit_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "requested_cargos", ["cargo_type_id"], :name => "index_requested_cargos_on_cargo_type_id"
-  add_index "requested_cargos", ["measure_unit_id"], :name => "index_requested_cargos_on_measure_unit_id"
-  add_index "requested_cargos", ["shipping_request_id"], :name => "index_requested_cargos_on_shipping_request_id"
-
-  create_table "requested_deliveries", :force => true do |t|
-    t.integer  "address_id"
-    t.integer  "ammount"
-    t.integer  "requested_cargo_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-    t.text     "comments"
-  end
-
-  add_index "requested_deliveries", ["address_id"], :name => "index_requested_deliveries_on_address_id"
-  add_index "requested_deliveries", ["requested_cargo_id"], :name => "index_requested_deliveries_on_requested_cargo_id"
-
-  create_table "requested_supplies", :force => true do |t|
-    t.integer  "ammount"
-    t.integer  "address_id"
-    t.text     "comments"
-    t.integer  "requested_cargo_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
-  add_index "requested_supplies", ["address_id"], :name => "index_requested_supplies_on_address_id"
-  add_index "requested_supplies", ["requested_cargo_id"], :name => "index_requested_supplies_on_requested_cargo_id"
-
   create_table "services", :force => true do |t|
     t.string   "description"
     t.integer  "billing_unit_id"
     t.integer  "vehicle_type_id"
     t.integer  "couple_type_id"
-    t.integer  "couple_required", :limit => 1
+    t.integer  "couple_required", :limit => 2
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.integer  "company_id"
@@ -223,25 +202,37 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
   add_index "services", ["vehicle_type_id"], :name => "index_services_on_vehicle_type_id"
 
   create_table "shipment_deliveries", :force => true do |t|
-    t.integer  "ammount"
+    t.integer  "amount"
     t.integer  "shipment_id"
-    t.integer  "requested_delivery_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.integer  "address_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
-  add_index "shipment_deliveries", ["requested_delivery_id"], :name => "index_shipment_deliveries_on_requested_delivery_id"
+  add_index "shipment_deliveries", ["address_id"], :name => "index_shipment_deliveries_on_address_id"
   add_index "shipment_deliveries", ["shipment_id"], :name => "index_shipment_deliveries_on_shipment_id"
 
-  create_table "shipment_supplies", :force => true do |t|
-    t.integer  "ammount"
+  create_table "shipment_documents", :force => true do |t|
     t.integer  "shipment_id"
-    t.integer  "requested_supply_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "document_type_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "number_text"
+    t.text     "comments"
   end
 
-  add_index "shipment_supplies", ["requested_supply_id"], :name => "index_shipment_supplies_on_requested_supply_id"
+  add_index "shipment_documents", ["document_type_id"], :name => "index_shipment_documents_on_document_type_id"
+  add_index "shipment_documents", ["shipment_id"], :name => "index_shipment_documents_on_shipment_id"
+
+  create_table "shipment_supplies", :force => true do |t|
+    t.integer  "amount"
+    t.integer  "shipment_id"
+    t.integer  "address_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "shipment_supplies", ["address_id"], :name => "index_shipment_supplies_on_address_id"
   add_index "shipment_supplies", ["shipment_id"], :name => "index_shipment_supplies_on_shipment_id"
 
   create_table "shipments", :force => true do |t|
@@ -249,7 +240,7 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
     t.integer  "vehicle_id"
     t.integer  "coupled_vehicle_id"
     t.integer  "driver_id"
-    t.integer  "status",              :limit => 1
+    t.integer  "status",              :limit => 2
     t.text     "comments"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
@@ -261,21 +252,25 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
   add_index "shipments", ["vehicle_id"], :name => "index_shipments_on_vehicle_id"
 
   create_table "shipping_requests", :force => true do |t|
+    t.integer  "customer_shipping_order_id"
+    t.integer  "m_shipping_request_id"
     t.integer  "service_id"
-    t.integer  "account_id"
-    t.string   "bill_number"
-    t.date     "request_date"
-    t.date     "required_shipment_date"
-    t.string   "contact"
-    t.text     "details"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.integer  "trip_quantity"
+    t.integer  "cargo_quantity"
     t.integer  "trip_id"
-    t.integer  "simple_shipment"
+    t.integer  "cargo_type_id"
+    t.text     "comments"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "measure_unit_id"
   end
 
-  add_index "shipping_requests", ["account_id"], :name => "index_shipping_requests_on_account_id"
+  add_index "shipping_requests", ["cargo_type_id"], :name => "index_shipping_requests_on_cargo_type_id"
+  add_index "shipping_requests", ["customer_shipping_order_id"], :name => "index_shipping_requests_on_customer_shipping_order_id"
+  add_index "shipping_requests", ["m_shipping_request_id"], :name => "index_shipping_requests_on_m_shipping_request_id"
+  add_index "shipping_requests", ["measure_unit_id"], :name => "index_shipping_requests_on_measure_unit_id"
   add_index "shipping_requests", ["service_id"], :name => "index_shipping_requests_on_service_id"
+  add_index "shipping_requests", ["trip_id"], :name => "index_shipping_requests_on_trip_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"
@@ -286,7 +281,7 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
 
   create_table "sucta_registrations", :force => true do |t|
     t.datetime "expiration"
-    t.integer  "extended",   :limit => 1
+    t.integer  "extended",   :limit => 2
     t.text     "comments"
     t.integer  "vehicle_id"
     t.datetime "created_at",              :null => false
@@ -336,7 +331,7 @@ ActiveRecord::Schema.define(:version => 20140616004028) do
 
   create_table "vehicle_types", :force => true do |t|
     t.string   "description"
-    t.integer  "coupling_support",   :limit => 1
+    t.integer  "coupling_support",   :limit => 2
     t.integer  "couples_to_type_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false

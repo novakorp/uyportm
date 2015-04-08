@@ -41,6 +41,10 @@ gem 'strong_parameters'
 
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'activerecord-postgresql-adapter'
+
+gem 'savon'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

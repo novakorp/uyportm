@@ -28,7 +28,7 @@ class ShipmentSuppliesController < ApplicationController
 	  @shipment_supply = ShipmentSupply.find(params[:id])	 
 	  @shipment = @shipment_supply.shipment
 	 
-	 if @shipment_supply.update_attributes(params[:shipment_supply].permit(:ammount, :requested_delivery_id))
+	 if @shipment_supply.update_attributes(params[:shipment_supply].permit(:amount, :requested_delivery_id))
 		redirect_to @shipment
 	  else
 		render 'edit'

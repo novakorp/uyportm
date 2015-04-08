@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @shipping_request do |s| %>
+<%= form_for ([@customer_shipping_order, @shipping_request]) do |f| %>
  <% if @shipping_request.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@shipping_request.errors.count, "error") %> impiden guardar el formulario:</h2>
+   <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @shipping_request.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -11,98 +11,120 @@
   </div>
   <% end %>
   
-  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <%= hidden_field_tag :back_opt, @back_opt %>
   
-  <tr>
-    <th> Fecha del Pedido:</th>
-    <td> <%= s.date_select :request_date %>   </td>
-  </tr>
-    
-  <tr>
-    <th> Fecha del Viaje:</th>
-    <td> <%= s.date_select :required_shipment_date %>   </td> 
-  </tr>
-
+  <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
   
-  <tr>
-    <th> Servicio:</th>
-    <td> <%= s.collection_select :service_id, Service.all, :id, :description %>  
-  </td>
+   <% if @shipping_request.customer_shipping_order.order_number != nil %>
+  <tr>    
+	<th><%= f.label :order_number %></th>    
+   <td><%= @shipping_request.customer_shipping_order.order_number %></td>
+  </tr>
+  <% end %>
+  
+  <tr>	
+	<th><%= f.label :company_id %></th>
+    <td><%= @shipping_request.customer_shipping_order.company.company_name %></td>
   </tr>
   
-  <tr>
-    <th> Recorrido:</th>
-    <td> <%= s.collection_select :trip_id, Trip.all, :id, :description %>   </td>
+  <tr>	
+	<th><%= f.label :customer_id %></th>
+  <td> 
+     <%= @shipping_request.customer_shipping_order.customer.name %>   
+   </td>
+   </tr> 
+ 
+  <tr>	
+	<th><%= f.label :order_datetime %></th>
+    <td> <%= l @shipping_request.customer_shipping_order.order_datetime %> </td>
   </tr>
-  
-  
-  <tr>
-  <th> Cliente:</th>
-  <td> <%= text_field_tag(:customer_select) %> 
-		<%= hidden_field_tag(:customer_id) %> 
-  </td>
-  </tr>  
-  
-  <tr>
-    <th> Cuenta Cliente:</th>
-    <td> <%= s.select :account_id, [] %>  
-  </td>
+  <tr>	
+	<th><%= f.label :shipping_date %></th>
+    <td> <%= l @shipping_request.customer_shipping_order.shipping_date %> </td>
   </tr>
-  
-  
-  <tr>
-    <th>Viaje Unico:</th>
-    <td> <%= s.select :simple_shipment, [['Si', 1], ['No', 0]] %>  </td>
-  </tr>
-  
-  
-  <tr>
-  <th> Número de Factura:</th>
-    <td> <%= s.text_field :bill_number %> </td>
-  </tr>
-
-  <tr>
-    <th> Observaciones:</th>
-    <td> <%= s.text_area :details %></td>
-  </tr>
-  
-  <tr><td colspan=2 class="acciones_form">
-  <%= s.submit "Guardar" %>
-  </td>
+   <tr>	
+	<th><%= f.label :comments %></th>
+    <td><%= @shipping_request.customer_shipping_order.comments %></td>
   </tr>
   </table>
-
+  
+  <table>
+    <tr><td colspan=2> 
+    
+    <!--  LINEAS DE LA NOTA DE PEDIDO  -->
+        
+        <table class="tabla_listado" cellpadding=0 cellspacing=0>
+        <tr class="tabla_listado_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> </tr>
+           <% @shipping_request.customer_shipping_order.shipping_requests.each do |sr| %>
+           <% if sr.id != @shipping_request.id %>
+         
+              <%= render sr %>
+     
+          <% else %>
+           <tr> <td>
+             <%= text_field_tag "m_shipping_request_select" , @shipping_request.m_shipping_request.name %>
+             <%= f.hidden_field :m_shipping_request_id %>
+             </td> 
+             <td><div id = "sr_service" style="border:solid 1px #B8B8B8; height:18px;" > <nobr><%= @shipping_request.service.description %>: <%=  @shipping_request.trip.description %> </nobr></div></td> 
+             <td><%= f.text_field :trip_quantity, size: 3, maxlength: 4 %></td> 
+             <td> <%= f.collection_select :cargo_type_id, CargoType.all,  :id, :description, include_blank: true  %> </td>
+             <td> <%= f.text_field :cargo_quantity, size: 8, maxlength: 9 %></td> 
+             <td> <%= f.collection_select :measure_unit_id, MeasureUnit.all,  :id, :symbol, include_blank: true  %> </td>
+           </tr>  
+            <% end %>        
+          <% end %>      
+        </table> 
+    </td></tr>  
+  </table>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <td colspan=2 class="acciones_form">
+     <%= f.submit t(:save) %>
+  </td>
+  </tr> 
+  </table>
   
 <% end %>
 
 
 <script>
+   //  ---- Autocomplete en lineas del pedido  -----
+   
   
-  $(function() {    
-    $("#customer_select" ).autocomplete({
+   // Convierte en autocomplete el campo de la columna "Tipo Trabajo" con los tipos de trabajo de un cliente
+  function autocompTipoPedido (customerID) {
+ 
+    $("#m_shipping_request_select").autocomplete({
 	  minLength: 0,
-      source: "/customers/customers_ac.js",
+      source: "/m_shipping_requests/m_shipping_requests_ac.js?customer_id=" + customerID,
 	  focus: function( event, ui ) {
-        $( "#customer_select" ).val( ui.item.label );
+        $( "#m_shipping_request_select").val( ui.item.label );
         return false;
       },
 	  select: function( event, ui ) {
           if (ui.item) {		  
-			$("#customer_select").val (ui.item.label);
-			$("#customer_id").val (ui.item.value);		  
-			set_select_options ("/accounts/accounts_by_customer_id.js", ui.item.value, "shipping_request_account_id");
-		  };
-			return false;
+			$("#m_shipping_request_select").val (ui.item.label);
+			$("#shipping_request_m_shipping_request_id").val (ui.item.value);
+                   
+            // solicitar x ajax y cargar los datos del tipo de pedido. Como no tengo N lineas paso -1 para indicar que estoy modificando 
+            // los datos de una linea solamente
+            $.post('/m_shipping_requests/fill_request_order_line', {id: ui.item.value, line_num: -1}, null , "script");
+          };
+		  return false;
       } 
     });
-  });
-  
-  // Carga opciones en el campo con id select_field_id , obtenidos de una url de opciones y un parametro
-  function set_select_options (url_action, param_id, select_field_id) {
-	$.post(url_action, {id: param_id, element_id: select_field_id}, null , "script");  
-  }
-   
+  }    
  
+ // ----  Inicializacion de los campos  ----
+      
+  $(function() {
+         
+         // Autocomplete tipos de pedido
+          
+         autocompTipoPedido (<%= @shipping_request.m_shipping_request.customer_id %>);
+          
+    });
+      
 </script>
-	
-	
+

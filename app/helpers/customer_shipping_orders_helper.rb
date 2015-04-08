@@ -1,0 +1,2 @@
+module CustomerShippingOrdersHelper
+end

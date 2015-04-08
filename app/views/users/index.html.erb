@@ -12,8 +12,8 @@
     <tr class="tabla_listado_fila_contenido">
      <td><%= user.name %></td>
       <td><%= user.email %></td>  
-	  <td><%= link_to 'Ver', user %> &nbsp; <%= link_to 'Editar', edit_user_path(user) %> &nbsp; <%= link_to 'Eliminar', user_path(user), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), user %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_user_path(user) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), user_path(user), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

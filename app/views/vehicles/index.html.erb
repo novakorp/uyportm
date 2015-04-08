@@ -19,8 +19,8 @@
       <td><%= vehicle.model %></td>
       <td><%= vehicle.number_plate %></td>
       <td><%= vehicle.comments %></td>  
-	  <td><%= link_to 'Ver', vehicle %> &nbsp; <%= link_to 'Editar', edit_vehicle_path(vehicle) %> &nbsp; <%= link_to 'Eliminar', vehicle_path(vehicle), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), vehicle_path(vehicle), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

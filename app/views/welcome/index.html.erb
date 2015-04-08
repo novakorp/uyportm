@@ -2,62 +2,31 @@
 	Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
 </style>
 
-<h2>UY Port | Sistema de Gestión de Transportes </h2>
-<br>
+<% @top_menu_selection="Inicio" %>
+<%= render '/common/top_menu' %>
+
+<div style="margin-left:10px">
+
+<% if @alerts.length > 0 %>
+
+<H4>  Alertas (!)</H4>
+<div id="Alertas" class="lista_alertas">
+  <% @alerts.each do |alert| %>
+    <%= link_to "- " + alert['texto'] , alert['url'] %><br>
+  <% end %>
+</div>
+<% end %>
 
 
-<%= link_to "Pedidos Diarios", controller: "daily_shipping_requests", action: "list" %> 
-<br>
-<%= link_to "Pedidos", controller: "shipping_requests" %> 
-<br>
-<%= link_to "Viajes", controller: "shipments" %> 
+<H4> Pedidos Recientes <H4>
+<div id="PedidosRecietes" class="ventana_inicio">
 
-<br><br>
-<hr>
-<h4>Configuración</h4>
-<table class="tabla_mantenimiento" cellpadding=0 cellspacing=0>
-<tr><th>Flota</th><th>Negocio</th><th>Datos Geográficos</th></tr>
-<tr>
-<td>
-	<%= link_to "Vehículos", controller: "vehicles" %><br>
-	<%= link_to "Tipos de Vehículos", controller: "vehicle_types" %>
-</td>
-<td>
-	<%= link_to "Servicios", controller: "services" %> <br>	 
-	<%= link_to "Clientes", controller: "customers" %> <br>
-	<%= link_to "Cuentas", controller: "accounts" %>  
-</td>
-<td>
-	<%= link_to "Ubicaciones", controller: "locations" %> <br>
-	<%= link_to "Recorridos", controller: "trips" %> <br>
-	<%= link_to "Departamentos", controller: "states" %>
-</td>
-</tr>
-<tr><th>Empresas</th><th>Unidades</th><th>Cargas</th></tr>
-<td> 
-	<%= link_to "Empresas", controller: "companies" %> <br> 
-	<%= link_to "Empleados", controller: "employees" %>
-</td>  
-<td>
-	<%= link_to "Unidades de Facturación", controller: "billing_units" %> <br>
-	<%= link_to "Unidades de Medida", controller: "measure_units" %>
-</td>
-<td>
-	<%= link_to "Tipos de Carga", controller: "cargo_types" %> <br>
-	<%= link_to "Categorias de Carga", controller: "cargo_categories" %>
-</td>
+  <div class="lista_inicio">
+      <% @pedidos.each do |p| %>         
+            <b><%= I18n.l(p.customer_shipping_order.order_datetime.to_date, :format => :short) %> </b> <%= p.customer_shipping_order.customer.name%>  -  <%= p.m_shipping_request.name%>  &nbsp;  <%=  p.cargo_quantity %> <%=  p.measure_unit.symbol %>  <br>
+      <% end %>
+  </div>
+</div>
 
-</tr>
-<tr><th>Modelos</th><th>Usuarios</th><th>Tipos de Documento</th></tr>
-<td> 
-	<%= link_to "Modelos de Pedidos", controller: "m_shipping_requests" %> <br> 
-</td>  
-<td>
-	<%= link_to "Usuarios", controller: "users" %> <br> 
-</td>
-<td>
-	<%= link_to "Tipos de Documento", controller: "document_types" %> <br> 
-</td>
-</tr>
-</table>
+</div>
 

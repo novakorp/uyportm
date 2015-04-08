@@ -1,0 +1,35 @@
+﻿<H1> Nota de Pedido </H1>
+
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+
+  <tr>
+  <th>Empresa:</th>
+  <td><%= @customer_shipping_order.company.company_name %></td>
+  </tr>  
+  
+  <tr>
+  <th>Nro:</th>
+  <td><%= @customer_shipping_order.order_number %></td>
+  </tr>  
+  
+   <tr>
+  <th>Cliente:</th>
+  <td> <%= @customer_shipping_order.customer.name %></td>
+  </tr>  
+  
+  <tr>
+  <th>Fecha Pedido:</th>
+  <td><%= l(@customer_shipping_order.order_datetime, format: :short) %></td>
+  </tr>  
+  
+   
+</table>
+
+   <table class="tabla_listado_2" cellpadding=0 cellspacing=0>
+        <tr> <th>Tipo Trabajo</th> <th>Desc</th><th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th></tr>
+        <%= render @customer_shipping_order.shipping_requests %>
+   </table>
+
+<br>
+<div class="links_form"><%= link_to 'Atrás', @back_option %></div>

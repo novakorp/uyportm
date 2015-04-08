@@ -13,7 +13,8 @@
       <td><%= measure_unit.name %></td>
       <td><%= measure_unit.symbol %></td>
 	   <td><%= link_to 'Ver', measure_unit %> &nbsp; <%= link_to 'Editar', edit_measure_unit_path(measure_unit) %> &nbsp; <%= link_to 'Eliminar', measure_unit_path(measure_unit), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-	
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), measure_unit %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_measure_unit_path(measure_unit) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), measure_unit_path(measure_unit), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	
     </tr>
   <% end %>
 </table>

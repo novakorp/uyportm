@@ -1,8 +1,8 @@
 ﻿
-<%= form_for @location do |l| %>
+<%= form_for @location do |f| %>
  <% if @location.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@location.errors.count, "error") %> impiden guardar la Ubicación:</h2>
+  <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @location.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -13,28 +13,36 @@
   
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>nombre:</th>
-  <td> <%= l.text_field :name %> </td>
+  <tr>  
+  <th><%= f.label :name %></th>
+  <td> <%= f.text_field :name %> </td>
   </tr>
   
   <tr>
-    <th> Departamento: </th>
-    <td> <%= l.collection_select :state_id, State.all,  :id, :name  %> </td>
-  </tr>
-  
-  <tr>
-    <th> Coordenadas: </th>
-    <td> <%= l.text_field :coords %> </td>
+    <th><%= f.label :state_id %></th>
+    <td> <%= f.collection_select :state_id, State.all,  :id, :name  %> </td>
   </tr>
   
    <tr>
-    <th> Tipo: </th>
-    <td> <%= l.select :location_type , [['Ciudad', 1], ['Lugar', 2]] %> </td>
+    <th><%= f.label :location_type %></th>
+    <td> <%= f.select :location_type , [['Ciudad', 1], ['Lugar', 2]] %> </td>
+  </tr>
+    
+   <tr>
+    <th><%= f.label :longitude %></th>
+    <td> <%= f.text_field :longitude , :value => (number_with_precision(f.object.longitude, precision: 5, separator: '.')) %> </td>
   </tr>
   
+   <tr>
+    <th><%= f.label :latitude %></th>
+    <td> <%= f.text_field :latitude , :value => (number_with_precision(f.object.latitude, precision: 5, separator: '.')) %> </td>
+  </tr>
+  
+  
   <tr><td colspan=2 class="acciones_form">
-  <%= l.submit "Guardar" %>
+  
+	<%= f.submit t(:save) %>
+
   </td>
   </tr>
   </table>

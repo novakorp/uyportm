@@ -1,3 +1,19 @@
+.form_errors {
+	border-style: solid;
+	border-width: 2px;
+	border-color: #FF7C7C;
+	background-color: #FFF4F4;
+	padding: 8px;
+	margin-bottom:10px;
+}
+
+.form_errors LI {
+	color: #FF4242;
+	/*font-weight: bold;*/
+	font-size: 8pt;
+	margin-top:2px;
+}
+
 .tabla_campos TH, .tabla_campos_lectura  TH{
 	width: 130px;
 	padding: 7px 5px 7px 7px;
@@ -19,11 +35,49 @@
 
 .tabla_campos_lectura {
 	margin-bottom: 10px;
-	width: 400px;
 }
 
 .tabla_campos_lectura TD  {
 	font-weight: bold;
+}
+
+.tabla_grilla_edicion {
+ /* margin-top: 3px;
+  margin-left:2px;*/
+}
+
+.tabla_grilla_edicion_header { 
+    background-color: #4BC438;  
+/*	color: #FBFBFB; */
+}
+
+.tabla_grilla_edicion TH, .tabla_grilla_edicion  TD {
+  padding: 2px 0px 2px 1px;
+}
+
+.tabla_grilla_edicion  TD {
+  	font-size: 9pt;
+  padding: 2px 0px 2px 1px; 
+ }
+  
+.tabla_grilla_edicion TH {
+	color: #FBFBFB;
+  text-align:center;
+	font-size: 8pt;
+  padding: 3px; 
+ }
+ 
+
+.tabla_grilla_edicion TD {	
+	border-style: none;
+	border-color: #C0C0C0;
+	border-width: 0px 0px 1px 0px;	
+  font-weight: regular;
+}
+
+.tabla_grilla_edicion_fila_sep {
+  border-style: none;
+  height: 8px;
 }
 
 TD.acciones_form  {
@@ -36,3 +90,11 @@ TD.acciones_form  {
 	padding-left: 5px;
 }
 
+.campo_fecha_hora {
+    width: 190px;
+}
+
+.campo_comentarios {
+    height: 100px;
+    width: 420px;
+}

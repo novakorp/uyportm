@@ -15,7 +15,7 @@ class ShippingRequestsBuilderController < ApplicationController
 		sr.required_shipment_date = Date.new(params[:required_shipment_date][:year].to_i, params[:required_shipment_date][:month].to_i, params[:required_shipment_date][:day].to_i)
 		sr.service_id = msr.service_id
 		sr.trip_id = msr.trip_id
-		sr.account_id = msr.account_id
+		sr.customer_id = msr.customer_id
 		sr.details = msr.details	
 		sr.simple_shipment = msr.simple_shipment	
 

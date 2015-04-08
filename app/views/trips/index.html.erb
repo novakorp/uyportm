@@ -14,7 +14,7 @@
      <td><%= trip.from_location.name %></td>
       <td><%= trip.to_location.name %></td>
 	  <td><%= trip.distance %></td>  
-	  <td><%= link_to 'Ver', trip %> &nbsp; <%= link_to 'Editar', edit_trip_path(trip) %> &nbsp; <%= link_to 'Eliminar', trip_path(trip), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), trip %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_trip_path(trip) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), trip_path(trip), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
     </tr>
   <% end %>
 </table>

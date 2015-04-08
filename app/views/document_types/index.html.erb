@@ -11,7 +11,8 @@
     <tr class="tabla_listado_fila_contenido">
       <td><%= document_type.description %></td>
 	   <td><%= link_to 'Ver', document_type %> &nbsp; <%= link_to 'Editar', edit_document_type_path(document_type) %> &nbsp; <%= link_to 'Eliminar', document_type_path(document_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-	
+	   <td><%= link_to image_tag(asset_path ('buttons/view.gif')), document_type %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_document_type_path(document_type) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), document_type_path(document_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	
     </tr>
   <% end %>
 </table>

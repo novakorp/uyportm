@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      service:
+        one: "Servicio"
+        other: "Servicios"
+    attributes:
+      service:
+        company_id: "Empresa"
+        description: "Descripción"
+        billing_unit_id: "Unidad de Facturación"
+        vehicle_type_id: "Tipo de Vehículo"
+        couple_required: "Requiere Acoplado"
+        couple_type_id: "Tipo de Acoplado"

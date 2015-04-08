@@ -1,14 +1,16 @@
-﻿<h1>Listado de Viajes</h1>
+﻿
+<% @top_menu_selection="Viajes" %>
+<%= render '/common/top_menu' %>
 
- <%= link_to 'Nuevo Viaje', new_shipment_path %>
+<h1>Viajes</h1>
+
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
     <th>Fecha</th>	
+    <th>Nota</th>
 	<th>Cliente</th>
     <th>Servicio</th>
-    <th>Vehículo</th> 
-	<th>Acoplado</th> 
-	<th>Recorrido</th>	
+    <th>Vehículo<br>Acoplado</th> 
 	<th>Chofer</th>
 	<th>Estado</th> 
 	<th></th>
@@ -16,30 +18,16 @@
  
   <% @shipments.each do |shipment| %>
     <tr class="tabla_listado_fila_contenido">
-      <td><%= shipment.departure_time %></td>
-	  <td></td><td></td>
-	  <!-- shipment.shipping_request.account.customer.name  shipment.shipping_request.service.details -->
-	  
-	  
-     <td><%= shipment.vehicle.number_plate %></td> 	  
-      <td><%= shipment.coupled_vehicle.number_plate %></td> 
-      <td>shipment.shipping_request.trip.description  </td> 
+      <td>  <%=l shipment.departure_time, format: :short %></td>
+	    <td> <%= shipment.shipping_request.customer_shipping_order.order_number %></td>
+      <td> <%= shipment.shipping_request.customer_shipping_order.customer.name %> </td>
+      <td> <nobr> <%=  shipment.shipping_request.service.description %></nobr><br>
+        <span class="dato_lista_sec"> <%=  shipment.shipping_request.trip.description %> </span></td>	  
+     <td><%= shipment.vehicle.number_plate %> <br> <%= shipment.coupled_vehicle.number_plate %></td>
 	  <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
-	  <td> <% if shipment.status == 1 %>
-			 Solicitado
-		   <% end %>
-			<% if shipment.status == 2 %>
-			 En Curso
-		   <% end %>
-		   <% if shipment.status == 3 %>
-			 Realizado
-		   <% end %>
-		   <% if shipment.status == 4 %>
-			 Cerrado
-		   <% end %>
-		   </td> 
-	  <td><%= link_to 'Ver', shipment %> &nbsp; <%= link_to 'Editar', edit_shipment_path(shipment) %> &nbsp; <%= link_to 'Eliminar', shipment_path(shipment), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td> <%= getShipmentStatusDesc(shipment.status) %> </td> 
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), shipment %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipment_path(shipment) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), shipment_path(shipment), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

@@ -30,7 +30,7 @@ class EmployeesController < ApplicationController
 	 
 	 if @employee.update_attributes(params[:employee].permit(:first_name, :last_name, :personal_id, :personal_id_type))
 		redirect_to @employee
-	  else
+	 else
 		render 'edit'
 	 end
 	end

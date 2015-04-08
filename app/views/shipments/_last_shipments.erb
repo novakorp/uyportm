@@ -1,0 +1,19 @@
+<div class="titulo_dato">
+  Ultimos Viajes Asignados
+</div>
+
+<table class="tabla_datos" cellpadding=0 cellspacing=0>
+<tr> 
+  <th>Salida</th><th>Vehículo</th><th>Acoplado</th><th>Chofer</th>
+</tr>
+
+<% @other_shipments.each do |shipment| %>
+<tr>
+     <td><%=l shipment.departure_time, format: :short %></td> 
+     <td><%= shipment.vehicle.number_plate %></td> 	  
+     <td><%= shipment.coupled_vehicle.number_plate %></td> 
+      <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
+</tr>
+<% end %>
+
+</table>

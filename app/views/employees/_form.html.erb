@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @employee do |e| %>
+<%= form_for @employee do |f| %>
  <% if @employee.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@employee.errors.count, "error") %> impiden guardar el formulario:</h2>
+	<div id="error_explanation" class="form_errors">
+	  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @employee.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,34 +14,34 @@
     
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Empresa:</th>
-  <td> <%= e.collection_select :company_id, Company.all,  :id, :company_name %> </td>
+  <th><%= f.label :company_id %></th>
+  <td> <%= f.collection_select :company_id, Company.all,  :id, :company_name %> </td>
   </tr>
   
   <tr>
-  <th>Nombre:</th>
-  <td> <%= e.text_field :first_name %> </td>
+  <th><%= f.label :first_name %></th>
+  <td> <%= f.text_field :first_name %> </td>
   </tr>
   
   <tr>
-  <th>Apellido:</th>
-  <td>  <%= e.text_field :last_name %> </td>
-  </tr>
-  
-  
-  <tr>
-  <th>Nro Documento:</th>
-  <td>  <%= e.text_field :personal_id %> </td>
+  <th><%= f.label :last_name %></th>
+  <td>  <%= f.text_field :last_name %> </td>
   </tr>
   
   
   <tr>
-  <th>Tipo Documento:</th>
-  <td><%= e.text_field :personal_id_type %></td>
+  <th><%= f.label :personal_id %></th>
+  <td>  <%= f.text_field :personal_id %> </td>
+  </tr>
+  
+  
+  <tr>
+  <th><%= f.label :personal_id_type %></th>
+  <td><%= f.text_field :personal_id_type %></td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= e.submit "Crear" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>

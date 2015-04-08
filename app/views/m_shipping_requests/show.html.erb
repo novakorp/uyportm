@@ -19,10 +19,10 @@
   </tr>
 
   <tr>
-    <th> Cuenta Cliente:</th>
-    <td> <%= @m_shipping_request.account.account_number + ' - ' + @m_shipping_request.account.customer.name  %>  </td>
+    <th> Cliente:</th>
+    <td> <%= @m_shipping_request.customer.name  %>  </td>
   </tr>
-  
+    
     <tr>
     <th> Viaje Unico:</th>
 	
@@ -41,8 +41,9 @@
   </tr>
 </table>
 
-
+<% if @m_shipping_request.m_requested_cargos.size == 0 %>
 <div class="links_form"><%= link_to 'Ingresar Detalles de Carga', new_m_shipping_request_m_requested_cargo_path(@m_shipping_request) %></div>
+<% end %>
 
 <%= render @m_shipping_request.m_requested_cargos %>
 

@@ -1,0 +1,24 @@
+﻿
+// Se encarga de completar datos de una linea de nota de pedido, a partir de los datos de un modelo de pediod. 
+// Se puede invocar desde el form de nota de pedido o desde el form de edicion de una linea de pedido (form shipping_request).
+
+// Caso form linea de pedido (el nro de linea se pasa como -1
+<% if @line_num.eql?('-1') %>
+  $("#sr_service").html('<%=@m_sr.service.description + ': ' + @m_sr.trip.description%>');
+  <% if @m_sr.m_requested_cargos.size > 0 %>
+    $("#shipping_request_cargo_type_id").val('<%=@m_sr.m_requested_cargos.first.cargo_type_id%>');
+    $("#shipping_request_cargo_quantity").val('<%=@m_sr.m_requested_cargos.first.amount%>');
+    $("#shipping_request_measure_unit_id").val('<%=@m_sr.m_requested_cargos.first.measure_unit_id%>');
+  <%end%>
+  
+ // Caso form nota de pedido , se recibe el nro de lineade pedido a completar
+<% else %>
+
+  $("#sr_<%=@line_num%>_service").html('<%=@m_sr.service.description + ': ' + @m_sr.trip.description%>');
+  <% if @m_sr.m_requested_cargos.size > 0 %>
+    $("#sr_<%=@line_num%>_cargo_type_id").val('<%=@m_sr.m_requested_cargos.first.cargo_type_id%>');
+    $("#sr_<%=@line_num%>_cargo_quantity").val('<%=@m_sr.m_requested_cargos.first.amount%>');
+    $("#sr_<%=@line_num%>_measure_unit_id").val('<%=@m_sr.m_requested_cargos.first.measure_unit_id%>');
+  <%end%>
+
+<%end%>

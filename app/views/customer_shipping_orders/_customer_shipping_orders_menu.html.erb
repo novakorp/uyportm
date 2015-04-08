@@ -1,0 +1,28 @@
+
+<table class="menu_superior" cellpadding=0 cellspacing=0> 
+  <tr> 
+    <% if @customer_shipping_orders_menu_selection == "Pendientes" %>
+      <td class="link_inactivo">Pendientes</td>
+    <% else %>
+      <td><%= link_to "Pendientes",  controller: "customer_shipping_orders", action: "pending_requests" %> </td>
+    <% end %>
+    
+    <td>|</td>
+        
+     <% if @customer_shipping_orders_menu_selection == "Para Facturar" %>
+      <td class="link_inactivo">Para Facturar</td>
+    <% else %>
+      <td><%= link_to "Para Facturar",  "javascript:alert('to_do')"  %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @customer_shipping_orders_menu_selection == "Consultas" %>
+      <td class="link_inactivo">Por Fecha</td>
+    <% else %>
+      <td><%= link_to "Por Fecha", "javascript:alert('to_do')" %>  </td>
+    <% end %>
+       
+  </tr>
+</table>
+

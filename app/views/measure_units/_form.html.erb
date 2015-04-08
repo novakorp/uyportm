@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @measure_unit do |m| %>
+<%= form_for @measure_unit do |f| %>
  <% if @measure_unit.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@measure_unit.errors.count, "error") %> impiden guardar el formulario:</h2>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
     <ul>
     <% @measure_unit.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -13,16 +13,16 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Nombre:</th>
-  <td>  <%= m.text_field :name %> </td>
+  <th><%= f.label :name %></th>
+  <td>  <%= f.text_field :name %> </td>
   </tr>
     
   <tr>
-    <th> Símbolo: </th>
-    <td> <%= m.text_field :symbol %> </td>
+    <th><%= f.label :symbol %></th>
+    <td> <%= f.text_field :symbol %> </td>
   </tr>
   <tr><td colspan=2 class="acciones_form">
-  <%= m.submit "Guardar" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>

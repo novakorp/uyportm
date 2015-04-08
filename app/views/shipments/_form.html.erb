@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @shipment do |s| %>
+<%= form_for @shipment do |f| %>
  <% if @shipment.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@shipment.errors.count, "error") %> impiden guardar el formulario:</h2>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
     <ul>
     <% @shipment.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -10,101 +10,279 @@
     </ul>
   </div>
   <% end %>
+    
+  <%= f.hidden_field :shipping_request_id %>   
+  <%= f.hidden_field :departure_time %>  
+  <%= hidden_field_tag :dep_date %>  
+  <%= f.hidden_field :arrival_time %> 
+  <%= hidden_field_tag :arv_date %>  
   
-  <%= s.hidden_field :shipping_request_id %> 
-   
+  <%= hidden_field_tag "back_option", @back_option %> 
+  
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
-     
   <tr>
-    <th> Solicitud:</th>
-   <!--  <td> <%= s.collection_select :shipping_request_id, ShippingRequest.all, :id, :details %>   </td> -->
-    <td> <%= @shipping_request.description %> </td>
-	
+    <th><%= f.label :customer_shipping_order_number %></th>
+    <td> <%= @shipping_request.customer_shipping_order.order_number %> </td>	
   </tr>
-  
   <tr>
-    <th> Estado:</th>
-    <td> <%= s.select  :status, [['Solicitado', 1], ['En Curso', 2], ['Realizado', 3], ['Cerrado', 4]] %>  </td>
+    <th><%= f.label :shipping_request_description %></th>
+    <td> <%= @shipping_request.service.description %> </td>	
+  </tr>
+  <tr>
+    <th><%= f.label :shipping_request_trip %></th>
+    <td> <%= @shipping_request.trip.description %> </td>	
+  </tr>
+  <tr>
+    <th><%= f.label :status %></th>
+    <td> <%= f.select  :status, [['Agendado', 1], ['En Curso', 2], ['Completado', 3], ['Para Facturar', 4],  ['Finalizado', 5], ['Cancelado', 6]] %>  </td>
   </tr>   
   
    <tr>
-    <th> Salida:</th>
-    <td> <%= s.datetime_select :departure_time %>   </td> 
+    <th><%= f.label :departure_time %></th>
+    <td> <input type="text" id="dep_date_dp" class="campo_fecha_hora"/> &nbsp;-&nbsp; <%= select_time @shipment.departure_time, prefix: 'dep_time' %>hs </td> 	
   </tr>
   
-    <tr>
-    <th> Llegada:</th>
-    <td> <%= s.datetime_select :arrival_time %>   </td> 
+  <tr>
+    <th><%= f.label :arrival_time %></th>
+    <td> <input type="text" id="arv_date_dp" class="campo_fecha_hora"/> &nbsp;-&nbsp; <%= select_time @shipment.arrival_time, prefix: 'arv_time' %>hs </td> 
   </tr>
   
   
   <tr>
-    <th> Vehículo:</th>
-    <td> <%= s.collection_select :vehicle_id, Vehicle.all, :id, :number_plate %>   </td>
+    <th><%= f.label :vehicle_id %></th>
+    <td> <%= f.collection_select :vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 0}), :id, :number_plate %>   </td>
   </tr>
   
    <tr>
-    <th> Acoplado:</th>
-    <td> <%= s.collection_select :coupled_vehicle_id, Vehicle.all, :id, :number_plate %>   </td>
+    <th><%= f.label :coupled_vehicle_id %></th>
+    <% if @shipment.shipping_request.service.couple_type %>
+      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.where("vehicle_type_id=" + @shipment.shipping_request.service.couple_type_id.to_s), :id, :number_plate %>   </td>
+    <% else %>
+      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 1}), :id, :number_plate %>   </td>
+      
+    <% end %>
   </tr>
   
   <tr>
-    <th> Chofer:</th>
-    <td>  <%= s.collection_select :driver_id, Employee.all, :id, :last_name  %> </td>
+    <th><%= f.label :driver_id %></th>
+    <td>  <%= f.collection_select :driver_id, Employee.all, :id, :last_name  %> </td>
+  </tr>
+  </table>
+  
+  <br>
+  <h2> Detalles de Carga </h2>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+    <th>Tipo de Carga</th>
+    <td> <%=@shipping_request.cargo_type.description %></td>
+   </tr>
+   <tr>
+    <th>Q Total</th>
+    <td> <%= @shipping_request.cargo_quantity.to_s + " " + @shipping_request.measure_unit.symbol %></td>
   </tr>
   
-  <tr>
-  <th> Detalles de Carga: </th>
-  <td>
+  
+   <% @addresses = @shipping_request.customer_shipping_order.customer.addresses %>
+  
+  
+  
+  <tr> 
+    <th></th>
+    <td> 
+  
+   <% req_cargo = @shipping_request.m_shipping_request.m_requested_cargos.first %> 
   
    <!--  TABLA DATOS DE CARGA -->
-
-   <% @shipping_request.requested_cargos.each do |req_cargo| %>
-
-	<%= req_cargo.cargo_type.description + ": " + req_cargo.ammount.to_s + " " + req_cargo.measure_unit.symbol %>
-	
-    <table>
-	
-    <tr> <th>Lugar de Carga</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
-	
-	<% req_cargo.requested_supplies.each do |req_sup| %>
-	    <tr> <td> <%= req_sup.address.description %> </td>
-		  
-	    <td> <%=  text_field_tag "[supplies][" + req_sup.id.to_s + "][ammount]", req_sup.ammount %> </td>
-	 
-	<% end %>
-	</table>
-	
-	<br>
-	
-    <table>
-	
-    <tr> <th>Lugar de Entrega</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
-	
-	<% req_cargo.requested_deliveries.each do |req_del| %>
-	   <tr> <td> <%= req_del.address.description %> </td>		
-	   <td> <%=  text_field_tag "[deliveries][" + req_del.id.to_s + "][ammount]", req_del.ammount %> </td>	
-	<% end %>
-	</table>
-	
-   <% end %>
+		
+    
+   <% @count_supplies = 0 %>
    
-   </td>
+  <table id="supplies" class="tabla_grilla_edicion" cellpadding=0 cellspacing=0>
+	
+    <tr class="tabla_grilla_edicion_header"> <th width=100px>Lugar de Carga</th> <th width=120px>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+    
+       <!--  Mostrar puntos de carga (lugar, cantidad) segun se haya definido en el modelo de pedido -->
   
-</tr>
+      <% if @shipment.shipment_supplies.size > 0 %>
+        <% req_supplies= @shipment.shipment_supplies %>
+      <% else %>
+        <% req_supplies= req_cargo.m_requested_supplies %>
+      <% end %>
+      
+      <!-- Fila "template" con el html general que debe tener cada fila agregada dinamicamente en esta coleccion de registros -->
+   
+      <tr id='suppliestmp' style="display:none" > 
+        <td> <%= select_tag "suppliestmp[0][address]", options_from_collection_for_select(@addresses, :id, :description), :include_blank => true %>
+            <%= hidden_field_tag "suppliestmp[0][id]" %>
+        </td>       
+       <td> <%=  text_field_tag "suppliestmp[0][amount]"%> </td>	
+      </tr>
+      
+	    <% req_supplies.each do |req_sup| %>
+        <% @count_supplies = @count_supplies + 1 %>
+        
+        <tr> <td> 
+          <%= select_tag "supplies[" + @count_supplies.to_s + "][address]", options_from_collection_for_select(@addresses, :id, :description, req_sup.address_id.to_s), :include_blank => true %>
+          <%= hidden_field_tag "supplies[" + @count_supplies.to_s + "][id]", req_sup.id.to_s %>
+          <td> <%=  text_field_tag "supplies[" + @count_supplies.to_s + "][amount]", req_sup.amount %> </td>
+        </tr>
+      <% end %>
+   
+   </table>
+   <a href="javascript:agregarRegistroColeccion('supplies', ++count_supplies)">agregar</a>  
+	
+   
+   
+   <% @count_deliveries = 0 %>
+   
+   <table id="deliveries" class="tabla_grilla_edicion" cellpadding=0 cellspacing=0>
+   
+	  <tr> <td colspan=2 class="tabla_grilla_edicion_fila_sep"></td> </tr>
+
+    
+    <tr  class="tabla_grilla_edicion_header"> <th>Lugar de Entrega</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+ 
+ 
+    <!--  Mostrar puntos de entrega (lugar, cantidad) segun se haya definido en el modelo de pedido --> 
+   
+    <% if @shipment.shipment_supplies.size > 0 %>
+      <% req_deliveries= @shipment.shipment_deliveries %>
+    <% else %>
+      <% req_deliveries= req_cargo.m_requested_deliveries %>
+    <% end %>
   
+      
+      <!-- Fila "template" con el html general que debe tener cada fila agregada dinamicamente en esta coleccion de registros -->
+   
+      <tr id='deliveriestmp' style="display:none" > 
+        <td> <%= select_tag "deliveriestmp[0][address]", options_from_collection_for_select(@addresses, :id, :description), :include_blank => true %>
+            <%= hidden_field_tag "deliveriestmp[0][id]" %>
+        </td>       
+       <td> <%=  text_field_tag "deliveriestmp[0][amount]"%> </td>	
+      </tr>
+       
+    <% req_deliveries.each do |req_del| %>
+      <% @count_deliveries = @count_deliveries + 1 %>
+      
+	    <tr> <td> 
+      <%= select_tag "deliveries[" + @count_deliveries.to_s + "][address]", options_from_collection_for_select(@addresses, :id, :description, req_del.address_id.to_s), :include_blank => true %>
+      <%= hidden_field_tag "deliveries[" + @count_deliveries.to_s + "][id]", req_del.id.to_s %>
+      </td>       
+       <td> <%=  text_field_tag "deliveries[" + @count_deliveries.to_s + "][amount]", req_del.amount %> </td>	
+       </tr>
+    <% end %>
+
+	</table>
   
-  <tr>
-    <th> Observaciones:</th>
-    <td> <%= s.text_area :comments %></td>
-  </tr>
-  
-  <tr><td colspan=2 class="acciones_form">
-  <%= s.submit "Guardar" %>
+  <a href="javascript:agregarRegistroColeccion('deliveries', ++count_deliveries)">agregar</a>  
+	
   </td>
   </tr>
   </table>
+   
+  
+  <br>
+  <br>
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+    <th><%= f.label :comments %></th>
+    <td> <%= f.text_area :comments, {class: "campo_comentarios"} %></td>
+  </tr>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= f.submit t(:save) %>
 
+  </td>
+  </tr>
+  
+  </table>
+  
+  <script>
+  
+    // contadores para saber la cantidad de registros agregados 
+  
+    var count_supplies = <%= @count_supplies %>;
+    var count_deliveries = <%= @count_deliveries %>;
+    
+    // Esta funcion permite seleccionar fechas y horas con datepicker y mostrarlas con formato
+    function datetime_to_datepicker (datetime_field, date_field, datepicker_field, time_field) {
+        var datetime=$('#' + datetime_field).val().substring(0,10)
+    
+        $('#' + datepicker_field).val(datetime);
+    
+        $('#' + datepicker_field).datepicker({
+          dateFormat: "yy-mm-dd",          
+          altField: "#" + date_field,
+          altFormat: "yy-mm-dd"        
+        }); 
+        
+        $('#' + datepicker_field).datepicker("option", "dateFormat", "DD d 'de' MM, yy"); 
+        
+        
+        strOnChangeScript = 'fld.onchange=function(){update_datetime("' + datetime_field + '", "' + date_field + '", "' + time_field + '")};'
+        fld=document.getElementById(datepicker_field);
+        eval (strOnChangeScript);
+        
+        fld=document.getElementById(time_field + '_hour');
+        eval (strOnChangeScript);
+        
+        fld=document.getElementById(time_field + '_minute');
+        eval (strOnChangeScript);
+ 
+    }
+    
+    function update_datetime (datetime_field, date_field, time_field) {
+        $('#' + datetime_field).val( $('#' + date_field).val() + ' ' + $('#' + time_field + '_hour').val() + ':' + $('#' + time_field + '_minute').val() + ':00.000000');
+    }
+  
+  
+    // Agrega una fila para el ingreso de un nuevo registro, en una tabla correspondiente a una coleccion de datos, dados el nombre de la coleccion y el indice que corresponde al registro. 
+    // El nombre de la coleccion pude ser el de  Puntos de Carga (supplies) o Puntos de Entrega (deliveries).
+    // El indice de los campos indica el indice que se usara para los atributos name e id de los campos que se agregaran a la tabla.
+    // Los nombres de los campos de un registro son de la forma  nombre_coleccion[indice_campos][nombre_campo] y los id son nombre_coleccion_indice_campos_nombre_campo.
+    // Para generar la fila se utiliza una fila template, cuyo id es la concatenacion : nomColeccion + "tmp" . Los campos de dicha fila tienen como nombre de coleccion
+    //  el mismo valor que el id de la fila, e indice 0. Se toma el html de esa fila y se remplaza el nombre de coleccion y el indice por los valores recibidos para armar
+    // el html de la fila a insertar.
+    
+    function agregarRegistroColeccion (nomColeccion, indiceCampos){
+    
+      // obtener la tabla donde se insertara la fila para el nuevo registro
+       var tabla = document.getElementById (nomColeccion);
+       
+       // obtener la fila "template" para generar el html de la nueva fila
+       var tmp_name = nomColeccion + "tmp"
+       var tmp_row = document.getElementById (tmp_name);
+        
+       // armar el html a partir de la fila template remplazando el indice y el nombre de la coleccion
+       html =  tmp_row.innerHTML;
+              
+       re = new RegExp (tmp_name + "\\[0\\]" , "g" );
+       html = html.replace(re, nomColeccion + "[" + indiceCampos + "]");
+       
+       re = new RegExp (tmp_name + "_0_" , "g" );
+       html = html.replace(re, nomColeccion + "_" + indiceCampos + "_");
+       
+       // agregar la fila al final de la tabla y cargarle el html generado
+       
+       tabla.insertRow(-1);       
+       var lastPos = tabla.rows.length-1;       
+       var lastRow = tabla.rows[lastPos];
+       
+       lastRow.innerHTML = html;              
+    }
+  
+  
+	$(function() { 
+        datetime_to_datepicker ('shipment_departure_time', 'dep_date', 'dep_date_dp', 'dep_time');
+        datetime_to_datepicker ('shipment_arrival_time', 'arv_date', 'arv_date_dp', 'arv_time');
+      });
+      
+      
+      
+  </script>
+  
+ 
   
 <% end %>
 

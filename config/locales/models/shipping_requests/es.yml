@@ -1,0 +1,25 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      shipping_request:
+        one: "Pedido"
+        other: "Pedidos"
+    attributes:
+      shipping_request:
+        request_date: " Fecha del Pedido"
+        required_shipment_date: "Fecha del Viaje"
+        service_id: "Servicio" 
+        trip_id: "Recorrido"
+        customer_id: "Cliente"		
+        account_id: "Cuenta Cliente"
+        simple_shipment: "Viaje Unico"        
+        bill_number: "Número de Factura"
+        details: "Observaciones"
+        order_number: Nro Nota
+        company_id: Empresa
+        order_datetime: Fecha Pedido
+        shipping_date: Fecha Trabajo
+        comments: Comentarios

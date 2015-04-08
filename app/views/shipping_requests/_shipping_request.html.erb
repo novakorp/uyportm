@@ -1,0 +1,21 @@
+﻿
+      <% if @sel_line_id == shipping_request.id.to_s 
+            @css_class="tabla_listado_fila_destacada" 
+        else
+            @css_class="tabla_listado_fila_contenido"
+        end %>
+
+  <tr class=<%= @css_class %>>   
+    <td> <nobr> <%=  shipping_request.m_shipping_request.name %> </nobr> </td>
+	<td> <%=  shipping_request.service.description %> <br><nobr> <%=  shipping_request.trip.description %> </nobr></td>
+ 	<td> <%=  shipping_request.trip_quantity %> </td>
+    
+ 	<td> <%=  shipping_request.cargo_type.description %> </td>
+ 	<td> <%=  shipping_request.cargo_quantity %> <%=  shipping_request.measure_unit.symbol %> </td>
+    
+  
+ 
+  <td> <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipping_request_path(shipping_request) %>  <%= link_to image_tag(asset_path ('buttons/delete.gif')), shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %>
+   </td>
+
+</tr> 

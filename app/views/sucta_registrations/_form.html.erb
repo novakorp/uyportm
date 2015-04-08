@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for ([@vehicle, @sucta_registration])  do |s| %>
+<%= form_for ([@vehicle, @sucta_registration])  do |f| %>
  <% if @sucta_registration.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@sucta_registration.errors.count, "error") %> impiden guardar el formulario:</h2>
+  <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @sucta_registration.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,26 +14,26 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Empresa:</th>  
-	<td> <%=  @vehicle.company.company_name %> </td>
+    <th><%= f.label :company_id %></th>
+	<td> <%=  @sucta_registration.vehicle.company.company_name %> </td>
   </tr>
   <tr>
   <th>Vehículo:</th>  
-	<td>  <%=  @vehicle.brand %> - <%= @vehicle.number_plate %> </td>
+	<td>  <%=  @sucta_registration.vehicle.brand %> - <%= @sucta_registration.vehicle.number_plate %> </td>
   </tr>
    <tr>
-  <th>Vencimiento:</th>
-  <td> <%= s.date_select :expiration %> </td>
+  <th><%= f.label :expiration %></th>
+  <td> <%= f.date_select :expiration %> </td>
   </tr>
   <tr>
-  <th>Prórroga:</th>
-  <td> <%= s.select :extended, [['Si', 1], ['No', 0]] %>  </td>
+  <th><%= f.label :extended %></th>
+  <td> <%= f.select :extended, [['Si', 1], ['No', 0]] %>  </td>
   </tr>  
-  <th>Comentarios:</th>
-  <td> <%= s.text_area :comments %> </td>
+  <th><%= f.label :comments %></th>
+  <td> <%= f.text_area :comments %> </td>
   </tr>
   <tr><td colspan=2 class="acciones_form">
-  <%= s.submit "Guardar" %>
+ <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>  

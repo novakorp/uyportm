@@ -1,6 +1,14 @@
-﻿<h1>Nuevo Viaje</h1>
+﻿<table cellpadding=0 cellsapcing=0 width=100%>
+<tr>
+<td width=60% class="celda_tabla_panel"> 
+  <h1>Nuevo Viaje</h1> 
+  <%= render 'form' %>
+</td> 
+<td class="celda_tabla_panel">
+  <%= render 'last_shipments' %>
+</td>
+</tr>
+</table>
   
-<%= render 'form' %>
-
  
-<div class="links_form"><%= link_to 'Atrás', shipments_path %></div>
+<div class="links_form"><%= link_to 'Atrás', @back_option %></div>

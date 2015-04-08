@@ -1,0 +1,16 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      employee:
+        one: "Empleado"
+        other: "Empleados"
+    attributes:
+      employee:
+        company_id: "Empresa"
+        first_name: "Nombre"
+        last_name: "Apellido"
+        personal_id: "Nro Documento"
+        personal_id_type: "Tipo Documento"

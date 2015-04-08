@@ -1,0 +1,13 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      m_requested_cargo:
+        one: "Carga de Modelo de Viaje"
+        other: "Cargas de Modelo de Viaje"
+    attributes:
+      m_requested_cargo:
+        cargo_type_id: "Tipo de Carga"
+        ammount: "Cantidad"

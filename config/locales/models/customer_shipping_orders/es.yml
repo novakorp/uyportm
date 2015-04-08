@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      customer_shipping_order:
+        one: "Orden de Trabajo"
+        other: "Ordenes de Trabajo"
+    attributes:
+      customer_shipping_order:
+        customer_id: "Cliente"
+        order_number: "Nro"
+        account_id: "Cuenta"
+        company_id: "Empresa"
+        order_datetime: "Fecha Orden"
+        shipping_date: "Fecha Inicio Trabajos"
+        comments: "Observaciones"
+        shipping_requests: ""
+        

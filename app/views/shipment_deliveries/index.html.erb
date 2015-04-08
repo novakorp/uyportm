@@ -12,7 +12,8 @@
     <tr class="tabla_listado_fila_contenido">
       <td><%= cargo_category.description %></td> 
 	   <td><%= link_to 'Ver', cargo_category %> &nbsp; <%= link_to 'Editar', edit_cargo_category_path(cargo_category) %> &nbsp; <%= link_to 'Eliminar', cargo_category_path(cargo_category), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-	
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), cargo_category %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_cargo_category_path(cargo_category) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), cargo_category_path(cargo_category), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	
     </tr>
   <% end %>
 </table>

@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      company:
+        one: "Empresa"
+        other: "Empresas"
+    attributes:
+      company:
+        company_name: "Nombre"
+        trade_name: "Razón Social"
+        rut: "RUT"
+        mtop: "MTOP"
+        bps: "BPS"
+        mtss: "MTSS"

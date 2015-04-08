@@ -9,8 +9,9 @@
 </head>
 <body>
 <table class="tabla_principal" align=center cellpadding=0 cellspacing=0 border=0>
-<tr><td class="tabla_principal_encabezado">
-<div class="titulo_sistema">Gestión de Transportes</div> 
+<tr class="tabla_principal_encabezado">
+ <td class="tabla_principal_banner"></td>
+ <td>
 <div class="links_autenticacion" width=100%>
  <% if signed_in? %>
 	  <%= current_user.name %> &nbsp; | &nbsp; <%= link_to "Cerrar sesión", signout_path, method: "delete" %>
@@ -20,7 +21,7 @@
 </div>
 </td></tr>
 <tr>
-<td class="tabla_principal_contenido">
+<td colspan=2 class="tabla_principal_contenido">
 	<!-- Mensajes del controller de su ultima invocacion -->
 	<% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>

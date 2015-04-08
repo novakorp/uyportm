@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      location:
+        one: "Ubicación"
+        other: "Ubicaciones"
+    attributes:
+      location:
+        name: "Nombre"
+        state_id: "Departamento"
+        coords: "Coordenadas"  
+        location_type: "Tipo"
+        longitude: "Longitud"
+        latitude: "Latitud"
+        
+        
+  

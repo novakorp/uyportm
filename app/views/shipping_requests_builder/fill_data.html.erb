@@ -27,7 +27,7 @@
 
 	<tr>   
 	<th>Cantidad:</th>  
-	<td> <%= text_field_tag "cargo[" + cargo_c.to_s + "][ammount]", req_cargo.ammount %>  <%=  select_tag("cargo[" + cargo_c.to_s + "][measure_unit_id]", options_from_collection_for_select(MeasureUnit.all,  :id, :symbol, req_cargo.measure_unit_id)) %> </td>
+	<td> <%= text_field_tag "cargo[" + cargo_c.to_s + "][amount]", req_cargo.amount %>  <%=  select_tag("cargo[" + cargo_c.to_s + "][measure_unit_id]", options_from_collection_for_select(MeasureUnit.all,  :id, :symbol, req_cargo.measure_unit_id)) %> </td>
 	</tr>
   
   
@@ -40,7 +40,7 @@
 	
 	<tr>   
 	<th>Cantidad:</th>  
-	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][supplies][" + details_c.to_s + "][ammount]", req_sup.ammount %> <%= req_cargo.measure_unit.symbol %> </td>
+	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][supplies][" + details_c.to_s + "][amount]", req_sup.amount %> <%= req_cargo.measure_unit.symbol %> </td>
 	</tr> 
 	
     <tr> 
@@ -63,7 +63,7 @@
 	
 	<tr>   
 	<th>Cantidad:</th>  
-	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][deliveries][" + details_c.to_s + "][ammount]", req_deliv.ammount %> <%= req_cargo.measure_unit.symbol %> </td>
+	<td> <%=  text_field_tag "cargo[" + cargo_c.to_s + "][deliveries][" + details_c.to_s + "][amount]", req_deliv.amount %> <%= req_cargo.measure_unit.symbol %> </td>
 	</tr>
 	
 	

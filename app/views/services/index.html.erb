@@ -14,7 +14,7 @@
 	  <td><%= service.company.company_name %></td>
       <td><%= service.description %></td>
       <td><%= service.billing_unit.description %></td>  
-	  <td><%= link_to 'Ver', service %> &nbsp; <%= link_to 'Editar', edit_service_path(service) %> &nbsp; <%= link_to 'Eliminar', service_path(service), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), service %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_service_path(service) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), service_path(service), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
     </tr>
   <% end %>
 </table>

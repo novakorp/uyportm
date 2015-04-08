@@ -1,0 +1,223 @@
+﻿  
+<%= form_for @customer_shipping_order do |f| %>
+ <% if @customer_shipping_order.errors.any? %>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
+    <ul>
+    <% @customer_shipping_order.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <% if @customer_shipping_order.order_number != nil %>
+  <tr>    
+	<th><%= f.label :order_number %></th>    
+  </tr>
+  <% end %>
+  
+  <tr>	
+	<th><%= f.label :company_id %></th>
+    <td><%= f.collection_select :company_id, Company.all,  :id, :company_name %></td>
+  </tr>
+  
+  <tr>	
+	<th><%= f.label :customer_id %></th>
+    <td>
+    
+    <%= text_field_tag :customer_select %>
+    <%= f.hidden_field :customer_id %>
+     
+    </td>
+    
+  </tr>  
+   
+  <tr>	
+	<th><%= f.label :order_datetime %></th>
+    <td><%= f.hidden_field :order_datetime %> <%= hidden_field_tag :order_date %> 
+    <input type="text" id="order_date_dp" class="campo_fecha_hora"/>  &nbsp;-&nbsp; <%= select_time @customer_shipping_order.order_datetime, prefix: 'order_time' %>hs 
+    </td>
+    
+ 
+  </tr>
+  <tr>	
+	<th><%= f.label :shipping_date %></th>
+    <td><%= text_field_tag :shipping_date, @customer_shipping_order.shipping_date ,:class => "campo_fecha_hora"  %> 
+         <%= f.hidden_field :shipping_date%>  </td>
+  </tr>
+  </table>
+  <br>
+  <table cellpadding=0 cellspacing=0 >
+    <tr><td colspan=2>
+   
+    <!--  LINEAS DE LA NOTA DE PEDIDO  -->
+    
+    
+
+    <% if @customer_shipping_order.shipping_requests.size > 0 %>
+    
+        <table class="tabla_listado_2" cellpadding=0 cellspacing=0>
+        <tr class="tabla_listado_2_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> <th></th></tr>
+        <%= render @customer_shipping_order.shipping_requests %>
+     
+    <% else %>    
+     <table class="tabla_listado_2" cellspacing=0 cellpadding=1> 
+        <tr class="tabla_listado_2_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> </tr>
+    
+       <% @cant_lineas = 5 %>
+
+       <% for i in 1..@cant_lineas %>
+        <tr> <td>
+             <%=text_field_tag "sr[" + i.to_s + "][m_shipping_request_select]" %>
+             <%=hidden_field_tag "sr[" + i.to_s + "][m_shipping_request_id]" %>
+             </td> 
+             <td><div id = "sr_<%= i.to_s %>_service" style="border:solid 1px #B8B8B8; height:18px;" > &nbsp;</div></td> 
+             <td><%=text_field_tag "sr[" + i.to_s + "][trip_quantity]", nil, {:size => 3, :maxlength => 4}%></td> 
+             <td> <%=select_tag( "sr[" + i.to_s + "][cargo_type_id]", options_from_collection_for_select(CargoType.all,  :id, :description), :include_blank => true)  %> </td>
+             <td> <%=text_field_tag "sr[" + i.to_s + "][cargo_quantity]", nil, {:size => 8, :maxlength => 9} %></td> 
+             <td> <%=select_tag( "sr[" + i.to_s + "][measure_unit_id]", options_from_collection_for_select(MeasureUnit.all,  :id, :symbol), :include_blank => true)  %> </td>
+     
+           </tr> 
+       
+        <% end %>          
+   <% end %> 
+         </table>
+    </td></tr>  
+  </table>
+  
+  <br>
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr><th style="text-align:left"><%= f.label :comments %></th><tr>
+  <tr><td><%= f.text_area :comments, class: 'campo_comentarios' %></td></tr>
+  <tr><td class="acciones_form">
+  <%= f.submit t(:save) %>
+  </td>
+  </tr>
+  </table>
+  
+<% end %>
+
+<script>
+
+
+   //  ---- Autocomplete en lineas del pedido  -----
+   
+  
+   // Convierte en autocomplete el campo de la columna "Tipo Trabajo" de una fila, con los tipos de trabajo de un cliente
+  function autocompTipoPedido (customerID, row_num) {
+    $("#sr_" + row_num + "_m_shipping_request_select").autocomplete({
+	  minLength: 0,
+      source: "/m_shipping_requests/m_shipping_requests_ac.js?customer_id=" + customerID,
+	  focus: function( event, ui ) {
+        $( "#sr_" + row_num + "_m_shipping_request_select").val( ui.item.label );
+        return false;
+      },
+	  select: function( event, ui ) {
+          if (ui.item) {		  
+			$("#sr_" + row_num + "_m_shipping_request_select").val (ui.item.label);
+			$("#sr_" + row_num + "_m_shipping_request_id").val (ui.item.value);
+                   
+            // solicitar x ajax y cargar los datos del tipo de pedido
+            $.post('/m_shipping_requests/fill_request_order_line', {id: ui.item.value, line_num: row_num}, null , "script");
+          };
+		  return false;
+      } 
+    });
+  }
+  
+  
+  // -----  Campos fecha , datepicker  -----
+    
+    // Esta funcion permite seleccionar fechas y horas con datepicker y mostrarlas con formato
+    function datetime_to_datepicker (datetime_field, date_field, datepicker_field, time_field) {
+        var datetime=$('#' + datetime_field).val().substring(0,10)
+    
+        $('#' + datepicker_field).val(datetime);
+    
+        $('#' + datepicker_field).datepicker({
+          dateFormat: "yy-mm-dd",          
+          altField: "#" + date_field,
+          altFormat: "yy-mm-dd"        
+        }); 
+        
+        $('#' + datepicker_field).datepicker("option", "dateFormat", "DD d 'de' MM, yy"); 
+        
+        
+        strOnChangeScript = 'fld.onchange=function(){update_datetime("' + datetime_field + '", "' + date_field + '", "' + time_field + '")};'
+        fld=document.getElementById(datepicker_field);
+        eval (strOnChangeScript);
+        
+        fld=document.getElementById(time_field + '_hour');
+        eval (strOnChangeScript);
+        
+        fld=document.getElementById(time_field + '_minute');
+        eval (strOnChangeScript);
+ 
+    }
+    
+    function update_datetime (datetime_field, date_field, time_field) {
+        $('#' + datetime_field).val( $('#' + date_field).val() + ' ' + $('#' + time_field + '_hour').val() + ':' + $('#' + time_field + '_minute').val() + ':00.000000');
+    }
+
+    
+   // Asigna opciones al campo cuenta
+  function accounts_options() {
+       $.post("/accounts/accounts_by_customer_id", {id: $("#customer_id").val(), element_id: "customer_shipping_order_account_id"}, null , "script");
+  }     
+    
+ 
+ // ----  Inicializacion de los campos  ----
+      
+   $(function() {    
+    $("#customer_select" ).autocomplete({
+	  minLength: 0,
+      source: "/customers/customers_ac.js",
+	  focus: function( event, ui ) {
+        $( "#customer_select" ).val( ui.item.label );
+        return false;
+      },
+	  select: function( event, ui ) {
+          if (ui.item) {		  
+			$("#customer_select").val (ui.item.label);
+			$("#customer_shipping_order_customer_id").val (ui.item.value);		
+
+   
+    //  POR AHORA NO SE SELECCIONAN CUENTAS
+    //  accounts_options();
+		
+        <% if @cant_lineas != nil %>
+            for (i=1; i <= <%= @cant_lineas %>; i++) {
+                $("#sr_" + i + "_m_shipping_request_select").val ('');
+                $("#sr_" + i + "_m_shipping_request_id").val ('');
+                autocompTipoPedido (ui.item.value, i);
+              }
+        <% end %>
+		  };
+			return false;
+      } 
+    });
+    
+      //  Inicializar campos  datetime
+      
+      // Campo fecha orden, datetime
+     datetime_to_datepicker ('customer_shipping_order_order_datetime', 'order_date', 'order_date_dp', 'order_time');
+     
+     // campo fecha viaje, date
+     
+     $('#shipping_date').val ($('#customer_shipping_order_shipping_date').val ());
+
+    $('#shipping_date').datepicker({
+          dateFormat:  "yy-mm-dd",          
+          altField: "#customer_shipping_order_shipping_date" ,
+          altFormat: "yy-mm-dd"        
+        }); 
+      
+     $('#shipping_date').datepicker("option", "dateFormat", "DD d 'de' MM, yy"); 
+     
+  });
+      
+      
+  </script>
+  

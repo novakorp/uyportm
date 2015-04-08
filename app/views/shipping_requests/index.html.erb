@@ -3,27 +3,32 @@
  <%= link_to 'Nuevo Pedido', new_shipping_request_path %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
-    <th>Fecha del Pedido</th>	
-	<th>Fecha del Viaje</th>
-    <th>Servicio</th>			
-	<th>Cliente</th>		
+  <th>Nro Nota</th>	
+	<th>Cliente</th>
+  <th>Fecha Trabajo</th>			
+	<th>Trabajo</th>		
 	<th>Recorrido</th>
-	<th>Factura</th>
-	<th>Observaciones</th>
+	<th># Viajes</th>
+	<th>Tipo Carga</th>
+	<th>Q</th>  
+	<th></th>  
 	<th></th>
   </tr>
  
   <% @shipping_requests.each do |shipping_request| %>
     <tr class="tabla_listado_fila_contenido">
-      <td><%= shipping_request.request_date %></td>
-      <td><%= shipping_request.required_shipment_date %></td>
-	  <td><%= shipping_request.service.description %></td>  	  
-	  <td><%= shipping_request.account.customer.name %> </td> 
-      <td><%= shipping_request.trip.description %></td> 
-	  <td><%= shipping_request.bill_number %> </td>   
-	  <td><%= shipping_request.details %> </td>   
-	  <td><%= link_to 'Ver', shipping_request %> &nbsp; <%= link_to 'Editar', edit_shipping_request_path(shipping_request) %> &nbsp; <%= link_to 'Eliminar', shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %> &nbsp;  <%= link_to 'Ingresar Viaje', '/shipments/new/' + shipping_request.id.to_s %></td>
-    </tr>
+     <td><%= shipping_request.customer_shipping_order.order_number %></td>
+     <td><%= shipping_request.customer_shipping_order.customer.name %></td>
+     <td><%= l customer_shipping_order.shipping_date %></td>
+     <td> <nobr> <%=  shipping_request.m_shipping_request.name %> </nobr> </td>
+     <td> <nobr> <%=  shipping_request.service.description %>: <%=  shipping_request.trip.description %> </nobr></td>
+     <td> <%=  shipping_request.trip_quantity %> </td>    
+     <td> <%=  shipping_request.cargo_type.description %> </td>
+     <td> <%=  shipping_request.cargo_quantity %> </td>
+     <td> <%=  shipping_request.measure_unit.symbol %> </td>
+    
+	   <td><%= link_to image_tag(asset_path ('buttons/view.gif')), shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipping_request_path(shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

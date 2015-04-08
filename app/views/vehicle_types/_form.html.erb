@@ -1,10 +1,10 @@
 ﻿
   
-<%= form_for @vehicle_type do |v| %>
+<%= form_for @vehicle_type do |f| %>
  <% if @vehicle_type.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@vehicle_type.errors.count, "error") %> impiden guardar el formulario:</h2>
-    <ul>
+  <div id="error_explanation" class="form_errors">
+	<h2> <%= t :error_header %> </h2>
+			<ul>
     <% @vehicle_type.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -14,22 +14,24 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Descripción:</th>
-  <td> <%= v.text_field :description %> </td>
+  <th><%= f.label :description %></th>
+  <td> <%= f.text_field :description %> </td>
   </tr>
     
   <tr>
-    <th>Es Acoplado:</th>
-    <td> <%= v.select :coupling_support, [['Si', 1], ['No', 0]] %>  </td>
+    <th><%= f.label :coupling_support %></th>
+    <td> <%= f.select :coupling_support, [['No', 0], ['Si', 1]] %>  </td>
   </tr>
   
   <tr>
-    <th>Se acopla a:</th>
-    <td> <%= v.collection_select :couples_to_type_id, VehicleType.all, :id, :description, { include_blank: true } %> </td>
+	<!-- se le asigna un id a esta etiqueta para poder mostrarla u ocultarla -->
+    <th><%= f.label :couples_to_type_id,nil,{"id"=> "vehicle_type_couples_to_type_id_lbl", "style"=> "display:none"} %></th>
+    <td> <%= f.collection_select :couples_to_type_id, VehicleType.all, :id, :description, { include_blank: true }, {"style"=> "display:none"} %> </td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= v.submit "Guardar" %>
+   <%= f.submit t(:save) %>
+
   </td>
   </tr>
   
@@ -37,5 +39,36 @@
 
   
 <% end %>
+
+  
+  
+  
+<script>
+	function coupling_support_on_change() {
+		_this=$("#vehicle_type_coupling_support");
+		
+		if ($(_this).val() != "1") {
+			$("#vehicle_type_couples_to_type_id_lbl").css("display","none");
+			$("#vehicle_type_couples_to_type_id").css("display","none");
+		}
+		else {
+			$("#vehicle_type_couples_to_type_id_lbl").css("display","block");
+			$("#vehicle_type_couples_to_type_id").css("display","block");
+		}
+	}
+
+	// control de ocultacion segun valor
+	$(function () {
+			$("#vehicle_type_coupling_support").change(coupling_support_on_change);
+			
+			coupling_support_on_change();
+	});
+	
+	
+</script>
+
+
+
+
 
 

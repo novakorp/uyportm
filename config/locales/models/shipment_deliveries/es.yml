@@ -1,0 +1,18 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      vehicle:
+        one: "Vehículo"
+        other: "Vehículos"
+    attributes:
+      vehicle:
+        company_id: "Empresa"
+        vehicle_type_id: "Tipo de Vehículo"
+        brand: "Marca" 
+        model: "Modelo"
+        number_plate: "Matrícula"
+        comments: "Comentarios"
+  

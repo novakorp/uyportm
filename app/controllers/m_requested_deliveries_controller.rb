@@ -28,7 +28,7 @@ class MRequestedDeliveriesController < ApplicationController
 	  @m_requested_delivery = MRequestedDelivery.find(params[:id])	
 	  @m_requested_cargo = @m_requested_delivery.m_requested_cargo
 	 
-	 if @m_requested_delivery.update_attributes(params[:m_requested_delivery].permit(:ammount, :cargo_type_id, :measure_unit_id, :address_id, :comments))
+	 if @m_requested_delivery.update_attributes(params[:m_requested_delivery].permit(:amount, :cargo_type_id, :measure_unit_id, :address_id, :comments))
 		redirect_to @m_requested_cargo
 	  else
 		render 'edit'

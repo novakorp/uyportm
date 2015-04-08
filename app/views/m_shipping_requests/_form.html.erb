@@ -1,9 +1,8 @@
 ﻿  
 <%= form_for @m_shipping_request do |s| %>
  <% if @m_shipping_request.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@m_shipping_request.errors.count, "error") %> impiden guardar el formulario:</h2>
-    <ul>
+   <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>    <ul>
     <% @m_shipping_request.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -31,18 +30,18 @@
   </tr>
 
   <tr>
-    <th> Cuenta Cliente:</th>
-	
-	<td> <input id="customer_select" >  <br> <%= s.text_field :account_id %>  </td>
-	
-	<!--
-    <td> <%= s.collection_select :account_id, Account.all, :id, :account_number %>  
-  </td>
-  -->
+    <th> Cliente:</th>	
+	<td> <% if @m_shipping_request.customer then
+               @cust_name = @m_shipping_request.customer.name
+             else
+                @cust_name = ""
+              end %>
+        <%= text_field_tag :customer_select, @cust_name %> 
+        <%= s.hidden_field :customer_id %>
+    </td>	
   </tr>
   
-
-  
+   
   <tr>
     <th>Viaje Unico:</th>
     <td> <%= s.select :simple_shipment, [['Si', 1], ['No', 0]] %>  </td>
@@ -63,16 +62,28 @@
 <% end %>
  
  
-<script>
-  $(function() {   
-    $( "#customer_select" ).autocomplete({
+<script> 
+ 
+   $(function() {    
+    $("#customer_select" ).autocomplete({
+	  minLength: 0,
       source: "/customers/customers_ac.js",
+	  focus: function( event, ui ) {
+        $( "#customer_select" ).val( ui.item.label );
+        return false;
+      },
 	  select: function( event, ui ) {
-          if (ui.item) {
-			$("#account_id").value = ui.item.value
+          if (ui.item) {		  
+			$("#customer_select").val (ui.item.label);
+			$("#m_shipping_request_customer_id").val (ui.item.value);	 
 		  };
+			
+          return false;
       } 
     });
-  });
+  }); 
   
-  </script>  
+ </script>  
+  
+  
+  

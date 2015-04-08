@@ -12,14 +12,13 @@
   </tr>
  
   <% @employees.each do |employee| %>
-    <tr class="tabla_listado_fila_contenido">
-	
+     <tr class="tabla_listado_fila_contenido">
       <td><%= employee.company.company_name %></td>
       <td><%= employee.first_name %></td>
       <td><%= employee.last_name %></td>  
       <td><%= employee.personal_id %></td>
-	  <td><%= link_to 'Ver', employee %> &nbsp; <%= link_to 'Editar', edit_employee_path(employee) %> &nbsp; <%= link_to 'Eliminar', employee_path(employee), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), employee %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_employee_path(employee) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), employee_path(employee), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr> 
   <% end %>
 </table>
  

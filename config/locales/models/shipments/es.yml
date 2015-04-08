@@ -1,0 +1,22 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      shipment:
+        one: "Viaje"
+        other: "Viajes"
+    attributes:
+      shipment:
+        customer_shipping_order_number: "Nro Nota"
+        shipping_request_description: "Tipo Trabajo"
+        shipping_request_trip: "Recorrido" 
+        status: "Estado"        
+        departure_time: "Salida"
+        arrival_time: "Llegada"
+        vehicle_id: "Vehículo"
+        coupled_vehicle_id: "Acoplado"
+        driver_id: "Chofer"
+        comments: "Observaciones"
+        cargo_type: "Tipo"

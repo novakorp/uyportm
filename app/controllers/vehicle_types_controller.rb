@@ -15,6 +15,8 @@ class VehicleTypesController < ApplicationController
 
 	def show
 	  @vehicle_type = VehicleType.find(params[:id])
+      
+      @couple_id=''
 	end
 
 	def index

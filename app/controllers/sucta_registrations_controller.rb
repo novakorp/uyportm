@@ -6,7 +6,7 @@ class SuctaRegistrationsController < ApplicationController
 	end
 	
 	def create
-		@vehicle = Veheicle.find(params[:vehicle_id])
+    @vehicle = Vehicle.find(params[:vehicle_id])
 		@sucta_registration = SuctaRegistration.new(params[:sucta_registration])
 		@sucta_registration.vehicle_id = @vehicle.id
 		
@@ -22,7 +22,7 @@ class SuctaRegistrationsController < ApplicationController
 	end
 
 	def edit
-	  @sucta_registration = SuctaRegistration.find(params[:id])	  
+	  @sucta_registration = SuctaRegistration.find(params[:id])	      
 	end
 
 	def update

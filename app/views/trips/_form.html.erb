@@ -1,8 +1,8 @@
 ﻿
-<%= form_for @trip do |t| %>
+<%= form_for @trip do |f| %>
  <% if @trip.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@trip.errors.count, "error") %> impiden guardar el formulario:</h2>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
     <ul>
     <% @trip.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,22 +14,22 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Desde:</th>
+  <th><%= f.label :from_location_id %></th>
   <td>  <%= collection_select(:trip, :from_location_id, Location.all, :id, :name) %> </td>
   </tr>
     
   <tr>
-    <th> Hacia: </th>
+    <th><%= f.label :to_location_id %></th>
     <td>   <%= collection_select(:trip, :to_location_id, Location.all, :id, :name) %> </td>
   </tr>
   
   <tr>
-    <th> Distancia: </th>
-    <td>  <%= t.text_field :distance %> </td>
+    <th><%= f.label :distance %></th>
+    <td>  <%= f.text_field :distance %> </td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= t.submit "Guardar" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>

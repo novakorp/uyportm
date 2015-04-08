@@ -12,7 +12,7 @@
     <tr class="tabla_listado_fila_contenido">
       <td><%= billing_unit.description %></td>
       <td><%= billing_unit.code %></td>
-	   <td><%= link_to 'Ver', billing_unit %> &nbsp; <%= link_to 'Editar', edit_billing_unit_path(billing_unit) %> &nbsp; <%= link_to 'Eliminar', billing_unit_path(billing_unit), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+  	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), billing_unit %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_billing_unit_path(billing_unit) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), billing_unit_path(billing_unit), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
 	
     </tr>
   <% end %>

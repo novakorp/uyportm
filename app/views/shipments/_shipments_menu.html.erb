@@ -1,0 +1,36 @@
+
+<table class="menu_superior" cellpadding=0 cellspacing=0> 
+  <tr> 
+    <% if @shipments_menu_selection == "Pendientes" %>
+      <td class="link_inactivo">Pendientes</td>
+    <% else %>
+      <td><%= link_to "Pendientes",  controller: "shipments", action: "pending" %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @shipments_menu_selection == "Completados" %>
+      <td class="link_inactivo">Completados</td>
+    <% else %>
+      <td><%= link_to "Completados", controller: "shipments", action: "completed"  %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+     <% if @shipments_menu_selection == "Para Facturar" %>
+      <td class="link_inactivo">Para Facturar</td>
+    <% else %>
+      <td><%= link_to "Para Facturar", controller: "shipments", action: "bill_pending"%> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @shipments_menu_selection == "Por Fecha" %>
+      <td class="link_inactivo">Por Fecha</td>
+    <% else %>
+      <td><%= link_to "Por Fecha", controller: "shipments", action: "by_date"  %>  </td>
+    <% end %>
+       
+  </tr>
+</table>
+

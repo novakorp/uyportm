@@ -14,8 +14,8 @@
       <td><%= cargo_type.description %></td>
       <td><%= cargo_type.cargo_category.description %></td>
       <td><%= cargo_type.measure_unit.symbol %></td>
-	   <td><%= link_to 'Ver', cargo_type %> &nbsp; <%= link_to 'Editar', edit_cargo_type_path(cargo_type) %> &nbsp; <%= link_to 'Eliminar', cargo_type_path(cargo_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-	
+	   <td><%= link_to image_tag(asset_path ('buttons/view.gif')), cargo_type %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_cargo_type_path(cargo_type) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), cargo_type_path(cargo_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+ 	
     </tr>
   <% end %>
 </table>

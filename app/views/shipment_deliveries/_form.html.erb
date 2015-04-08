@@ -1,9 +1,9 @@
 ﻿  
 <%= form_for @shipment_delivery do |f| %>
  <% if @shipment_delivery.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@shipment_delivery.errors.count, "error") %> impiden guardar el formulario:</h2>
-    <ul>
+ <div id="error_explanation" class="form_errors">
+  <h2> <%= t :error_header %> </h2>
+     <ul>
     <% @shipment_delivery.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
@@ -18,12 +18,12 @@
   </tr>
   
   <tr>
-  <th>Cantidad:</th>
-  <td>  <%= f.text_field :ammount %>  <%= @shipment_delivery.requested_delivery.requested_cargo.measure_unit.symbol %> </td>
+   <th><%= f.label :amount %></th>
+  <td>  <%= f.text_field :amount %>  <%= @shipment_delivery.requested_delivery.requested_cargo.measure_unit.symbol %> </td>
   </tr>
    
   <tr><td colspan=2 class="acciones_form">
-  <%= f.submit "Guardar" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>

@@ -12,7 +12,9 @@
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
+  match '/welcome/:action' => 'welcome#:action'
   
+ 
  # ----  RUTAS  PARA  CONSULTAS  AJAX  ----
  
  #  tipos de vehiculos
@@ -23,6 +25,30 @@
  get 'accounts/accounts_by_customer_id', to: 'accounts#accounts_by_customer_id'
  post 'accounts/accounts_by_customer_id', to: 'accounts#accounts_by_customer_id'
  
+ # Autocomplete clientes
+get 'customers/customers_ac', to: 'customers#customers_ac' 
+
+ # Autocomplete tipos pedido
+get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shipping_requests_ac'
+ # Completar datos de un pedido a partir del modelo de pedido
+post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fill_request_order_line' 
+ 
+ # ----  FIN RUTAS  PARA  CONSULTAS  AJAX  ---- 
+  
+  
+ # Paginas agregadas
+ 
+ get 'shipments/pending(.:format)', to: 'shipments#pending'  
+ get 'shipments/completed(.:format)', to: 'shipments#completed'  
+ get 'shipments/bill_pending(.:format)', to: 'shipments#bill_pending'  
+ get 'shipments/by_date(.:format)', to: 'shipments#by_date'  
+    
+ get 'shipments/new/:id(.:format)', to: 'shipments#new' 
+ get 'shipments/consultar_moviles(.:format)', to: 'shipments#consultar_moviles'  
+ get 'shipments/consultar_ultima_posicion(.:format)', to: 'shipments#consultar_ultima_posicion' 
+  
+ post 'shipments/:id/ajax_update(.:format)', to: 'shipments#ajax_update'   
+  
   
  get 'shipping_requests_builder/start(.:format)', to: 'shipping_requests_builder#start'   
  post 'shipping_requests_builder/start(.:format)', to: 'shipping_requests_builder#fill_data'  
@@ -32,13 +58,8 @@
  post 'daily_shipping_requests/list(.:format)', to: 'daily_shipping_requests#list'   
  
  
- get 'shipments/new/:id(.:format)', to: 'shipments#new'
- 
+ get 'customer_shipping_orders/pending_requests', to: 'customer_shipping_orders#pending_requests'
   
- # Autocomplete clientes
-get 'customers/customers_ac', to: 'customers#customers_ac' 
- # Autocomplete tipos pedido
-get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shipping_requests_ac' 
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):   
   
@@ -62,16 +83,15 @@ get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shi
   resources :measure_units
   
   resources :shipments  do
-	resources :shipment_supplies
-	resources :shipment_deliveries
+    resources :shipment_supplies
+    resources :shipment_deliveries
+    resources :shipment_documents
   end
   
-  resources :shipping_requests, shallow: true do
-	resources :requested_cargos, shallow: true do
-		resources :requested_deliveries		
-		resources :requested_supplies
-	end	
+  resources :customer_shipping_orders, shallow: true do
+    resources :shipping_requests
   end
+  
   
   # pedidos modelo
   resources :m_shipping_requests, shallow: true do
@@ -92,7 +112,23 @@ get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shi
   resources :trips
   resources :vehicle_types  
   
-  #  Manejo de usuarios
+  
+ # Requests particulares
+ 
+ get 'customer_shipping_orders/:id/:sel_line_id', to: 'customer_shipping_orders#show'
+ 
+ # Parametro de vuelta atras en pedidos
+ get 'shipping_requests/:id/edit/:back_option(.:format)', to: 'shipping_requests#edit'
+ 
+ # Parametro de vuelta atras en viajes
+ get 'shipments/:id/edit/:back_option(.:format)', to: 'shipments#edit' 
+ get 'shipments/:id/:back_option(.:format)', to: 'shipments#show'
+ delete 'shipments/:id/:back_option(.:format)', to: 'shipments#destroy'
+  
+  
+  
+  #  Autenticacion y Manejo de usuarios
+  
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   

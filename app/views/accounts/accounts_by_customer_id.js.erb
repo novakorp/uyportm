@@ -1,1 +1,6 @@
-﻿$("#<%=@element_id%>").html('<% @accounts.each do |ac| %> <option value="<%= ac.id %>"> <%= ac.description %> </option> <% end %>')
+﻿$("#<%=@element_id%>").html('<option value=""></option>' + '<% @accounts.each do |ac| %> <option value="<%= ac.id %>"> <%= ac.description %> </option> <% end %>');
+
+if ($("#<%=@element_id%>").attr("options").length == 2) {
+  
+  $("#<%=@element_id%>").attr("selectedIndex", "1");
+}

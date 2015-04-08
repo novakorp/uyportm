@@ -1,0 +1,15 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      vehicle_type:
+        one: "Tipo de Vehículo"
+        other: "Tipos de Vehículo"
+    attributes:
+      vehicle_type:
+        description: "Descripción"
+        coupling_support: "Es Acoplado"
+        couples_to_type_id: "Se Acopla a" 
+  

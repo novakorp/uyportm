@@ -13,8 +13,8 @@
     <tr class="tabla_listado_fila_contenido">
       <td><%= customer.name %></td>
       <td><%= customer.rut %> </td>
-	  <td><%= link_to 'Ver', customer %> &nbsp; <%= link_to 'Editar', edit_customer_path(customer) %> &nbsp; <%= link_to 'Eliminar', customer_path(customer), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+ 	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), customer %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_customer_path(customer) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), customer_path(customer), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+     </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>

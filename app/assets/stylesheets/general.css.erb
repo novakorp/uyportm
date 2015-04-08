@@ -4,7 +4,7 @@
 	background-repeat: repeat;
 }
 
-BODY , INPUT, A {font-family: Tahoma ; font-size: 9pt}
+BODY , INPUT, A , TD {font-family: Tahoma ; font-size: 9pt}
 
 A, A:Visited { text-decoration: none; color: #24AF2E; font-weight:bold}
 
@@ -13,13 +13,17 @@ A:Hover {color: #63F265}
 h1 {margin:0px 0px 20px 0px; font-size: 14pt}
 h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 
-.tabla_principal {width: 780px; height:700px;}
+.tabla_principal {width: 100%; height:700px;}
 .tabla_principal_encabezado {
-	background-image: url(<%= asset_path 'banner_disenio_gral.jpg' %>) ;
-	background-repeat: no-repeat;
-	background-color: #24AF2E;
-	height: 86px;
-	padding-left: 120px;
+	background-image: url('<%= asset_path 'fondo_banner_der.jpg' %>') ;
+	background-repeat: repeat-x;
+	height: 45px;
+}
+
+.tabla_principal_banner {
+	background-image: url('<%= asset_path 'banner3.jpg' %>') ;
+  width: 133px;
+	height: 45px;
 }
 
 .tabla_principal_borde_encabezado {
@@ -30,8 +34,12 @@ h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 }
 
 .tabla_principal_contenido {
-	border: 10px solid #24AF2E;
-	padding: 15px; 
+	border-width: 0px;
+  border-style: solid;
+   border-color:  #009902; 
+  /*  border-color:  #24AF2E; */
+   /*border-color:  #303030;*/
+	padding: 5px 15px 15px 10px; 
 	vertical-align: top; 
 	background-color: #FEFEFE;
 	background-image: url(<%= asset_path 'fondo_contenido_disenio_gral.jpg' %>) ;
@@ -43,6 +51,28 @@ h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 	color: white;
 	font-size: 16pt;
 	font-weight: bold;
+}
+
+.menu_superior {
+  margin-left : 10px;
+  margin-bottom : 20px;
+}
+
+.menu_superior TD {
+  padding: 0px 15px 0px 0px;  
+  color: #c0c0c0;
+}
+
+TD.link_inactivo {   
+  color: #505050; 
+  font-weight:bold;
+}
+
+.titulo_dato {
+	color: #454545;
+	font-size: 9pt;
+	font-weight: bold;
+  margin: 12px 0px 20px 0px;
 }
 
 .tabla_mantenimiento TH {
@@ -81,4 +111,37 @@ h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 }
 
 
+.celda_tabla_panel {
+  vertical-align: top;
+}
+
+.tabla_datos TH {
+ font-size: 8pt;
+  text-align: left;
+  background-color: #E0E0E0;
+  padding:4px 6px 4px 6px;
+  
+}
+
+.tabla_datos TD {   
+  font-size: 9pt;
+  padding:5px 6px 3px 6px;
+  background-color: white;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #E5E5E5;
+}
+
+
+.lista_alertas, .lista_alertas A {
+  font-size: 8pt;
+  line-height: 150%;
+}
+
+.lista_inicio {
+  font-size: 9pt;
+  font-weight: normal;  
+  line-height: 150%;
+  color: #555555;
+}
 

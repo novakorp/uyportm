@@ -30,7 +30,7 @@ class MRequestedCargosController < ApplicationController
 	  @m_requested_cargo = MRequestedCargo.find(params[:id])	 
 	  @m_shipping_request = @m_requested_cargo.m_shipping_request
 	 
-	 if @m_requested_cargo.update_attributes(params[:m_requested_cargo].permit(:ammount, :cargo_type_id, :measure_unit_id))
+	 if @m_requested_cargo.update_attributes(params[:m_requested_cargo].permit(:amount, :cargo_type_id, :measure_unit_id))
 		redirect_to @m_shipping_request
 	  else
 		render 'edit'

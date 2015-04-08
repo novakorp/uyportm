@@ -1,8 +1,8 @@
 ﻿  
-<%= form_for @state do |a| %>
+<%= form_for @state do |f| %>
  <% if @state.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@state.errors.count, "error") %> impiden guardar el formulario:</h2>
+	<div id="error_explanation" class="form_errors">
+	  <h2> <%= t :error_header %> </h2>
     <ul>
     <% @state.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,17 +14,17 @@
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
   <tr>
-  <th>Nombre:</th>
-  <td> <%= a.text_field :name %> </td>
+  <th><%= f.label :name %></th>
+  <td> <%= f.text_field :name %> </td>
   </tr>
     
   <tr>
-    <th> País: </th>
-    <td> <%=  a.text_field  :country  %> </td>
+    <th><%= f.label :country %></th>
+    <td> <%=  f.text_field  :country  %> </td>
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= a.submit "Guardar" %>
+  <%= f.submit t(:save) %>
   </td>
   </tr>
   </table>  

@@ -1,1 +1,1 @@
-﻿$("#<%=@element_id%>").html('<% @couplable_types.each do |ct| %> <option value="<%= ct.id %>"> <%= ct.description %> </option> <% end %>')
+﻿$("#<%=@element_id%>").html('<option value=""></option>'+'<% @couplable_types.each do |ct| %> <option value="<%= ct.id %>"> <%= ct.description %> </option> <% end %>');

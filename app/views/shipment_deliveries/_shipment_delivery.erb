@@ -1,8 +1,7 @@
 ﻿ 
   <tr>   
-    <td> <%= shipment_delivery.requested_delivery.address.description %> </td>
-  	<td> <%= shipment_delivery.requested_delivery.requested_cargo.cargo_type.description %> </td>
- 	<td> <%= shipment_delivery.ammount %> <%= shipment_delivery.requested_delivery.requested_cargo.cargo_type.measure_unit.symbol %>  </td>
+    <td> <%= shipment_delivery.address.description %> </td>
+ 	<td> <%= shipment_delivery.amount %> <%= shipment_delivery.shipment.shipping_request.measure_unit.symbol %>  </td>
   </tr>
    
 

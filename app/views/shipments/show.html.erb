@@ -1,21 +1,31 @@
 ﻿<H1> Viaje </H1>
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0 >
   <tr>
+  <th>Nro Nota:</th>
+  <td><%= @shipping_request.customer_shipping_order.order_number %> </td>
+  </tr>    
+  <tr>
+  <th>Cliente:</th>
+  <td><%= @shipping_request.customer_shipping_order.customer.name  %></td>
+  </tr>
+   <tr>
+  <th>Servicio:</th>
+  <td><%= @shipping_request.service.description %> </td>
+  </tr>  
+  <tr>
+  <th>Estado</th>
+  <td><%= getShipmentStatusDesc(@shipment.status) %>
+  </td>	
+  </tr>
+  
+  <tr>  
   <th>Salida:</th>
-  <td><%= @shipment.departure_time %></td>
+  <td> <%=l @shipment.departure_time, format: :long %> </td>
   </tr>
   <tr>
   <th>Llegada:</th>
-  <td><%= @shipment.arrival_time %></td>
-  </tr>
-   <tr>
-  <th>Cliente:</th>
-  <td><%= @shipment.shipping_request.account.customer.name  %></td>
-  </tr>
-  <tr>
-  <th>Servicio:</th>
-  <td><%= @shipment.shipping_request.service.description %></td>
+  <td><%=l @shipment.arrival_time, format: :long %></td>
   </tr>
   <tr>
   <th> <%= @shipment.vehicle.vehicle_type.description %>: </th>
@@ -27,7 +37,7 @@
   </tr>
   
   <tr>
-  <th> Viaje:</th>
+  <th> Recorrido:</th>
   <td><%= @shipment.shipping_request.trip.description %> </td>
   </tr>
   
@@ -35,45 +45,34 @@
   <th>Chofer:</th>
   <td><%= @shipment.driver.first_name + " " + @shipment.driver.last_name %></td>
   </tr>
-   
-   <tr>
-		<th>Estado: </th>
-		<td> 
-			<% if @shipment.status == 1 %>
-			 Solicitado
-		   <% end %>
-			<% if @shipment.status == 2 %>
-			 En Curso
-		   <% end %>
-		   <% if @shipment.status == 3 %>
-			 Realizado
-		   <% end %>
-		   <% if @shipment.status == 4 %>
-			 Cerrado
-		   <% end %>
-		  </td> 
-   </tr>
-    
-	<tr><th>Cargas:</th>
-	<td>
-	 
-      <table> <tr><th>Lugar</th><th>Material</th><th>Cantidad</th></tr>
+       
+	<tr><th>Puntos de Carga:</th>
+  <td><table class="tabla_grilla_edicion">
+      <tr class="tabla_grilla_edicion_header"><th>Lugar</th><th>Cantidad</th></tr>
        <%= render @supplies %> 
       </table>
 	</td>
 	</tr>
 	
-	<tr><th>Entregas:</th>
-	<td>
-	 
-      <table> <tr><th>Lugar</th><th>Material</th><th>Cantidad</th></tr>
+	<tr><th>Puntos de Entrega:</th> 
+  <td><table class="tabla_grilla_edicion"> 
+       <tr class="tabla_grilla_edicion_header"><th>Lugar</th><th>Cantidad</th></tr>
        <%= render @deliveries %> 
       </table>
 	</td>
 	</tr>
-	
+  
+  
+	<tr><th>Documentos:</th> 
+  <td><table class="tabla_grilla_edicion"> 
+       <tr class="tabla_grilla_edicion_header"><th>Tipo</th><th>Numero</th><th>Comentarios</th></tr>
+       <%= render @shipment.shipment_documents %> 
+      </table>
+	</td>
+	</tr>
+	  
 </table>
 
 
-<div class="links_form"><%= link_to 'Atrás', shipments_path %></div>
- 
+<div class="links_form"><%= link_to 'Atrás', @back_option %></div>
+

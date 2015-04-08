@@ -1,8 +1,8 @@
 ﻿ 
-  <tr>       
-	<td> <%= shipment_supply.requested_supply.address.description %> </td>
-	<td> <%= shipment_supply.requested_supply.requested_cargo.cargo_type.description %> </td>
-	<td> <%= shipment_supply.ammount %> <%= shipment_supply.requested_supply.requested_cargo.cargo_type.measure_unit.symbol %>  </td>
+   <tr>   
+    <td> <%= shipment_supply.address.description %> </td>
+ 	<td> <%= shipment_supply.amount %> <%= shipment_supply.shipment.shipping_request.measure_unit.symbol %>  </td>
   </tr>
+   
    
 

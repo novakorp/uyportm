@@ -2,58 +2,103 @@
 
 <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
   <tr>
-    <th> Fecha del Pedido:</th>
-    <td> <%= @shipping_request.request_date %>   </td>
+    <th> Nro de Nota:</th>
+    <td> <%= @shipping_request.customer_shipping_order.order_number %>   </td>
+  </tr>
+  
+  <tr>
+    <th> Empresa:</th>
+    <td> <%= @shipping_request.customer_shipping_order.company.company_name %>   </td>
   </tr>
     
-  <tr>
-    <th> Fecha del Viaje:</th>
-    <td> <%= @shipping_request.required_shipment_date %>   </td>
+   <tr>
+    <th> Cliente:</th>
+    <td> <%= @shipping_request.customer_shipping_order.customer.name %>   </td>
   </tr>
   
   <tr>
-    <th> Servicio:</th>
-    <td> <%= @shipping_request.service.description %>  </td>
+    <th> Fecha Pedido:</th>
+    <td> <%= l @shipping_request.customer_shipping_order.order_datetime %> </td>
   </tr>
   
   <tr>
-    <th> Recorrido:</th>
-    <td> <%= @shipping_request.trip.description %>   </td>
-  </tr>
-
-  <tr>
-    <th> Cuenta Cliente:</th>
-    <td> <%= @shipping_request.account.account_number + ' - ' + @shipping_request.account.customer.name  %>  </td>
-  </tr>
-  
-    <tr>
-    <th> Viaje Unico:</th>
-	
-    <td>
-	<% if @shipping_request.simple_shipment == 1 %> 
-		SI
-	<% else %>
-	  NO
-	<% end %>
-	</td>
+    <th> Fecha Trabajo:</th>
+    <td>  <%= l @shipping_request.customer_shipping_order.shipping_date %> </td>
   </tr>
   
   <tr>
-  <th> Número de Factura:</th>
-    <td> <%= @shipping_request.bill_number %> </td>
+    <th> Comentarios:</th>
+    <td> <%= @shipping_request.customer_shipping_order.comments %>  </td>
   </tr>
+  </table>
+  
+  <% @sel_line_id=@shipping_request.id.to_s %>
 
-  <tr>
-    <th> Observaciones:</th>
-    <td> <%= @shipping_request.details %></td>
-  </tr>
-</table>
+<table class="tabla_listado" cellpadding=0 cellspacing=0 style="margin-left: 3px">
+        <tr class='tabla_listado_fila_cabezal'> 
+        <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> 
+        </tr>
 
-
-<div class="links_form"><%= link_to 'Ingresar Detalles de Carga', new_shipping_request_requested_cargo_path(@shipping_request) %></div>
-
-
-<%= render @shipping_request.requested_cargos %>
-
-<div class="links_form"><%= link_to 'Atrás', shipping_requests_path %></div>
+        <% @shipping_request.customer_shipping_order.shipping_requests.each do |sr| %>         
+           <%= render sr %>    
+        <% end %>  
+         
+  
+  <%= form_for [@shipping_request.customer_shipping_order, @shipping_request.customer_shipping_order.shipping_requests.build] do |f| %>
+ 
+         <tr> <td colspan = 6 align=right> <%= link_to "Agregar", "javascript:agregarLinea()" %></td> </tr> 
+        <tr id="newsr_row" style="display:none">   
+            <td>
+             <%=text_field_tag "m_shipping_request_select" %>
+             <%= f.hidden_field :m_shipping_request_id %>
+             <br><br>
+              <%= f.submit t(:save) %>
+              <br>
+             </td> 
+             <td><div id = "sr_service" style="border:solid 1px #B8B8B8; height:18px;" > &nbsp;</div></td>  
+             <td><%= f.text_field "trip_quantity", {:size => 3, :maxlength => 4} %></td> 
+             <td><%= f.select(:cargo_type_id, options_from_collection_for_select(CargoType.all,  :id, :description), :include_blank => true)  %></td>
+             <td><%= f.text_field :cargo_quantity, {:size => 8, :maxlength => 9} %></td> 
+              <td> <%= f.select(:measure_unit_id, options_from_collection_for_select(MeasureUnit.all, :id, :symbol), :include_blank => true)  %> </td>
+        </tr>        
+         
+    <% end %>
+</table> 
+  
+<div class="links_form"><%= link_to 'Atrás', @back_option %></div>
+ 
+ 
+ <script>
+ 
+ function agregarLinea() {
+    $('#newsr_row').toggle();
+ }
+ 
+   // Convierte en autocomplete el campo de la columna "Tipo Trabajo" de una fila, con los tipos de trabajo de un cliente
+  function autocompTipoPedido (customerID) {
+    $("#m_shipping_request_select").autocomplete({
+	  minLength: 0,
+      source: "/m_shipping_requests/m_shipping_requests_ac.js?customer_id=" + customerID,
+	  focus: function( event, ui ) {
+        $( "#m_shipping_request_select").val( ui.item.label );
+        return false;
+      },
+	  select: function( event, ui ) {
+          if (ui.item) {		  
+			$("#m_shipping_request_select").val (ui.item.label);
+			$("#shipping_request_m_shipping_request_id").val (ui.item.value);
+                   
+            // solicitar x ajax y cargar los datos del tipo de pedido
+            $.post('/m_shipping_requests/fill_request_order_line', {id: ui.item.value, line_num: -1}, null , "script");
+          };
+		  return false;
+      } 
+    });
+  }
+ 
+ 
+  autocompTipoPedido (<%=@shipping_request.customer_shipping_order.customer_id%>);
+ 
+ </script>
+ 
  

@@ -1,14 +1,19 @@
-﻿.tabla_listado {
+﻿IMG {
+  border: none;
+}
+
+.tabla_listado {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
 
 .tabla_listado  TH {
-	padding: 5px 10px 5px 10px;
+	padding: 5px 7px 5px 7px;
 }
 
 .tabla_listado  TD {
-	padding: 7px 10px 7px 10px;
+	padding: 5px 7px 5px 7px;
+  vertical-align: top;
  }
  
 
@@ -18,7 +23,7 @@
 }
 
 
-.tabla_listado_fila_contenido TD {	
+TR.tabla_listado_fila_contenido TD , TR.tabla_listado_fila_destacada TD  {	
 	border-style: solid;
 	border-color: #A0A0A0;
 	border-width: 0px 0px 1px 0px;	
@@ -27,3 +32,67 @@
 TR.tabla_listado_fila_contenido:Hover  TD{
 	background-color: #F5FFF4;
 } 
+
+.tabla_listado_fila_destacada  TD{	
+  font-weight: bold;
+}
+
+.tabla_listado_fila_destacada  {	
+  border-color:#909090; 
+  border-width:1px ; 
+  border-style: solid; 
+  background-color: #F4F4F4;
+}
+
+TR.tabla_listado_fila_destacada:Hover  TD{
+	background-color: #F5FFF4;
+} 
+
+
+
+
+.tabla_listado_2 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.tabla_listado_2  TH {
+  background-color: #4BC438;
+  color: #FBFBFB;
+	padding: 5px 10px 5px 10px;
+  vertical-align: top;
+}
+
+.tabla_listado_2  TD {
+	padding: 4px 5px 1px 5px;
+  vertical-align: top;
+  
+ }
+ 
+
+.tabla_listado_2_fila_cabezal {
+	background-color: #4BC438;
+	color: #FBFBFB;
+}
+
+
+TR.tabla_listado_2_fila_contenido TD{	
+	border-style: solid;
+	border-color: #A0A0A0;
+	border-width: 0px 0px 1px 0px;	
+}
+
+TR.tabla_listado_2_fila_contenido:Hover  TD{
+	background-color: #F5FFF4;
+} 
+
+.dato_lista_1 {
+ 
+  color: #404040;
+}
+
+.dato_lista_2 {
+  font-size: 8pt;
+  color: #707070;
+}
+
