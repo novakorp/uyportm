@@ -1,4 +1,4 @@
-﻿source 'https://rubygems.org'
+﻿source 'http://rubygems.org'
 ruby '1.9.3'
 
 LANG="en_US.UTF-8"
@@ -44,6 +44,8 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'activerecord-postgresql-adapter'
 
 gem 'savon'
+
+gem 'tap'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
