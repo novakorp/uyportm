@@ -25,12 +25,12 @@ class VehiclesController < ApplicationController
 	  @vehicles = Vehicle.all
       
         
-       @client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl', 
-      endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/')
+     ##  @client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl', 
+    ##  endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/')
    
         #client = Savon.client(wsdl: 'http://localhost:3000/ServiceDataBykom.xml')
    
-        @client.operations.to_s
+      ##  @client.operations.to_s
 	end
 
 	def edit

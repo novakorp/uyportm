@@ -24,8 +24,10 @@
       <td><%= vehicle.model %></td>
       <td><%= vehicle.number_plate %></td>
       <td><%= vehicle.comments %></td>  
-       <td> <% @pos_cercana = vehicle.get_near_location(@client) %>
-           <%= @pos_cercana["name"] %> (<%= "%.2f" % @pos_cercana["dist"] %> km )
+       <td>
+
+<!--        @pos_cercana = vehicle.get_near_location(@client)  
+             @pos_cercana["name"]   (    "%.2f" % @pos_cercana["dist"]   km )    -->
       </td>
 	 <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to(image_tag(asset_path('buttons/delete.gif')), vehicle_path(vehicle), method: :delete, data: { confirm: '¿Está seguro?' }) %></td>  
     
