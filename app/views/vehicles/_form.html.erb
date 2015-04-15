@@ -24,9 +24,9 @@
     <td> <%= f.collection_select :vehicle_type_id, VehicleType.all,  :id, :description %>  </td>
   </tr>
   
-  <tr>
-  <th><%= f.label :brand %></th>
-  <td>  <%= f.text_field :brand %> </td>
+   <tr>
+    <th><%= f.label :vehicle_brand_id %></th>
+    <td> <%= f.collection_select :vehicle_brand_id, VehicleBrand.all,  :id, :name, :prompt => true %>  </td>
   </tr>
     
   <tr>

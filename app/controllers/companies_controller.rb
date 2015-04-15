@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
 	end
 
 	def index
-	  @companies = Company.all
+	  @Companies = Company.all
 	end
 
 	def edit
@@ -39,7 +39,7 @@ class CompaniesController < ApplicationController
 	  @company = Company.find(params[:id])
 	  @company.destroy
 	 
-	  redirect_to companys_path
+	  redirect_to companies_path
 	end
 	
 end

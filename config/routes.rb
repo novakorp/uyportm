@@ -110,6 +110,8 @@ post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fil
   end
 	
   resources :trips
+  
+  resources :vehicle_brands
   resources :vehicle_types  
   
   

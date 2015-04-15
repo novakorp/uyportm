@@ -2,13 +2,16 @@
 	Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
 </style>
 
-<h4>Configuración</h4>
+<% @top_menu_selection="Configuracion" %>
+<%= render '/common/top_menu' %>
+
 <table class="tabla_mantenimiento" cellpadding=0 cellspacing=0>
 <tr><th>Flota</th><th>Negocio</th><th>Datos Geográficos</th></tr>
 <tr>
 <td>
 	<%= link_to "Vehículos", controller: "vehicles" %><br>
-	<%= link_to "Tipos de Vehículos", controller: "vehicle_types" %>
+	<%= link_to "Tipos de Vehículos", controller: "vehicle_types" %><br>
+	<%= link_to "Marcas", controller: "vehicle_brands" %>
 </td>
 <td>
 	<%= link_to "Servicios", controller: "services" %> <br>	 
@@ -51,5 +54,4 @@
 <br>
 <br>
 
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "/welcome/index" %></div>
 

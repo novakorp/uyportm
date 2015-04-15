@@ -197,6 +197,7 @@ class ShipmentsController < ApplicationController
     return b_opt
   end
   
+   
   
   def consultar_moviles  
   
@@ -213,7 +214,30 @@ class ShipmentsController < ApplicationController
    
    #@wsdata = client.operations.to_s
    
-  @wsdata=response.body[:consultar_moviles_flota_response][:return]
+    @wsdata=response.body[:consultar_moviles_flota_response][:return]
+    
+    @wsdata.each do |data|
+      
+      vehic = Vehicle.new
+      vehic.brand = "marca"
+      vehic.model = "modelo" 
+      vehic.number_plate = data[:patente] 
+      vehic.gps_id_str = data[:movil_id] 
+      vehic.comments = data[:identificador] 
+      vehic.company_id = 1
+      vehic.vehicle_type_id = 1
+      
+      if ! vehic.valid?
+        vehic.errors.each do |err|
+            puts err.to_s
+        end
+      end
+      
+   #   vehic.save
+      
+      
+      puts "Guardando " + vehic.number_plate
+    end
   
   end
   

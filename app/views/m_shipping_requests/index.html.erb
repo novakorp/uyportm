@@ -1,6 +1,6 @@
 ﻿<h1>Listado de Modelos de Pedidos</h1>
 
- <%= link_to 'Nuevo Modelo de Pedido', new_m_shipping_request_path %>
+ <%= link_to 'Nuevo Modelo de Pedido', new_m_shipping_request_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
     <th>Nombre</th>			
@@ -18,12 +18,11 @@
 	  
       <td><%= m_shipping_request.trip.description %></td>  
 	  <td><%= m_shipping_request.details %> </td>   
-	  <td><%= link_to 'Ver', m_shipping_request %> &nbsp; <%= link_to 'Editar', edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to 'Eliminar', m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
 	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), m_shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
      </tr>
   <% end %>
 </table>
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
  
 
 

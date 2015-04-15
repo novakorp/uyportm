@@ -1,6 +1,6 @@
 ﻿<h1>Listado de Recorridos</h1>
 
- <%= link_to 'Nuevo Recorrido', new_trip_path %> 
+ <%= link_to 'Nuevo Recorrido', new_trip_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
    <th>Desde</th>
@@ -18,6 +18,6 @@
     </tr>
   <% end %>
 </table>
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
  
  

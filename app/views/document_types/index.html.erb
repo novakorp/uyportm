@@ -1,6 +1,6 @@
 ﻿<h1>Listado de Tipos de Documento</h1>
 
- <%= link_to 'Nuevo Tipo de Documento', new_document_type_path %>
+ <%= link_to 'Nuevo Tipo de Documento', new_document_type_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
     <th>Descripción</th>
@@ -10,10 +10,9 @@
   <% @document_types.each do |document_type| %>
     <tr class="tabla_listado_fila_contenido">
       <td><%= document_type.description %></td>
-	   <td><%= link_to 'Ver', document_type %> &nbsp; <%= link_to 'Editar', edit_document_type_path(document_type) %> &nbsp; <%= link_to 'Eliminar', document_type_path(document_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
 	   <td><%= link_to image_tag(asset_path ('buttons/view.gif')), document_type %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_document_type_path(document_type) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), document_type_path(document_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
  	
     </tr>
   <% end %>
 </table>
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>

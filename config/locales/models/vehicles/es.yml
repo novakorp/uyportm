@@ -11,6 +11,7 @@ es:
       vehicle:
         company_id: "Empresa"
         vehicle_type_id: "Tipo de Vehículo"
+        vehicle_brand_id: "Marca"
         brand: "Marca" 
         model: "Modelo"
         number_plate: "Matrícula"

@@ -1,6 +1,6 @@
 ﻿<H1>Listado de Servicios</H1>
 
- <%= link_to 'Nuevo Servicio', new_service_path %>
+ <%= link_to 'Nuevo Servicio', new_service_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
     <th>Empresa</th>
@@ -18,4 +18,4 @@
     </tr>
   <% end %>
 </table>
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>

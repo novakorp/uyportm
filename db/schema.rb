@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150318015201) do
+ActiveRecord::Schema.define(:version => 20150415042931) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_number"
@@ -315,6 +315,14 @@ ActiveRecord::Schema.define(:version => 20150318015201) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
+  create_table "vehicle_brands", :force => true do |t|
+    t.string   "name"
+    t.string   "country_of_origin"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "abbreviation"
+  end
+
   create_table "vehicle_registrations", :force => true do |t|
     t.string   "chassis"
     t.string   "engine"
@@ -343,10 +351,14 @@ ActiveRecord::Schema.define(:version => 20150318015201) do
     t.string   "number_plate"
     t.string   "comments"
     t.string   "text"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "company_id"
     t.integer  "vehicle_type_id"
+    t.string   "gps_id_str"
+    t.integer  "vehicle_brand_id"
   end
+
+  add_index "vehicles", ["vehicle_brand_id"], :name => "index_vehicles_on_vehicle_brand_id"
 
 end
