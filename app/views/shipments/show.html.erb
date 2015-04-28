@@ -31,10 +31,12 @@
   <th> <%= @shipment.vehicle.vehicle_type.description %>: </th>
   <td><%= @shipment.vehicle.number_plate %></td>
   </tr>
+  <% if @shipment.coupled_vehicle %>
   <tr>
   <th> <%= @shipment.coupled_vehicle.vehicle_type.description %>: </th>
   <td> <%= @shipment.coupled_vehicle.number_plate %></td>
   </tr>
+  <% end %>
   
   <tr>
   <th> Recorrido:</th>

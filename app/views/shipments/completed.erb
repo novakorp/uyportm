@@ -26,7 +26,7 @@
       <td> <%= shipment.shipping_request.customer_shipping_order.customer.name %> </td>
       <td> <nobr> <%=  shipment.shipping_request.service.description %></nobr><br>
         <span class="dato_lista_sec"> <%=  shipment.shipping_request.trip.description %> </span></td>	  
-     <td><%= shipment.vehicle.number_plate %> <br> <%= shipment.coupled_vehicle.number_plate %></td>
+     <td><%= shipment.vehicle.number_plate %> <br>    <% if shipment.coupled_vehicle %> <%= shipment.coupled_vehicle.number_plate %> <% end %> </td>
 	  <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
 	  <td id="<%= 'estado_viaje_' + @ship_id_str %>"> <%= getShipmentStatusDesc(shipment.status) %> </td> 
 	  <td>        

@@ -5,4 +5,5 @@ class ShippingRequest < ActiveRecord::Base
   belongs_to :trip
   belongs_to :cargo_type
   belongs_to :measure_unit
+  has_many :shipments
 end

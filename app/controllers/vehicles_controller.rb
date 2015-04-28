@@ -1,7 +1,8 @@
 ﻿require 'savon'
 
-
 class VehiclesController < ApplicationController
+  include VehiclesHelper
+  
 	def new
 		@vehicle = Vehicle.new
 	end
@@ -22,15 +23,8 @@ class VehiclesController < ApplicationController
 
 	def index
     
-	  @vehicles = Vehicle.all
-      
-        
-     ##  @client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl', 
-    ##  endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/')
-   
-        #client = Savon.client(wsdl: 'http://localhost:3000/ServiceDataBykom.xml')
-   
-      ##  @client.operations.to_s
+	  @vehicles = Vehicle.order(:number_plate )
+    
 	end
 
 	def edit
@@ -53,6 +47,13 @@ class VehiclesController < ApplicationController
 	 
 	  redirect_to vehicles_path
 	end
+  
+  def update_positions 
+  
+    # Definida en vehicles_helper
+    update_vehicle_positions
+    
+  end
 
     
 end

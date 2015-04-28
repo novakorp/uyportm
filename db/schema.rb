@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150415042931) do
+ActiveRecord::Schema.define(:version => 20150421210926) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_number"
@@ -322,6 +322,16 @@ ActiveRecord::Schema.define(:version => 20150415042931) do
     t.datetime "updated_at",        :null => false
     t.string   "abbreviation"
   end
+
+  create_table "vehicle_positions", :force => true do |t|
+    t.decimal  "longitude",  :precision => 7, :scale => 5
+    t.decimal  "latitude",   :precision => 7, :scale => 5
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "vehicle_id"
+  end
+
+  add_index "vehicle_positions", ["vehicle_id"], :name => "index_vehicle_positions_on_vehicle_id"
 
   create_table "vehicle_registrations", :force => true do |t|
     t.string   "chassis"

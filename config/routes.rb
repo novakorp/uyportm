@@ -59,6 +59,8 @@ post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fil
  
  
  get 'customer_shipping_orders/pending_requests', to: 'customer_shipping_orders#pending_requests'
+ 
+ get 'vehicles/update_positions', to: 'vehicles#update_positions'
   
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):   
@@ -118,16 +120,7 @@ post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fil
  # Requests particulares
  
  get 'customer_shipping_orders/:id/:sel_line_id', to: 'customer_shipping_orders#show'
- 
- # Parametro de vuelta atras en pedidos
- get 'shipping_requests/:id/edit/:back_option(.:format)', to: 'shipping_requests#edit'
- 
- # Parametro de vuelta atras en viajes
- get 'shipments/:id/edit/:back_option(.:format)', to: 'shipments#edit' 
- get 'shipments/:id/:back_option(.:format)', to: 'shipments#show'
- delete 'shipments/:id/:back_option(.:format)', to: 'shipments#destroy'
-  
-  
+
   
   #  Autenticacion y Manejo de usuarios
   

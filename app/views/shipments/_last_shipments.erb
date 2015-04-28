@@ -11,7 +11,7 @@
 <tr>
      <td><%=l shipment.departure_time, format: :short %></td> 
      <td><%= shipment.vehicle.number_plate %></td> 	  
-     <td><%= shipment.coupled_vehicle.number_plate %></td> 
+     <td><% if shipment.coupled_vehicle %> <%= shipment.coupled_vehicle.number_plate %> <% end %></td> 
       <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
 </tr>
 <% end %>

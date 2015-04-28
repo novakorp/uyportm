@@ -12,6 +12,7 @@
   <% end %>
     
   <%= f.hidden_field :shipping_request_id %>   
+  
   <%= f.hidden_field :departure_time %>  
   <%= hidden_field_tag :dep_date %>  
   <%= f.hidden_field :arrival_time %> 
@@ -30,7 +31,7 @@
   </tr>
   <tr>
     <th><%= f.label :shipping_request_trip %></th>
-    <td> <%= @shipping_request.trip.description %> </td>	
+    <td> <%= @shipping_request.trip.description %>  (<%=@shipping_request.trip.duration_minutes %> min) </td>	
   </tr>
   <tr>
     <th><%= f.label :status %></th>
@@ -200,12 +201,15 @@
   
   <script>
   
+    // duracion del recorrido actual
+    var trip_duration = <%=@shipping_request.trip.duration_minutes %>;
+     
     // contadores para saber la cantidad de registros agregados 
   
     var count_supplies = <%= @count_supplies %>;
     var count_deliveries = <%= @count_deliveries %>;
     
-    // Esta funcion permite seleccionar fechas y horas con datepicker y mostrarlas con formato
+    // Esta funcion permite seleccionar fechas y horas de un campo datetime, mediante un campo datepicker y campos de hora.
     function datetime_to_datepicker (datetime_field, date_field, datepicker_field, time_field) {
         var datetime=$('#' + datetime_field).val().substring(0,10)
     
@@ -217,10 +221,16 @@
           altFormat: "yy-mm-dd"        
         }); 
         
+        
         $('#' + datepicker_field).datepicker("option", "dateFormat", "DD d 'de' MM, yy"); 
         
+        // armo un string con el codigo javascript que al evaluarse asigna la funcion "update_datetime" 
+        //  como handler del evento onchange del campo representado por la variable "fld" 
         
         strOnChangeScript = 'fld.onchange=function(){update_datetime("' + datetime_field + '", "' + date_field + '", "' + time_field + '")};'
+        
+        // ejecuto el codigo preparado anteriormente, para setear el handler del evento onchange en distintos campos
+        
         fld=document.getElementById(datepicker_field);
         eval (strOnChangeScript);
         
@@ -232,10 +242,51 @@
  
     }
     
+    // actualiza un campo "datetime" a partir de campos separados para fecha y hora (time_field_hour, time_field_minute)
     function update_datetime (datetime_field, date_field, time_field) {
+    
+        // Actualizo el campo en el formato correspondiente
         $('#' + datetime_field).val( $('#' + date_field).val() + ' ' + $('#' + time_field + '_hour').val() + ':' + $('#' + time_field + '_minute').val() + ':00.000000');
+         
+        // Si actualice el campo de hora de salida, cambio los valores y actualizo para los campos de hora de llegada segun la variable global 'trip_duration'
+        if (datetime_field == "shipment_departure_time") {
+                
+          dep_date = $('#dep_date_dp').datepicker('getDate');
+          
+          dep_date.setHours ( parseInt( $('#' + time_field + '_hour').val()));
+          dep_date.setMinutes ( parseInt( $('#' + time_field + '_minute').val()));
+                   
+          new_date = new Date (dep_date.getTime() + trip_duration*60*1000);    // Obtener la fecha hora de llegada, multiplicando los minutos de viaje
+                                                                               // para obtener los milisegundos correspondientes y sumarlos a la fecha hora de salida
+          
+          // Actualizar campo de seleccion de fecha (datepicker)
+          $('#arv_date_dp').datepicker('setDate', new_date);
+          
+          // Actualizar campos de seleccion de hora y minutos
+          var str_val;
+          str_val = getTimeStrVal (new_date.getHours());
+           
+          $('#' + 'arv_time' + '_hour').val(str_val);
+          
+          str_val = getTimeStrVal (new_date.getMinutes()); 
+          $('#' + 'arv_time' + '_minute').val(str_val);
+          
+          // Actualizo el campo fecha-hora de llegada 
+          update_datetime ("shipment_arrival_time", "arv_date", "arv_time");
+        }
     }
   
+  
+    // devuelve un string apropiado para usar como valor en los campos de seleccion de hora y minutos, a partir de un numero
+    function getTimeStrVal (num_value) {
+      var str_value = num_value.toString();
+      
+      if (num_value < 10) {
+        str_value = "0" + str_value;
+      }
+      
+      return str_value;
+    }
   
     // Agrega una fila para el ingreso de un nuevo registro, en una tabla correspondiente a una coleccion de datos, dados el nombre de la coleccion y el indice que corresponde al registro. 
     // El nombre de la coleccion pude ser el de  Puntos de Carga (supplies) o Puntos de Entrega (deliveries).
