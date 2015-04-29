@@ -101,9 +101,8 @@
     #  Setea la variable back_option en la sesion, con la ruta a la lista indicada
     set_list_in_session "pending_requests"
   
-    @shipping_requests = ShippingRequest.find_by_sql("Select * from customer_shipping_orders o inner join shipping_requests r on o.id = r.customer_shipping_order_id where 
-      (select trip_quantity from shipping_requests r1 where o.id = r1.customer_shipping_order_id) > 
-      (select count(*) from shipments s2 inner join shipping_requests r2 on s2.shipping_request_id = r2.id where s2.status >= 3)")
+    @shipping_requests = ShippingRequest.find_by_sql("Select * from customer_shipping_orders c inner join shipping_requests r on c.id = r.customer_shipping_order_id
+        where r.trip_quantity > (select count(*) from shipments s where s.shipping_request_id = r.id and s.status >= 3) order by c.order_number ASC, c.created_at ASC")
   
 	   # @shipping_requests = ShippingRequest.joins(:customer_shipping_order).order("customer_shipping_orders.order_number ASC, customer_shipping_orders.created_at ASC")
 	end
