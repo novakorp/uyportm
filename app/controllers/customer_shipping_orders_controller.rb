@@ -108,6 +108,19 @@
 	end
 
 
+	def completed_requests
+    #  Setea la variable back_option en la sesion, con la ruta a la lista indicada
+    set_list_in_session "completed_requests"
+  
+    @shipping_requests = ShippingRequest.find_by_sql("Select * from customer_shipping_orders c inner join shipping_requests r on c.id = r.customer_shipping_order_id
+        where ((select count(*) from shipments s where s.shipping_request_id = r.id and s.status >= 3) = 
+        (select count(*) from shipments s where s.shipping_request_id = r.id)) and
+        ((select count(*) from shipments s where s.shipping_request_id = r.id) > 0 ) order by c.order_number ASC, c.created_at ASC")
+  
+	   # @shipping_requests = ShippingRequest.joins(:customer_shipping_order).order("customer_shipping_orders.order_number ASC, customer_shipping_orders.created_at ASC")
+	end
+
+  
 	def update
     # obtener destino para la accion volver
     @back_option=get_back_option()
@@ -135,8 +148,7 @@
   def set_list_in_session(list_name)
     session[:back_option]="/customer_shipping_orders/" + list_name
   end
-  
-  
+   
    
   # Devuelve el valor asignado en la variable de sesion :back_option, que indica donde se debe ir con la accion Volver.
   def get_back_option

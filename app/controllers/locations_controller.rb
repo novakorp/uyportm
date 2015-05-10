@@ -18,7 +18,7 @@
 	end
 
 	def index
-	  @locations = Location.all
+	  @locations = Location.order("name asc")
 	end
 
 	def edit

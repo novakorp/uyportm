@@ -46,15 +46,15 @@ class VehicleTypesController < ApplicationController
 	
 	def couplable_types_by_id
 	  if params[:id].present?
-		@couplable_types = VehicleType.find(params[:id]).couplable_types
-		@element_id = params[:element_id]
+      @couplable_types = VehicleType.find(params[:id]).couplable_types
+      @element_id = params[:element_id]
 	  else
-		@couplable_types = []
+      @couplable_types = []
 	  end
 
 	  respond_to do |format|
-		format.js 
-		format.html
+      format.js 
+      format.html
 	  end
 	end
 end

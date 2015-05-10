@@ -31,27 +31,22 @@
 	  <td id="<%= 'estado_viaje_' + @ship_id_str %>"> <%= getShipmentStatusDesc(shipment.status) %> </td> 
 	  <td>        
         <%= link_to image_tag(asset_path ('buttons/view.gif')), shipment %>&nbsp;<%= link_to image_tag(asset_path ('buttons/view_docs.gif')), "javascript:dialogoDocumentos(" + @ship_id_str + ")"  %>&nbsp;<%= 
-        link_to image_tag(asset_path('buttons/gear.gif')), "javascript:desplegarMenuObjeto('menu', 'menu_btn_" + @ship_id_str + "', '" + @ship_id_str + "');", html_options = {id: 'menu_btn_' + @ship_id_str} %> </td>
-     </tr>
-     <tr style="display:none">  
-     <td colspan=8>  
-            <div id="<%= 'dialog-documents-' + @ship_id_str %>" title="Documentos del Viaje" style="display:none">
-                  <table id="<%= 'tabla_docs_' + @ship_id_str  %>" class="tabla_campos" cellpadding=0 cellspacing=0 >
-                    <% shipment.shipment_documents.each do |doc| %>
-                    <tr>
-                      <td><%=  doc.document_type.description %></td>  <td><%=  doc.number_text %></td> <td><%=  doc.comments %></td>
-                    </tr>
-                    <% end %>
-                  </table>
-          </div>
-     
-     </td> 
-     </tr>
+        link_to image_tag(asset_path('buttons/gear.gif')), "javascript:desplegarMenuObjeto('menu', 'menu_btn_" + @ship_id_str + "', '" + @ship_id_str + "');", html_options = {id: 'menu_btn_' + @ship_id_str} %> 
+    </td>
+    </tr>
   <% end %>
   
   </table>
 
-
+  
+  <!-- Div para mostrar documentos de un viaje -->
+  
+  <div id="<%= 'dialog-documents' %>" title="Documentos del Viaje" style="display:none">
+    <table id="<%= 'shipment_docs' %>" class="tabla_campos" cellpadding=0 cellspacing=0 >
+      
+    </table>
+  </div>
+     
 
  <style>
   .ui-menu { width: 150px; font-size: 0.9em}
@@ -75,13 +70,19 @@
         dialogAddDocument (paramId);
       
       }
-      // Cambiar a En Curso
+      
+      // Cambiar a Para Facturar
       else if (menuItemId == "menu_itm_2") {
+      
+        dialogoCambiarEstado (paramId, 4, "o"); 
+      }
+      // Cambiar a En Curso
+      else if (menuItemId == "menu_itm_3") {
       
         dialogoCambiarEstado (paramId, 2, "o"); 
       }
       // Anular
-      else if (menuItemId == "menu_itm_3") {
+      else if (menuItemId == "menu_itm_4") {
       
         dialogoCambiarEstado (paramId, 0, "o", "Se va a ANULAR el viaje");
           
@@ -117,6 +118,12 @@
     
     // Muestra un dialogo para ingreso de un documento para un viaje.
     function dialogAddDocument (idViaje) {    
+     
+        $("#shipment_document_document_type_id").val('');
+        $("#shipment_document_number_text").val('');
+        $("#shipment_document_comments").val('');
+        
+     
      
          // Preparar los parametros para el dialogo.
          // Se incluye la funcion recibida como parametro
@@ -217,6 +224,8 @@
         return "En Curso";
       }  else if (idEstado == "3") {
         return "Completado";
+      } else if (idEstado == "4") {
+        return "Para Facturar";
       }
       
     }
@@ -234,26 +243,44 @@
     
    
    // Muestra el dialogo con los documentos de un viaje
-    function dialogoDocumentos (idViaje) {    
-
+   function dialogoDocumentos (idViaje) {  
       
+        // Traer los datos de documentos del viaje actual (ajax)
+        
+        $.get( "/shipments/list_documents?shipment_id="+idViaje, function( data ) {
+          
+          var html;
+          var i;
+        
+           docs = eval(data);
+        
+          for (i=0; i < docs.length; i++) {
+            html=html + "<tr><td>" + docs[i].number_text + "</td><td>" + docs[i].type + "</td><td>" + docs[i].comments + "</td></tr>";
+           }
+           
+           
+          $("#shipment_docs").html(html);
+          
          // Preparar los parametros para el dialogo.
          // Se incluye la funcion recibida como parametro
          // para la accion aceptar
-        dialog_params ={
-          resizable: false,
-          height:400,
-          width: 500,
-          modal: true,
-          buttons: { "Aceptar": function() {
-              $( this ).dialog( "close" );
+         dialog_params ={
+              resizable: false,
+              height:400,
+              width: 500,
+              modal: true,
+              buttons: { "Aceptar": function() {
+                  $( this ).dialog( "close" );
+                }
             }
-        }
-      };
-      
-      $( "#dialog-documents-" + idViaje ).dialog(
-        dialog_params
-      );
+          };
+            
+        $( "#dialog-documents" ).dialog(
+          dialog_params
+        );
+         
+     });
+        
     }
     
   
@@ -264,8 +291,9 @@
  <div id="toggler_menu" class="toggler">   
     <ul id="menu" >
       <li id="menu_itm_1">Cargar Documento</li>
-      <li id="menu_itm_2">Volver a "En Curso"</li>
-      <li id="menu_itm_3">Anular</li> 
+      <li id="menu_itm_2">Dejar "Para Facturar"</li>
+      <li id="menu_itm_3">Volver a "En Curso"</li>
+      <li id="menu_itm_4">Anular</li> 
       <li id="menu_itm_5">Cerrar Menú</li> 
     </ul>   
 </div>

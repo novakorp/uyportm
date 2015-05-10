@@ -275,14 +275,17 @@ class ShipmentsController < ApplicationController
   
   
   end
-  
-  
-  
-  
-  
-  
-  
-	
+   
+	def list_documents
+		@documents  = Shipment.find(params["shipment_id"]).shipment_documents
+    
+    
+	  respond_to do |format|
+      format.js 
+      format.html
+	  end
+	end
+    
 end
 
 

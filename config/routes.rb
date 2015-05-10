@@ -33,6 +33,10 @@ get 'm_shipping_requests/m_shipping_requests_ac', to: 'm_shipping_requests#m_shi
  # Completar datos de un pedido a partir del modelo de pedido
 post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fill_request_order_line' 
  
+ 
+ # Documentos de un viaje clientes
+get 'shipments/list_documents', to: 'shipments#list_documents' 
+ 
  # ----  FIN RUTAS  PARA  CONSULTAS  AJAX  ---- 
   
   
@@ -58,7 +62,8 @@ post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fil
  post 'daily_shipping_requests/list(.:format)', to: 'daily_shipping_requests#list'   
  
  
- get 'customer_shipping_orders/pending_requests', to: 'customer_shipping_orders#pending_requests'
+ get 'customer_shipping_orders/pending_requests', to: 'customer_shipping_orders#pending_requests' 
+ get 'customer_shipping_orders/completed_requests', to: 'customer_shipping_orders#completed_requests'
  
  get 'vehicles/update_positions', to: 'vehicles#update_positions'
   

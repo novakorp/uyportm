@@ -9,18 +9,18 @@
     
     <td>|</td>
         
-     <% if @customer_shipping_orders_menu_selection == "Para Facturar" %>
-      <td class="link_inactivo">Completados</td>
+     <% if @customer_shipping_orders_menu_selection == "Cumplidos" %>
+      <td class="link_inactivo">Cumplidos</td>
     <% else %>
-      <td><%= link_to "Completados",  "javascript:alert('to_do')"  %> </td>
+      <td><%= link_to "Cumplidos",  controller: "customer_shipping_orders", action: "completed_requests"  %> </td>
     <% end %>
     
     <td>|</td>
     
     <% if @customer_shipping_orders_menu_selection == "Consultas" %>
-      <td class="link_inactivo">Por Fecha</td>
+      <td class="link_inactivo">Consultas</td>
     <% else %>
-      <td><%= link_to "Por Fecha", "javascript:alert('to_do')" %>  </td>
+      <td><%= link_to "Consultas", "javascript:alert('to_do')" %>  </td>
     <% end %>
        
   </tr>

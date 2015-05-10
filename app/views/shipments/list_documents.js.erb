@@ -1,0 +1,5 @@
+﻿[ <%= 
+
+   raw @documents.map {|d| "{\"number_text\":\"" + h(d.number_text) + "\", \"type\":\"" + d.document_type.description + "\", \"comments\":\"" + h(d.comments) + "\"}"}.join(",")
+   
+  %> ]
