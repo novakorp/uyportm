@@ -1,4 +1,4 @@
-require 'savon'
+
 
 class ShipmentsController < ApplicationController
 
@@ -198,83 +198,6 @@ class ShipmentsController < ApplicationController
   end
   
    
-  
-  def consultar_moviles  
-  
-    client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl', endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/')
-  
-   #client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl')
-   
-   #client = Savon.client(wsdl: 'http://localhost:3000/ServiceDataBykom.xml')
-   
-   client.operations.to_s
-   
-   response = client.call(:consultar_moviles_flota, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912' })
-   #response = client.call(:consultar_ultima_posicion, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912', })
-   
-   #@wsdata = client.operations.to_s
-   
-    @wsdata=response.body[:consultar_moviles_flota_response][:return]
-    
-    @wsdata.each do |data|
-      
-      vehic = Vehicle.new
-      vehic.brand = "marca"
-      vehic.model = "modelo" 
-      vehic.number_plate = data[:patente] 
-      vehic.gps_id_str = data[:movil_id] 
-      vehic.comments = data[:identificador] 
-      vehic.company_id = 1
-      vehic.vehicle_type_id = 1
-      
-      if ! vehic.valid?
-        vehic.errors.each do |err|
-            puts err.to_s
-        end
-      end
-      
-   #   vehic.save
-      
-      
-      puts "Guardando " + vehic.number_plate
-    end
-  
-  end
-  
-  
-  def consultar_ultima_posicion  
-  
-    
-   client = Savon.client(wsdl: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl', 
-      endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/')
-   
-   #client = Savon.client(wsdl: 'http://localhost:3000/ServiceDataBykom.xml')
-   
-   client.operations.to_s
-   
-   response = client.call(:consultar_ultima_posicion, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912', 'movil_id' => '100009398' })
-   #response = client.call(:consultar_ultima_posicion, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912', })
-   
-   #@wsdata = client.operations.to_s
-   
-  @wsdata=response.body[:consultar_ultima_posicion_response][:return]
-  
-  
-   longitud = @wsdata[:longitud].to_f.abs 
-   latitud = @wsdata[:latitud].to_f.abs
-   
-   dist_calc = "(point(" + longitud.to_s + "," + latitud.to_s + ") <-> "
-   
-   dist_calc_1 = dist_calc + "point (e.longitude , e.latitude))"
-   dist_calc_2 = dist_calc + "point (i.longitude, i.latitude))"
-   
-   
-   
-   @pos_cercana=Location.connection.select_all("Select e.name ," + dist_calc_1 + " / 0.010918996 as dist from locations e where " + dist_calc_1 + " = ( select min (" + 
-      dist_calc_2 + ") from locations i )" )
-  
-  
-  end
    
 	def list_documents
 		@documents  = Shipment.find(params["shipment_id"]).shipment_documents

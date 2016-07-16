@@ -9,6 +9,7 @@ es:
         other: "Viajes"
     attributes:
       shipment:
+        customer: "Cliente"
         customer_shipping_order_number: "Nro Nota"
         shipping_request_description: "Tipo Trabajo"
         shipping_request_trip: "Recorrido" 

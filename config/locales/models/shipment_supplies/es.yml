@@ -4,15 +4,11 @@
 es:
   activerecord:
     models:
-      vehicle:
-        one: "Vehículo"
-        other: "Vehículos"
+      shipment_supply:
+        one: "Indicación de Carga de Pedido"
+        other: "Indicaciones de Carga de Pedido"
     attributes:
       vehicle:
-        company_id: "Empresa"
-        vehicle_type_id: "Tipo de Vehículo"
-        brand: "Marca" 
-        model: "Modelo"
-        number_plate: "Matrícula"
-        comments: "Comentarios"
+        address_id: "Lugar"
+        amount_id: "Cantidad"
   

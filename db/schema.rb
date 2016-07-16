@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150421210926) do
+ActiveRecord::Schema.define(:version => 20151023024325) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_number"
@@ -323,6 +323,19 @@ ActiveRecord::Schema.define(:version => 20150421210926) do
     t.string   "abbreviation"
   end
 
+  create_table "vehicle_odometer_readings", :force => true do |t|
+    t.datetime "gps_datetime"
+    t.integer  "gps_partial_read"
+    t.integer  "gps_total_read"
+    t.string   "gps_vehicle_id"
+    t.integer  "vehicle_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "difference"
+  end
+
+  add_index "vehicle_odometer_readings", ["vehicle_id"], :name => "index_vehicle_odometer_readings_on_vehicle_id"
+
   create_table "vehicle_positions", :force => true do |t|
     t.decimal  "longitude",  :precision => 7, :scale => 5
     t.decimal  "latitude",   :precision => 7, :scale => 5
@@ -365,8 +378,10 @@ ActiveRecord::Schema.define(:version => 20150421210926) do
     t.datetime "updated_at",       :null => false
     t.integer  "company_id"
     t.integer  "vehicle_type_id"
-    t.string   "gps_id_str"
     t.integer  "vehicle_brand_id"
+    t.string   "gps_vehicle_id"
+    t.string   "gps_description"
+    t.string   "gps_number_plate"
   end
 
   add_index "vehicles", ["vehicle_brand_id"], :name => "index_vehicles_on_vehicle_brand_id"

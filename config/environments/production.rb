@@ -64,4 +64,18 @@ UYPort::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+   
+  # Configuracion para Envio de Emails
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['gmail_username'],
+    :password             => ENV['gmail_password'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+  
 end

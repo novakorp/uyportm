@@ -1,0 +1,58 @@
+﻿
+
+
+<h1>Reporte Kilometrajes Vehículos</h1>
+
+ <%= link_to 'Volver', "/welcome/configuration" %>  <br><br>
+ 
+Desde el <%= @dates[0][0] %>  al  <%= @dates[0][1] %> <br>
+
+Total Vehículos: <%= @data.length %> <br />
+
+<canvas id="myChart" width="850" height="400"></canvas>
+
+
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+
+<br><br> 
+ 
+<script>
+
+	var data = {
+	    labels: <%= raw @g_km_labels %> ,
+	    datasets: [
+	        {
+	            label: "My First dataset",
+	            fillColor: "rgba(151,187,205,0.5)",
+          		strokeColor: "rgba(151,187,205,0.8)",
+            	highlightFill: "rgba(151,187,205,0.75)",
+            	highlightStroke: "rgba(151,187,205,1)",
+	            data: <%= @g_km_values %>
+	        }
+	    ]
+	};
+
+	
+	var ctx = $("#myChart").get(0).getContext("2d");
+	var myBarChart = new Chart(ctx).Bar(data, {});
+	
+	
+	
+	var canvas = document.getElementById("myChart");
+	canvas.onclick = function(evt){
+			process_on_click(evt);
+	 };
+	
+
+	function process_on_click(evt) {
+		 var activeBars = myBarChart.getBarsAtEvent(evt);
+		 
+		 alert ("HOLA");
+	    // => activeBars is an array of bars on the canvas that are at the same position as the click event.
+
+	}
+
+</script>
+
+
+

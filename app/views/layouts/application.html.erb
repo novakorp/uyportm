@@ -23,8 +23,10 @@
 <td colspan=2 class="tabla_principal_contenido">
 	<!-- Mensajes del controller de su ultima invocacion -->
 	<% flash.each do |key, value| %>
+      <% if key == 'success' || key == 'error' %>
         <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
+        <% end %>
+  <% end %>
 <%= yield %>
 
 </td>

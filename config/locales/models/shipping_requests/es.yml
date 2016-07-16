@@ -9,7 +9,7 @@ es:
         other: "Pedidos"
     attributes:
       shipping_request:
-        request_date: " Fecha del Pedido"
+        request_date: "Fecha del Pedido"
         required_shipment_date: "Fecha del Viaje"
         service_id: "Servicio" 
         trip_id: "Recorrido"

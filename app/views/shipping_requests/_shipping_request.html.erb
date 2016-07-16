@@ -6,7 +6,13 @@
         end %>
 
   <tr class=<%= @css_class %>>   
-    <td> <nobr> <%=  shipping_request.m_shipping_request.name %> </nobr> </td>
+    <td> <nobr> 
+    <% if shipping_request.m_shipping_request != nil %> 
+         <%= shipping_request.m_shipping_request.name %>
+    <% else %>
+         <%= t 'other' %>
+    <% end %> 
+    </nobr> </td>
 	<td> <%=  shipping_request.service.description %> <br><nobr> <%=  shipping_request.trip.description %> </nobr></td>
  	<td> <%=  shipping_request.trip_quantity %> </td>
     

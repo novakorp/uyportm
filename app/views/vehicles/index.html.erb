@@ -8,6 +8,9 @@
     <th>Modelo</th> 
 	<th>Matrícula</th>
 	<th>Comentarios</th>
+	<th>Id GPS</th>
+	<th>Matr GPS</th>	
+	<th>Desc GPS</th>
     <th>Cerca de ..</th>
 	<th></th>
   </tr>
@@ -24,6 +27,10 @@
       <td><%= vehicle.model %></td>
       <td><%= vehicle.number_plate %></td>
       <td><%= vehicle.comments %></td>  
+      
+      <td><%= vehicle.gps_vehicle_id %></td>  
+      <td><%= vehicle.gps_number_plate %></td>  
+      <td><%= vehicle.gps_description %></td>  
        <td>
 
        <% @pos_cercana = vehicle.get_near_location()  %>

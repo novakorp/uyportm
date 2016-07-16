@@ -20,7 +20,8 @@ class Vehicle < ActiveRecord::Base
 	
 	has_one :sucta_registration
 	has_one :vehicle_registration
-       
+	has_many :vehicle_odometer_readings
+  has_many :vehicle_gps_changes     
     
     def get_near_location()       
             longitud = 0 
@@ -48,18 +49,26 @@ class Vehicle < ActiveRecord::Base
         self.vehicle_position = VehiclePosition.new        
       end
       
-      response=client.call(:consultar_ultima_posicion, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912', 'movil_id' => self.gps_id_str })
+      puts Time.now.to_s + "> Actualizando vehiculo " + self.gps_vehicle_id
+      
+            
+      begin
+        response=client.call(:consultar_ultima_posicion, :message => {'user' => 'ferreira', 'pass' => 'at78024agd912', 'movil_id' => self.gps_vehicle_id })
    
-      wsdata=response.body[:consultar_ultima_posicion_response][:return]
+        wsdata=response.body[:consultar_ultima_posicion_response][:return]
+    
+        longitud = wsdata[:longitud].to_f 
+        latitud = wsdata[:latitud].to_f
+        
+        self.vehicle_position.longitude=longitud
+        self.vehicle_position.latitude=latitud
+        
+        self.vehicle_position.save
+        
+      rescue Savon::Error => soap_fault
+        puts "ERROR: #{soap_fault}\n"
+      end
   
-      longitud = wsdata[:longitud].to_f 
-      latitud = wsdata[:latitud].to_f
-      
-      self.vehicle_position.longitude=longitud
-      self.vehicle_position.latitude=latitud
-      
-      self.vehicle_position.save
-   
     end
     
 end 

@@ -33,6 +33,11 @@ es:
   # Traduccionoes personalizadas
   save: "Guardar"
   error_header: "Se encontraron errores en el formulario:"
+  invalid_lines_found: "Hay líneas no válidas"
+  must_fill_one_sr_line: "Debe completar al menos una línea de pedido"
+  must_fill_one_line: "Debe completar al menos una línea"
+  other: "Otro"
+  
   errors:
      # The default format to use in full error messages.
     format: "%{attribute} %{message}"

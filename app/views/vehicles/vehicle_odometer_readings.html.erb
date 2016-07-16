@@ -1,0 +1,34 @@
+﻿<h1>Kilometraje Vehículos</h1>
+
+ <%= link_to 'Volver', "/welcome/configuration" %>
+
+Total Vehículos: <%= @data.length %> <br />
+
+<table cellpadding=3 cellspacing=5>
+	<tr>
+		<td>patente</td>		
+		<td>movil id</td>
+		<td>fecha</td>
+		<td>odometro total</td>
+		<td>KMs</td>
+	</tr>
+	
+	<% @data.each do |data| %>
+	<tr>
+		
+		 <td><%=  data.vehicle.number_plate %> </td>
+    	 <td><%=  data.gps_vehicle_id  %> </td>
+    	 <td><%=  data.gps_datetime  %> </td>
+      	 <td><%=  data.gps_total_read  %> </td>
+      	 <td><%=  data.difference  %> </td>
+      	 
+	</tr>	
+	
+	<% end %>
+		
+</table>
+
+ <%= @msgs %>
+
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+ 

@@ -6,8 +6,9 @@
   
       @customer_shipping_order = CustomerShippingOrder.new
         
-        @customer_shipping_order.order_datetime = l(Time.now, :format => :short_dp)
-        @customer_shipping_order.shipping_date = l(DateTime.now.tomorrow.to_date, :format => :short_dp)
+      @customer_shipping_order.order_datetime = l(Time.now, :format => :short_dp)
+      @customer_shipping_order.shipping_date = l(DateTime.now.tomorrow.to_date, :format => :short_dp)
+      
 	end
 	
 	def create
@@ -24,21 +25,36 @@
     if valid
         sh_reqs = params[:sr]
       
-        sh_reqs.each do |key, value|
-            if value[:m_shipping_request_id] != '' 
-                 
-                msr = MShippingRequest.find(value[:m_shipping_request_id])
-                
-                if ! (msr != nil && value[:trip_quantity] != '' && value[:cargo_type_id] != '' && value[:cargo_quantity] != '' && value[:measure_unit_id] != '')
-                   valid = false
-                   
-                   @customer_shipping_order.errors.add("shipping_requests", "Hay líneas de pedido incompletas")
+        sh_reqs.each do |key, value|                          
+            if (value[:m_shipping_request_select] == 'otro')                
+                if value[:service_id] == ''
+                   @customer_shipping_order.errors.add("shipping_requests", t("activerecord.attributes.shipping_request.service_id") + ": " + t("errors.messages.blank"))
+                    valid = false
                 end
-            end            
+                
+                if value[:trip_id] == ''
+                   @customer_shipping_order.errors.add("shipping_requests", t("activerecord.attributes.shipping_request.trip_id") + ": " + t("errors.messages.blank"))
+                    valid = false
+                end
+                                          
+            else
+                 if value[:m_shipping_request_id] != ''    
+                   msr = MShippingRequest.find(value[:m_shipping_request_id])       
+                 
+                   if ! (msr != nil && value[:trip_quantity] != '' && value[:cargo_type_id] != '' && value[:cargo_quantity] != '' && value[:measure_unit_id] != '')
+                      valid = false
+                   
+                      @customer_shipping_order.errors.add("shipping_requests", "Hay líneas de pedido incorrectas")
+                   end
+                end
+            end     
         end
+        
     end 
     
     if !(valid)
+      #redirect_to '/customer_shipping_orders/new'
+      flash[:sr]=sh_reqs
       render 'new'
       return
     end
@@ -49,7 +65,20 @@
         sh_reqs = params[:sr]
       
         sh_reqs.each do |key, value|
-            if value[:m_shipping_request_id] != '' 
+            if (value[:m_shipping_request_id] == '') && (value[:service_id] != '')
+                sr = ShippingRequest.new
+                sr.customer_shipping_order_id = @customer_shipping_order.id
+                                
+                sr.service_id = value[:service_id]
+                sr.trip_id = value[:trip_id]
+                
+                sr.trip_quantity = value[:trip_quantity]
+                sr.cargo_type_id = value[:cargo_type_id]
+                sr.cargo_quantity = value[:cargo_quantity]
+                sr.measure_unit_id = value[:measure_unit_id]    
+
+                sr.save
+            elsif value[:m_shipping_request_id] != '' 
                 sr = ShippingRequest.new
                 sr.customer_shipping_order_id = @customer_shipping_order.id
                 sr.m_shipping_request_id = value[:m_shipping_request_id]

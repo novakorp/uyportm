@@ -46,8 +46,15 @@ class MShippingRequestsController < ApplicationController
 		@shippings  =  MShippingRequest.find(:all, 
 			:conditions => ['customer_id = ? AND name iLIKE ?', params[:customer_id] ,"%#{params[:term]}%"])
 	end
-    
-    def fill_request_order_line		
+  
+ 
+	def options_by_customer_id
+		@shippings  =  MShippingRequest.find(:all, 
+			:conditions => ['customer_id = ?', params[:customer_id]])
+	end 
+  
+  
+  def fill_request_order_line		
 		@line_num  =  params[:line_num]
         @m_sr = MShippingRequest.find(params[:id])		
 	end

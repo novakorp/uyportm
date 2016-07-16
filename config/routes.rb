@@ -37,6 +37,11 @@ post 'm_shipping_requests/fill_request_order_line', to: 'm_shipping_requests#fil
  # Documentos de un viaje clientes
 get 'shipments/list_documents', to: 'shipments#list_documents' 
  
+ # Tipos de trabajo por cliente , para campo options
+ post 'm_shipping_requests/options_by_customer_id(.:format)', to: 'm_shipping_requests#options_by_customer_id'
+ get  'm_shipping_requests/options_by_customer_id(.:format)/:id', to: 'm_shipping_requests#options_by_customer_id'
+ 
+ 
  # ----  FIN RUTAS  PARA  CONSULTAS  AJAX  ---- 
   
   
@@ -66,7 +71,14 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
  get 'customer_shipping_orders/completed_requests', to: 'customer_shipping_orders#completed_requests'
  
  get 'vehicles/update_positions', to: 'vehicles#update_positions'
-  
+ 
+ get 'vehicles/save_odometer_readings', to: 'vehicles#save_odometer_readings'
+ 
+ get 'vehicles/top_kilometers_done', to: 'vehicles#top_kilometers_done'   
+ get 'vehicles/vehicle_odometer_readings', to: 'vehicles#vehicle_odometer_readings'   
+ get 'vehicles/update_vehicles_gps_data', to: 'vehicles#update_vehicles_gps_data'   
+ get 'vehicles/update_from_gps_data/:gps_vehicle_id', to: 'vehicles#update_gps_data'  
+ get 'vehicles/create_from_gps_data/:gps_vehicle_id', to: 'vehicles#create_from_gps_data'  
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):   
   

@@ -12,3 +12,10 @@
   
  
 <div class="links_form"><%= link_to 'Atrás', @back_option %></div>
+
+
+
+<% @mioncas = Vehicle.where("vehicle_type_id='" + @shipping_request.service.vehicle_type_id.to_s + "'") %>
+ <%  @mioncas.each do |m| %>
+    <br> <%= m.number_plate %>
+<% end %>

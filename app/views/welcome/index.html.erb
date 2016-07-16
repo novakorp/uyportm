@@ -23,7 +23,7 @@
 
   <div class="lista_inicio">
       <% @pedidos.each do |p| %>         
-            <b><%= I18n.l(p.customer_shipping_order.order_datetime.to_date, :format => :short) %> </b> <%= p.customer_shipping_order.customer.name%>  -  <%= p.m_shipping_request.name%>  &nbsp;  <%=  p.cargo_quantity %> <%=  p.measure_unit.symbol %>  <br>
+            <b><%= I18n.l(p.customer_shipping_order.order_datetime.to_date, :format => :short) %> </b> <%= p.customer_shipping_order.customer.name%>  -  <% if p.m_shipping_request != nil %> <%= p.m_shipping_request.name%> <% else %> <%= t 'other' %> <% end %> &nbsp;  <%=  p.cargo_quantity %> <%=  p.measure_unit.symbol %>  <br>
       <% end %>
   </div>
 </div>

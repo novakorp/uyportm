@@ -31,6 +31,33 @@
  </tr> 
  </table>
  
+
+<h4>Kilometraje Diario</h4>
+<canvas id="myChart" width="400" height="200"></canvas>
+ 
+<script>
+
+	var data = {
+	    labels: <%= raw @g_km_labels %> ,
+	    datasets: [
+	        {
+	            label: "My First dataset",
+	            fillColor: "rgba(151,187,205,0.5)",
+          		strokeColor: "rgba(151,187,205,0.8)",
+            	highlightFill: "rgba(151,187,205,0.75)",
+            	highlightStroke: "rgba(151,187,205,1)",
+	            data: <%= @g_km_values %>
+	        }
+	    ]
+	};
+
+	var ctx = $("#myChart").get(0).getContext("2d");
+	var myBarChart = new Chart(ctx).Bar(data, {});
+	
+</script>
+
+<br> 
+ 
  <% if @vehicle.sucta_registration %>
 <%= render @vehicle.sucta_registration %>
  <% else %> 
@@ -42,6 +69,9 @@
  <% else %> 
 <div class="links_form"><%= link_to 'Ingresar Registro de MTOP', new_vehicle_vehicle_registration_path(@vehicle) %></div>
 <% end %>
+
+
 <br>
+
 <div class="links_form"><%= link_to 'Atrás', vehicles_path %></div>
 

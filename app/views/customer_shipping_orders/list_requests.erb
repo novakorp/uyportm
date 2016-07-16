@@ -23,7 +23,13 @@
         <span class="dato_lista_2"><%= shipping_request.customer_shipping_order.customer.name %></span>
      </td>
      <td><%= l shipping_request.customer_shipping_order.shipping_date %></td>
-     <td> <nobr> <%=  shipping_request.m_shipping_request.name %> </nobr> </td>
+     <td> <nobr> 
+      <% if shipping_request.m_shipping_request != nil %>
+           <%=  shipping_request.m_shipping_request.name %>
+        <%  else %>
+            <%= t 'other' %>
+        <% end %>
+     </nobr> </td>
      <td> <nobr> <%=  shipping_request.service.description %></nobr><br>
         <span class="dato_lista_sec"> <%=  shipping_request.trip.description %> </span></td>
      <td> <%=  shipping_request.trip_quantity %> </td>    

@@ -9,6 +9,14 @@
     <% end %>
     </ul>
   </div>
+  <%else%>
+    <div id="error_explanation" class="form_errors" style="display:none">
+      <h2> <%= t :error_header %> </h2>
+      <ul id="error_list">
+      
+      </ul>
+    </div>
+  
   <% end %>
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
@@ -28,7 +36,7 @@
     <td>
     
     <%= text_field_tag :customer_select %>
-    <%= f.hidden_field :customer_id %>
+    <%= f.text_field :customer_id %>
      
     </td>
     
@@ -59,21 +67,29 @@
     <% if @customer_shipping_order.shipping_requests.size > 0 %>
     
         <table class="tabla_listado_2" cellpadding=0 cellspacing=0>
-        <tr class="tabla_listado_2_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> <th></th></tr>
+        <tr class="tabla_listado_2_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> <th></th> </tr>
         <%= render @customer_shipping_order.shipping_requests %>
      
     <% else %>    
      <table class="tabla_listado_2" cellspacing=0 cellpadding=1> 
-        <tr class="tabla_listado_2_fila_cabezal"> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th> </tr>
+        <tr class="tabla_listado_2_fila_cabezal"> <th style="background-color:white"></th> <th>Tipo Trabajo</th> <th width=300px>Servicio</th> <th>Viajes</th> <th>Tipo Carga</th> <th>Q Total</th> <th></th>  </tr>
     
        <% @cant_lineas = 5 %>
 
        <% for i in 1..@cant_lineas %>
-        <tr> <td>
-             <%=text_field_tag "sr[" + i.to_s + "][m_shipping_request_select]" %>
+        <tr id="<%= "sr_line_" + i.to_s %>" > 
+            <td><div id="<%= "err_line_" + i.to_s %>" style="display:none; color:red; font-weight:bold; width:10px; font-size:11pt" >*</div></td>
+             <td>
+             <%=select_tag( "sr[" + i.to_s + "][m_shipping_request_select]", "<option></option>", :include_blank => true)  %>  
+             
              <%=hidden_field_tag "sr[" + i.to_s + "][m_shipping_request_id]" %>
              </td> 
-             <td><div id = "sr_<%= i.to_s %>_service" style="border:solid 1px #B8B8B8; height:18px;" > &nbsp;</div></td> 
+             <td><div id = "sr_<%= i.to_s %>_service" style="border:solid 1px #B8B8B8; height:18px;" > &nbsp;</div>
+                  <div id = "sr_<%= i.to_s %>_service_other" style="display:none" > 
+                    <%=select_tag( "sr[" + i.to_s + "][service_id]", options_from_collection_for_select(Service.all,  :id, :description), :include_blank => true)  %>&nbsp;
+                    <%=select_tag( "sr[" + i.to_s + "][trip_id]", options_from_collection_for_select(Trip.all,  :id, :description), :include_blank => true)  %> 
+                  </div>
+             </td> 
              <td><%=text_field_tag "sr[" + i.to_s + "][trip_quantity]", nil, {:size => 3, :maxlength => 4}%></td> 
              <td> <%=select_tag( "sr[" + i.to_s + "][cargo_type_id]", options_from_collection_for_select(CargoType.all,  :id, :description), :include_blank => true)  %> </td>
              <td> <%=text_field_tag "sr[" + i.to_s + "][cargo_quantity]", nil, {:size => 8, :maxlength => 9} %></td> 
@@ -92,19 +108,196 @@
   <tr><th style="text-align:left"><%= f.label :comments %></th><tr>
   <tr><td><%= f.text_area :comments, class: 'campo_comentarios' %></td></tr>
   <tr><td class="acciones_form">
-  <%= f.submit t(:save) %>
+  <%= f.submit t(:save), onclick: 'return validarForm();' %>
   </td>
   </tr>
   </table>
   
+  
 <% end %>
 
 <script>
-
-
-   //  ---- Autocomplete en lineas del pedido  -----
-   
   
+  
+  function validarFilas(errores) {
+      var i;
+      var error_line = 0;
+      var hayErrores = false;
+      var hayDatos = false;
+      var errorMsg;
+      
+                 
+      for (i= <%=@cant_lineas%>; i >= 1; i--) {
+        
+        result = validarFila (i);
+      
+        if ( result == 0) {
+            $("#err_line_" + i).show(); 
+            
+            hayErrores = true;
+           
+        } else {
+            $("#err_line_" + i).hide();
+            
+            if (result == 1) {
+              hayDatos = true;
+            }
+        }
+      }
+      
+      if (hayErrores) {
+        errorMsg = "<%= t 'invalid_lines_found' %>";
+      }
+      else if ( ! hayDatos ) {
+       errorMsg = "<%= t 'must_fill_one_sr_line' %>";
+        hayErrores = true;
+      }
+       
+      if (hayErrores) {        
+        errores.push(errorMsg);
+        return false;
+      }
+      
+     
+      return true;
+  }
+
+  function quitarMensajesErr () {     
+    $("#error_explanation").hide();
+    $("#error_list").html("");  
+  }
+  
+  
+  function mostrarMensajesErr (errores) {  
+  
+    var html = "<li>"  + errores.join("</li><li>") + "</li>";       
+    $("#error_list").html(html);      
+    $("#error_explanation").show();
+    
+    var offs = $("#error_explanation").offset();
+    
+    window.scrollTo(offs.left-5, offs.top-5);
+  }
+  
+  
+  function validarFila (nroFila) {
+     
+     var sr_select = $("#sr_" + nroFila + "_m_shipping_request_select").val();
+     var service_id = $("#sr_" + nroFila + "_service_id").val();
+     var trip_id = $("#sr_" + nroFila + "_trip_id").val();
+     var trip_quantity = $("#sr_" + nroFila + "_trip_quantity").val();
+     var cargo_type_id = $("#sr_" + nroFila + "_cargo_type_id").val();
+     var cargo_quantity = $("#sr_" + nroFila + "_cargo_quantity").val();
+     var measure_unit_id = $("#sr_" + nroFila + "_measure_unit_id").val();
+     
+     
+     if ((sr_select == "") && (trip_quantity == "") && (cargo_type_id == "") && (cargo_quantity == "")  && (measure_unit_id == "")) {
+        return -1;
+     }
+  
+     if (( sr_select == "otro" ) && (service_id == "" || trip_id == "" )) {           
+        return 0;
+     } 
+     
+     
+     if ( trip_quantity == "" || cargo_type_id == "" || cargo_quantity == "" || measure_unit_id == "") {           
+        return 0;
+     } 
+     
+     return 1;
+               
+  }
+  
+  function validarForm () {
+     
+     var errores = [];
+     
+     validarSeleccionAutoComp ("customer_shipping_order_customer_id", "<%= t "activerecord.attributes.customer_shipping_order.customer_id" %>", errores) ;
+     
+     validarFilas(errores);
+     
+     if (errores.length > 0 ) {
+        mostrarMensajesErr(errores);
+        return false;
+     }
+     
+     return true;
+  }
+  
+  function validarSeleccionAutoComp (idCampo, labelCampo, errores) {
+      var valor = $("#" + idCampo).val();
+      var errorMsg ;
+      
+      if (valor == "") {
+        errorMsg = labelCampo + ": " + "<%= t("errors.messages.invalid") %>";
+        
+        errores.push (errorMsg);
+        
+        return false;
+      }
+      
+      return true;
+  }
+   
+   function validarCampoGral (idCampo, labelCampo, validacion, errorMsg) {
+      var valor = $("#" + idCampo).val();
+      var valido = true;
+      
+      if (validacion="blank") {
+        if (valor == "") {
+            errorMsg = labelCampo + ": " + "<%= t("errors.messages.blank") %>";
+            return false;
+        }
+      }
+      
+      return valido;
+   }
+   
+  // Carga opciones en el campo de la columna "Tipo Trabajo" de una fila, con los tipos de trabajo de un cliente
+  function opcionesTipoPedido (customerID, row_num) {  
+    var url_action = "/m_shipping_requests/options_by_customer_id.js" ;
+    var element_id  = "#sr_" + row_num + "_m_shipping_request_select";
+           
+    $.post(url_action,{customer_id: customerID}, 
+     function(data, status) {
+        $(element_id).html(eval(data));
+        
+        // Asignar handler para cargar datos del tipo de trabajo seleccionado al evento onchange del campo de seleccion.
+        // Si se selecciona Otro , se muestran campos para permitir seleccionar tipo de servicio y recorrido
+        $(element_id).on("change", function(e) {
+                   
+            $('#sr_' + row_num + '_service_id').val('');
+            $('#sr_' + row_num + '_trip_id').val('');
+            
+            $('#sr_' + row_num + '_trip_quantity').val('');
+            $('#sr_' + row_num + '_cargo_type_id').val('');
+            $('#sr_' + row_num + '_cargo_quantity').val('');              
+            $('#sr_' + row_num + '_measure_unit_id').val('');
+                        
+            // Cargar datos segun si se selecciona un tipo de trabajo existente o se selecciona "otro"
+            if ($(element_id).val() == "otro"){
+            
+              $('#sr_' + row_num + '_m_shipping_request_id').val('');
+              $('#sr_' + row_num + '_service').css ("display","none");
+              $('#sr_' + row_num + '_service_other').css ("display", "block");
+                           
+            } else {
+            
+               // Guardo id del tipo de trabajo seleccionado ( solo se guarda en este caso, no cuando seleccionan "otro")
+              $('#sr_' + row_num + '_m_shipping_request_id').val($(element_id).val());
+              $('#sr_' + row_num + '_service').css ("display","block");
+              $('#sr_' + row_num + '_service_other').css ("display", "none");
+              
+              
+              // solicitar por ajax y cargar los datos del tipo de pedido
+              $.post('/m_shipping_requests/fill_request_order_line', {id: $(element_id).val(), line_num: row_num}, null , "script");
+            }
+        });
+     } ); 
+  } 
+  
+  
+   //  ---- Autocomplete en lineas del pedido  -----
    // Convierte en autocomplete el campo de la columna "Tipo Trabajo" de una fila, con los tipos de trabajo de un cliente
   function autocompTipoPedido (customerID, row_num) {
     $("#sr_" + row_num + "_m_shipping_request_select").autocomplete({
@@ -191,7 +384,8 @@
             for (i=1; i <= <%= @cant_lineas %>; i++) {
                 $("#sr_" + i + "_m_shipping_request_select").val ('');
                 $("#sr_" + i + "_m_shipping_request_id").val ('');
-                autocompTipoPedido (ui.item.value, i);
+                
+               opcionesTipoPedido(ui.item.value, i);
               }
         <% end %>
 		  };
@@ -216,8 +410,8 @@
       
      $('#shipping_date').datepicker("option", "dateFormat", "DD d 'de' MM, yy"); 
      
+            
   });
-      
       
   </script>
   

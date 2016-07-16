@@ -1,0 +1,48 @@
+﻿<h1>Actualizar Posiciones de Vehículos</h1>
+
+ <%= link_to 'Volver', "/welcome/configuration" %>
+
+Total Vehículos: <%= @wsdata.length %> <br />
+
+<table cellpadding=3 cellspacing=5>
+	<tr>
+		<td>patente</td>
+		<td>patente ant</td>		
+		<td>gps_vehicle_id</td>
+		<td>gps descr</td>
+		<td>acción</td>
+		<td>info</td>
+	</tr>
+	
+	<% @wsdata.each do |data| %>
+	<tr>
+		
+		 <td><%=  data[:patente]  %> </td>
+    	 <td><%=  data[:patente_ant]  %> </td>
+    	 <td><%=  data[:movil_id]  %> </td>
+      	 <td><%=  data[:identificador]  %> </td>
+      	 <td>
+      	 	<% if data[:mostrar_acc] == "1"  %>  
+      	 		<table cellpadding="2" cellspacing="0">
+      	 			<tr>
+      	 				<td>
+      	 					<div class="links_form"><%= link_to 'create','/vehicles/create_from_gps_data/' + data[:movil_id] %></div>
+      	 				</td>
+      	 				<td>
+      	 					<div class="links_form"><%= link_to 'updt','/vehicles/update_from_gps_data/' + data[:movil_id] %></div>
+      	 				</td>
+      	 			</td>
+      	 		</table>
+      	 	<% end %>
+      	 	</td>
+      	 <td><%=  data[:comments] %></td>
+	</tr>	
+	
+	<% end %>
+		
+</table>
+
+ <%= @msgs %>
+
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+ 

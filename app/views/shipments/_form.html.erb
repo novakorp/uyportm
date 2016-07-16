@@ -1,14 +1,22 @@
 ﻿  
 <%= form_for @shipment do |f| %>
  <% if @shipment.errors.any? %>
-  <div id="error_explanation" class="form_errors">
+   <div id="error_explanation" class="form_errors">
     <h2> <%= t :error_header %> </h2>
     <ul>
-    <% @shipment.errors.full_messages.each do |msg| %>
+    <% @customer_shipping_order.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>
   </div>
+  <%else%>
+    <div id="error_explanation" class="form_errors" style="display:none">
+      <h2> <%= t :error_header %> </h2>
+      <ul id="error_list">
+      
+      </ul>
+    </div>
+  
   <% end %>
     
   <%= f.hidden_field :shipping_request_id %>   
@@ -21,6 +29,10 @@
   <%= hidden_field_tag "back_option", @back_option %> 
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
+   <tr>
+    <th><%= f.label :customer %></th>
+    <td> <%= @shipping_request.customer_shipping_order.customer.name %> </td>	
+  </tr>
   <tr>
     <th><%= f.label :customer_shipping_order_number %></th>
     <td> <%= @shipping_request.customer_shipping_order.order_number %> </td>	
@@ -92,7 +104,15 @@
     <th></th>
     <td> 
   
-   <% req_cargo = @shipping_request.m_shipping_request.m_requested_cargos.first %> 
+   <% 
+      msr = @shipping_request.m_shipping_request
+      if msr != nil 
+        if msr.m_requested_cargos != nil
+          req_cargo = msr.m_requested_cargos.first 
+        end
+      end        
+   %>
+       
   
    <!--  TABLA DATOS DE CARGA -->
 		
@@ -101,14 +121,20 @@
    
   <table id="supplies" class="tabla_grilla_edicion" cellpadding=0 cellspacing=0>
 	
-    <tr class="tabla_grilla_edicion_header"> <th width=100px>Lugar de Carga</th> <th width=120px>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+    <tr class="tabla_grilla_edicion_header"> <th width=100px>Lugar de Carga</th> <th width=120px>Cantidad (<%= @shipping_request.measure_unit.symbol %>)</th></tr>
     
        <!--  Mostrar puntos de carga (lugar, cantidad) segun se haya definido en el modelo de pedido -->
   
       <% if @shipment.shipment_supplies.size > 0 %>
         <% req_supplies= @shipment.shipment_supplies %>
       <% else %>
-        <% req_supplies= req_cargo.m_requested_supplies %>
+        <% 
+            if req_cargo != nil
+              req_supplies = req_cargo.m_requested_supplies 
+            else
+              req_supplies = nil
+            end
+        %>
       <% end %>
       
       <!-- Fila "template" con el html general que debe tener cada fila agregada dinamicamente en esta coleccion de registros -->
@@ -119,16 +145,22 @@
         </td>       
        <td> <%=  text_field_tag "suppliestmp[0][amount]"%> </td>	
       </tr>
-      
-	    <% req_supplies.each do |req_sup| %>
-        <% @count_supplies = @count_supplies + 1 %>
+            
+	    <% 
+          if req_supplies != nil
+            req_supplies.each do |req_sup| 
+              @count_supplies = @count_supplies + 1 
+      %>
         
         <tr> <td> 
           <%= select_tag "supplies[" + @count_supplies.to_s + "][address]", options_from_collection_for_select(@addresses, :id, :description, req_sup.address_id.to_s), :include_blank => true %>
           <%= hidden_field_tag "supplies[" + @count_supplies.to_s + "][id]", req_sup.id.to_s %>
           <td> <%=  text_field_tag "supplies[" + @count_supplies.to_s + "][amount]", req_sup.amount %> </td>
         </tr>
-      <% end %>
+        
+        
+       <% end %>
+    <% end %>
    
    </table>
    <a href="javascript:agregarRegistroColeccion('supplies', ++count_supplies)">agregar</a>  
@@ -142,7 +174,7 @@
 	  <tr> <td colspan=2 class="tabla_grilla_edicion_fila_sep"></td> </tr>
 
     
-    <tr  class="tabla_grilla_edicion_header"> <th>Lugar de Entrega</th> <th>Cantidad (<%= req_cargo.measure_unit.symbol %>)</th></tr>
+    <tr  class="tabla_grilla_edicion_header"> <th>Lugar de Entrega</th> <th>Cantidad (<%= @shipping_request.measure_unit.symbol %>)</th></tr>
  
  
     <!--  Mostrar puntos de entrega (lugar, cantidad) segun se haya definido en el modelo de pedido --> 
@@ -150,7 +182,13 @@
     <% if @shipment.shipment_supplies.size > 0 %>
       <% req_deliveries= @shipment.shipment_deliveries %>
     <% else %>
-      <% req_deliveries= req_cargo.m_requested_deliveries %>
+        <% 
+            if req_cargo != nil
+              req_deliveries = req_cargo.m_requested_deliveries 
+            else
+              req_deliveries = nil
+            end
+        %>
     <% end %>
   
       
@@ -162,9 +200,15 @@
         </td>       
        <td> <%=  text_field_tag "deliveriestmp[0][amount]"%> </td>	
       </tr>
-       
-    <% req_deliveries.each do |req_del| %>
-      <% @count_deliveries = @count_deliveries + 1 %>
+    
+    
+      
+    <% 
+        if req_deliveries != nil
+          req_deliveries.each do |req_del| 
+            @count_deliveries = @count_deliveries + 1 
+    %>
+    
       
 	    <tr> <td> 
       <%= select_tag "deliveries[" + @count_deliveries.to_s + "][address]", options_from_collection_for_select(@addresses, :id, :description, req_del.address_id.to_s), :include_blank => true %>
@@ -172,7 +216,10 @@
       </td>       
        <td> <%=  text_field_tag "deliveries[" + @count_deliveries.to_s + "][amount]", req_del.amount %> </td>	
        </tr>
+       
+       <% end %>
     <% end %>
+   
 
 	</table>
   
@@ -192,7 +239,7 @@
   </tr>
   
   <tr><td colspan=2 class="acciones_form">
-  <%= f.submit t(:save) %>
+  <%= f.submit t(:save), onclick: 'return validarForm();' %>
 
   </td>
   </tr>
@@ -323,14 +370,136 @@
        lastRow.innerHTML = html;              
     }
   
+      
+  // Validaciones
+  
+  function validarCampoGral (idCampo, labelCampo, validacion, errores) {
+      var valor = $("#" + idCampo).val();
+      var valido = true;
+      
+      if (validacion="blank") {
+        if (valor == "") {
+            errores.push(labelCampo + ": " + "<%= t("errors.messages.blank") %>");
+            return false;
+        }
+      }
+      
+      return valido;
+  }
+  
+  function validarFila (nomColeccion, nroFila) {
+     
+     var r_address = $("#" + nomColeccion + "_" + nroFila + "_address").val();
+     var r_amount = $("#" + nomColeccion + "_" + nroFila + "_amount").val();
+         
+     
+     if ((r_address == "") && (r_amount == "") ) {
+        return -1;
+     }
+     
+     if ((r_address == "") || (r_amount == "") ) {
+        return 0;
+     }
+     
+     return 1;               
+  }
+      
+      
+  
+  function validarFilas(nomLista, nomPrefijo, cantFilas, errores) {
+      var i;
+      var error_line = 0;
+      var hayErrores = false;
+      var hayDatos = false;
+      var errorMsg;
+      
+                 
+      for (i= 1; i <= cantFilas ; i++) {
+        
+        result = validarFila (nomPrefijo, i);
+      
+        if ( result == 0) {
+                      
+            hayErrores = true;
+           
+        } else {            
+            
+            if (result == 1) {
+              hayDatos = true;
+            }
+        }
+      }
+      
+      if (hayErrores) {
+        errorMsg = '<%= t('invalid_lines_found')%>' + ' (' + nomLista + ')' ;
+      }
+      else if ( ! hayDatos ) {
+       errorMsg = "<%= t 'must_fill_one_sr_line' %>" + ' (' + nomLista + ')' ;
+        hayErrores = true;
+      }
+       
+      if (hayErrores) {        
+        errores.push(errorMsg);
+        return false;
+      }
+      
+     
+      return true;
+  }
+  
+  
+  function validarForm () {
+     
+     var errores = [];
+     
+     validarCampoGral("shipment_departure_time", "<%= t('activerecord.attributes.shipment.departure_time') %>", 'blank', errores);
+     validarCampoGral("shipment_arrival_time", "<%= t('activerecord.attributes.shipment.arrival_time') %>", 'blank', errores);
+     
+     validarFilas("<%= t('activerecord.models.' + 'shipment_supply' + '.other') %>", "supplies", count_supplies, errores);
+     validarFilas("<%= t('activerecord.models.' + 'shipment_delivery' + '.other') %>", "deliveries", count_deliveries, errores);
+     
+     if (errores.length > 0 ) {
+        mostrarMensajesErr(errores);
+        return false;
+     }
+     
+     return true;
+  }
+  
+  
+  function mostrarMensajesErr (errores) {  
+  
+    var html = "<li>"  + errores.join("</li><li>") + "</li>";       
+    $("#error_list").html(html);      
+    $("#error_explanation").show();
+    
+    var offs = $("#error_explanation").offset();
+    
+    window.scrollTo(offs.left-5, offs.top-5);
+  }
+  
+      
   
 	$(function() { 
         datetime_to_datepicker ('shipment_departure_time', 'dep_date', 'dep_date_dp', 'dep_time');
         datetime_to_datepicker ('shipment_arrival_time', 'arv_date', 'arv_date_dp', 'arv_time');
-      });
-      
-      
-      
+        
+        
+       // Agregar Filas para ingreso de indicaciones de carga y entrega,  en caso que no haya tipo de trabajo definido
+       // (Filas con campos generadas dinamicamente, en la seccion "Detalles de Carga" , para seleccion de Lugar y Cantidad)
+        
+        if (count_supplies == 0) {
+          javascript:agregarRegistroColeccion('supplies', ++count_supplies);
+        }
+     
+        if (count_deliveries == 0) {
+          javascript:agregarRegistroColeccion('deliveries', ++count_deliveries);
+        }
+        
+   });
+        
+     
+     
   </script>
   
  

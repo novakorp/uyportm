@@ -1,0 +1,57 @@
+﻿<h1>Guardar Lecturas de Odómetros</h1>
+
+ <%= link_to 'Volver', "/welcome/configuration" %>
+
+Total Vehículos: <%= @wsdata.length %> <br />
+
+<table cellpadding=3 cellspacing=5>
+	<tr>
+		
+		<td>gps_vehicle_id</td>		
+		<td>gps_vehicle_id result</td>
+		<td>patente gps</td>
+		<td>identificador gps</td>		
+		<td>fecha gps</td>
+		<td>fecha result</td>
+		<td>diff</td>
+		<td>od parcial</td>
+		<td>od total</td>
+		<td>od parcial result</td>
+		<td>id vehículo</td>
+	</tr>
+	
+	<% @wsdata.each do |data| %>
+	
+		<% vehic = Vehicle.first(:conditions => ["gps_vehicle_id = ?", data[:movil_id]])   %>
+		<% if vehic.nil?   %>
+			<% data[:id_vehiculo] = ""  %>
+		<% else %>
+			<% data[:id_vehiculo] = vehic.id.to_s  %>
+		<% end %>
+		
+	 
+		
+		<tr>
+	    	 <td><%=  data[:movil_id]  %> </td>
+	    	 <td><%=  data[:result_busqueda_id]  %> </td>
+			 <td><%=  data[:patente]  %> </td> 
+	      	 <td><%=  data[:identificador]  %> </td>      	 
+	      	 <td><%=  data[:fecha_gps]  %> </td> 
+	      	 <td><%=  data[:result_busqueda_dt]  %> </td>
+	      	 <td><%=  data[:dif_dt] %> </td>
+	      	 <td><%=  data[:odometro_parcial]  %> </td>   
+	      	     	 
+	      	 <td><%=  data[:odometro_total]  %> </td>
+	      	 
+	      	 <td><%=  data[:result_busqueda_pr]  %> </td>
+	      	 <td><%=  data[:id_vehiculo]  %> </td>  
+		</tr>
+	
+	<% end %>
+		
+</table>
+
+ <%= @msgs %>
+
+<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+ 

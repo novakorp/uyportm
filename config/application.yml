@@ -1,0 +1,19 @@
+defaults: &defaults
+  gmail_username: 'notificaciones.odacor@gmail.com'
+  gmail_password: 'transportes01'
+  
+  
+  gps_ws_username: 'ferreira'
+  gps_ws_password: 'at78024agd912'
+  gps_ws_url: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom?wsdl'
+  gps_ws_endpoint: 'http://190.64.141.170:8009/wcAdmin/services/ServiceDataBykom.ServiceDataBykomHttpSoap12Endpoint/'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  
+production:
+  <<: *defaults
+  
