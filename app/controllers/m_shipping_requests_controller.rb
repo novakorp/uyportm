@@ -4,7 +4,7 @@ class MShippingRequestsController < ApplicationController
 	end
 	
 	def create
-	  @m_shipping_request = MShippingRequest.new(params[:m_shipping_request])
+	  @m_shipping_request = MShippingRequest.new(obj_params)
 
 	  if @m_shipping_request.save
 		redirect_to @m_shipping_request
@@ -39,12 +39,19 @@ class MShippingRequestsController < ApplicationController
 	  @m_shipping_request = MShippingRequest.find(params[:id])
 	  @m_shipping_request.destroy
 	 
-	  redirect_to m_shipping_requests_path
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to m_shipping_requests_path }
+      format.js { render "/common/action_result.js" }
+    end 
+	   
 	end
 	
 	def m_shipping_requests_ac
-		@shippings  =  MShippingRequest.find(:all, 
-			:conditions => ['customer_id = ? AND name iLIKE ?', params[:customer_id] ,"%#{params[:term]}%"])
+		@shippings  =  MShippingRequest.where("customer_id = ? AND name iLIKE ?", params[:customer_id],"%#{params[:term]}%")
 	end
   
  
@@ -59,4 +66,9 @@ class MShippingRequestsController < ApplicationController
         @m_sr = MShippingRequest.find(params[:id])		
 	end
 	
+  private
+
+  def obj_params
+    params.require(:m_shipping_request).permit(:name, :service_id, :customer_id, :trip_id, :contact, :details, :simple_shipment)
+  end
 end

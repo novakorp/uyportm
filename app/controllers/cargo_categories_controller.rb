@@ -4,12 +4,12 @@ class CargoCategoriesController < ApplicationController
 	end
 	
 	def create
-	  @cargo_category = CargoCategory.new(params[:cargo_category])
+	  @cargo_category = CargoCategory.new(obj_params)
 
 	  if @cargo_category.save
-		redirect_to @cargo_category
+		  redirect_to @cargo_category 
 	  else
-		render 'new'
+		  render 'new'
 	  end
 	end
 
@@ -38,8 +38,22 @@ class CargoCategoriesController < ApplicationController
 	def destroy
 	  @cargo_category = CargoCategory.find(params[:id])
 	  @cargo_category.destroy
-	 
-	  redirect_to cargo_categories_path
+	  
+	  
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to cargo_categories_path }
+      format.js { render "/common/action_result.js" }
+    end
+   
 	end
 	
+  private
+
+  def obj_params
+    params.require(:cargo_category).permit(:description)
+  end
 end

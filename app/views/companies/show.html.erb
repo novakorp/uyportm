@@ -1,29 +1,39 @@
-﻿<H1> Empresa </H1>
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>Nombre:</th>
-  <td> <%= @company.company_name%> </td>
-  </tr>
-  <tr>
-  <th>Razón Social:</th>
-  <td> <%= @company.trade_name%> </td>
-  </tr>
-  <tr>
-  <th>RUT:</th>
-  <td> <%= @company.rut%> </td>
-  </tr>
-  <th>MTOP:</th>
-  <td> <%= @company.mtop%> </td>
-  </tr>    
-  <tr>
-  <th>BPS:</th>
-  <td> <%= @company.bps%> </td>
-  </tr>
-  <tr>
-  <th>MTSS:</th>
-  <td> <%= @company.mtss%> </td>
-  </tr>    
-</table>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Empresa" } do %>
+   
+  <div role="main" class="ui-content">    
 
-<div class="links_form"><%= link_to 'Atrás', companies_path %></div>
+	<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+	  <tr>
+	  <th>Nombre:</th>
+	  <td> <%= @company.company_name%> </td>
+	  </tr>
+	  <tr>
+	  <th>Razón Social:</th>
+	  <td> <%= @company.trade_name%> </td>
+	  </tr>
+	  <tr>
+	  <th>RUT:</th>
+	  <td> <%= @company.rut%> </td>
+	  </tr>
+	  <th>MTOP:</th>
+	  <td> <%= @company.mtop%> </td>
+	  </tr>    
+	  <tr>
+	  <th>BPS:</th>
+	  <td> <%= @company.bps%> </td>
+	  </tr>
+	  <tr>
+	  <th>MTSS:</th>
+	  <td> <%= @company.mtss%> </td>
+	  </tr>    
+	</table>
+
+	<div class="links_form"><%= link_to 'Salir', companies_path , {"data-ajax"=>"false"}%></div>  
+
+  </div> <!-- /content --> 
+<% end %>
+
+
+

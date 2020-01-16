@@ -1,0 +1,207 @@
+﻿
+
+<% @top_menu_selection="Viajes" %>
+<%= render '/common/top_menu' %>
+
+
+<% @shipments_menu_selection="Pendientes" %>
+<%= render 'shipments_menu' %>
+
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Fecha</th>	
+    <th>Nota</th>
+	<th>Cliente</th>
+    <th>Servicio</th>
+    <th>Vehículo<br>Acoplado</th> 
+	<th>Chofer</th>
+	<th>Estado</th> 
+	<th></th>
+  </tr>
+ 
+  <% @shipments.each do |shipment| %>
+      <% @ship_id_str = shipment.id.to_s %>
+    <tr id="<%= 'fila_viaje_' + @ship_id_str %>" class="tabla_listado_fila_contenido">
+      <td>  <%=l shipment.departure_time, format: :short %></td>
+	    <td> <%= shipment.shipping_request.customer_shipping_order.order_number %></td>
+      <td> <%= shipment.shipping_request.customer_shipping_order.customer.name %> </td>
+      <td> <nobr> <%=  shipment.shipping_request.service.description %></nobr><br>
+        <span class="dato_lista_sec"> <%=  shipment.shipping_request.trip.description %> </span></td>	  
+     <td><%= shipment.vehicle.plate_number %> <br> <% if shipment.coupled_vehicle %> <%= shipment.coupled_vehicle.plate_number %> <% end %> </td>
+	  <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
+	  <td id="<%= 'estado_viaje_' + @ship_id_str %>"> <%= getShipmentStatusDesc(shipment.status) %> </td> 
+	  <td>        
+        <%= link_to image_tag(asset_path ('buttons/view.gif')), shipment  %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipment_path(shipment)   %> &nbsp;
+         <%= link_to image_tag(asset_path('buttons/gear.gif')), "javascript:desplegarMenuObjeto('menu', 'menu_btn_" + @ship_id_str + "', '" + @ship_id_str + "');", html_options = {id: 'menu_btn_' + @ship_id_str} %> </td>
+     </tr>
+  <% end %>
+</table>
+
+
+
+ <style>
+  .ui-menu { width: 150px; font-size: 0.9em}
+  .toggler { width: 150px; } 
+ </style>
+  
+  
+  <script>
+  
+    // IMPORTANTE
+    // Esta funcion debe definirse en cada pagina donde se usa un menu 
+    // para realizar el procesamiento correspondiente a cada una.
+    //
+    // Procesa una accion de menu. 
+    // Recibe un id de parametro (del objeto sobre el que se aplica el menu) 
+    // y el id del item de menu seleccionado.
+    function procesarAccionMenu (menuId, menuItemId, paramId) {
+       
+      // Cambiar a En Curso
+      if (menuItemId == "menu_itm_1") {
+      
+        dialogoCambiarEstado (paramId, 2, "a");
+      
+      }
+      // Cambiar a Completado
+      else if (menuItemId == "menu_itm_2") {
+      
+        dialogoCambiarEstado (paramId, 3, "o"); 
+      }
+      // Cambiar a Agendado
+      else if (menuItemId == "menu_itm_3") {
+      
+        dialogoCambiarEstado (paramId, 1, "a");    
+      }
+      // Anular
+      else if (menuItemId == "menu_itm_4") {
+      
+        dialogoCambiarEstado (paramId, 0, "o", "Se va a ANULAR el viaje");
+          
+      }
+      
+    }
+    
+    // Muestra un mensaje en un dialogo de confirmacion con las opciones Aceptar y Cancelar.
+    // Recibe el mensaje y la funcion que debe ejecutar en caso de aceptar.
+    function dialogConfirm (mensaje, funcionAceptar) {    
+      $( "#dialog-confirm" ).html(mensaje);
+      
+         // Preparar los parametros para el dialogo.
+         // Se incluye la funcion recibida como parametro
+         // para la accion aceptar
+        dialog_params ={
+          resizable: false,
+          height:140,
+          modal: true,
+          buttons: {
+            "Aceptar": funcionAceptar,
+            "Cancelar": function() {
+              $( this ).dialog( "close" );
+            }
+        }
+      };
+      
+      $( "#dialog-confirm" ).dialog(
+        dialog_params
+      );
+    }
+    
+    $(function() {
+   
+      $( "#menu" ).hide(); 
+      
+    });
+  
+    function ocultarViajeListado(idViaje) {
+      $ ("#fila_viaje_" + idViaje).css("display","none");
+    }
+    
+    
+    // Maneja el dialogo de cambio de estado de un viaje. Utiliza AJAX para invocar el cambio.    
+    // Recibe el id del viaje a cambiar, el id del estado al que se desea cambiar, la accion que se debe realizar en pantalla para actualizar el listado 
+    //  ("a" - actualizar estado, "o" - ocultar viaje), y un mensaje opcional para mostrar en el dialogo de cambio de estado.
+    
+    function dialogoCambiarEstado(idViaje, idEstado, accionListado, mensaje) {
+      var nombreEstado = getNombreEstado (idEstado);
+      
+        // funcion encargada de procesar el cambio, que se debe invocar si se confirma la accion en el dialogo
+       funcionAceptar = function() { 
+          
+          // Invocar via ajax el cambio de estado, mediante un POST
+          var url_action = "/shipments/" + idViaje + "/ajax_update";
+          $.post(url_action, {status: idEstado}, 
+                function () {
+                    if (accionListado=="o")
+                        ocultarViajeListado(idViaje) 
+                     else 
+                        actualizarEstadoListado (idViaje, nombreEstado) ;
+                  }
+            ).fail( function () {avisoErrorAccion ();});     
+          
+          $( this ).dialog( "close" );
+         }  
+      
+      // Mostrar dialogo de confirmacion de la accion
+      
+      if (mensaje == null || mensaje == "")  {
+        mensaje = "Se cambiará el estado a '" + nombreEstado + "'"; 
+      }
+      dialogConfirm(mensaje, funcionAceptar); 
+          
+    }
+    
+    
+    function actualizarEstadoListado(idViaje, nombreEstado) {
+      $ ("#estado_viaje_" + idViaje).html(nombreEstado);
+    }
+      
+  
+    function getNombreEstado (idEstado) {
+      if (idEstado == "0") {
+        return "Anulado";
+      } else if (idEstado == "1") {
+        return "Agendado";
+      } else if (idEstado == "2") {
+        return "En Curso";
+      }  else if (idEstado == "3") {
+        return "Completado";
+      }
+      
+    }
+    
+    function avisoErrorAccion() {
+        $( "#dialog-message" ).dialog({
+          modal: true,
+          buttons: {
+            "Aceptar": function() {
+              $( this ).dialog( "close" );
+            }
+          }
+        });
+    }
+  
+  </script>
+ 
+ <!-- Cada menu requiere un div que tenga un id con el mismo nombre del menu y el prefijo "toggler_" -->
+ <!-- para poder ser desplegado correctamente por las funciones -->
+ <div id="toggler_menu" class="toggler">   
+    <ul id="menu" >
+      <li id="menu_itm_1">Pasar a "En Curso"</li>
+      <li id="menu_itm_2">Pasar a "Completado"</li>
+      <li id="menu_itm_3">Pasar a "Agendado"</li>
+      <li id="menu_itm_4">Anular</li> 
+      <li id="menu_itm_5">Cerrar Menú</li> 
+    </ul>   
+</div>
+
+<div id="dialog-confirm" title="Atención" style="display:none">
+  Mensaje asignado por la funcion dialogConfirm
+</div>
+
+
+<div id="dialog-message" title="ERROR" style="display:none">
+  Se produjo un error al procesar la acción.
+</div>
+
+
+

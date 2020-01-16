@@ -6,7 +6,7 @@ class RequestedDeliveriesController < ApplicationController
 	
 	def create
 		@requested_cargo = RequestedCargo.find(params[:requested_cargo_id])
-		@requested_delivery = RequestedDelivery.new(params[:requested_delivery])
+		@requested_delivery = RequestedDelivery.new(obj_params)
 		@requested_delivery.requested_cargo_id = @requested_cargo.id
 		
 	  if @requested_delivery.save
@@ -40,7 +40,19 @@ class RequestedDeliveriesController < ApplicationController
 	  @requested_cargo = @requested_delivery.requested_cargo
 	  @requested_delivery.destroy
 	 
-	  redirect_to @requested_cargo
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @requested_cargo }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 	
+  private
+
+  def obj_params
+    params.require(:requested_delivery).permit(:ammount, :cargo_type_id, :measure_unit_id, :address_id)
+  end
 end

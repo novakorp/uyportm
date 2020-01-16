@@ -1,5 +1,17 @@
-﻿<h1>Ingresar Registro Sucta</h1>
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Ingresar Registro SUCTA" } do %>
+                  
   
-<%= render 'form' %>
-  
-<div class="links_form"><%= link_to 'Atrás', vehicle_path(@vehicle) %></div>
+  <div role="main" class="ui-content">   
+    
+    <% @form_objs = [@vehicle, @sucta_registration] %>
+    
+    <%= render 'form' %>  
+
+    <div class="links_form"><%= link_to 'Salir', vehicle_path(@vehicle) %></div> 
+
+  </div> <!-- /content --> 
+
+<% end %>

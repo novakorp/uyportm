@@ -1,5 +1,16 @@
-﻿<h1>Nuevo Tipo de Documento</h1>
-  
-<%= render 'form' %>
 
-<div class="links_form"><%= link_to 'Atrás', document_types_path %></div>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Tipo de Documento" } do %>
+                   
+  <div role="main" class="ui-content">     
+  
+	<%= render 'form' %>
+
+	<div class="links_form"><%= link_to 'Salir', document_types_path %></div>
+ 
+
+  </div> <!-- /content -->
+  
+
+<% end %>

@@ -1,7 +1,66 @@
-﻿<h1>Modificar Pedido</h1>
+﻿<h1>Modificar Pedido</h1> 
  
-<%= render 'form' %>
+
+<%= form_for(@shipping_request) do |f| %>  
+ 
+
+  <% if @shipping_request.errors.any? %>
+     <div id="error_explanation" class="form_errors">
+      <h2> <%= t :error_header %> </h2>
+      <ul>
+      <% @shipping_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>    
+  <% end %>
   
-<div class="links_form"><%= link_to 'Atrás', @back_option %></div>
+  <% if @shipping_request.m_shipping_request 
+      sr_name = @shipping_request.m_shipping_request.name
+    else
+      sr_name = ""
+    end
+  %>
+    
+  
+  <div class="ui-filterable">
+    <label for="m_shipping_request_input"> Tipo de Trabajo: </label>          
+    <input id="m_shipping_request_input" data-type="search" placeholder="Tipo de Trabajo..." autocomplete="off" value="<%= sr_name %>">
+    
+    <%= f.hidden_field :m_shipping_request_id %>           
+             
+    <ul id="m_shipping_request_list" data-role="listview" data-inset="true" data-filter="true" data-input="#m_shipping_request_input"></ul>
+  </div>
+  
+      
+  <label for="service_select"> Servicio: </label>                  
+  <%= f.collection_select :service_id,  Service.all, :id, :description, include_blank: true %>     
+
+  <%= f.label :trip_id %>
+  <%= f.collection_select :trip_id, Trip.all,  :id, :description, include_blank: true  %> 
+
+
+  <%= f.label :cargo_type_id %>
+  <%= f.collection_select :cargo_type_id, CargoType.all,  :id, :description, include_blank: true  %> 
+
+
+  <%= f.label :cargo_quantity %>
+  <%= f.text_field :cargo_quantity, size: 8, maxlength: 9 %> 
+
+
+  <%= f.label :measure_unit_id %>
+  <%= f.collection_select :measure_unit_id, MeasureUnit.all,  :id, :symbol, include_blank: true  %>
   
   
+  <%= f.label :schedule %>
+  <%= f.select :schedule, [['1 - Primera Hora', 1],['2 - Mañana', 2],['3 - Media Tarde', 3],['4 - Ultima Hora', 4],['5 - Sin Especificar', 5]]  %> 
+
+  
+  <!-- Hace un submit del form shipping_request, invoca  shipping_requests_controller.create -->
+  <input type="Submit" value="Guardar" data-role="none" >  
+  
+ 
+<% end %> <!-- form -->
+ 
+ 
+<%= render 'form_script' %>

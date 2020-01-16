@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
 	end
 	
 	def create
-	  @customer = Customer.new(params[:customer])
+	  @customer = Customer.new(obj_params)
 
 	  if @customer.save
 		redirect_to @customer
@@ -38,12 +38,30 @@ class CustomersController < ApplicationController
 	def destroy
 	  @customer = Customer.find(params[:id])
 	  @customer.destroy
+	  
+	  @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to customers_path }
+      format.js { render "/common/action_result.js" }
+    end
+	  
+	end
 	 
-	  redirect_to customers_path
-	end
-	
 	def customers_ac
-		@customers  = Customer.find(:all,:conditions => ['name iLIKE ?', "%#{params[:term]}%"])
+	  
+		@customers  = Customer.where("name iLIKE ? ", "%" + params[:term] + "%")
+		
+		 respond_to do |format|
+        format.js
+    end
 	end
 	
+  private
+
+  def obj_params
+    params.require(:customer).permit(:name, :rut)
+  end
 end

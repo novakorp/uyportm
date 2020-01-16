@@ -13,7 +13,7 @@ class DailyShippingRequestsController < ApplicationController
 			
 		end
 		
-		@shipping_requests = ShippingRequest.where(required_shipment_date: @listing_date)
+		@shipments = Shipment.where("departure_time >=? and departure_time <? ",@listing_date,@listing_date+1)
 	end
 
 end

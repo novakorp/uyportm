@@ -4,9 +4,24 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hola <%= @user.name %></h1>
-    <p>
-      Este es un correo enviado por el sistema.
-    </p>
+    <h2>Vencimientos de SUCTA</h2>
+    
+    <% if @sucta_vencidos.length > 0 %>
+   	
+    	<h4>Ya Vencidos</h4>    
+	    <% @sucta_vencidos.each do |alert| %>
+	    	<%= alert['texto'] %> <br>
+	  	<% end %>
+   		<br>
+    <% end %>
+    
+    <% if @sucta_a_vencer.length > 0 %>
+    	<h4>Por Vencer</h4>    
+	    <% @sucta_a_vencer.each do |alert| %>
+	    	<%= alert['texto'] %> <br>
+	  	<% end %>
+    	<br>
+    <% end %>
+    
   </body>
 </html>

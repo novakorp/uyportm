@@ -1,0 +1,46 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Kilometraje Vehículos" } do %> 
+
+  <div role="main" class="ui-content">  
+
+	 <%= link_to 'Volver', "/welcome/configuration" %>
+
+	Total Vehículos: <%= @data.length %> <br />
+
+	<table cellpadding=3 cellspacing=5>
+		<tr>
+			<td>id vehiculo</td>
+			<td>ident numerico GPS</td>
+			<td>patente GPS</td>		
+			<td>ident descriptivo GPS</td>		
+			<td>fecha</td>
+			<td>odometro parcial</td>
+			<td>odometro total</td>
+			<td>KMs</td>
+		</tr>
+	
+		<% @data.each do |data| %>
+		<tr>
+			 <td><%=  data.vehicle_id %> </td>
+			 <td><%=  data.gps_numeric_ident %> </td>
+			 <td><%=  data.gps_plate_number %> </td>
+			 <td><%=  data.gps_descriptive_ident %> </td>
+	    	 <td><%=  data.gps_datetime  %> </td>
+	      	 <td><%=  data.gps_partial_read  %> </td>
+	      	 <td><%=  data.gps_total_read  %> </td>
+	      	 <td><%=  data.difference  %> </td>
+		</tr>	
+	
+		<% end %>
+		
+	</table>
+
+	 <%= @msgs %>
+
+	<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+
+  </div> <!-- /content --> 
+  
+<% end %>
+	 

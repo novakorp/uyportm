@@ -1,11 +1,6 @@
-
-
 class ShipmentsController < ApplicationController
-
-  
  
 	def new
-    @back_option=get_back_option
   
 		@shipping_request = ShippingRequest.find(params[:id])
 		@shipment = Shipment.new
@@ -15,9 +10,8 @@ class ShipmentsController < ApplicationController
 	end
 	
 	def create
-    @back_option=get_back_option
     
-	  @shipment = Shipment.new(params[:shipment])
+	  @shipment = Shipment.new(obj_params)
 
 	  if @shipment.save
 	    supplies = (params[:supplies])
@@ -54,7 +48,6 @@ class ShipmentsController < ApplicationController
 	end
 
 	def show
-    @back_option=get_back_option
   
 	  @shipment = Shipment.find(params[:id])
     @shipping_request = @shipment.shipping_request;
@@ -67,6 +60,8 @@ class ShipmentsController < ApplicationController
 	def index
 	  @shipments = Shipment.all
 	end
+  
+ 
   
 	def pending
   
@@ -97,7 +92,6 @@ class ShipmentsController < ApplicationController
 	end
 
 	def edit
-    @back_option=get_back_option
     
 	  @shipment = Shipment.find(params[:id])
     @shipping_request=@shipment.shipping_request   
@@ -120,7 +114,6 @@ class ShipmentsController < ApplicationController
   end
   
 	def update
-    @back_option=get_back_option
     
 	  @shipment = Shipment.find(params[:id])
 	 
@@ -165,8 +158,9 @@ class ShipmentsController < ApplicationController
         end
       end  
     
-    redirect_to @back_option
+     
 	 else
+	   
 		render 'edit'
 	 end
 	end
@@ -175,7 +169,14 @@ class ShipmentsController < ApplicationController
 	  @shipment = Shipment.find(params[:id])
     @shipment.destroy
 	 
-	  redirect_to get_back_option
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to shipments_path }
+      format.js { render "/common/action_result.js" }
+    end 
 	end
   
   
@@ -208,6 +209,40 @@ class ShipmentsController < ApplicationController
       format.html
 	  end
 	end
+	
+	
+	
+  def planning
+    if params[:date_select]
+    
+      @date_select = params[:date_select]
+      @listing_date = Date.strptime(params[:date_select], '%d-%m-%Y')
+      
+    else
+    
+      @listing_date = Date.today
+      @date_select = @listing_date.strftime("%d-%m-%Y")
+      
+    end
+    
+    @shipments = []
+    
+    if @listing_date >= Date.today
+    
+      @vehicles = Vehicle.where("type_group in [1,5]")
+      @shipments = Shipment.where("departure_time >=? and departure_time <? ", @listing_date, @listing_date+1)
+      
+    end
+    
+    
+    
+  end
+
+  private
+
+  def obj_params
+    params.require(:shipment).permit(:shipping_request_id, :departure_time, :arrival_time, :status, :vehicle_id, :coupled_vehicle_id, :driver_id, :comments )
+  end
     
 end
 

@@ -1,6 +1,17 @@
-﻿<h1>Modificar Nota de Pedido</h1>
- 
-<%= render 'form' %>
 
-<div class="links_form"><%= link_to 'Atrás', @back_option %></div>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title =>  "Editar Nota de Pedido" } do %> 
+           
+ 
+  <div role="main" class="ui-content">    
+
+	<%= render 'form' %>
+
+  	<div class="links_form"><%= link_to 'Salir', customer_shipping_orders_path   %></div>
+
+
+  </div> <!-- /content -->
+  
+
+<% end %>
   

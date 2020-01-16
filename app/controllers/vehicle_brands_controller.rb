@@ -4,12 +4,12 @@ class VehicleBrandsController < ApplicationController
 	end
 	
 	def create
-	  @vehicle_brand = VehicleBrand.new(params[:vehicle_brand])
+	  @vehicle_brand = VehicleBrand.new(obj_params)
 
 	  if @vehicle_brand.save
-		redirect_to @vehicle_brand
+		  redirect_to @vehicle_brand
 	  else
-		render 'new'
+	   	render 'new'
 	  end
 	end
 
@@ -39,7 +39,19 @@ class VehicleBrandsController < ApplicationController
 	  @vehicle_brand = VehicleBrand.find(params[:id])
 	  @vehicle_brand.destroy
 	 
-	  redirect_to vehicle_brands_path
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to vehicle_brands_path }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 	
+  private
+
+  def obj_params
+    params.require(:vehicle_brand).permit(:name, :abbreviation, :country_of_origin)
+  end
 end

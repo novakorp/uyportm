@@ -1,0 +1,45 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Actualizar Posiciones de Vehículos" } do %> 
+
+  <div role="main" class="ui-content"> 
+
+
+
+	 <%= link_to 'Volver', "/welcome/configuration" %>
+
+	Total Vehículos: <%= @vehicles.length %> <br />
+
+	<table cellpadding=3 cellspacing=5>
+		<tr>
+      <td>id</td>
+			<td>movil id</td>
+			<td>patente</td>		
+			<td>identificador</td>
+			<td>Id Vehiculo</td>
+		</tr>
+	
+		<% @vehicles.each do |data| %>
+		<tr>
+		
+         <td><%=  data.id  %> </td> 
+         <td><%=  data.gps_numeric_ident  %> </td> 
+	    	 <td><%=  data.gps_plate_number  %> </td>
+	    	 <td><%=  data.gps_descriptive_ident %> </td> 	 
+			 <td><%=  data.vehicle_id %> </td>
+	      	
+		</tr>	
+	
+		<% end %>
+		
+	</table>
+
+	 <%= @msgs %>
+
+	<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+	 
+ 
+
+  </div> <!-- /content --> 
+  
+<% end %>

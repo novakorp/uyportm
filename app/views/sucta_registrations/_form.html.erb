@@ -1,5 +1,5 @@
 ﻿  
-<%= form_for ([@vehicle, @sucta_registration])  do |f| %>
+<%= form_for (@form_objs) do |f| %>
  <% if @sucta_registration.errors.any? %>
   <div id="error_explanation" class="form_errors">
   <h2> <%= t :error_header %> </h2>
@@ -19,7 +19,7 @@
   </tr>
   <tr>
   <th>Vehículo:</th>  
-	<td>  <%=  @sucta_registration.vehicle.brand %> - <%= @sucta_registration.vehicle.number_plate %> </td>
+	<td>  <%=  @sucta_registration.vehicle.vehicle_brand.abbreviation %> - <%= @sucta_registration.vehicle.plate_number %> </td>
   </tr>
    <tr>
   <th><%= f.label :expiration %></th>

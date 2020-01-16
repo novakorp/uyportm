@@ -1,6 +1,6 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
+ 
 es:
   activerecord:
     models:
@@ -23,3 +23,8 @@ es:
         order_datetime: Fecha Pedido
         shipping_date: Fecha Trabajo
         comments: Comentarios
+        cargo_type_id: Tipo de Carga
+        cargo_quantity: Cantidad
+        measure_unit_id: Unidad
+        schedule: Turno
+        

@@ -10,6 +10,7 @@ es:
     attributes:
       vehicle_type:
         description: "Descripción"
+        type_group: "Grupo"
         coupling_support: "Es Acoplado"
         couples_to_type_id: "Se Acopla a" 
   

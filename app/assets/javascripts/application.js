@@ -10,19 +10,8 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require_tree ./jquery-1.11.1 
+//= require_tree ./jquery_mobile-1.4.5  
 //= require_tree .
-//= require jquery_ujs
-
-jQuery.ajaxSetup({
-  'beforeSend': function(xhr) { xhr.setRequestHeader("Accept", "text/javascript") }
-});
-
-$.fn.subSelectWithAjax = function(url_action, elem_id) {
-  var that = this;
-   
-  this.change(function() {
-    $.post(url_action, {id: that.val(), element_id: elem_id}, null , "script");
-  });
-}
 
 

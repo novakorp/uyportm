@@ -1,5 +1,5 @@
 ﻿  
-<%= form_for ([@m_requested_cargo, @m_requested_delivery])  do |f| %>
+<%= form_for (@form_objects)  do |f| %>
  <% if @m_requested_delivery.errors.any? %>
   <div id="error_explanation" class="form_errors">
   <h2> <%= t :error_header %> </h2>

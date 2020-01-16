@@ -1,34 +1,38 @@
 class ShippingRequestsController < ApplicationController
-	def new
-    
-    # variable con la ruta que debe usar la accion "volver" del formulario
-    @back_option=get_back_option
-    
-		@shipping_request = ShippingRequest.new
+	def new    
+	    
+	 @customer_shipping_order  = CustomerShippingOrder.find(params[:customer_shipping_order_id])
+	 @shipping_request = @customer_shipping_order.shipping_requests.build 
+	
+	# @shipping_request = ShippingRequest.new	 
+	# @shipping_request.customer_shipping_order_id = params[:customer_shipping_order_id]
+		
 	end
 	
 	def create
-	  @shipping_request = ShippingRequest.new(params[:shipping_request])
-    @shipping_request.customer_shipping_order_id = params[:customer_shipping_order_id]
+	  
+	  puts params.to_s
+	  puts "*************  CUSTOMER SH ORDER ID = " + params[:customer_shipping_order_id]  + "  *****************"
+	  
+	  @customer_shipping_order = CustomerShippingOrder.find(params[:customer_shipping_order_id])
+	  @shipping_request = @customer_shipping_order.shipping_requests.create(obj_params)
+	  
+    #@shipping_request.customer_shipping_order_id = params[:customer_shipping_order_id]
+        
+
+
+    puts "**************  SAVE SR **********************"  
     
-    msr = MShippingRequest.find(@shipping_request.m_shipping_request)
-    @shipping_request.service_id = msr.service_id
-    @shipping_request.trip_id = msr.trip_id
+	  @shipping_request.save
     
-    
-    @back_option=get_back_option
-    
-	  if @shipping_request.save
-      redirect_to @shipping_request
-	  else
-      render 'new'
-	  end
+    puts "**************  REDIRECT TO CSO  2 **********************"  
+	  #  redirect_to @shipping_request.customer_shipping_order
+	  
+	  redirect_to :controller => :customer_shipping_orders, :action => :show, :id => @shipping_request.customer_shipping_order_id.to_s
+	  
 	end
 
 	def show  
-    
-    # variable con la ruta que debe usar la accion "volver" del formulario
-    @back_option=get_back_option
   
 	  @shipping_request = ShippingRequest.find(params[:id])
 	end
@@ -37,19 +41,17 @@ class ShippingRequestsController < ApplicationController
 	  @shipping_requests = ShippingRequest.all
 	end
 
-	def edit
-    # variable con la ruta que debe usar la accion "volver" del formulario
-    @back_option=get_back_option
-    
-	  @shipping_request = ShippingRequest.find(params[:id])    
+	def edit    
+	  
+	  @shipping_request = ShippingRequest.find(params[:id])
+	  @customer_shipping_order = @shipping_request.customer_shipping_order    
 	end
-
+ 
 	def update
 	  @shipping_request = ShippingRequest.find(params[:id])
-	 
-   @back_option=get_back_option
+	  
    
-	 if @shipping_request.update_attributes(params[:shipping_request].permit(:m_shipping_request_id, :service_id, :trip_id, :trip_quantity, :cargo_type_id, :cargo_quantity, :measure_unit_id))
+	 if @shipping_request.update_attributes(params[:shipping_request].permit(:m_shipping_request_id, :service_id, :trip_id, :trip_quantity, :cargo_type_id, :cargo_quantity, :measure_unit_id, :schedule))
       
       redirect_to @shipping_request
       
@@ -59,28 +61,32 @@ class ShippingRequestsController < ApplicationController
 	end
 
 	def destroy
+	  
+	  puts "----------- DESTROY SR -----------"
+	  
 	  @shipping_request = ShippingRequest.find(params[:id])
+	  
+	  @cso = @shipping_request.customer_shipping_order
 	  @shipping_request.destroy
-	 
-    # variable con la ruta que debe usar la accion "volver" del formulario
-    @back_option=get_back_option
+	  
     
-	  redirect_to @back_option
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+    
+	  
+    respond_to do |format|
+      format.html { redirect_to shipping_requests_path }
+      format.js { render "/common/action_result.js" }
+    end
     
 	end
   
   	 
-  
-  # Devuelve el valor asignado en la variable de sesion :back_option, que indica donde se debe ir con la accion Volver.
-  def get_back_option
-    b_opt = session[:back_option]
-
-    if b_opt == nil
-      b_opt= customer_shipping_orders_path + "/pending_requests"
-    end
-    
-    return b_opt
-  end
+   
   
 	
+  def obj_params
+    params.require(:shipping_request).permit(:m_shipping_request_id, :service_id, :trip_id, :trip_quantity, :cargo_type_id, :cargo_quantity, :measure_unit_id, :schedule)
+  end
 end

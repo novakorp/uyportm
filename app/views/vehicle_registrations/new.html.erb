@@ -1,5 +1,17 @@
-﻿<h1> Ingresar Registro MTOP </h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Ingresar Registro MTOP" } do %> 
   
-<%= render 'form' %>
+  <div role="main" class="ui-content">    
   
-<div class="links_form"><%= link_to 'Atrás', vehicle_path(@vehicle) %></div>
+  
+    <% @form_objects = [@vehicle, @vehicle_registration] %>
+    
+    <%= render 'form' %>
+
+    <div class="links_form"><%= link_to 'Salir', vehicle_path(@vehicle)%></div>  
+
+  </div> <!-- /content -->
+  
+
+<% end %> 

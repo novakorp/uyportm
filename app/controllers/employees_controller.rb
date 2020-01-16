@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
 	end
 	
 	def create
-	  @employee = Employee.new(params[:employee])
+	  @employee = Employee.new(obj_params)
 
 	  if @employee.save
 		redirect_to @employee
@@ -28,7 +28,7 @@ class EmployeesController < ApplicationController
 	def update
 	  @employee = Employee.find(params[:id])
 	 
-	 if @employee.update_attributes(params[:employee].permit(:first_name, :last_name, :personal_id, :personal_id_type))
+	 if @employee.update_attributes(params[:employee].permit(:company_id, :first_name, :last_name, :personal_id, :personal_id_type, :job_type))
 		redirect_to @employee
 	 else
 		render 'edit'
@@ -38,8 +38,20 @@ class EmployeesController < ApplicationController
 	def destroy
 	  @employee = Employee.find(params[:id])
 	  @employee.destroy
-	 
-	  redirect_to employees_path
+   
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to employees_path }
+      format.js { render "/common/action_result.js" }
+    end 
 	end
 	
+  private
+
+  def obj_params
+    params.require(:employee).permit(:company_id, :first_name, :last_name, :personal_id, :personal_id_type, :job_type)
+  end
 end

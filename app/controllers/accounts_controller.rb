@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
 	end
 	
 	def create
-	  @account = Account.new(params[:account])
+	  @account = Account.new(obj_params)
 
 	  if @account.save
 		redirect_to @account
@@ -37,18 +37,33 @@ class AccountsController < ApplicationController
 
 	def destroy
 	  @account = Account.find(params[:id])
-	  @account.destroy
-	 
-	  redirect_to accounts_path
+	  @account.destroy 
+ 
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to accounts_path }
+      format.js { render "/common/action_result.js" }
+    end 
 	end
 	
 	def accounts_by_customer_id
 	  if params[:id].present?
-		@accounts = Customer.find(params[:id]).accounts
-		@element_id = params[:element_id]
+		  @accounts = Customer.find(params[:id]).accounts
+		  @element_id = params[:element_id]
 	  else
-		@accounts = []
+		  @accounts = []
 	  end
+
+
 	end
+  
+  private
+
+  def obj_params
+    params.require(:account).permit(:description, :account_number, :customer_id)
+  end
 
 end

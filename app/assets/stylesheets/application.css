@@ -9,9 +9,6 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
- *
- *= require_tree ./jquery_ui 
- *
- *
+ *= require_tree . 
+ *= require_tree ./jquery_mobile-1.4.5 
  */

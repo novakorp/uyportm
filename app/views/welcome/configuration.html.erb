@@ -1,58 +1,71 @@
-﻿<style>
-	Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
-</style>
+﻿
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Configuración" } do %>
+                  
+  
+  <div role="main" class="ui-content">    
 
-<% @top_menu_selection="Configuracion" %>
-<%= render '/common/top_menu' %>
+    <style>
+      Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
+    </style>
 
-<table class="tabla_mantenimiento" cellpadding=0 cellspacing=0>
-<tr><th>Flota</th><th>Negocio</th><th>Datos Geográficos</th></tr>
-<tr>
-<td>
-	<%= link_to "Vehículos", controller: "vehicles" %><br>
-	<%= link_to "Tipos de Vehículos", controller: "vehicle_types" %><br>
-	<%= link_to "Marcas", controller: "vehicle_brands" %><br>
-	<%= link_to "Actualizar Datos GPS", controller: "vehicles", action: "update_vehicles_gps_data"%><br>
-</td>
-<td>
-	<%= link_to "Servicios", controller: "services" %> <br>	 
-	<%= link_to "Clientes", controller: "customers" %> <br>
-	<%= link_to "Cuentas", controller: "accounts" %>  
-</td>
-<td>
-	<%= link_to "Ubicaciones", controller: "locations" %> <br>
-	<%= link_to "Recorridos", controller: "trips" %> <br>
-	<%= link_to "Departamentos", controller: "states" %>
-</td>
-</tr>
-<tr><th>Empresas</th><th>Unidades</th><th>Cargas</th></tr>
-<td> 
-	<%= link_to "Empresas", controller: "companies" %> <br> 
-	<%= link_to "Empleados", controller: "employees" %>
-</td>  
-<td>
-	<%= link_to "Unidades de Facturación", controller: "billing_units" %> <br>
-	<%= link_to "Unidades de Medida", controller: "measure_units" %>
-</td>
-<td>
-	<%= link_to "Tipos de Carga", controller: "cargo_types" %> <br>
-	<%= link_to "Categorias de Carga", controller: "cargo_categories" %>
-</td>
 
-</tr>
-<tr><th>Modelos</th><th>Usuarios</th><th>Tipos de Documento</th></tr>
-<td> 
-	<%= link_to "Modelos de Pedidos", controller: "m_shipping_requests" %> <br> 
-</td>  
-<td>
-	<%= link_to "Usuarios", controller: "users" %> <br> 
-</td>
-<td>
-	<%= link_to "Tipos de Documento", controller: "document_types" %> <br> 
-</td>
-</tr>
-</table>
-<br>
-<br>
+    <table class="tabla_mantenimiento" cellpadding=0 cellspacing=0>
+    <tr><th>Flota</th><th>Negocio</th><th>Datos Geográficos</th></tr>
+    <tr>
+    <td>
+      <%= link_to "Vehículos", controller: "vehicles" %><br>
+      <%= link_to "Tipos de Vehículos", controller: "vehicle_types" %><br>
+      <%= link_to "Marcas", controller: "vehicle_brands" %><br>
+    </td>
+    <td>
+      <%= link_to "Servicios", controller: "services" %> <br>	 
+      <%= link_to "Clientes", controller: "customers" %> <br>
+      <%= link_to "Cuentas", controller: "accounts" %>  
+    </td>
+    <td>
+      <%= link_to "GPS", controller: "gps" %> <br>
+      <%= link_to "Ubicaciones", controller: "locations" %> <br>
+      <%= link_to "Recorridos", controller: "trips" %> <br>
+      <%= link_to "Departamentos", controller: "states" %>
+    </td>
+    </tr>
+    <tr><th>Empresas</th><th>Unidades</th><th>Cargas</th></tr>
+    <td> 
+      <%= link_to "Empresas", controller: "companies" %> <br> 
+      <%= link_to "Empleados", controller: "employees" %>
+    </td>  
+    <td>
+      <%= link_to "Unidades de Facturación", controller: "billing_units" %> <br>
+      <%= link_to "Unidades de Medida", controller: "measure_units" %>
+    </td>
+    <td>
+
+      <%= link_to "Tipos de Retorno", controller: "return_types" %> <br>
+      <%= link_to "Tipos de Carga", controller: "cargo_types" %> <br>
+      <%= link_to "Categorias de Carga", controller: "cargo_categories" %>
+    </td>
+
+    </tr>
+    <tr><th>Modelos</th><th>Usuarios</th><th>Tipos de Documento</th></tr>
+    <td> 
+      <%= link_to "Modelos de Pedidos", controller: "m_shipping_requests" %> <br> 
+    </td>  
+    <td>
+      <%= link_to "Usuarios", controller: "users" %> <br> 
+    </td>
+    <td>
+      <%= link_to "Tipos de Documento", controller: "document_types" %> <br> 
+    </td>
+    </tr>
+    </table>
+    <br>
+    <br>
+
+
+  </div> <!-- /content -->
+  
+
+<% end %>
 
 

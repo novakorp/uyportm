@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gps_vehicle_id: MyString
+  gps_plate_number: MyString
+  gps_identifier: MyString
+  retirement_date: 2016-07-27 01:05:42
+  retirement_reason: 1
+
+two:
+  gps_vehicle_id: MyString
+  gps_plate_number: MyString
+  gps_identifier: MyString
+  retirement_date: 2016-07-27 01:05:42
+  retirement_reason: 1

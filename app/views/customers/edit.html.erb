@@ -1,6 +1,13 @@
-﻿<h1>Modificar Cliente</h1>
+﻿
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => ">Modificar Cliente" } do %>
+                  
+  <div role="main" class="ui-content">     
  
-<%= render 'form' %>
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', customers_path %></div>
+	   
+  </div> <!-- /content -->  
   
-<div class="links_form"><%= link_to 'Atrás', customers_path %></div>
-  
+<% end %>

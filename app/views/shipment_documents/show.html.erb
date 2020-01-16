@@ -1,4 +1,8 @@
-﻿<H1> Documento de Viaje </H1>
+﻿
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Documento de Viaje" } do %>
+   
+  <div role="main" class="ui-content">   
 
 
 <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
@@ -25,5 +29,11 @@
 	<td> <%= @shipment_document.comments %> </td>
   </tr>
 </table>
-<div class="links_form"><%= link_to 'Atrás', shipments_path(@shipment) %></div>
+
+
+
+    <div class="links_form"><%= link_to 'Salir', shipments_path(@shipment), {"data-ajax"=>"false"}%></div> 
+
+  </div> <!-- /content --> 
+<% end %>
   

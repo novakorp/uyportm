@@ -1,5 +1,5 @@
 ﻿  
-<%= form_for ([@vehicle, @vehicle_registration])  do |f| %>
+<%= form_for (@form_objects)  do |f| %>
  <% if @vehicle_registration.errors.any? %>
    <div id="error_explanation" class="form_errors">
   <h2> <%= t :error_header %> </h2>
@@ -12,12 +12,36 @@
   <% end %>
   
   
+  <% @vehic = @vehicle_registration.vehicle %> 
+  
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <% if @vehic %>
   <tr>
-   
-  <th><%= f.label :chassis %></th> 
-	<td> <%=  f.text_field :chassis %> </td>
+  <th>Empresa</th> 
+	<td> <%= @vehic.company.company_name %> </td>
   </tr>
+  <tr>
+    <th>Marca:</th>
+    <td>  <%= 
+        if @vehic.vehicle_brand != nil
+            @vehic.vehicle_brand.name
+        end  %>
+    </td>
+   </tr>
+   <tr>
+    <th>Modelo:</th>
+    <td> <%= @vehic.model %></td>
+   </tr>
+   <tr>
+    <th>Matrícula:</th>
+    <td> <%= @vehic.plate_number %></td>
+   </tr>
+ <% end %>
+ 
+ <tr>
+   <th><%= f.label :chassis %></th> 
+	<td> <%=  f.text_field :chassis %> </td>
+   </tr>
   
   <th><%= f.label :engine %></th>  
 	<td> <%=  f.text_field :engine %> </td>

@@ -1,11 +1,24 @@
-﻿<H1> Categroía de Carga </H1>
+﻿ 
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Categoría de Carga" } do %>
+                 
+    
+  <div role="main" class="ui-content">     
+    
+    <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+      <tr>
+      <th>Descripción:</th>
+      <td><%= @cargo_category.description %></td>
+      </tr>
+    </table>
 
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>Descripción:</th>
-  <td><%= @cargo_category.description %></td>
-  </tr>
-   
+    <div class="links_form"><%= link_to 'Salir', cargo_categories_path, {"data-ajax"=>"false"}%></div>
 
-<div class="links_form"><%= link_to 'Atrás', cargo_categories_path %></div>
+
+  </div><!-- /content -->
+  
+  
+<% end %>
+
+ 

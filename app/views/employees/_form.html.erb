@@ -40,6 +40,11 @@
   <td><%= f.text_field :personal_id_type %></td>
   </tr>
   
+    <tr>
+    <th><%= f.label :job_type %></th>
+    <td> <%= f.select  :job_type, [['', 0], ['Gerente', 1], ['Encargado', 2], ['Chofer', 3], ['Administrativo', 4]] %>  </td>
+  </tr>    
+  
   <tr><td colspan=2 class="acciones_form">
   <%= f.submit t(:save) %>
   </td>

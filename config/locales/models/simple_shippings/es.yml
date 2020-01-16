@@ -1,0 +1,25 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      simple_shipping:
+        one: "Reporte de Viaje"
+        other: "Reportes de Viaje"
+    attributes:
+      simple_shipping:
+        shipping_date: "Fecha"
+        m_shipping_request_id: "Tipo de Trabajo"
+        vehicle_id: "Vehículo"
+        coupled_vehicle_id: "Acoplado"
+        driver_id: "Chofer"
+        company_id: "Empresa"
+        amount: "Q"
+        billing_unit_id: "Unidad"
+        unit_price: "Precio Unit"
+        documents: "Documentos"
+        return_type_id: "Fecha"
+        comments: "Observaciones"
+        invoice_number: "Nro Factura"
+        

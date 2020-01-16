@@ -1,5 +1,13 @@
-﻿<h1>Ingresar Datos de Carga de Modelo de Viaje</h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Modelo de Carga de Pedido" } do %>
+         
+  <div role="main" class="ui-content"> ﻿ 
   
-<%= render 'form' %> 
-  
-<div class="links_form"><%= link_to 'Atrás', m_shipping_request_path(@m_shipping_request) %></div>
+    <%= render 'form' %> 
+      
+    <div class="links_form"><%= link_to 'Salir', m_shipping_request_path(@m_shipping_request) %></div> 
+
+  </div> <!-- /content --> 
+
+<% end %>

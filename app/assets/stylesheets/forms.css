@@ -1,32 +1,48 @@
 .form_errors {
-	border-style: solid;
-	border-width: 2px;
-	border-color: #FF7C7C;
-	background-color: #FFF4F4;
-	padding: 8px;
-	margin-bottom:10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #FF7C7C;
+  background-color: #FFF4F4;
+  padding: 8px;
+  margin-bottom:10px;
 }
 
 .form_errors LI {
-	color: #FF4242;
-	/*font-weight: bold;*/
-	font-size: 8pt;
-	margin-top:2px;
+  color: #FF4242;
+  /*font-weight: bold;*/
+  font-size: 8pt;
+  margin-top:2px;
 }
 
+
+/* Tabla para formularios */
+@media ( min-width: 600px ) {
+  .ui-custom-field-cont  {
+    width: 75%
+  }
+}
+
+@media ( min-width: 800px ) {
+  .ui-custom-field-cont  {
+    width: 65%
+  }
+}
+
+
 .tabla_campos TH, .tabla_campos_lectura  TH{
-	width: 130px;
-	padding: 7px 5px 7px 7px;
-	font-size: 8pt;
-	text-align: right;
-	color: #909090;
-	border-style: solid;
-	border-width: 0px 0px 0px 0px;
-	border-color: #A0A0A0;
+  width: 130px;
+  padding: 7px 5px 7px 7px;
+  font-size: 10pt;
+  text-align: left;
+  color: #707070;
+  font-weight: normal;
+  border-width: 0px 0px 0px 0px;
+  border-color: #A0A0A0;
 }
 
 .tabla_campos  TD, .tabla_campos_lectura TD  {
-	padding: 7px 5px 7px 7px;
+  font-size: 10pt;
+  padding: 7px 5px 7px 7px;
 }
  
 
@@ -34,12 +50,9 @@
 }
 
 .tabla_campos_lectura {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.tabla_campos_lectura TD  {
-	font-weight: bold;
-}
 
 .tabla_grilla_edicion {
  /* margin-top: 3px;
@@ -48,7 +61,7 @@
 
 .tabla_grilla_edicion_header { 
     background-color: #4BC438;  
-/*	color: #FBFBFB; */
+/*  color: #FBFBFB; */
 }
 
 .tabla_grilla_edicion TH, .tabla_grilla_edicion  TD {
@@ -56,23 +69,23 @@
 }
 
 .tabla_grilla_edicion  TD {
-  	font-size: 9pt;
+    font-size: 9pt;
   padding: 2px 0px 2px 1px; 
  }
   
 .tabla_grilla_edicion TH {
-	color: #FBFBFB;
+  color: #FBFBFB;
   text-align:center;
-	font-size: 8pt;
+  font-size: 8pt;
   padding: 3px; 
  }
  
 
-.tabla_grilla_edicion TD {	
-	border-style: none;
-	border-color: #C0C0C0;
-	border-width: 0px 0px 1px 0px;	
-  font-weight: regular;
+.tabla_grilla_edicion TD {  
+  border-style: none;
+  border-color: #C0C0C0;
+  border-width: 0px 0px 1px 0px;  
+  font-weight: normal;
 }
 
 .tabla_grilla_edicion_fila_sep {
@@ -81,13 +94,13 @@
 }
 
 TD.acciones_form  {
-	padding-top: 20px;
-	padding-left: 0px;
-	padding-bottom: 15px;
+  padding-top: 20px;
+  padding-left: 0px;
+  padding-bottom: 15px;
 }
 
 .links_form {
-	padding-left: 5px;
+  padding-left: 5px;
 }
 
 .campo_fecha_hora {
@@ -98,3 +111,70 @@ TD.acciones_form  {
     height: 100px;
     width: 420px;
 }
+
+.campo_comentarios_flat {
+    height: 40px;
+    width: 600px;
+}
+
+
+
+
+ 
+.tabla_form_integrado TH, .tabla_form_integrado_lectura  TH{   
+  padding: 3px 3px 3px 12px;
+  font-size: 9pt;
+  text-align: right;
+  color: #505050;
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #A0A0A0;
+  font-weight: normal;
+}
+
+.tabla_form_integrado  TD, .tabla_form_integrado_lectura TD  {
+  padding: 5px;
+}
+ 
+
+.tabla_form_integrado TH, .tabla_form_integrado_lectura TH{
+}
+
+.tabla_form_integrado_lectura {
+  margin-bottom: 6px;
+}
+
+.tabla_form_integrado_lectura TD  {
+  font-weight: bold;
+}
+ 
+
+.tabla_detalle_form_integrado { 
+  border-style: solid;
+  border-width: 0px ;
+  border-color: #E0E0E0; 
+  padding: 5px;
+  margin: 2px 0px 2px 0px;
+}
+
+.tabla_detalle_form_integrado TH {
+  padding: 3px 5px 3px 5px;
+  font-size: 9pt;
+  text-align: center;
+  color: #505050;
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #707070; 
+  font-weight: normal;
+}
+
+.tabla_detalle_form_integrado  TD {
+  padding: 3px 5px 3px 5px;
+  font-size: 9pt;
+}
+
+.accion_tabla_detalle {
+  font-weight:normal;
+  margin-bottom:2px;
+}
+

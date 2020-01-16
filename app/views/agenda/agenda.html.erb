@@ -1,0 +1,270 @@
+﻿ 
+
+<%= form_tag({}, {"data-ajax" => "false"}) do %>
+          <div class="ui-field-contain"> 
+            <%= text_field_tag :agenda_date_select, @agenda_date_select %> 
+            <%= submit_tag("Ver") %>   
+          </div>
+          <div>
+          <% if @agenda_date.prev_day == Date.today %>
+            Mostrando Pedidos para el día de MAÑANA 
+          <% end %>
+          <% if @agenda_date == Date.today %>
+            Mostrando Pedidos para el día de HOY 
+          <% end %>
+          <% if @agenda_date.next_day == Date.today %>
+            Mostrando Pedidos para el día de AYER 
+          <% end %>
+          </div>
+ 
+
+<% end %>    <!-- Form --> 
+  
+<div class="ui-grid-a">
+    <div class="ui-block-a"><div class="ui-bar ui-bar-a ui-filterable">
+       
+      <input id="agenda-vehicles-filter-input" data-type="search" placeholder="" autocomplete="off">
+       
+      <ul data-role="listview" data-inset="true" data-filter="true" data-input="#agenda-vehicles-filter-input" >                     
+                   
+          <% @vehicles.each do |vehic|  %>
+          
+            <!-- Obtener viajes asignados de la fecha -->
+            <% @assigned_shipments = vehic.shipments.joins(shipping_request: :customer_shipping_order).where(customer_shipping_orders: {shipping_date: @agenda_date}) %>
+            
+            
+            <li data-role="list-divider" > <%= vehic.plate_number %>  <span class="ui-li-count"> <%= @assigned_shipments.length %> </span></li> 
+            
+            <li>            
+            <a href="javascript:seleccion_vehiculo('<%=vehic.id.to_s%>', '<%= vehic.plate_number %>')" id='agenda_vehicle_<%= vehic.id.to_s %>' >
+            <p><strong><%= vehic.plate_number %></strong></p>
+             
+             
+             
+            <% @assigned_shipments.each do |shipment| %> 
+               
+                <p><strong><%= shipment.shipping_request.customer_shipping_order.customer.name %> - <%= shipment.shipping_request.trip.description %></strong></p>
+                <p> 
+                    <%=  shipment.shipping_request.cargo_type.description %> <%=  shipment.shipping_request.cargo_quantity %> <%=  shipment.shipping_request.measure_unit.symbol %>  
+                </p>
+                 
+                 
+                    <!-- <p class="ui-li-aside"><strong>4:48</strong>PM</p>   
+            -->
+            <% end %>
+            
+            
+            </a>
+            </li>
+         
+          <% end %>
+          
+      </ul>
+
+      Total Vehículos: <%= @vehicles.length %>
+
+    </div></div>
+    
+    <div class="ui-block-b"><div class="ui-bar ui-bar-a ui-filterable">
+      
+      
+      <input id="agenda-requests-filter-input" data-type="search" placeholder="" autocomplete="off"> 
+      
+      <ul data-role="listview" data-inset="true" data-filter="true" data-input="#agenda-requests-filter-input">                     
+          
+        <% @shipping_requests.each do |shipping_request| %>
+  
+          <li data-role="list-divider"> <%= shipping_request.customer_shipping_order.order_number %> - <span class="dato_lista_1"><%= l shipping_request.customer_shipping_order.order_datetime.to_date %> </span> <span class="ui-li-count">1</span></li>
+         
+         <li>
+          <!--  <%= link_to(shipping_request) do %> -->
+          
+              <a href="javascript:seleccion_pedido('<%=shipping_request.id.to_s%>', '<%= shipping_request.customer_shipping_order.customer.name + ' - ' + shipping_request.service.description   %>')" id='agenda_request_<%= shipping_request.id.to_s %>' >
+                            
+              <h2><%= shipping_request.customer_shipping_order.customer.name %></h2>
+              <p><strong><% if shipping_request.m_shipping_request != nil %>
+                 <%=  shipping_request.m_shipping_request.name %>
+              <%  else %>
+                  <%= t 'other' %>
+              <% end %></strong></p>
+              <p> 
+                 
+              <nobr> <%=  shipping_request.service.description %></nobr><br>
+                  <span class="dato_lista_sec"> <%=  shipping_request.trip.description %> </span>
+                       
+              <%=  shipping_request.cargo_type.description %> 
+              <%=  shipping_request.cargo_quantity %> <%=  shipping_request.measure_unit.symbol %> 
+          
+          
+              </p>
+              <p class="ui-li-aside"><strong><%= l shipping_request.customer_shipping_order.shipping_date %></strong></p>
+              
+              </a>
+            <!-- <% end %> -->  
+            <!-- fin link_to -->
+          </li> 
+        <% end %> 
+      </ul> 
+      
+       Total Pedidos: <%= @shipping_requests.length %>
+      
+    </div></div>
+</div><!-- /grid-a -->
+
+
+    
+ <a id ="agenda-btn-dlg-asignar" style="visibility:hidden" href="#dialogo-asignar-pedido" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Asignar</a>
+ 
+ 
+
+ </div> <!-- content -->   
+    
+      
+  <%= render "/common/nav_menu" %>
+  
+  <%= render "/common/footer_generic" %>
+  
+  
+</div>  <!-- Page-->
+  
+  
+  <!-- Hacer form custom y enviarlo por ajax, en el backend tiene que crear un shipment para el request -->
+  
+  <div id="dialogo-asignar-pedido" data-role="page" data-dialog="true" data-close-btn="none">
+    <div data-role="header">
+      <h2>Asignar Pedido</h2>
+    </div>
+    <div class="ui-content" role="main">
+      
+      <%= form_tag({controller: "agenda", action: "assign_request"}, method: "post") do %>
+        <p id="agenda-dlg-asignar-pedido"></p>
+        <p id="agenda-dlg-asignar-vehiculo"></p>
+        
+        <label for="agenda_driver_select" class="ui-hidden-accessible">Chofer:</label>
+        <%= select_tag :agenda_driver_select, options_from_collection_for_select(Employee.all, :id, :last_name) %>
+        <label for="agenda-dlg-asignar-acoplado" class="ui-hidden-accessible">Acoplado:</label>
+        <% types_range = 2..3 %>
+        <%= select_tag :agenda_coupled_select, options_from_collection_for_select(Vehicle.joins(:vehicle_type).where(vehicle_types: { type_group: types_range}, vehicles: {status: 1}), :id, :description) %>
+        
+        
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <a href="javascript:dlg_asignar_asignar()" id="agenda-dlg-asignar-asignar" class="ui-btn ui-btn-b ui-shadow ui-corner-all">Asignar</a>
+          </div>
+          <div class="ui-block-b">
+            <a href="#" id="agenda-dlg-asignar-cancelar" class="ui-btn ui-shadow ui-corner-all" data-rel="back" onclick="dlg_asignar_cancelar(); return true;" >Cancelar</a>
+          </div>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+  
+  
+  
+      
+<script>
+
+  var id_vehic_sel='';
+  var id_pedido_sel='';
+  var vehic_data =[];
+
+  $(function() {
+    $(document).ready(function(){ 
+      $('#agenda_date_select').date({
+        dateFormat:  "dd-mm-yy"
+      });  
+    });   
+    
+  });
+  
+  
+  
+  
+  // Seleccion de vehiculo
+  
+  function seleccion_vehiculo (id, desc) {
+    
+    if (id_vehic_sel != '' && id_vehic_sel != id) {
+      $("#agenda_vehicle_" + id_vehic_sel).removeClass ("ui-btn-active"); 
+    }
+    
+    id_vehic_sel = id;
+    desc_vehic_sel = desc; 
+ 
+    if (id_pedido_sel != '') {
+      $("#agenda_vehicle_" + id_vehic_sel).addClass ("ui-btn-active"); 
+      $("#agenda_request_" + id_pedido_sel).addClass ("ui-btn-active");
+            
+      asociar_vehic_pedido ();
+    }
+   
+  }
+  
+  function seleccion_pedido (id, desc) {
+    
+    if (id_pedido_sel != '' && id_pedido_sel != id) {
+      $("#agenda_request_" + id_pedido_sel).removeClass ("ui-btn-active"); 
+    }
+    
+    id_pedido_sel = id;
+    desc_pedido_sel = desc;
+    
+    if (id_vehic_sel != '') {
+      $("#agenda_vehicle_" + id_vehic_sel).addClass ("ui-btn-active");      
+      $("#agenda_request_" + id_pedido_sel).addClass ("ui-btn-active");
+      
+      asociar_vehic_pedido ();
+    }
+       
+       
+       
+  }
+  
+  function asociar_vehic_pedido() {
+    
+    $("#agenda-dlg-asignar-pedido").html(desc_pedido_sel );
+    $("#agenda-dlg-asignar-vehiculo").html(desc_vehic_sel );
+    
+    $("#agenda-btn-dlg-asignar").click();    
+    
+    
+  } 
+  
+  
+  function dlg_asignar_asignar () {
+    
+    token_value = $("meta[name='csrf-token']").attr("content");
+    
+    var datos = {request_id: id_pedido_sel , vehicle_id: id_vehic_sel, driver_id: $("#agenda_driver_select").val(), coupled_vehicle_id: $("#agenda_coupled_select").val() };
+    
+    
+    
+    $.ajax({       
+      url:"/agenda/assign_request",       
+      data: datos,
+      method: 'POST',
+      headers: {'X-CSRF-token': token_value },
+      dataType: 'json',
+      success: function (data, status, jqxhr ) {
+        
+        alert( data.result_code + ' ' + data.result_desc);
+       },
+       error: function (a, b, errormsg) {
+         alert (errormsg);
+       }
+    })
+    
+  }
+  
+  function dlg_asignar_cancelar () {
+    $("#agenda_request_" + id_pedido_sel).removeClass ("ui-btn-active");
+    $("#agenda_vehicle_" + id_vehic_sel).removeClass ("ui-btn-active");
+    
+    id_pedido_sel='';
+    id_vehic_sel='';
+  }
+    
+</script>
+
+

@@ -1,18 +1,18 @@
-﻿<H2>Carga de Modelo de Pedido </H2>
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>   
-  <th>Tipo de Carga:</th>  
-	<td> <%= m_requested_cargo.cargo_type.description %> </td>
-  </tr>
-  <tr>
-   <th>Cantidad:</th>  
-	<td> <%= m_requested_cargo.amount %> <%= m_requested_cargo.measure_unit.symbol %>  </td>
-  </tr>
-  
- 
+<div class="titulo_partial_modelo">Modelo de Carga de Pedido</div>
+   
+  <div role="main" class="ui-content"> 
 
-</table>
+    <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+      <tr>   
+      <th>Tipo de Carga:</th>  
+	    <td> <%= m_requested_cargo.cargo_type.description %> </td>
+      </tr>
+      <tr>
+       <th>Cantidad:</th>  
+	    <td> <%= m_requested_cargo.amount %> <%= m_requested_cargo.measure_unit.symbol %>  </td>
+      </tr>  
+    </table>
  
 
 <div class="links_form"><%= link_to 'Ingresar Indicacion de Carga', new_m_requested_cargo_m_requested_supply_path(m_requested_cargo) %></div>
@@ -22,5 +22,4 @@
 <div class="links_form"><%= link_to 'Ingresar Indicacion de Entrega', new_m_requested_cargo_m_requested_delivery_path(m_requested_cargo) %></div>
  
 <%= render m_requested_cargo.m_requested_deliveries %>
-
 

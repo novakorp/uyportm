@@ -1,45 +1,106 @@
-﻿<h1>Listado de Vehículos</h1>
 
- <%= link_to 'Nuevo Vehículo', new_vehicle_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
-<table class="tabla_listado" cellpadding=0 cellspacing=0>
-  <tr class="tabla_listado_fila_cabezal">
-	<th>Empresa</th>
-     <th>Marca</th>
-    <th>Modelo</th> 
-	<th>Matrícula</th>
-	<th>Comentarios</th>
-	<th>Id GPS</th>
-	<th>Matr GPS</th>	
-	<th>Desc GPS</th>
-    <th>Cerca de ..</th>
-	<th></th>
-  </tr>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Vehiculos" } do %> 
+
+
  
-  <% @vehicles.each do |vehicle| %>
-    <tr class="tabla_listado_fila_contenido">
-	
-       <td><%= vehicle.company.company_name %></td>
-       <td><%= 
-            if vehicle.vehicle_brand != nil
-                vehicle.vehicle_brand.abbreviation
-            end
-        %></td>
-      <td><%= vehicle.model %></td>
-      <td><%= vehicle.number_plate %></td>
-      <td><%= vehicle.comments %></td>  
+    <style>
+      Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
+    </style>
+
+
+  <div role="main" class="ui-content">    
+
+    <table>
+    <tr><td>
+      <table class="tabla_menu_superior" width=100%  >
+        <tr>
+          <td><%= link_to 'Nuevo Vehículo', new_vehicle_path %></td>
+          <td align=right class="campo_ordenar_cabezal"> Ordenar por <%= select_tag :select_sort, options_for_select(sort_options) %> </td>
+        </tr>
+      </table>
+    </td></tr>
+    <tr><td>
+     
+     
+    <table class="tabla_listado" cellpadding=0 cellspacing=0>
+      <tr class="tabla_listado_fila_cabezal"> 
+     
+      <th>Modelo</th> 
+	    <th>Matrícula</th> 
+	    <th>Detalle</th>
+	    <th>GPS</th>
+	    <th></th>
+      </tr>
+     
+      <% @vehicles.each do |vehicle| %>
+        <%  item_url = vehicle_path(vehicle)  
+            item_id=mobile_item_id(item_url) %>
       
-      <td><%= vehicle.gps_vehicle_id %></td>  
-      <td><%= vehicle.gps_number_plate %></td>  
-      <td><%= vehicle.gps_description %></td>  
-       <td>
-
-       <% @pos_cercana = vehicle.get_near_location()  %>
-       <%= @pos_cercana["name"] + " (" + "%.2f" % @pos_cercana["dist"] + " km)"  %>
-      </td>
-	 <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to(image_tag(asset_path('buttons/delete.gif')), vehicle_path(vehicle), method: :delete, data: { confirm: '¿Está seguro?' }) %></td>  
-    
-    </tr>
-  <% end %>
-</table>
-<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+      	<% gps_pos = vehicle.get_last_position() %>
+      	<% if vehicle.gps_numeric_ident != nil
+      		gps_vehic = vehicle.gps_vehicle
+      	   end 
+      	 %>
+       
+		    <tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
  
+           <td> 
+           <div class="tabla_listado_titulo_fila_chico"><%= vehicle.company.company_name %></div>
+             <%= 
+                if vehicle.vehicle_brand != nil
+                    vehicle.vehicle_brand.abbreviation
+                end
+            %> <%= vehicle.model %></td>
+          <td><div class="tabla_listado_titulo_fila_chico">&nbsp;</div><%= vehicle.plate_number %></td>
+         
+          <td>
+            <div class="tabla_listado_titulo_fila_chico"><%= get_vehicle_status_description(vehicle.status) %></div>
+            <%= vehicle.comments %>
+          </td>  
+          <td>
+            <div class="tabla_listado_titulo_fila_chico">&nbsp;</div>
+          	<%= vehicle.gps_numeric_ident %>  |  
+          	<% if gps_vehic != nil %>       
+              <%= gps_vehic.gps_descriptive_ident  %>           
+            <% end %>
+          	<% if gps_vehic != nil %>   |   		
+           		<%= gps_vehic.gps_plate_number  %>
+         	  <% end %>
+          </td>  
+	     <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to(image_tag(asset_path('buttons/delete.gif')),"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')")  %>  </td> 
+        
+        </tr>
+      <% end %>
+    </table>
+    
+    </td></tr>
+    </table>
+    
+    <br>
+    <br>
+    Order String : "<%=@order_string%>"
+    
+      
+    <div class="links_listado"><%= link_to 'Volver',  "/welcome/configuration" %></div>
+
+
+  </div><!-- /content --> 
+  
+  <script> 
+    $("#select_sort").change(function(event) {
+      
+      event.preventDefault();
+      
+      // Obtener valor a usar para ordenar
+      sort_value=$("#select_sort option:selected").val();
+      
+
+      $.mobile.navigate("/vehicles/sort/" + sort_value);
+    });
+  </script>
+  
+<% end %> 
+
+
+     

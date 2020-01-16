@@ -1,7 +1,14 @@
-﻿<h1>Modificar Modelo de Pedido</h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Modificar Modelo de Pedido" } do %> 
+           
  
-<%= render 'form' %>
+  <div role="main" class="ui-content">    
+ 
+    <%= render 'form' %>
   
-<div class="links_form"><%= link_to 'Atrás', m_shipping_requests_path %></div>
+  <div class="links_form"><%= link_to 'Salir',           -------- cargo_categories_path%></div>  
+
+  </div> <!-- /content -->  
   
-  
+<% end %>

@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Odacor MS</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+   
+  <link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.css" />
+  <script src="/assets/date_picker/jquery.ui.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.mobile.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.ui.datepicker-es.js"></script>
+
+</head>
+<body>
+  
+  <div data-role="page" class="ui-responsive-panel">
+
+  <div data-role="header">
+    <h2 style="color:green">Odacor MS</h2>
+    
+    <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+    
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+    
+      <% flash.each do |key, value| %>
+      <% if key == 'success' || key == 'error' %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+      <% end %>
+      <%= yield %>
+    
+  </div><!-- /content -->
+
+   <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>            
+                <li><%= link_to "Inicio", controller: "welcome", action: "index"%></li>
+                <li><a href="#panel-responsive-page2">Pedidos</a></li>
+                <li><%= link_to "Agenda", controller: "shipments", action: "agenda"%></li>                 
+                <li><a href="#panel-responsive-page2">Viajes</a></li>
+                <li><a href="#panel-responsive-page2">Consultas</a></li>
+                <li><a href="#panel-responsive-page2">Ajustes</a></li>
+                <li><a href="#panel-responsive-page2">Salir</a></li> 
+        </ul>
+    </div><!-- /panel -->
+
+
+  <div data-role="footer"> 
+      <h6 style="font-weight: normal;  font-size: 9pt;  color: #5F5F5F;"> Odacor S.A. </h6>  
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+    
+</body>
+</html>

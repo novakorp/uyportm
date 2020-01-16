@@ -1,0 +1,15 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Información de Vehículos de GPS" } do %> 
+
+	  <div role="main" class="ui-content">  
+
+	 <%= link_to 'Volver', "/welcome/configuration" %> <br/>
+
+	<%= @msgs %>
+
+	<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+	 
+  </div> <!-- /content --> 
+  
+<% end %>

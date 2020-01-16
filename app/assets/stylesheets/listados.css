@@ -22,6 +22,15 @@
 	color: #FBFBFB;
 }
 
+.campo_ordenar_cabezal {
+  font-size: 9pt
+  
+}
+
+.campo_ordenar_cabezal select {
+  font-size: 8pt
+  
+}
 
 TR.tabla_listado_fila_contenido TD , TR.tabla_listado_fila_destacada TD  {	
 	border-style: solid;
@@ -96,3 +105,8 @@ TR.tabla_listado_2_fila_contenido:Hover  TD{
   color: #707070;
 }
 
+
+.tabla_listado_titulo_fila_chico {
+  font-size: 8pt;
+  color:  #707070;
+}

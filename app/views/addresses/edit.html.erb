@@ -1,8 +1,18 @@
-﻿<h1>Dirección</h1>
+﻿
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Dirección" } do %> 
+           
  
+  <div role="main" class="ui-content">     
 
-<%= render 'form' %>
+	<%= render 'form' %>
     
 
-<div class="links_form"><%= link_to 'Atrás', customer_path(@customer) %></div>
+	<div class="links_form"><%= link_to 'Salir', customer_path(@customer) %></div>
   
+
+  </div><!-- /content --> 
+   
+  
+<% end %>
+

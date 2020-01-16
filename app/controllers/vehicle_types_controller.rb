@@ -4,7 +4,7 @@ class VehicleTypesController < ApplicationController
 	end
 	
 	def create
-	  @vehicle_type = VehicleType.new(params[:vehicle_type])
+	  @vehicle_type = VehicleType.new(obj_params)
 
 	  if @vehicle_type.save
 		redirect_to @vehicle_type
@@ -30,7 +30,7 @@ class VehicleTypesController < ApplicationController
 	def update
 	  @vehicle_type = VehicleType.find(params[:id])
 	 
-	 if @vehicle_type.update_attributes(params[:vehicle_type].permit(:description, :coupling_support, :couples_to_type_id))
+	 if @vehicle_type.update_attributes(params[:vehicle_type].permit(:description, :coupling_support, :couples_to_type_id, :type_group))
 		redirect_to @vehicle_type
 	  else
 		render 'edit'
@@ -41,7 +41,14 @@ class VehicleTypesController < ApplicationController
 	  @vehicle_type = VehicleType.find(params[:id])
 	  @vehicle_type.destroy
 	 
-	  redirect_to vehicle_types_path
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to vehicle_types_path }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 	
 	def couplable_types_by_id
@@ -57,4 +64,10 @@ class VehicleTypesController < ApplicationController
       format.html
 	  end
 	end
+	
+  private
+
+  def obj_params
+    params.require(:vehicle_type).permit(:description, :coupling_support, :couples_to_type_id, :type_group)
+  end
 end

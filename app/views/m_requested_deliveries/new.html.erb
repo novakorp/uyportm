@@ -1,5 +1,19 @@
-﻿<h1> Ingresar Indicación de Entrega de Modelo de Pedido</h1>
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Indicación de Entrega" } do %>
+                  
   
-<%= render 'form' %>
+  <div role="main" class="ui-content"> 
+       
+    <% @form_objects = [@m_requested_cargo, @m_requested_delivery] %>  
+    <%= render 'form' %>
+      
+    <div class="links_form"><%= link_to 'Salir', m_shipping_request_path(@m_requested_cargo.m_shipping_request) %></div>
+ 
+
+  </div> <!-- /content -->
   
-<div class="links_form"><%= link_to 'Atrás', m_shipping_request_path(@m_requested_cargo.m_shipping_request) %></div>
+
+<% end %>
+

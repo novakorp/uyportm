@@ -1,6 +1,17 @@
-﻿<h1>Nuevo Recorrido</h1>
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Recorrido" } do %>
+                  
   
-<%= render 'form' %>
+  <div role="main" class="ui-content">
+  
+  <%= render 'form' %>
+  
+    <div class="links_form"><%= link_to 'Salir', trips_path %></div>
+
+
+  </div> <!-- /content -->
   
 
-<div class="links_form"><%= link_to 'Atrás', trips_path %></div>
+<% end %>

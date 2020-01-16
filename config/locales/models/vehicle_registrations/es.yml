@@ -13,5 +13,5 @@ es:
         engine: "Motor"
         dnt_id: "Identificación DNT" 
         registration_date: "Fecha Empadronado"
-        Padrón: "registration_number"
-        Fecha de Ingreso: "date_of_entry"
+        registration_number: "Padrón"
+        date_of_entry: "Fecha de Ingreso" 

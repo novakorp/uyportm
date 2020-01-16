@@ -4,7 +4,7 @@ class DocumentTypesController < ApplicationController
 	end
 	
 	def create
-	  @document_type = DocumentType.new(params[:document_type])
+	  @document_type = DocumentType.new(obj_params)
 
 	  if @document_type.save
 		redirect_to @document_type
@@ -38,8 +38,21 @@ class DocumentTypesController < ApplicationController
 	def destroy
 	  @document_type = DocumentType.find(params[:id])
 	  @document_type.destroy
-	 
-	  redirect_to document_types_path
+  
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to document_types_path }
+      format.js { render "/common/action_result.js" }
+    end 
+    
 	end
 	
+  private
+
+  def obj_params
+    params.require(:document_type).permit(:description)
+  end
 end

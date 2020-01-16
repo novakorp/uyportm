@@ -1,0 +1,2 @@
+module SimpleShippingsHelper
+end

@@ -1,5 +1,16 @@
-﻿<h1>Ingresar Datos de Carga</h1>
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => ﻿Ingresar Datos de Carga" } do %>
+                  
+    
+  <div role="main" class="ui-content">    
+    
+    <%= render 'form' %>
+    
+    <div class="links_form"><%= link_to 'Salir', shipping_request_path(@shipping_request) %></div>
   
-<%= render 'form' %>
+  </div> <!-- /content -->
   
-<div class="links_form"><%= link_to 'Atrás', shipping_request_path(@shipping_request) %></div>
+
+<% end %>

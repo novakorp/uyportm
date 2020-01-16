@@ -1,23 +1,34 @@
-﻿<H1> Cliente </H1>
 
-
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-
-  <tr>
-  <th>Nombre:</th>
-  <td><%= @customer.name %></td>
-  </tr>  
-  
-  <tr>
-  <th>RUT:</th>
-  <td> <%= @customer.rut %> </td>
-  </tr>  
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Cliente" } do %>
    
-</table>
-
-<div class="links_form"><%= link_to 'Ingresar Direccion', new_customer_address_path(@customer) %></div>
-
-<%= render @customer.addresses %>
+  <div role="main" class="ui-content"> 
 
 
-<div class="links_form"><%= link_to 'Atrás', customers_path %></div>
+	<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+
+	  <tr>
+	  <th>Nombre:</th>
+	  <td><%= @customer.name %></td>
+	  </tr>  
+	  
+	  <tr>
+	  <th>RUT:</th>
+	  <td> <%= @customer.rut %> </td>
+	  </tr>  
+	   
+	</table>
+
+	<div class="links_form"><%= link_to 'Ingresar Direccion', new_customer_address_path(@customer) %></div>
+
+	<%= render @customer.addresses %>
+
+
+	<div class="links_form"><%= link_to 'Salir', customers_path, {"data-ajax"=>"false"}%></div> 
+  
+
+  </div> <!-- /content --> 
+<% end %>
+
+
+

@@ -1,0 +1,32 @@
+﻿<style>
+	Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
+</style>
+
+<% @top_menu_selection="Inicio" %>
+<%= render '/common/top_menu' %>
+
+<div style="margin-left:10px">
+
+<% if @alerts.length > 0 %>
+
+<H4>  Alertas (!)</H4>
+<div id="Alertas" class="lista_alertas">
+  <% @alerts.each do |alert| %>
+    <%= link_to "- " + alert['texto'] , alert['url'] %><br>
+  <% end %>
+</div>
+<% end %>
+
+
+<H4> Pedidos Recientes <H4>
+<div id="PedidosRecietes" class="ventana_inicio">
+
+  <div class="lista_inicio">
+      <% @pedidos.each do |p| %>         
+            <b><%= I18n.l(p.customer_shipping_order.order_datetime.to_date, :format => :short) %> </b> <%= p.customer_shipping_order.customer.name%>  -  <% if p.m_shipping_request != nil %> <%= p.m_shipping_request.name%> <% else %> <%= t 'other' %> <% end %> &nbsp;  <%=  p.cargo_quantity %> <%=  p.measure_unit.symbol %>  <br>
+      <% end %>
+  </div>
+</div>
+
+</div>
+

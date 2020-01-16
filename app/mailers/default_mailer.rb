@@ -1,9 +1,18 @@
 class DefaultMailer < ActionMailer::Base
-  default from: ENV['gmail_username']
+  default from: "Notificaciones Odacor"
    
   
-   def sample_email(user)
+   def email_venc_sucta(user)
+      # Obtener alertas a mostrar
+    ag = AlertGenerator.new    
+    @sucta_vencidos = ag.get_alerts_sucta_expired
+    @sucta_a_vencer = ag.get_alerts_sucta_to_expire
+     
+    #  !!!!!!
+    #  CAMBIAR : Enviar correo a todos los usuarios que reciban notificaciones
+    
+     
     @user = user
-    mail(to: @user.email, subject: 'Correo de Prueba')
+    mail(to: @user.email, subject: 'Vencimientos SUCTA')
   end
 end

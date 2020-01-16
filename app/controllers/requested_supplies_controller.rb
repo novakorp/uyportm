@@ -6,7 +6,7 @@ class RequestedSuppliesController < ApplicationController
 	
 	def create
 		@requested_cargo = RequestedCargo.find(params[:requested_cargo_id])
-		@requested_supply = RequestedSupply.new(params[:requested_supply])
+		@requested_supply = RequestedSupply.new(obj_params)
 		@requested_supply.requested_cargo_id = @requested_cargo.id
 		
 	  if @requested_supply.save
@@ -40,7 +40,21 @@ class RequestedSuppliesController < ApplicationController
 	  @requested_cargo = @requested_supply.requested_cargo
 	  @requested_supply.destroy
 	 
-	  redirect_to @requested_cargo
+	 
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @requested_cargo }
+      format.js { render "/common/action_result.js" }
+    end 
+     
 	end
 	
+  private
+
+  def obj_params
+    params.require(:requested_supply).permit(:ammount, :cargo_type_id, :measure_unit_id,  :address_id)
+  end
 end

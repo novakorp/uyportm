@@ -1,0 +1,77 @@
+﻿<H1> Vehículo </H1>
+
+<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+  <tr>
+  <th>Empresa:</th>
+  <td>  <%= @vehicle.company.company_name  %></td>
+  </tr>
+  <tr>
+  <th>Marca:</th>
+  <td>  <%= 
+        if @vehicle.vehicle_brand != nil
+            @vehicle.vehicle_brand.name
+        end
+  %></td>
+  </tr>
+  <tr>
+  <th>Tipo de Vehículo:</th>
+  <td>  <%if @vehicle.vehicle_type %> <%= @vehicle.vehicle_type.description %> <% end %> </td>
+  </tr>
+  <tr>
+  <th>Modelo:</th>
+  <td> <%= @vehicle.model %></td>
+ </tr>
+ <tr>
+  <th>Matrícula:</th>
+  <td> <%= @vehicle.plate_number %></td>
+ </tr>
+ <tr>
+  <th>Comentarios:</th>
+  <td>  <%= @vehicle.comments %></td>
+ </tr> 
+ </table>
+ 
+
+<h4>Kilometraje Diario</h4>
+<canvas id="myChart" width="400" height="200"></canvas>
+ 
+<script>
+
+	var data = {
+	    labels: <%= raw @g_km_labels %> ,
+	    datasets: [
+	        {
+	            label: "My First dataset",
+	            fillColor: "rgba(151,187,205,0.5)",
+          		strokeColor: "rgba(151,187,205,0.8)",
+            	highlightFill: "rgba(151,187,205,0.75)",
+            	highlightStroke: "rgba(151,187,205,1)",
+	            data: <%= @g_km_values %>
+	        }
+	    ]
+	};
+
+	var ctx = $("#myChart").get(0).getContext("2d");
+	var myBarChart = new Chart(ctx).Bar(data, {});
+	
+</script>
+
+<br> 
+ 
+ <% if @vehicle.sucta_registration %>
+<%= render @vehicle.sucta_registration %>
+ <% else %> 
+<div class="links_form"><%= link_to 'Ingresar Registro de SUCTA', new_vehicle_sucta_registration_path(@vehicle) %></div>
+<% end %>
+
+ <% if @vehicle.vehicle_registration %>
+<%= render @vehicle.vehicle_registration %>
+ <% else %> 
+<div class="links_form"><%= link_to 'Ingresar Registro de MTOP', new_vehicle_vehicle_registration_path(@vehicle) %></div>
+<% end %>
+
+
+<br>
+
+<div class="links_form"><%= link_to 'Atrás', vehicles_path %></div>
+

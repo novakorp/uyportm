@@ -1,31 +1,44 @@
-﻿<h1>Listado de Empresas</h1>
 
- <%= link_to 'Nueva Empresa', new_company_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
-<table class="tabla_listado" cellpadding=0 cellspacing=0>
-  <tr class="tabla_listado_fila_cabezal">
-     <th>Nombre</th>
-     <th>Razón Social</th>
-	 <th>RUT</th>
-     <th>MTOP</th>  
-     <th>BPS</th>
-     <th>MTSS</th>      
-     <th></th>
-  </tr>
- 
-  <% @companies.each do |company| %>
-     <tr class="tabla_listado_fila_contenido">
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Listado de Empresas" } do %> 
+
+  <div role="main" class="ui-content">    
+
+	 <%= link_to 'Nueva Empresa', new_company_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
+	<table class="tabla_listado" cellpadding=0 cellspacing=0>
+	  <tr class="tabla_listado_fila_cabezal">
+	     <th>Nombre</th>
+	     <th>Razón Social</th>
+		 <th>RUT</th>
+	     <th>MTOP</th>  
+	     <th>BPS</th>
+	     <th>MTSS</th>      
+	     <th></th>
+	  </tr>
 	 
-      <td><%= company.company_name %></td> 	  
-      <td><%= company.trade_name %></td> 	  
-      <td><%= company.rut %></td> 		  
-      <td><%= company.mtop %></td> 		  
-      <td><%= company.bps %></td> 
-      <td><%= company.mtss %></td> 
-	   
-	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), company %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_company_path(company) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), company_path(company), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
- 
-    </tr>
-  <% end %>
-</table>
-<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+	  <% @companies.each do |company| %> 
+		<%  item_url = company_path(company)
+		    item_id=mobile_item_id(item_url) %>
+	      
+		<tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+		 
+	      <td><%= company.company_name %></td> 	  
+	      <td><%= company.trade_name %></td> 	  
+	      <td><%= company.rut %></td> 		  
+	      <td><%= company.mtop %></td> 		  
+	      <td><%= company.bps %></td> 
+	      <td><%= company.mtss %></td> 
+		   
+		  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), company %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_company_path(company) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), "javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')" %></td>
+	 
+	    </tr>
+	  <% end %>
+	</table>
+
+	<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+
+  </div> <!-- /content --> 
+  
+<% end %>
+
 

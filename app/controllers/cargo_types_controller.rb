@@ -4,7 +4,7 @@ class CargoTypesController < ApplicationController
 	end
 	
 	def create
-	  @cargo_type = CargoType.new(params[:cargo_type])
+	  @cargo_type = CargoType.new(obj_params)
 
 	  if @cargo_type.save
 		redirect_to @cargo_type
@@ -39,7 +39,20 @@ class CargoTypesController < ApplicationController
 	  @cargo_type = CargoType.find(params[:id])
 	  @cargo_type.destroy
 	 
-	  redirect_to cargo_types_path
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to cargo_types_path }
+      format.js { render "/common/action_result.js" }
+    end 
+	  
 	end
 	
+  private
+
+  def obj_params
+    params.require(:cargo_type).permit(:description, :cargo_category_id, :measure_unit_id)
+  end
 end

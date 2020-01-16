@@ -1,15 +1,23 @@
-﻿<H1> Unidad de Facturación </H1>
 
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Unidad de Facturación" } do %>
+   
+  <div role="main" class="ui-content">    
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>Descripción:</th>
-  <td><%= @billing_unit.description %></td>
-  </tr>
+	<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+	  <tr>
+	  <th>Descripción:</th>
+	  <td><%= @billing_unit.description %></td>
+	  </tr>
+	  
+	  <tr>
+	  <th>Código:</th>
+	  <td> <%= @billing_unit.code %></td>
+	  </tr>
+	</table>
+
+    <div class="links_form"><%= link_to 'Salir', billing_units_path, {"data-ajax"=>"false"}%></div> 
+  </div><!-- /content -->
   
-  <tr>
-  <th>Código:</th>
-  <td> <%= @billing_unit.code %></td>
-  </tr>
-
-<div class="links_form"><%= link_to 'Atrás', billing_units_path %></div>
+  
+<% end %>

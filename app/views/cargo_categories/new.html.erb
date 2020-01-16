@@ -1,5 +1,17 @@
-﻿<h1>Nueva Categoria de Carga</h1>
-  
-<%= render 'form' %>
 
-<div class="links_form"><%= link_to 'Atrás', cargo_categories_path %></div>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nueva Categoria de Carga" } do %>
+                  
+  
+  <div role="main" class="ui-content">    
+
+
+    <%= render 'form'  %>
+
+    <div class="links_form"><%= link_to 'Salir', cargo_categories_path %></div>
+
+
+  </div><!-- /content -->
+  
+
+<% end %>

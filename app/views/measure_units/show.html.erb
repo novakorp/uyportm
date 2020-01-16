@@ -1,15 +1,23 @@
-﻿<H1> Unidad de Medida </H1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Unidad de Medida" } do %>
+   
+  <div role="main" class="ui-content">   
 
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>Nombre:</th>
-  <td><%= @measure_unit.name %></td>
-  </tr>
-  
-  <tr>
-  <th>Símbolo:</th>
-  <td> <%= @measure_unit.symbol %></td>
-  </tr>
+	<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+	  <tr>
+	  <th>Nombre:</th>
+	  <td><%= @measure_unit.name %></td>
+	  </tr>
+	  
+	  <tr>
+	  <th>Símbolo:</th>
+	  <td> <%= @measure_unit.symbol %></td>
+	  </tr>
+	</table>
 
-<div class="links_form"><%= link_to 'Atrás', measure_units_path %></div>
+	<div class="links_form"><%= link_to 'Salir', measure_units_path, {"data-ajax"=>"false"}%></div>  
+
+  </div> <!-- /content --> 
+<% end %>

@@ -1,4 +1,8 @@
-﻿<h1>Listado de Modelos de Pedidos</h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title =>  "Listado de Modelos de Pedidos" } do %> 
+
+  <div role="main" class="ui-content"> 
 
  <%= link_to 'Nuevo Modelo de Pedido', new_m_shipping_request_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
@@ -12,17 +16,31 @@
   </tr>
  
   <% @m_shipping_requests.each do |m_shipping_request| %>
+  	<%  item_url = m_shipping_request_path(m_shipping_request)
+		    item_id=mobile_item_id(item_url) %>
+	      
+		<tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+
+
     <tr class="tabla_listado_fila_contenido"> 
 	  <td><%= m_shipping_request.name %></td>  
 	  <td><%= m_shipping_request.service.description %></td>  	  
 	  
       <td><%= m_shipping_request.trip.description %></td>  
 	  <td><%= m_shipping_request.details %> </td>   
-	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), m_shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), m_shipping_request_path(m_shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-     </tr>
-  <% end %>
-</table>
-<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
- 
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), m_shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_m_shipping_request_path(m_shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), 	"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %></td>
+
+
+       </tr>
+    <% end %>
+  </table>
+  <div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+   
+
+  </div><!-- /content --> 
+  
+<% end %>
+
+
 
 

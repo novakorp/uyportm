@@ -1,0 +1,642 @@
+       Controller#Action
+                               welcome_index GET    /welcome/index(.:format)                                                      
+        welcome#index
+                                             GET    /welcome/:action(.:format)                                                    
+        welcome#:action
+         vehicle_types_couplable_types_by_id GET    /vehicle_types/couplable_types_by_id(.:format)                                
+        vehicle_types#couplable_types_by_id
+                                             POST   /vehicle_types/couplable_types_by_id(.:format)                                
+        vehicle_types#couplable_types_by_id
+            accounts_accounts_by_customer_id GET    /accounts/accounts_by_customer_id(.:format)                                   
+        accounts#accounts_by_customer_id
+                                             POST   /accounts/accounts_by_customer_id(.:format)                                   
+        accounts#accounts_by_customer_id
+                      customers_customers_ac GET    /customers/customers_ac(.:format)                                             
+        customers#customers_ac
+  m_shipping_requests_m_shipping_requests_ac GET    /m_shipping_requests/m_shipping_requests_ac(.:format)                         
+        m_shipping_requests#m_shipping_requests_ac
+ m_shipping_requests_fill_request_order_line POST   /m_shipping_requests/fill_request_order_line(.:format)                        
+        m_shipping_requests#fill_request_order_line
+                    shipments_list_documents GET    /shipments/list_documents(.:format)                                           
+        shipments#list_documents
+                                             POST   /m_shipping_requests/options_by_customer_id(.:format)                         
+        m_shipping_requests#options_by_customer_id
+                                             GET    /m_shipping_requests/options_by_customer_id(.:format)/:id                     
+        m_shipping_requests#options_by_customer_id
+                                             GET    /shipments/pending(.:format)                                                  
+        shipments#pending
+                                             GET    /shipments/completed(.:format)                                                
+        shipments#completed
+                                             GET    /shipments/bill_pending(.:format)                                             
+        shipments#bill_pending
+                                             GET    /shipments/by_date(.:format)                                                  
+        shipments#by_date
+                                             GET    /shipments/new/:id(.:format)                                                  
+        shipments#new
+                                             GET    /agenda/agenda(.:format)                                                      
+        agenda#agenda
+                                             POST   /agenda/agenda(.:format)                                                      
+        agenda#agenda
+                                             POST   /agenda/assign_request(.:format)                                              
+        agenda#assign_request
+                                             POST   /shipments/:id/ajax_update(.:format)                                          
+        shipments#ajax_update
+                                             GET    /shipping_requests_builder/start(.:format)                                    
+        shipping_requests_builder#start
+                                             POST   /shipping_requests_builder/start(.:format)                                    
+        shipping_requests_builder#fill_data
+                                             POST   /shipping_requests_builder/fill_data(.:format)                                
+        shipping_requests_builder#create_from_template
+                                             GET    /daily_shipping_requests/list(.:format)                                       
+        daily_shipping_requests#list
+                                             POST   /daily_shipping_requests/list(.:format)                                       
+        daily_shipping_requests#list
+   customer_shipping_orders_pending_requests GET    /customer_shipping_orders/pending_requests(.:format)                          
+        customer_shipping_orders#pending_requests
+ customer_shipping_orders_completed_requests GET    /customer_shipping_orders/completed_requests(.:format)                        
+        customer_shipping_orders#completed_requests
+                        gps_update_positions GET    /gps/update_positions(.:format)                                               
+        gps#update_positions
+                  gps_save_odometer_readings GET    /gps/save_odometer_readings(.:format)                                         
+        gps#save_odometer_readings
+                       gps_vehicles_gps_info GET    /gps/vehicles_gps_info(.:format)                                              
+        gps#vehicles_gps_info
+                     gps_top_kilometers_done GET    /gps/top_kilometers_done(.:format)                                            
+        gps#top_kilometers_done
+               gps_vehicle_odometer_readings GET    /gps/vehicle_odometer_readings(.:format)                                      
+        gps#vehicle_odometer_readings
+                gps_update_vehicles_gps_data GET    /gps/update_vehicles_gps_data(.:format)                                       
+        gps#update_vehicles_gps_data
+                                             GET    /gps/update_from_gps_data/:gps_vehicle_id(.:format)                           
+        gps#update_gps_data
+                                             GET    /gps/create_from_gps_data/:gps_vehicle_id(.:format)                           
+        gps#create_from_gps_data
+                     gps_update_gps_vehicles GET    /gps/update_gps_vehicles(.:format)                                            
+        gps#update_gps_vehicles
+                         gps_create_vehicles GET    /gps/create_vehicles(.:format)                                                
+        gps#create_vehicles
+                                             GET    /gps/consultar_moviles(.:format)                                              
+        gps#consultar_moviles
+                   vehicles_report_sucta_reg GET    /vehicles/report_sucta_reg(.:format)                                          
+        vehicles#report_sucta_reg
+                 vehicles_report_vehicle_reg GET    /vehicles/report_vehicle_reg(.:format)                                        
+        vehicles#report_vehicle_reg
+                                             GET    /users/notify/:id(.:format)                                                   
+        users#notify
+                                    accounts GET    /accounts(.:format)                                                           
+        accounts#index
+                                             POST   /accounts(.:format)                                                           
+        accounts#create
+                                 new_account GET    /accounts/new(.:format)                                                       
+        accounts#new
+                                edit_account GET    /accounts/:id/edit(.:format)                                                  
+        accounts#edit
+                                     account GET    /accounts/:id(.:format)                                                       
+        accounts#show
+                                             PATCH  /accounts/:id(.:format)                                                       
+        accounts#update
+                                             PUT    /accounts/:id(.:format)                                                       
+        accounts#update
+                                             DELETE /accounts/:id(.:format)                                                       
+        accounts#destroy
+                               billing_units GET    /billing_units(.:format)                                                      
+        billing_units#index
+                                             POST   /billing_units(.:format)                                                      
+        billing_units#create
+                            new_billing_unit GET    /billing_units/new(.:format)                                                  
+        billing_units#new
+                           edit_billing_unit GET    /billing_units/:id/edit(.:format)                                             
+        billing_units#edit
+                                billing_unit GET    /billing_units/:id(.:format)                                                  
+        billing_units#show
+                                             PATCH  /billing_units/:id(.:format)                                                  
+        billing_units#update
+                                             PUT    /billing_units/:id(.:format)                                                  
+        billing_units#update
+                                             DELETE /billing_units/:id(.:format)                                                  
+        billing_units#destroy
+                                 cargo_types GET    /cargo_types(.:format)                                                        
+        cargo_types#index
+                                             POST   /cargo_types(.:format)                                                        
+        cargo_types#create
+                              new_cargo_type GET    /cargo_types/new(.:format)                                                    
+        cargo_types#new
+                             edit_cargo_type GET    /cargo_types/:id/edit(.:format)                                               
+        cargo_types#edit
+                                  cargo_type GET    /cargo_types/:id(.:format)                                                    
+        cargo_types#show
+                                             PATCH  /cargo_types/:id(.:format)                                                    
+        cargo_types#update
+                                             PUT    /cargo_types/:id(.:format)                                                    
+        cargo_types#update
+                                             DELETE /cargo_types/:id(.:format)                                                    
+        cargo_types#destroy
+                            cargo_categories GET    /cargo_categories(.:format)                                                   
+        cargo_categories#index
+                                             POST   /cargo_categories(.:format)                                                   
+        cargo_categories#create
+                          new_cargo_category GET    /cargo_categories/new(.:format)                                               
+        cargo_categories#new
+                         edit_cargo_category GET    /cargo_categories/:id/edit(.:format)                                          
+        cargo_categories#edit
+                              cargo_category GET    /cargo_categories/:id(.:format)                                               
+        cargo_categories#show
+                                             PATCH  /cargo_categories/:id(.:format)                                               
+        cargo_categories#update
+                                             PUT    /cargo_categories/:id(.:format)                                               
+        cargo_categories#update
+                                             DELETE /cargo_categories/:id(.:format)                                               
+        cargo_categories#destroy
+                                   companies GET    /companies(.:format)                                                          
+        companies#index
+                                             POST   /companies(.:format)                                                          
+        companies#create
+                                 new_company GET    /companies/new(.:format)                                                      
+        companies#new
+                                edit_company GET    /companies/:id/edit(.:format)                                                 
+        companies#edit
+                                     company GET    /companies/:id(.:format)                                                      
+        companies#show
+                                             PATCH  /companies/:id(.:format)                                                      
+        companies#update
+                                             PUT    /companies/:id(.:format)                                                      
+        companies#update
+                                             DELETE /companies/:id(.:format)                                                      
+        companies#destroy
+                          customer_addresses GET    /customers/:customer_id/addresses(.:format)                                   
+        addresses#index
+                                             POST   /customers/:customer_id/addresses(.:format)                                   
+        addresses#create
+                        new_customer_address GET    /customers/:customer_id/addresses/new(.:format)                               
+        addresses#new
+                                edit_address GET    /addresses/:id/edit(.:format)                                                 
+        addresses#edit
+                                     address GET    /addresses/:id(.:format)                                                      
+        addresses#show
+                                             PATCH  /addresses/:id(.:format)                                                      
+        addresses#update
+                                             PUT    /addresses/:id(.:format)                                                      
+        addresses#update
+                                             DELETE /addresses/:id(.:format)                                                      
+        addresses#destroy
+                                   customers GET    /customers(.:format)                                                          
+        customers#index
+                                             POST   /customers(.:format)                                                          
+        customers#create
+                                new_customer GET    /customers/new(.:format)                                                      
+        customers#new
+                               edit_customer GET    /customers/:id/edit(.:format)                                                 
+        customers#edit
+                                    customer GET    /customers/:id(.:format)                                                      
+        customers#show
+                                             PATCH  /customers/:id(.:format)                                                      
+        customers#update
+                                             PUT    /customers/:id(.:format)                                                      
+        customers#update
+                                             DELETE /customers/:id(.:format)                                                      
+        customers#destroy
+                              document_types GET    /document_types(.:format)                                                     
+        document_types#index
+                                             POST   /document_types(.:format)                                                     
+        document_types#create
+                           new_document_type GET    /document_types/new(.:format)                                                 
+        document_types#new
+                          edit_document_type GET    /document_types/:id/edit(.:format)                                            
+        document_types#edit
+                               document_type GET    /document_types/:id(.:format)                                                 
+        document_types#show
+                                             PATCH  /document_types/:id(.:format)                                                 
+        document_types#update
+                                             PUT    /document_types/:id(.:format)                                                 
+        document_types#update
+                                             DELETE /document_types/:id(.:format)                                                 
+        document_types#destroy
+                                   employees GET    /employees(.:format)                                                          
+        employees#index
+                                             POST   /employees(.:format)                                                          
+        employees#create
+                                new_employee GET    /employees/new(.:format)                                                      
+        employees#new
+                               edit_employee GET    /employees/:id/edit(.:format)                                                 
+        employees#edit
+                                    employee GET    /employees/:id(.:format)                                                      
+        employees#show
+                                             PATCH  /employees/:id(.:format)                                                      
+        employees#update
+                                             PUT    /employees/:id(.:format)                                                      
+        employees#update
+                                             DELETE /employees/:id(.:format)                                                      
+        employees#destroy
+                                gps_vehicles GET    /gps_vehicles(.:format)                                                       
+        gps_vehicles#index
+                                             POST   /gps_vehicles(.:format)                                                       
+        gps_vehicles#create
+                             new_gps_vehicle GET    /gps_vehicles/new(.:format)                                                   
+        gps_vehicles#new
+                            edit_gps_vehicle GET    /gps_vehicles/:id/edit(.:format)                                              
+        gps_vehicles#edit
+                                 gps_vehicle GET    /gps_vehicles/:id(.:format)                                                   
+        gps_vehicles#show
+                                             PATCH  /gps_vehicles/:id(.:format)                                                   
+        gps_vehicles#update
+                                             PUT    /gps_vehicles/:id(.:format)                                                   
+        gps_vehicles#update
+                                             DELETE /gps_vehicles/:id(.:format)                                                   
+        gps_vehicles#destroy
+                                   locations GET    /locations(.:format)                                                          
+        locations#index
+                                             POST   /locations(.:format)                                                          
+        locations#create
+                                new_location GET    /locations/new(.:format)                                                      
+        locations#new
+                               edit_location GET    /locations/:id/edit(.:format)                                                 
+        locations#edit
+                                    location GET    /locations/:id(.:format)                                                      
+        locations#show
+                                             PATCH  /locations/:id(.:format)                                                      
+        locations#update
+                                             PUT    /locations/:id(.:format)                                                      
+        locations#update
+                                             DELETE /locations/:id(.:format)                                                      
+        locations#destroy
+                               measure_units GET    /measure_units(.:format)                                                      
+        measure_units#index
+                                             POST   /measure_units(.:format)                                                      
+        measure_units#create
+                            new_measure_unit GET    /measure_units/new(.:format)                                                  
+        measure_units#new
+                           edit_measure_unit GET    /measure_units/:id/edit(.:format)                                             
+        measure_units#edit
+                                measure_unit GET    /measure_units/:id(.:format)                                                  
+        measure_units#show
+                                             PATCH  /measure_units/:id(.:format)                                                  
+        measure_units#update
+                                             PUT    /measure_units/:id(.:format)                                                  
+        measure_units#update
+                                             DELETE /measure_units/:id(.:format)                                                  
+        measure_units#destroy
+                  shipment_shipment_supplies GET    /shipments/:shipment_id/shipment_supplies(.:format)                           
+        shipment_supplies#index
+                                             POST   /shipments/:shipment_id/shipment_supplies(.:format)                           
+        shipment_supplies#create
+                new_shipment_shipment_supply GET    /shipments/:shipment_id/shipment_supplies/new(.:format)                       
+        shipment_supplies#new
+               edit_shipment_shipment_supply GET    /shipments/:shipment_id/shipment_supplies/:id/edit(.:format)                  
+        shipment_supplies#edit
+                    shipment_shipment_supply GET    /shipments/:shipment_id/shipment_supplies/:id(.:format)                       
+        shipment_supplies#show
+                                             PATCH  /shipments/:shipment_id/shipment_supplies/:id(.:format)                       
+        shipment_supplies#update
+                                             PUT    /shipments/:shipment_id/shipment_supplies/:id(.:format)                       
+        shipment_supplies#update
+                                             DELETE /shipments/:shipment_id/shipment_supplies/:id(.:format)                       
+        shipment_supplies#destroy
+                shipment_shipment_deliveries GET    /shipments/:shipment_id/shipment_deliveries(.:format)                         
+        shipment_deliveries#index
+                                             POST   /shipments/:shipment_id/shipment_deliveries(.:format)                         
+        shipment_deliveries#create
+              new_shipment_shipment_delivery GET    /shipments/:shipment_id/shipment_deliveries/new(.:format)                     
+        shipment_deliveries#new
+             edit_shipment_shipment_delivery GET    /shipments/:shipment_id/shipment_deliveries/:id/edit(.:format)                
+        shipment_deliveries#edit
+                  shipment_shipment_delivery GET    /shipments/:shipment_id/shipment_deliveries/:id(.:format)                     
+        shipment_deliveries#show
+                                             PATCH  /shipments/:shipment_id/shipment_deliveries/:id(.:format)                     
+        shipment_deliveries#update
+                                             PUT    /shipments/:shipment_id/shipment_deliveries/:id(.:format)                     
+        shipment_deliveries#update
+                                             DELETE /shipments/:shipment_id/shipment_deliveries/:id(.:format)                     
+        shipment_deliveries#destroy
+                 shipment_shipment_documents GET    /shipments/:shipment_id/shipment_documents(.:format)                          
+        shipment_documents#index
+                                             POST   /shipments/:shipment_id/shipment_documents(.:format)                          
+        shipment_documents#create
+              new_shipment_shipment_document GET    /shipments/:shipment_id/shipment_documents/new(.:format)                      
+        shipment_documents#new
+             edit_shipment_shipment_document GET    /shipments/:shipment_id/shipment_documents/:id/edit(.:format)                 
+        shipment_documents#edit
+                  shipment_shipment_document GET    /shipments/:shipment_id/shipment_documents/:id(.:format)                      
+        shipment_documents#show
+                                             PATCH  /shipments/:shipment_id/shipment_documents/:id(.:format)                      
+        shipment_documents#update
+                                             PUT    /shipments/:shipment_id/shipment_documents/:id(.:format)                      
+        shipment_documents#update
+                                             DELETE /shipments/:shipment_id/shipment_documents/:id(.:format)                      
+        shipment_documents#destroy
+                                   shipments GET    /shipments(.:format)                                                          
+        shipments#index
+                                             POST   /shipments(.:format)                                                          
+        shipments#create
+                                new_shipment GET    /shipments/new(.:format)                                                      
+        shipments#new
+                               edit_shipment GET    /shipments/:id/edit(.:format)                                                 
+        shipments#edit
+                                    shipment GET    /shipments/:id(.:format)                                                      
+        shipments#show
+                                             PATCH  /shipments/:id(.:format)                                                      
+        shipments#update
+                                             PUT    /shipments/:id(.:format)                                                      
+        shipments#update
+                                             DELETE /shipments/:id(.:format)                                                      
+        shipments#destroy
+   customer_shipping_order_shipping_requests GET    /customer_shipping_orders/:customer_shipping_order_id/shipping_requests(.:form
+at)     shipping_requests#index
+                                             POST   /customer_shipping_orders/:customer_shipping_order_id/shipping_requests(.:form
+at)     shipping_requests#create
+new_customer_shipping_order_shipping_request GET    /customer_shipping_orders/:customer_shipping_order_id/shipping_requests/new(.:
+format) shipping_requests#new
+                       edit_shipping_request GET    /shipping_requests/:id/edit(.:format)                                         
+        shipping_requests#edit
+                            shipping_request GET    /shipping_requests/:id(.:format)                                              
+        shipping_requests#show
+                                             PATCH  /shipping_requests/:id(.:format)                                              
+        shipping_requests#update
+                                             PUT    /shipping_requests/:id(.:format)                                              
+        shipping_requests#update
+                                             DELETE /shipping_requests/:id(.:format)                                              
+        shipping_requests#destroy
+                    customer_shipping_orders GET    /customer_shipping_orders(.:format)                                           
+        customer_shipping_orders#index
+                                             POST   /customer_shipping_orders(.:format)                                           
+        customer_shipping_orders#create
+                 new_customer_shipping_order GET    /customer_shipping_orders/new(.:format)                                       
+        customer_shipping_orders#new
+                edit_customer_shipping_order GET    /customer_shipping_orders/:id/edit(.:format)                                  
+        customer_shipping_orders#edit
+                     customer_shipping_order GET    /customer_shipping_orders/:id(.:format)                                       
+        customer_shipping_orders#show
+                                             PATCH  /customer_shipping_orders/:id(.:format)                                       
+        customer_shipping_orders#update
+                                             PUT    /customer_shipping_orders/:id(.:format)                                       
+        customer_shipping_orders#update
+                                             DELETE /customer_shipping_orders/:id(.:format)                                       
+        customer_shipping_orders#destroy
+    m_requested_cargo_m_requested_deliveries GET    /m_requested_cargos/:m_requested_cargo_id/m_requested_deliveries(.:format)    
+        m_requested_deliveries#index
+                                             POST   /m_requested_cargos/:m_requested_cargo_id/m_requested_deliveries(.:format)    
+        m_requested_deliveries#create
+  new_m_requested_cargo_m_requested_delivery GET    /m_requested_cargos/:m_requested_cargo_id/m_requested_deliveries/new(.:format)
+        m_requested_deliveries#new
+                   edit_m_requested_delivery GET    /m_requested_deliveries/:id/edit(.:format)                                    
+        m_requested_deliveries#edit
+                        m_requested_delivery GET    /m_requested_deliveries/:id(.:format)                                         
+        m_requested_deliveries#show
+                                             PATCH  /m_requested_deliveries/:id(.:format)                                         
+        m_requested_deliveries#update
+                                             PUT    /m_requested_deliveries/:id(.:format)                                         
+        m_requested_deliveries#update
+                                             DELETE /m_requested_deliveries/:id(.:format)                                         
+        m_requested_deliveries#destroy
+      m_requested_cargo_m_requested_supplies GET    /m_requested_cargos/:m_requested_cargo_id/m_requested_supplies(.:format)      
+        m_requested_supplies#index
+                                             POST   /m_requested_cargos/:m_requested_cargo_id/m_requested_supplies(.:format)      
+        m_requested_supplies#create
+    new_m_requested_cargo_m_requested_supply GET    /m_requested_cargos/:m_requested_cargo_id/m_requested_supplies/new(.:format)  
+        m_requested_supplies#new
+                     edit_m_requested_supply GET    /m_requested_supplies/:id/edit(.:format)                                      
+        m_requested_supplies#edit
+                          m_requested_supply GET    /m_requested_supplies/:id(.:format)                                           
+        m_requested_supplies#show
+                                             PATCH  /m_requested_supplies/:id(.:format)                                           
+        m_requested_supplies#update
+                                             PUT    /m_requested_supplies/:id(.:format)                                           
+        m_requested_supplies#update
+                                             DELETE /m_requested_supplies/:id(.:format)                                           
+        m_requested_supplies#destroy
+       m_shipping_request_m_requested_cargos GET    /m_shipping_requests/:m_shipping_request_id/m_requested_cargos(.:format)      
+        m_requested_cargos#index
+                                             POST   /m_shipping_requests/:m_shipping_request_id/m_requested_cargos(.:format)      
+        m_requested_cargos#create
+    new_m_shipping_request_m_requested_cargo GET    /m_shipping_requests/:m_shipping_request_id/m_requested_cargos/new(.:format)  
+        m_requested_cargos#new
+                      edit_m_requested_cargo GET    /m_requested_cargos/:id/edit(.:format)                                        
+        m_requested_cargos#edit
+                           m_requested_cargo GET    /m_requested_cargos/:id(.:format)                                             
+        m_requested_cargos#show
+                                             PATCH  /m_requested_cargos/:id(.:format)                                             
+        m_requested_cargos#update
+                                             PUT    /m_requested_cargos/:id(.:format)                                             
+        m_requested_cargos#update
+                                             DELETE /m_requested_cargos/:id(.:format)                                             
+        m_requested_cargos#destroy
+                         m_shipping_requests GET    /m_shipping_requests(.:format)                                                
+        m_shipping_requests#index
+                                             POST   /m_shipping_requests(.:format)                                                
+        m_shipping_requests#create
+                      new_m_shipping_request GET    /m_shipping_requests/new(.:format)                                            
+        m_shipping_requests#new
+                     edit_m_shipping_request GET    /m_shipping_requests/:id/edit(.:format)                                       
+        m_shipping_requests#edit
+                          m_shipping_request GET    /m_shipping_requests/:id(.:format)                                            
+        m_shipping_requests#show
+                                             PATCH  /m_shipping_requests/:id(.:format)                                            
+        m_shipping_requests#update
+                                             PUT    /m_shipping_requests/:id(.:format)                                            
+        m_shipping_requests#update
+                                             DELETE /m_shipping_requests/:id(.:format)                                            
+        m_shipping_requests#destroy
+                            simple_shippings GET    /simple_shippings(.:format)                                                   
+        simple_shippings#index
+                                             POST   /simple_shippings(.:format)                                                   
+        simple_shippings#create
+                         new_simple_shipping GET    /simple_shippings/new(.:format)                                               
+        simple_shippings#new
+                        edit_simple_shipping GET    /simple_shippings/:id/edit(.:format)                                          
+        simple_shippings#edit
+                             simple_shipping GET    /simple_shippings/:id(.:format)                                               
+        simple_shippings#show
+                                             PATCH  /simple_shippings/:id(.:format)                                               
+        simple_shippings#update
+                                             PUT    /simple_shippings/:id(.:format)                                               
+        simple_shippings#update
+                                             DELETE /simple_shippings/:id(.:format)                                               
+        simple_shippings#destroy
+                                    services GET    /services(.:format)                                                           
+        services#index
+                                             POST   /services(.:format)                                                           
+        services#create
+                                 new_service GET    /services/new(.:format)                                                       
+        services#new
+                                edit_service GET    /services/:id/edit(.:format)                                                  
+        services#edit
+                                     service GET    /services/:id(.:format)                                                       
+        services#show
+                                             PATCH  /services/:id(.:format)                                                       
+        services#update
+                                             PUT    /services/:id(.:format)                                                       
+        services#update
+                                             DELETE /services/:id(.:format)                                                       
+        services#destroy
+                                      states GET    /states(.:format)                                                             
+        states#index
+                                             POST   /states(.:format)                                                             
+        states#create
+                                   new_state GET    /states/new(.:format)                                                         
+        states#new
+                                  edit_state GET    /states/:id/edit(.:format)                                                    
+        states#edit
+                                       state GET    /states/:id(.:format)                                                         
+        states#show
+                                             PATCH  /states/:id(.:format)                                                         
+        states#update
+                                             PUT    /states/:id(.:format)                                                         
+        states#update
+                                             DELETE /states/:id(.:format)                                                         
+        states#destroy
+                 vehicle_sucta_registrations GET    /vehicles/:vehicle_id/sucta_registrations(.:format)                           
+        sucta_registrations#index
+                                             POST   /vehicles/:vehicle_id/sucta_registrations(.:format)                           
+        sucta_registrations#create
+              new_vehicle_sucta_registration GET    /vehicles/:vehicle_id/sucta_registrations/new(.:format)                       
+        sucta_registrations#new
+                     edit_sucta_registration GET    /sucta_registrations/:id/edit(.:format)                                       
+        sucta_registrations#edit
+                          sucta_registration GET    /sucta_registrations/:id(.:format)                                            
+        sucta_registrations#show
+                                             PATCH  /sucta_registrations/:id(.:format)                                            
+        sucta_registrations#update
+                                             PUT    /sucta_registrations/:id(.:format)                                            
+        sucta_registrations#update
+                                             DELETE /sucta_registrations/:id(.:format)                                            
+        sucta_registrations#destroy
+               vehicle_vehicle_registrations GET    /vehicles/:vehicle_id/vehicle_registrations(.:format)                         
+        vehicle_registrations#index
+                                             POST   /vehicles/:vehicle_id/vehicle_registrations(.:format)                         
+        vehicle_registrations#create
+            new_vehicle_vehicle_registration GET    /vehicles/:vehicle_id/vehicle_registrations/new(.:format)                     
+        vehicle_registrations#new
+                   edit_vehicle_registration GET    /vehicle_registrations/:id/edit(.:format)                                     
+        vehicle_registrations#edit
+                        vehicle_registration GET    /vehicle_registrations/:id(.:format)                                          
+        vehicle_registrations#show
+                                             PATCH  /vehicle_registrations/:id(.:format)                                          
+        vehicle_registrations#update
+                                             PUT    /vehicle_registrations/:id(.:format)                                          
+        vehicle_registrations#update
+                                             DELETE /vehicle_registrations/:id(.:format)                                          
+        vehicle_registrations#destroy
+                                    vehicles GET    /vehicles(.:format)                                                           
+        vehicles#index
+                                             POST   /vehicles(.:format)                                                           
+        vehicles#create
+                                 new_vehicle GET    /vehicles/new(.:format)                                                       
+        vehicles#new
+                                edit_vehicle GET    /vehicles/:id/edit(.:format)                                                  
+        vehicles#edit
+                                     vehicle GET    /vehicles/:id(.:format)                                                       
+        vehicles#show
+                                             PATCH  /vehicles/:id(.:format)                                                       
+        vehicles#update
+                                             PUT    /vehicles/:id(.:format)                                                       
+        vehicles#update
+                                             DELETE /vehicles/:id(.:format)                                                       
+        vehicles#destroy
+                                return_types GET    /return_types(.:format)                                                       
+        return_types#index
+                                             POST   /return_types(.:format)                                                       
+        return_types#create
+                             new_return_type GET    /return_types/new(.:format)                                                   
+        return_types#new
+                            edit_return_type GET    /return_types/:id/edit(.:format)                                              
+        return_types#edit
+                                 return_type GET    /return_types/:id(.:format)                                                   
+        return_types#show
+                                             PATCH  /return_types/:id(.:format)                                                   
+        return_types#update
+                                             PUT    /return_types/:id(.:format)                                                   
+        return_types#update
+                                             DELETE /return_types/:id(.:format)                                                   
+        return_types#destroy
+                                       trips GET    /trips(.:format)                                                              
+        trips#index
+                                             POST   /trips(.:format)                                                              
+        trips#create
+                                    new_trip GET    /trips/new(.:format)                                                          
+        trips#new
+                                   edit_trip GET    /trips/:id/edit(.:format)                                                     
+        trips#edit
+                                        trip GET    /trips/:id(.:format)                                                          
+        trips#show
+                                             PATCH  /trips/:id(.:format)                                                          
+        trips#update
+                                             PUT    /trips/:id(.:format)                                                          
+        trips#update
+                                             DELETE /trips/:id(.:format)                                                          
+        trips#destroy
+                              vehicle_brands GET    /vehicle_brands(.:format)                                                     
+        vehicle_brands#index
+                                             POST   /vehicle_brands(.:format)                                                     
+        vehicle_brands#create
+                           new_vehicle_brand GET    /vehicle_brands/new(.:format)                                                 
+        vehicle_brands#new
+                          edit_vehicle_brand GET    /vehicle_brands/:id/edit(.:format)                                            
+        vehicle_brands#edit
+                               vehicle_brand GET    /vehicle_brands/:id(.:format)                                                 
+        vehicle_brands#show
+                                             PATCH  /vehicle_brands/:id(.:format)                                                 
+        vehicle_brands#update
+                                             PUT    /vehicle_brands/:id(.:format)                                                 
+        vehicle_brands#update
+                                             DELETE /vehicle_brands/:id(.:format)                                                 
+        vehicle_brands#destroy
+                               vehicle_types GET    /vehicle_types(.:format)                                                      
+        vehicle_types#index
+                                             POST   /vehicle_types(.:format)                                                      
+        vehicle_types#create
+                            new_vehicle_type GET    /vehicle_types/new(.:format)                                                  
+        vehicle_types#new
+                           edit_vehicle_type GET    /vehicle_types/:id/edit(.:format)                                             
+        vehicle_types#edit
+                                vehicle_type GET    /vehicle_types/:id(.:format)                                                  
+        vehicle_types#show
+                                             PATCH  /vehicle_types/:id(.:format)                                                  
+        vehicle_types#update
+                                             PUT    /vehicle_types/:id(.:format)                                                  
+        vehicle_types#update
+                                             DELETE /vehicle_types/:id(.:format)                                                  
+        vehicle_types#destroy
+                                             GET    /customer_shipping_orders/:id/:sel_line_id(.:format)                          
+        customer_shipping_orders#show
+                                    sessions POST   /sessions(.:format)                                                           
+        sessions#create
+                                 new_session GET    /sessions/new(.:format)                                                       
+        sessions#new
+                                     session DELETE /sessions/:id(.:format)                                                       
+        sessions#destroy
+                                       users GET    /users(.:format)                                                              
+        users#index
+                                             POST   /users(.:format)                                                              
+        users#create
+                                    new_user GET    /users/new(.:format)                                                          
+        users#new
+                                   edit_user GET    /users/:id/edit(.:format)                                                     
+        users#edit
+                                        user GET    /users/:id(.:format)                                                          
+        users#show
+                                             PATCH  /users/:id(.:format)                                                          
+        users#update
+                                             PUT    /users/:id(.:format)                                                          
+        users#update
+                                             DELETE /users/:id(.:format)                                                          
+        users#destroy
+                                         gps GET    /gps(.:format)                                                                
+        gps#index
+                                             POST   /gps(.:format)                                                                
+        gps#create
+                                      new_gp GET    /gps/new(.:format)                                                            
+        gps#new
+                                     edit_gp GET    /gps/:id/edit(.:format)                                                       
+        gps#edit
+                                          gp GET    /gps/:id(.:format)                                                            
+        gps#show
+                                             PATCH  /gps/:id(.:format)                                                            
+        gps#update
+                                             PUT    /gps/:id(.:format)                                                            
+        gps#update
+                                             DELETE /gps/:id(.:format)                                                            
+        gps#destroy
+                                      signup GET    /signup(.:format)                                                             
+        users#new
+                                      signin GET    /signin(.:format)                                                             
+        sessions#new
+                                     signout DELETE /signout(.:format)       

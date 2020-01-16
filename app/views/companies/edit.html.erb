@@ -1,6 +1,15 @@
-﻿<h1>Modificar Empresa</h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Modificar Empresa" } do %> 
+           
  
-<%= render 'form' %>
+  <div role="main" class="ui-content">  
+ 
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', companies_path %></div>
+   
+
+  </div> <!-- /content -->  
   
-<div class="links_form"><%= link_to 'Atrás', companies_path %></div>
-  
+<% end %>

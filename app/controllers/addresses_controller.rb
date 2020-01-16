@@ -6,7 +6,7 @@ class AddressesController < ApplicationController
 	
 	def create
 		@customer = Customer.find(params[:customer_id])
-		@address = Address.new(params[:address])
+		@address = Address.new(obj_params)
 		@address.customer_id = @customer.id
 		
 	  if @address.save
@@ -40,7 +40,20 @@ class AddressesController < ApplicationController
 	  @customer = @address.customer
 	  @address.destroy
 	 
-	  redirect_to @customer
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @customer }
+      format.js { render "/common/action_result.js" }
+    end 
+    
 	end
-	
+	  
+  private
+
+  def obj_params
+    params.require(:address).permit(:description, :address_detail_1, :address_detail_2, :postal_code, :location_id, :phone_number_1, :phone_number_2, :comments)
+  end
 end

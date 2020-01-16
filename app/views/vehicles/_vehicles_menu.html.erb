@@ -1,0 +1,28 @@
+
+<table class="menu_superior" cellpadding=0 cellspacing=0> 
+  <tr> 
+    <% if @vehicles_menu_selection == "General" %>
+      <td class="link_inactivo">General</td>
+    <% else %>
+      <td><%= link_to "General",  controller: "vehicles" %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+    <% if @vehicles_menu_selection == "SUCTA" %>
+      <td class="link_inactivo">SUCTA</td>
+    <% else %>
+      <td><%= link_to "SUCTA", controller: "vehicles", action:"report_sucta_reg"  %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+     <% if @vehicles_menu_selection == "MTOP" %>
+      <td class="link_inactivo">MTOP</td>
+    <% else %>
+      <td><%= link_to "MTOP", controller: "vehicles", action: "report_vehicle_reg" %> </td>
+    <% end %>
+     
+  </tr>
+</table>
+

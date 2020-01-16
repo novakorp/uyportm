@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gps_vehicle_id: 1
+  gps_retired_vehicle_id: 1
+  date_changed: 2016-10-04 21:56:49
+
+two:
+  gps_vehicle_id: 1
+  gps_retired_vehicle_id: 1
+  date_changed: 2016-10-04 21:56:49

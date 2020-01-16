@@ -1,0 +1,54 @@
+﻿
+<% @top_menu_selection="Flota" %>
+<%= render '/common/top_menu' %>
+
+<% @vehicles_menu_selection="MTOP" %>
+<%= render 'vehicles_menu' %>
+
+
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Empresa</th>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>Matrícula</th> 
+    <th>Chasis</th> 
+	<th>Motor</th>
+	<th>DNT</th>
+	<th>F Empad</th>
+	<th>Padrón</th>
+	<th>F Ingreso</th>
+	<td></td>
+  </tr>
+ 
+  <% @vehicle_registrations.each do |vehicle_registration| %>
+     <tr class="tabla_listado_fila_contenido"> 
+     <% if vehicle_registration.vehicle != nil %>
+	  <td> <%= vehicle_registration.vehicle.company.company_name  %> </td> 
+	  <td> 
+	  		<% if vehicle_registration.vehicle.vehicle_brand != nil %>
+	  			<%= vehicle_registration.vehicle.vehicle_brand.abbreviation %>  
+	  	   <% end %>
+	  </td>  
+	  <td> 
+	  	  <%= vehicle_registration.vehicle.model %>   
+	  </td> 
+	  <td> 
+	  	  <%= vehicle_registration.vehicle.plate_number %>   
+	  </td> 
+	 <% else %>
+	 	<td>-</td>
+	 	<td>-</td>
+	 	<td>-</td>
+	 	<td>-</td>
+	 <% end %>	   
+	  <td><%= vehicle_registration.chassis %></td>
+	  <td><%= vehicle_registration.engine %></td>
+	  <td><%= vehicle_registration.dnt_id %></td>
+	  <td><%= vehicle_registration.registration_date.to_date %></td>	  
+	  <td><%= vehicle_registration.registration_number %></td>
+      <td><%= vehicle_registration.date_of_entry.to_date %></td>	 
+	  <td><%= link_to 'Ver', vehicle_registration %> &nbsp; <%= link_to 'Editar', edit_vehicle_registration_path(vehicle_registration) %> &nbsp; <%= link_to 'Eliminar', vehicle_registration_path(vehicle_registration), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,31 +1,51 @@
-﻿<h1>Listado de Tipos de Vehículos</h1>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Listado de Tipos de Vehículos" } do %> 
 
- <%= link_to 'Nuevo Tipo de Vehículo', new_vehicle_type_path %>  &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %> 
-<table class="tabla_listado" cellpadding=0 cellspacing=0>
-  <tr class="tabla_listado_fila_cabezal">
-    <th>Descripción</th>	
-	<th>Acoplable</th>
-    <th>Se acopla a</th>
-	<th></th>
-  </tr>
- 
-  <% @vehicle_types.each do |vehicle_type| %>
-	<td><%= vehicle_type.description %></td> 	
-	<% if vehicle_type.coupling_support == 1 %>
-	  <td>Sí</td>
-	 <% else %>
-	  <td>No</td>
-	 <% end %>   
-	 <% if vehicle_type.couples_to_type %>
-	 <td><%= vehicle_type.couples_to_type.description %></td>
-	  <% else %>
-	  <td></td>
-	   <% end %>    
-	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle_type %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_type_path(vehicle_type) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), vehicle_type_path(vehicle_type), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-     </tr>
-  <% end %>
-</table>
-<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
- 
+  <div role="main" class="ui-content">    
+
+     <%= link_to 'Nuevo Tipo de Vehículo', new_vehicle_type_path %>  &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %> 
+    <table class="tabla_listado" cellpadding=0 cellspacing=0>
+      <tr class="tabla_listado_fila_cabezal">
+        <th>Descripción</th>	
+        <th>Grupo</th>
+	    <th>Acoplable</th>
+        <th>Se acopla a</th>
+	    <th></th>
+      </tr>
+     
+      <% @vehicle_types.each do |vehicle_type| %>
+
+      <%  item_url = vehicle_type_path(vehicle_type) 
+          item_id=mobile_item_id(item_url) %>
+      
+	      
+		      <tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+
+	        <td><%= vehicle_type.description %></td>
+	        <td><%= vehicle_type.type_group %> </td> 	
+
+	        <% if vehicle_type.coupling_support == 1 %>
+	          <td>Sí</td>
+	         <% else %>
+	          <td>No</td>
+	         <% end %>   	 
+
+	         <% if vehicle_type.couples_to_type %>
+	         <td><%= vehicle_type.couples_to_type.description %></td>
+	          <% else %>
+	          <td></td>
+	           <% end %>    
+	           
+	          <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle_type %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_type_path(vehicle_type) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), "javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %>  </td>  
+             </tr>
+          <% end %>
+      </table>
+
+	<div class="links_listado"><%= link_to 'Volver',  "/welcome/configuration" %></div>
+
+
+  </div><!-- /content --> 
+  
+<% end %> 
 
 

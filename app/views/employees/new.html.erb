@@ -1,6 +1,17 @@
-﻿<h1>Nuevo Empleado</h1>
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Empleado" } do %>
+                  
   
-<%= render 'form' %>
+  <div role="main" class="ui-content">     
+	  
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', employees_path %></div>
+	   
+  </div> <!-- /content -->
   
-<div class="links_form"><%= link_to 'Atrás', employees_path %></div>
-  
+
+<% end %>
+

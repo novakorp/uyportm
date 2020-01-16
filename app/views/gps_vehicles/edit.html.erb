@@ -1,0 +1,15 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Modificar Servicio" } do %> 
+           
+ 
+  <div role="main" class="ui-content">    
+
+	 
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', services_path %></div>
+	   
+  </div> <!-- /content -->  
+  
+<% end %>

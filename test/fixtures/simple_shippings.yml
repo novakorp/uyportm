@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shipping_date: 2017-11-26 03:04:52
+  vehicle_id: 1
+  coupled_vehicle_id: 1
+  company_id: 1
+  driver_id: 1
+  service_id: MyString
+  amount: 9.99
+  measure_unit_id: 1
+  unit_price: 9.99
+  documents: MyText
+  return_type_id: 1
+  comments: MyText
+  invoice_number: MyString
+
+two:
+  shipping_date: 2017-11-26 03:04:52
+  vehicle_id: 1
+  coupled_vehicle_id: 1
+  company_id: 1
+  driver_id: 1
+  service_id: MyString
+  amount: 9.99
+  measure_unit_id: 1
+  unit_price: 9.99
+  documents: MyText
+  return_type_id: 1
+  comments: MyText
+  invoice_number: MyString

@@ -1,0 +1,52 @@
+﻿
+<% @top_menu_selection="Flota" %>
+<%= render '/common/top_menu' %>
+
+<% @vehicles_menu_selection="SUCTA" %>
+<%= render 'vehicles_menu' %>
+
+
+<table class="tabla_listado" cellpadding=0 cellspacing=0>
+  <tr class="tabla_listado_fila_cabezal">
+    <th>Empresa</th>
+    <th>Marca</th>
+    <th>Modelo</th>
+    <th>Matrícula</th> 
+    <th>F Venc</th> 
+	<th>Prórroga</th>
+	<td></td>
+  </tr>
+ 
+  <% @sucta_registrations.each do |sucta_registration| %>
+     <tr class="tabla_listado_fila_contenido"> 
+     <% if sucta_registration.vehicle != nil %>
+	  <td> <%= sucta_registration.vehicle.company.company_name  %> </td> 
+	  <td> 
+	  		<% if sucta_registration.vehicle.vehicle_brand != nil %>
+	  		<%= sucta_registration.vehicle.vehicle_brand.abbreviation %>  
+	  	   <% end %>
+	  </td>  
+	  <td> 
+	  	  <%= sucta_registration.vehicle.model %>   
+	  </td> 
+	  <td> 
+	  	  <%= sucta_registration.vehicle.plate_number %>   
+	  </td> 
+	 <% else %>
+	 	<td>-</td>
+	 	<td>-</td>
+	 	<td>-</td>
+	 	<td>-</td>
+	 <% end %>	   
+      <td><%= sucta_registration.expiration.to_date %></td>	 
+	  <td> 
+	  	<% if sucta_registration.extended == 1 %>
+	  		Sí
+	  	<% else %>
+	  		No
+	  	<% end %>
+	  </td>
+	  <td><%= link_to 'Ver', sucta_registration %> &nbsp; <%= link_to 'Editar', edit_sucta_registration_path(sucta_registration) %> &nbsp; <%= link_to 'Eliminar', sucta_registration_path(sucta_registration), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>
+  <% end %>
+</table>

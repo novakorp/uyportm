@@ -1,6 +1,7 @@
 ﻿  
 <%= form_for @cargo_category do |f| %>
  <% if @cargo_category.errors.any? %>
+ 
   <div id="error_explanation" class="form_errors">
     <h2> <%= t :error_header %> </h2>
     <ul>
@@ -12,15 +13,15 @@
   <% end %>
   
   <table class="tabla_campos" cellpadding=0 cellspacing=0>
-  <tr>
-  <th><%= f.label :description %></th>
-  <td>  <%= f.text_field :description %> </td>
-  </tr>
-   
-  <tr><td colspan=2 class="acciones_form">
-  <%= f.submit t(:save) %>
-  </td>
-  </tr>
+    <tr>
+    <th><%= f.label :description %></th>
+    <td>  <%= f.text_field :description %> </td>
+    </tr>
+     
+    <tr><td colspan=2 class="acciones_form">
+    <%= f.submit t(:save) %>
+    </td>
+    </tr>
   </table>
   
 <% end %>

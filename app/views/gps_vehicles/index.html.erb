@@ -1,0 +1,37 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Dispositivos GPS" } do %> 
+
+  <div role="main" class="ui-content">  
+
+	<%= link_to 'Volver', "/gps/" %>
+	<table class="tabla_listado" cellpadding=0 cellspacing=0>
+	  <tr class="tabla_listado_fila_cabezal">
+	   <th>Ident Numerico GPS</th>
+	    <th>Ident Descriptivo GPS</th>
+	    <th>Matricula GPS</th> 
+		<th>ID Vehiculo</th>
+		<th></th>
+	  </tr>
+	 
+	  <% @gps_vehicles.each do |gps_vehicle| %>
+		<%  item_url = gps_vehicle_path(gps_vehicle)
+		    item_id=mobile_item_id(item_url) %>
+	      
+		<tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+
+		  <td><%= gps_vehicle.gps_numeric_ident %></td>
+	      <td><%= gps_vehicle.gps_descriptive_ident %></td>
+	      <td><%= gps_vehicle.gps_plate_number %></td>      
+	      <td><%= gps_vehicle.vehicle_id %></td>    
+		  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), gps_vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_gps_vehicle_path(gps_vehicle) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), "javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %></td>
+	    </tr>
+	  <% end %>
+	</table>
+	<div class="links_listado"><%= link_to 'Volver', "/gps" %></div>
+
+  </div> <!-- /content --> 
+  
+<% end %>
+
+

@@ -1,0 +1,15 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Tipo de Retorno" } do %>
+                  
+  
+  <div role="main" class="ui-content">   
+  
+    <%= render 'form' %>
+
+    <div class="links_form"><%= link_to 'Salir', return_types_path %></div>  
+
+  </div> <!-- /content -->
+  
+s
+<% end %>

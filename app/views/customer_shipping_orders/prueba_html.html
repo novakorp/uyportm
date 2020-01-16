@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Odacor MS</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" media="all" href="/assets/application.self-ec2278fca2b37b3ff0e64dd2170c26011a065e50a5600f9cf9852334e97b22d1.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/accounts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/billing_units.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/customer_shipping_orders.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/customers.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/daily_shipping_requests.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.self-5b5f5c1244313aa5c9c4ce02eba4c99c129bece6c9fbb6626625fcf6399c0b45.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/document_type.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/employees.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/forms.self-f8ab82732740488ce8374847879621219c38f6dbf0b834c8d8c814fecbd32dcb.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/general.self-eaf503c65d1e137321c6b64ad754afeca23e7d8080bc95f6c25f2cb3cba10d03.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/gps.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/gps_vehicles.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/ajustes.jquery.mobile-1.4.5.self-85357e3a025b8f4295b7d5ba664bdb8eb9088fa57e8ade85bcf66eca6065e502.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile-1.4.5.min.self-a154aac1e8df8befcc9f0ffe1a55bbd5add86199c399eb1bebffe6d22e738818.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.external-png-1.4.5.min.self-3d5b1daea04273ad11093764916216bf663ca8241591ca869a26e2e0da5bc343.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.icons-1.4.5.min.self-3943b4b3d41077173eec0adacbdd4e2fe12e50c214b645921c8af5ed03550702.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.inline-png-1.4.5.min.self-ecf70ac4ae6099dfb5115735e6d3fae0a6f3e536e4ca614136b3226f1b7658ce.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.inline-svg-1.4.5.min.self-5f93b2e6aa201b6ca0b1411c32a5c155ec21f1c7f25ac348883e416932edfcea.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.structure-1.4.5.min.self-f34bd716417bbaaaaf4532112ad17eab1f17197406fd844053cd51d12b677ff7.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/jquery_mobile-1.4.5/jquery.mobile.theme-1.4.5.min.self-b8a3654dbd125125a7fbc6857e481c2a5929e88da8e6fc7fc77ef48a5e5843f4.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/listados.self-8c4283e253a441a58c749db7760013dadd6d6402563fb7fdb9d0118cc5d9f2d2.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/mensajes.self-36f30f657a5caeba8f1cfe62fafae60ac1e07ffcfe1059d668440e7e8ead8b05.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/return_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/shipment_documents.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/simple_shippings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/vehicle_brands.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/vehicle_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/work_types.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/works.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" />
+  <script src="/assets/Chart.min.self-47555871d35f4700e80b3339eec210df843c95162a67431cd8579b29d74722e8.js?body=1"></script>
+<script src="/assets/ajax_helper.self-8636173c2eb86ffc5db0e357d069a536f1b2f1c137c614f181a60f8d687a3d6d.js?body=1"></script>
+<script src="/assets/customer_shipping_orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/daily_shipping_requests.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/date_picker/jquery.mobile.datepicker.self-16768849e5b620a92051fed16baad5608743f664eb864a882c482c223f470a0a.js?body=1"></script>
+<script src="/assets/date_picker/jquery.ui.datepicker-es.self-476108175a664de9e99ffeadeb84f1895f574fd0bd7b3bd42e3f6fb8bbaff0f3.js?body=1"></script>
+<script src="/assets/date_picker/jquery.ui.datepicker.self-63b7010b5829e11c1437ceca2de989362c0c6c26a9173447e421eea494ccbe74.js?body=1"></script>
+<script src="/assets/document_type.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/employees.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/gps.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/gps_vehicles.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/jquery-1.11.1/jquery-1.11.1.min.self-aedf0b4f9535e7b1d01d6a9ad81e6ecdb5b9a82acf17f3798645b7dbca2d86a1.js?body=1"></script>
+<script src="/assets/jquery_mobile-1.4.5/jquery.mobile-1.4.5.min.self-0992687978c26b8a46c10e3a967ecc74a912bbcfb81a8186bb0e0c3a1fea6009.js?body=1"></script>
+<script src="/assets/menus.self-a8e9a1bfa39869415c085be12eb76bb92aa8d1ad2f126d11da5e3ccc834058d1.js?body=1"></script>
+<script src="/assets/return_types.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/shipment_documents.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/simple_shippings.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/vehicle_brands.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1"></script>
+<script src="/assets/application.self-1c21563080352e66ffa09d5dda49c4333c0a752571d92886b8d6f7e91f3531b8.js?body=1"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="SkwiyI2kJ+WGVL2i+EsnBRfNXBS+knwgeddw5OaiP41QElZqmP+88pgBcNVe0h4tuMwpcm34KnHdw8gUJabiSg==" />
+  
+   
+  <link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.css" />
+  <script src="/assets/date_picker/jquery.ui.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.mobile.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.ui.datepicker-es.js"></script>
+
+</head>
+<body>
+  
+  <div data-role="page" class="ui-responsive-panel">
+
+  <div data-role="header">
+    <h2 style="color:green">Odacor MS</h2>
+    
+    <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+    
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+    
+      <div data-role="header" data-theme="a">   
+  <h1>Nota de Pedido</h1>
+</div>
+
+
+<form class="new_customer_shipping_order" id="new_customer_shipping_order" action="/customer_shipping_orders" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="j+w1Gwkvvy1wFmRlZHtEJinVwT8DfgKJS+a47q9rSnaVskG5HHQkOm5DqRLC4n0OhtS0WdAUVNjv8gAebG+XsQ==" />
+      <div id="error_explanation" class="form_errors" style="display:none">
+        <h4> Se encontraron errores en el formulario: </h4>
+        <ul id="error_list">
+        
+        </ul>
+      </div>
+    
+    
+ <div class="ui-grid-a">
+   
+  <!--  Seccion Ficha -->
+  
+ <div class="ui-block-a">
+    <div class="ui-body ui-body-d">
+     
+        <div class="ui-field-contain" >
+          
+        </div> 
+        
+        <div class="ui-field-contain"> 
+          <label for="customer_shipping_order_company_id">Empresa</label>
+          <select name="customer_shipping_order[company_id]" id="customer_shipping_order_company_id"><option value="1">Odacor</option>
+<option value="2">Ferreira Almirón</option></select>
+        </div>
+        
+        <div class="ui-field-contain ui-filterable">
+          <label for="customer_shipping_order_customer_id">Cliente</label>
+              
+          <input id="customer_input" data-type="search" placeholder="Cliente...">          
+         <!--  <input type="text" name="customer_select" id="customer_select" /> -->
+         <input type="hidden" name="customer_shipping_order[customer_id]" id="customer_shipping_order_customer_id" />     
+         
+         <ul id="customer_list" data-role="listview" data-inset="true" data-filter="true" data-input="#customer_input"></ul>
+        </div>
+        
+        
+        
+        <!--
+        <div class="ui-field-contain">
+          <label for="customer_shipping_order_order_datetime">Fecha Orden</label>
+          <input type="hidden" id="order_time_year" name="order_time[year]" value="2018" />
+<input type="hidden" id="order_time_month" name="order_time[month]" value="5" />
+<input type="hidden" id="order_time_day" name="order_time[day]" value="27" />
+<select id="order_time_hour" name="order_time[hour]">
+<option value="00">00</option>
+<option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12" selected="selected">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+</select>
+ : <select id="order_time_minute" name="order_time[minute]">
+<option value="00">00</option>
+<option value="01">01</option>
+<option value="02">02</option>
+<option value="03">03</option>
+<option value="04">04</option>
+<option value="05">05</option>
+<option value="06">06</option>
+<option value="07">07</option>
+<option value="08">08</option>
+<option value="09">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14" selected="selected">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+</select>
+ 
+                 
+          <input type="hidden" value="2018-05-27 12:14" name="customer_shipping_order[order_datetime]" id="customer_shipping_order_order_datetime" /> 
+          <input type="hidden" name="order_date" id="order_date" />
+        </div>  
+        -->
+        
+        <div class="ui-field-contain"> 
+          <label for="customer_shipping_order_order_datetime">Fecha Orden</label>
+          <input type="hidden" value="2018-05-27 12:14" name="customer_shipping_order[order_datetime]" id="customer_shipping_order_order_datetime" />
+          <!-- <input id="date_prueba" type="text" data-role="date"  /> -->
+        </div>
+        
+        
+        <div class="ui-field-contain"> 
+          <label for="customer_shipping_order_shipping_date">Fecha Trabajo</label>
+          <input type="text" name="shipping_date_dp" id="shipping_date_dp" />       
+          <input type="hidden" value="2018-05-28" name="customer_shipping_order[shipping_date]" id="customer_shipping_order_shipping_date" /> 
+        </div>
+          
+          <input type="submit" name="commit" value="Guardar" />
+           
+         <a href="#" class="ui-btn ui-mini">Agregar Solicitud</a>
+    </div></div>
+
+  <!--  Seccion Pedidos -->
+  
+  <div class="ui-block-b">
+        <div class="ui-body ui-body-d">
+    
+        <div class="">
+    </div>
+    </div>
+    
+  </div>
+ 
+</form> 
+ 
+ <!-- @@@@@@@@@@   JAVASCRIPT   @@@@@@@@@@  -->
+ 
+<script>
+
+  
+  function customer_selected (value, label) {
+    $("#customer_id").val(value); 
+    $("#customer_input").val(label);
+    $("#customer_list").html("");
+  }
+  
+  $(function() {
+    
+  
+    $( "#customer_list" ).on( "filterablebeforefilter", function ( e, data ) {
+      var $ul = $( this ),
+      $input = $( data.input ),
+      value = $input.val(),
+      html = "";
+      $ul.html( "" );
+      
+      if ( value && value.length > 1 ) {
+          $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+          $ul.listview( "refresh" );
+          $.ajax({
+              url: "/customers/customers_ac.js",
+              dataType: "json",
+             /* crossDomain: true ,*/
+              data: {
+                  term: $input.val()
+              }
+          })
+          .then( function ( data, textStatus, jqXHR ) {
+              $.each( jqXHR.responseJSON, function ( i, val ) {
+                  js_call = 'javascript:customer_selected ("' + val.value + '" ,"' + val.label + '");'
+                  html += "<li><a href='" + js_call +  "'>" + val.label + "</a></li>";
+              });
+               
+              $ul.html( html );
+              $ul.listview( "refresh" );
+              $ul.trigger( "updatelayout");
+          });
+        }
+     });
+  });
+  
+   
+   
+  // $('#shipping_date_dp').val ($('#customer_shipping_order_shipping_date').val ());
+
+  $('#shipping_date_dp').date({
+    dateFormat:  "dd-mm-yy",          
+   // altField: "#customer_shipping_order_shipping_date" ,
+   altField: "#shipping_date" ,
+    altFormat: "yy-mm-dd"        
+  }); 
+ 
+  $('#shipping_date_dp').date("setDate", "28-05-2018")
+  
+    
+  
+</script>
+
+
+    
+  </div><!-- /content -->
+
+   <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>            
+                <li><a href="/welcome/index">Inicio</a></li>
+                <li><a href="#panel-responsive-page2">Pedidos</a></li>
+                <li><a href="/shipments/agenda">Agenda</a></a></li>                 
+                <li><a href="#panel-responsive-page2">Viajes</a></li>
+                <li><a href="#panel-responsive-page2">Consultas</a></li>
+                <li><a href="#panel-responsive-page2">Ajustes</a></li>
+                <li><a href="#panel-responsive-page2">Salir</a></li> 
+        </ul>
+    </div><!-- /panel -->
+
+
+  <div data-role="footer"> 
+      <h6 style="font-weight: normal;  font-size: 9pt;  color: #5F5F5F;"> Odacor S.A. </h6>  
+  </div><!-- /footer -->
+</div><!-- /page -->
+
+    
+</body>
+</html>

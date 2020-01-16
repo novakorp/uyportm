@@ -1,0 +1,91 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Vehiculos" } do %> 
+
+
+
+    <style>
+      Body {font-family: Arial, Tahoma, Verdana; font-size:11pt }
+    </style>
+
+
+  <div role="main" class="ui-content">    
+
+     <%= link_to 'Nuevo Vehículo', new_vehicle_path %> 
+     
+     
+     
+    <table class="tabla_listado" cellpadding=0 cellspacing=0>
+      <tr class="tabla_listado_fila_cabezal">
+	    <th>Empresa</th>
+         <th>Marca</th>
+        <th>Modelo</th> 
+	    <th>Matrícula</th>
+	    <th>Estado</th>
+	    <th>Comentarios</th>
+	    <th>Id GPS</th>
+	    <th>Matricula GPS</th>
+	    <th>Ident GPS</th>
+        <th>Cerca de ..</th>
+	    <th></th>
+      </tr>
+     
+      <% @vehicles.each do |vehicle| %>
+        <%  item_url = vehicle_path(vehicle)  
+            item_id=mobile_item_id(item_url) %>
+      
+      	<% gps_pos = vehicle.get_last_position() %>
+      	<% if vehicle.gps_numeric_ident != nil
+      		gps_vehic = vehicle.gps_vehicle
+      	   end 
+      	 %>
+      
+	      
+		    <tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+
+	
+           <td><%= vehicle.company.company_name %></td>
+           <td><%= 
+                if vehicle.vehicle_brand != nil
+                    vehicle.vehicle_brand.abbreviation
+                end
+            %></td>
+          <td><%= vehicle.model %></td>
+          <td><%= vehicle.plate_number %></td>
+          <td><%= get_vehicle_status_description(vehicle.status) %></td>
+          <td><%= vehicle.comments %></td>  
+          <td>
+          	<%= vehicle.gps_numeric_ident %> 
+          </td>  
+          <td>
+          	<% if gps_vehic != nil %>        		
+           		<%= gps_vehic.gps_plate_number  %>
+         	<% end %>
+          </td> 
+          <td>
+          	<% if gps_vehic != nil %> 			 
+           		<%= gps_vehic.gps_descriptive_ident  %>       		
+          	<% end %>
+          </td>
+          <td>
+          	<% if gps_pos != nil %> 
+			        <% pos_cercana = vehicle.get_near_location(gps_pos)  %>
+           		<%= pos_cercana["name"] + " (" + "%.2f" % pos_cercana["dist"] + " km)" %>
+           		
+          	<% end %>
+          </td>
+	     <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to(image_tag(asset_path('buttons/delete.gif')),"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')")  %>  </td> 
+        
+        </tr>
+      <% end %>
+    </table>
+
+    <div class="links_listado"><%= link_to 'Volver',  "/welcome/configuration" %></div>
+
+
+  </div><!-- /content --> 
+  
+<% end %> 
+
+
+     

@@ -1,4 +1,10 @@
-﻿<H2> Indicacion de Entrega de Modelo de Pedido</H2>
+
+<%  item_url = m_requested_delivery_path(m_requested_delivery)
+    item_id=mobile_item_id(item_url) %>
+
+
+
+<div  id="<%= item_id %>" class="titulo_partial_modelo">Indicacion de Entrega</div >
 
 <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
      <tr>   
@@ -16,7 +22,9 @@
   <tr>
   <th> </th>
   <td> <div class="links_form"> <%= link_to 'Modificar', edit_m_requested_delivery_path(m_requested_delivery) %> </div> </td>
-  <td> <div class="links_form"> <%= link_to 'Eliminar', m_requested_delivery_path(m_requested_delivery), method: :delete, data: { confirm: '¿Está seguro?' } %></div></td>
+  <td> <div class="links_form"> <%= link_to 'Eliminar',"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %></div></td>
   </tr> 
 </table>
+
+</div>
 

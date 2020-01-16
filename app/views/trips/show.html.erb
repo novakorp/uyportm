@@ -1,18 +1,27 @@
-﻿<H1> Recorrido </H1>
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
-  <tr>
-  <th>Desde:</th>
-  <td><%= @trip.from_location.name %></td>
-  </tr>
-  <tr>
-  <th>Hacia:</th>
-  <td> <%= @trip.to_location.name %></td>
-  </tr>
-  <tr>
-   <th>Distancia:</th>
-  <td> <%= @trip.distance %></td>
- </tr>
-</table>
 
-<div class="links_form"><%= link_to 'Atrás', trips_path %></div>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Recorrido" } do %>
+   
+  <div role="main" class="ui-content">    
+
+    <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+      <tr>
+      <th>Desde:</th>
+      <td><%= @trip.from_location.name %></td>
+      </tr>
+      <tr>
+      <th>Hacia:</th>
+      <td> <%= @trip.to_location.name %></td>
+      </tr>
+      <tr>
+       <th>Distancia:</th>
+      <td> <%= @trip.distance %></td>
+     </tr>
+    </table>
+
+    <div class="links_form"><%= link_to 'Salir', trips_path, {"data-ajax"=>"false"} %> </div> 
+
+  </div> <!-- /content --> 
+<% end %>
+

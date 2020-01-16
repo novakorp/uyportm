@@ -1,4 +1,9 @@
-﻿<h1>Listado de Entregas de Material</h1>
+﻿
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Listado de Entregas de Material" } do %> 
+
+  <div role="main" class="ui-content">   
 
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
@@ -8,12 +13,18 @@
 	<th></th>
   </tr>
  
-  <% @cargo_categories.each do |cargo_category| %>
-    <tr class="tabla_listado_fila_contenido">
-      <td><%= cargo_category.description %></td> 
-	   <td><%= link_to 'Ver', cargo_category %> &nbsp; <%= link_to 'Editar', edit_cargo_category_path(cargo_category) %> &nbsp; <%= link_to 'Eliminar', cargo_category_path(cargo_category), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+  <% @shipment_supplies.each do |shipment_supply| %>
+ <%  item_url = shipment_supply_path(shipment_supply) 
+            item_id=mobile_item_id(item_url) %>     
+	      
+		    <tr id="<%= item_id %>" class="tabla_listado_fila_contenido"> 
+      <td><%=  %></td> 
+	<td> <%= shipment_supply.requested_supply.requested_cargo.description %> </td> 
+	<td> <%= shipment_supply.amount %> <%= shipment_supply.requested_supply.requested_cargo.measure_unit.symbol %>  </td>
+	   <td><%= link_to 'Ver', cargo_category %> &nbsp; <%= link_to 'Editar', edit_cargo_category_path(cargo_category) %> &nbsp; <%= link_to 'Eliminar', javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %></td>
 	
     </tr>
   <% end %>
 </table>
-<div class="links_listado"><%= link_to 'Volver al Menú Principal', "welcome/index" %></div>
+
+

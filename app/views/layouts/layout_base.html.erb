@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>Odacor MS</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+   
+  <link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.css" />
+  <script src="/assets/date_picker/jquery.ui.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.mobile.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.ui.datepicker-es.js"></script>
+
+</head>
+
+
+
+<body> 
+      
+      <%= yield %>  
+   
+   
+  <a id="show_generic_popup" style="display:none" href="#generic_popup" data-rel="popup" data-position-to="window"  data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Show Generic Popup</a>
+ 
+  <!-- Dialogo reusable, se deja fuera de las paginas -->
+ 
+   <div data-role="popup" id="generic_popup" data-overlay-theme="b" data-theme="b" style="max-width:400px;">
+      <div data-role="header" data-theme="a">
+        <h1 id='generic_popup_title'></h1>
+      </div>
+      <div role="main" class="ui-content"> 
+        
+          <h3 id='generic_popup_content' class="ui-title"></h3>
+          
+          <input id="generic_popup_data" />
+          
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancelar</a>
+           
+          <a id='generic_popup_action' href="javascript:eval($('#generic_popup_data').val())"  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow">Aceptar</a>
+      </div>  
+  </div> 
+  
+    
+    
+</body>
+
+
+</html>
+ 

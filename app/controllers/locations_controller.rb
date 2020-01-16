@@ -4,7 +4,7 @@
 	end
 
 	def create
-	  @location = Location.new(params[:location])
+	  @location = Location.new(obj_params)
 
 	  if @location.save
 		redirect_to @location
@@ -38,9 +38,23 @@
 	def destroy
 	  @location = Location.find(params[:id])
 	  @location.destroy
-	 
-	  redirect_to locations_path
+	  
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to locations_path }
+      format.js { render "/common/action_result.js" }
+    end 
+	  
 	end
+	
+  private
+
+  def obj_params
+    params.require(:location).permit(:name, :coords, :location_type, :state_id, :longitude, :latitude)
+  end
 end
 
 

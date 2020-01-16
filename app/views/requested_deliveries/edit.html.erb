@@ -1,6 +1,14 @@
-﻿<h1>Indicación de Entrega </h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title =>  "Indicación de Entrega" } do %> 
+           
  
-<%= render 'form' %>
+  <div role="main" class="ui-content">    
+ 
+    <%= render 'form' %>
+    
+    <div class="links_form"><%= link_to 'Salir', requested_cargo_path(@requested_cargo) %></div> 
+   
+  </div> <!-- /content -->  
   
-<div class="links_form"><%= link_to 'Atrás', requested_cargo_path(@requested_cargo) %></div>
-  
+<% end %>

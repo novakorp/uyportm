@@ -1,53 +1,60 @@
-﻿<H2> Registro MTOP </H2>
+﻿
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+
+<%  item_url = vehicle_registration_path(vehicle_registration)
+    item_id=mobile_item_id(item_url) %>
+
+  <div class="titulo_partial_modelo"> Registro MTOP </div >
+ 
+  <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+      
+    <tr>
+    <th>Chasis:</th>
+    <td> <%= vehicle_registration.chassis %> </td>
+    </tr>  
     
-  <tr>
-  <th>Chasis:</th>
-  <td> <%= vehicle_registration.chassis %> </td>
-  </tr>  
-  
-  <tr>
-  <th>Motor:</th>
-  <td> <%= vehicle_registration.engine %></td>
-  </tr>   
-  
-  <tr>
-  <th>Matrícula:</th>
-  <td> <%= vehicle_registration.vehicle.number_plate %></td>
-  </tr>   
-  
-  
-  <tr>
-  <th>Fecha Empadronamiento:</th>
-  <td>  <%= vehicle_registration.registration_date.to_date %>  </td> 
-  </tr>  
-  
-  <tr>
-  <th>Padrón:</th>
-  <td> <%= vehicle_registration.registration_number %></td>
-  </tr>   
-  
-  <tr>
-  <th>Identificación DNT:</th>
-  <td> <%= vehicle_registration.dnt_id %></td>
-  </tr>   
-  
-  
-  <tr>
-  <th>Fecha de Ingreso:</th>
-  <td> <%= vehicle_registration.date_of_entry %></td>
-  </tr>   
-  
-  <tr>
-  <th>Propietario / MTOP :</th>
-  <td> <%= vehicle_registration.vehicle.company.company_name %> / <%= vehicle_registration.vehicle.company.mtop %> </td>
-  </tr>   
+    <tr>
+    <th>Motor:</th>
+    <td> <%= vehicle_registration.engine %></td>
+    </tr>   
+    
+    
+    <tr>
+    <th>Fecha Empadronamiento:</th>
+    <td>    <%= if vehicle_registration.registration_date
+                l vehicle_registration.registration_date.to_date 
+              end %> 
+    </td> 
+    </tr>  
+    
+    <tr>
+    <th>Padrón:</th>
+    <td> <%= vehicle_registration.registration_number %></td>
+    </tr>   
+    
+    <tr>
+    <th>Identificación DNT:</th>
+    <td> <%= vehicle_registration.dnt_id %></td>
+    </tr>   
+    
+    
+    <tr>
+    <th>Fecha de Ingreso: </th>
+    <td>    <%= if vehicle_registration.date_of_entry
+                l vehicle_registration.date_of_entry.to_date 
+              end %> 
+    </td>
+    </tr>   
+    
+    <tr>
+    <th>Propietario / MTOP :</th>
+    <td> <%= vehicle_registration.vehicle.company.company_name %> / <%= vehicle_registration.vehicle.company.mtop %> </td>
+    </tr>   
 	
-  <tr>
-  <th> </th>
-  <td> <div class="links_form"> <%= link_to 'Modificar', edit_vehicle_registration_path(vehicle_registration) %> </div> </td>
-  </tr> 
+    <tr>
+    <th> </th>
+    <td> <div class="links_form"> <%= link_to 'Modificar', edit_vehicle_registration_path(vehicle_registration) %> </div> </td>
+    </tr> 
 	
-</table>
+  </table>
 

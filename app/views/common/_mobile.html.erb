@@ -1,0 +1,42 @@
+
+<body> 
+  
+    <!-- page_id , page_title se pasan como variable del layout -->    
+    <div id='<%= page_id %>' data-role="page" class="ui-responsive-panel">
+      
+      <div data-role="header">
+        <h2 style="color:green"> <%= page_title %></h2>    
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>    
+      </div><!-- /header -->
+      
+      <%= render "/common/form_errors" %>
+           
+      <%= yield %>  
+          
+      <%= render "/common/nav_menu" %>
+      <%= render "/common/footer_generic" %>
+      
+    </div> <!-- page -->
+    
+      <%= render '/common/generic_popup.html.erb'%> 
+</body>
+
+  
+<script>
+     
+  //  page_id se pasa como variable por parte de las paginas que utilizan este layout
+  
+  $( document ).on( "pagecreate", <%= page_id  %>, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+  
+  $( document ).on( "pageshow", <%= page_id %>, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+</script>
+ 
+
+
+
+ 
+ 

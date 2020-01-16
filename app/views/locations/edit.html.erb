@@ -1,5 +1,15 @@
-﻿<h1>Modificar Ubicación</h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title =>  "Modificar Ubicación" } do %> 
+           
  
-<%= render 'form' %>
+  <div role="main" class="ui-content">    
+	 
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', locations_path %></div>
+ 
+
+  </div> <!-- /content -->  
   
-<div class="links_form"><%= link_to 'Atrás', locations_path %></div>
+<% end %>

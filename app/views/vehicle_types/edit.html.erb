@@ -1,7 +1,13 @@
-﻿<h1>Modificar Tipo de Vehículo</h1>
+﻿<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title =>  "Modificar Tipo de Vehículo" } do %> 
  
-<%= render 'form' %>
+  <div role="main" class="ui-content">    
+ 
+    <%= render 'form' %>  
+
+    <div class="links_form"><%= link_to 'Salir', vehicle_types_path %></div>
+
+  </div> <!-- /content -->  
   
-<div class="links_form"><%= link_to 'Atrás', vehicle_types_path %></div>
-  
+<% end %>
   

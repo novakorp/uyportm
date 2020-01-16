@@ -1,0 +1,18 @@
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Dispositivo GPS" } do %>
+                  
+  
+  <div role="main" class="ui-content">    
+
+	  
+	<%= render 'form' %>
+	  
+	<div class="links_form"><%= link_to 'Salir', gps_vehicles_path %></div>
+ 
+
+  </div> <!-- /content -->
+  
+
+<% end %>

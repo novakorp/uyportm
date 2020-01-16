@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
 	end
 	
 	def create
-	  @service = Service.new(params[:service])
+	  @service = Service.new(obj_params)
 
 	  if @service.save
 		redirect_to @service
@@ -38,8 +38,20 @@ class ServicesController < ApplicationController
 	def destroy
 	  @service = Service.find(params[:id])
 	  @service.destroy
-	 
-	  redirect_to services_path
+	  
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to services_path }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 	
+  private
+
+  def obj_params
+    params.require(:service).permit(:description, :billing_unit_id, :vehicle_type_id, :couple_type_id, :couple_required, :company_id)
+  end
 end

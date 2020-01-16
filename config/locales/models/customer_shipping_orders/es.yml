@@ -13,8 +13,9 @@ es:
         order_number: "Nro"
         account_id: "Cuenta"
         company_id: "Empresa"
+        service_id: "Servicio"
         order_datetime: "Fecha Orden"
-        shipping_date: "Fecha Inicio Trabajos"
+        shipping_date: "Fecha Trabajo"
         comments: "Observaciones"
         shipping_requests: ""
         

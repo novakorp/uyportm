@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gps_vehicle_id: MyString
+  gps_plate_number: MyString
+  gps_identifier: MyString
+
+two:
+  gps_vehicle_id: MyString
+  gps_plate_number: MyString
+  gps_identifier: MyString

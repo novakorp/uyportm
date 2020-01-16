@@ -1,17 +1,17 @@
-﻿BODY {
-	margin: 0px ;  
-	background-image: url(<%= asset_path 'back_disenio_gral_2.gif' %>) ; 
-	background-repeat: repeat;
+
+/* Pie de pagina general */
+
+.footer_odacor { 
+  font-weight: normal;
+  font-size: 5px;
+  color: green;
 }
 
-BODY , INPUT, A , TD {font-family: Tahoma ; font-size: 9pt}
+/* para autocomplete */
+.ui-filter-inset {
+    margin-top: 0;
+}
 
-A, A:Visited { text-decoration: none; color: #24AF2E; font-weight:bold}
-
-A:Hover {color: #63F265}
-
-h1 {margin:0px 0px 20px 0px; font-size: 14pt}
-h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 
 .tabla_principal {width: 100%; height:700px;}
 .tabla_principal_encabezado {
@@ -21,7 +21,7 @@ h2 {margin:0px 0px 10px 0px; font-size: 10pt; color: #4C4C4C}
 }
 
 .tabla_principal_banner {
-	background-image: url('<%= asset_path 'banner3.jpg' %>') ;
+	
   width: 133px;
 	height: 45px;
 }
@@ -73,6 +73,14 @@ TD.link_inactivo {
 	font-size: 9pt;
 	font-weight: bold;
   margin: 12px 0px 20px 0px;
+}
+
+.titulo_seccion_p {
+	color: #606060;
+	font-size: 9pt;
+	font-weight: bold;
+	padding-left: 2px;
+	
 }
 
 .tabla_mantenimiento TH {
@@ -144,4 +152,5 @@ TD.link_inactivo {
   line-height: 150%;
   color: #555555;
 }
+
 

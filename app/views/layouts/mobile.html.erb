@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>Odacor MS</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+   
+  <link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.css" />
+  <script src="/assets/date_picker/jquery.ui.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.mobile.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.ui.datepicker-es.js"></script>
+
+</head>
+
+<body> 
+  
+    <!-- page_id , page_title se pasan como variable del layout -->    
+    <div id='<%= page_id %>' data-role="page" class="ui-responsive-panel">
+      
+      <div data-role="header">
+        <h2 style="color:green"> <%= page_title %></h2>    
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>    
+      </div><!-- /header -->
+      
+      <%= render "/common/form_errors" %>
+           
+      <%= yield %>  
+      
+          
+      <%= render "/common/nav_menu" %>
+      <%= render "/common/footer_generic" %>
+      
+    </div> <!-- page -->
+   
+   
+      <%= render '/common/generic_popup.html.erb'%>
+    
+</body>
+
+  
+<script>
+     
+  //  page_id se pasa como variable por parte de las paginas que utilizan este layout
+  
+  $( document ).on( "pagecreate", <%= page_id  %>, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+  
+  $( document ).on( "pageshow", <%= page_id %>, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+</script>
+
+
+</html>
+
+
+
+
+
+ 
+ 

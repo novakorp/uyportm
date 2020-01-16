@@ -14,3 +14,4 @@ es:
         last_name: "Apellido"
         personal_id: "Nro Documento"
         personal_id_type: "Tipo Documento"
+        job_type: "Cargo"

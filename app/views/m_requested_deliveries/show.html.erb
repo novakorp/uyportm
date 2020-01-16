@@ -1,20 +1,30 @@
-﻿<H1> Indicación de Entrega de Modelo de Pedido</H1>
 
-<table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Indicación de Entrega de Modelo de Pedido" } do %>
+   
+  <div role="main" class="ui-content">   
  
-  <tr>   
-  <th>Cantidad:</th>  
-	<td> <%=  @m_requested_delivery.amount %> </td>
-  </tr>
-    <tr> 
-  <th>Dirección de Entrega:</th>  
-	<td> <%=  @m_requested_delivery.address.description %> </td>
-  </tr>
-  <th>Comentarios:</th>  
-	<td> <%=  @m_requested_delivery.comments %> </td>
-  </tr>
-    
-</table>
 
-<div class="links_form"><%= link_to 'Atrás', m_requested_cargo_path(@m_requested_cargo) %></div>
+  <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
+   
+    <tr>   
+    <th>Cantidad:</th>  
+	  <td> <%=  @m_requested_delivery.amount %> </td>
+    </tr>
+      <tr> 
+    <th>Dirección de Entrega:</th>  
+	  <td> <%=  @m_requested_delivery.address.description %> </td>
+    </tr>
+    <th>Comentarios:</th>  
+	  <td> <%=  @m_requested_delivery.comments %> </td>
+    </tr>
+      
+  </table>
 
+  <div class="links_form"><%= link_to 'Salir', m_requested_cargo_path(@m_requested_cargo), {"data-ajax"=>"false"}%></div> 
+  
+  </div> <!-- /content -->
+  
+  
+<% end %>

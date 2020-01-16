@@ -1,5 +1,9 @@
-﻿<H1> Entrega de Material </H1>
 
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Entrega de Material" } do %>
+   
+  <div role="main" class="ui-content">   
 
 <table class="tabla_campos_lectura" cellpadding=0 cellspacing=0>
   <tr>   
@@ -10,6 +14,8 @@
    <th>Cantidad:</th>  
 	<td> <%= @shipment_supply.amount %> <%= shipment_supply.requested_supply.requested_cargo.measure_unit.symbol %>  </td>
   </tr>
-
-<div class="links_form"><%= link_to 'Atrás', shipments_path(@shipment) %></div>
   
+    <div class="links_form"><%= link_to 'Salir',  shipments_path(@shipment)  , {"data-ajax"=>"false"}%></div> 
+
+  </div> <!-- /content --> 
+<% end %>

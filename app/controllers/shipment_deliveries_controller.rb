@@ -6,7 +6,7 @@ class ShipmentDeliveriesController < ApplicationController
 	
 	def create
 		@shipment = Shipment.find(params[:shipment_id])
-		@shipment_delivery = ShipmentDelivery.new(params[:shipment_delivery])
+		@shipment_delivery = ShipmentDelivery.new(obj_params)
 		@shipment_delivery.shipment_id = @shipment.id
 		
 	  if @shipment_delivery.save
@@ -40,7 +40,21 @@ class ShipmentDeliveriesController < ApplicationController
 	  @shipment = @shipment_delivery.shipment
 	  @shipment_delivery.destroy
 	 
-	  redirect_to @shipment
+	 
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @shipment }
+      format.js { render "/common/action_result.js" }
+    end 
+     
 	end
 	
+  private
+
+  def obj_params
+    params.require(:shipment_delivery).permit(:amount, :requested_delivery_id)
+  end
 end

@@ -1,5 +1,14 @@
-﻿<h1>Nueva Unidad de Facturación</h1>
-  
-<%= render 'form' %>
+﻿
 
-<div class="links_form"><%= link_to 'Atrás', billing_units_path %></div>
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nueva Unidad de Facturación" } do %>
+                  
+  
+  <div role="main" class="ui-content">     
+	<%= render 'form' %>
+
+	<div class="links_form"><%= link_to 'Salir', billing_units_path %></div>
+  </div><!-- /content -->
+  
+
+<% end %>

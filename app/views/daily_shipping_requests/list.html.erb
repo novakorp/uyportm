@@ -16,7 +16,7 @@
 <% end %>
 
 <br>
- <%= link_to 'Nuevo Pedido', new_shipping_request_path %>
+ 
  
 <table class="tabla_listado" cellpadding=0 cellspacing=0>
   <tr class="tabla_listado_fila_cabezal">
@@ -25,22 +25,20 @@
     <th>Servicio</th>			
 	<th>Cliente</th>		
 	<th>Recorrido</th>
-	<th>Factura</th>
 	<th>Observaciones</th>
 	<th></th>
   </tr>
  
-  <% @shipping_requests.each do |shipping_request| %>
+  <% @shipments.each do |shipment| %>
     <tr class="tabla_listado_fila_contenido">
-      <td><%= shipping_request.request_date %></td>
-      <td><%= shipping_request.required_shipment_date %></td>
-	  <td><%= shipping_request.service.description %></td>  	  
-	  <td><%= shipping_request.account.customer.name %> </td> 
-      <td><%= shipping_request.trip.description %></td> 
-	  <td><%= shipping_request.bill_number %> </td>   
-	  <td><%= shipping_request.details %> </td>   
-	  <td><%= link_to 'Ver', shipping_request %> &nbsp; <%= link_to 'Editar', edit_shipping_request_path(shipping_request) %> &nbsp; <%= link_to 'Eliminar', shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
-    </tr>
+      <td><%= shipment.shipping_request.customer_shipping_order.order_datetime %></td>
+      <td><%= shipment.departure_time %></td>
+	  <td><%= shipment.shipping_request.service.description %></td>  	  
+	  <td><%= shipment.shipping_request.customer_shipping_order.customer.name  %> </td> 
+      <td><%= shipment.shipping_request.trip.description %></td> 
+	  <td><%= shipment.comments %> </td>   
+	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), shipment %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipment_path(shipment) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), shipment_path(shipment), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+        </tr>
   <% end %>
 </table>
 <div class="links_listado"><%= link_to 'Volver al Menú Principal', "/welcome/index" %></div>

@@ -63,15 +63,18 @@
   
   <tr>
     <th><%= f.label :vehicle_id %></th>
-    <td> <%= f.collection_select :vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 0}), :id, :number_plate %>   </td>
+    
+	<td> <%= f.collection_select :vehicle_id, Vehicle.joins(:vehicle_type).where("vehicle_type_id='" + @shipping_request.service.vehicle_type_id.to_s + "'").order(:plate_number), :id, :plate_number %> </td>
+    
+     
   </tr>
   
    <tr>
     <th><%= f.label :coupled_vehicle_id %></th>
     <% if @shipment.shipping_request.service.couple_type %>
-      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.where("vehicle_type_id=" + @shipment.shipping_request.service.couple_type_id.to_s), :id, :number_plate %>   </td>
+      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.where("vehicle_type_id=" + @shipment.shipping_request.service.couple_type_id.to_s), :id, :plate_number %>   </td>
     <% else %>
-      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 1}), :id, :number_plate %>   </td>
+      <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 1}), :id, :plate_number %>   </td>
       
     <% end %>
   </tr>

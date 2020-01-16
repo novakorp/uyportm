@@ -7,22 +7,24 @@ class SuctaRegistrationsController < ApplicationController
 	
 	def create
     @vehicle = Vehicle.find(params[:vehicle_id])
-		@sucta_registration = SuctaRegistration.new(params[:sucta_registration])
+		@sucta_registration = SuctaRegistration.new(obj_params)
 		@sucta_registration.vehicle_id = @vehicle.id
 		
 	  if @sucta_registration.save
 		 redirect_to  @vehicle 
 	  else
-		render 'new'
+		  render 'new'
 	  end
 	end
 
 	def show
 	  @sucta_registration = SuctaRegistration.find(params[:id])
+    @vehicle = Vehicle.find(@sucta_registration.vehicle_id)
 	end
 
 	def edit
-	  @sucta_registration = SuctaRegistration.find(params[:id])	      
+	  @sucta_registration = SuctaRegistration.find(params[:id])	     
+    @vehicle = Vehicle.find(@sucta_registration.vehicle_id) 
 	end
 
 	def update
@@ -41,8 +43,20 @@ class SuctaRegistrationsController < ApplicationController
 	  @vehicle = @sucta_registration.vehicle
 	  @sucta_registration.destroy
 	 
-	  redirect_to @vehicle
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @vehicle }
+      format.js { render "/common/action_result.js" }
+    end   
 	end
 	
+  private
+
+  def obj_params
+    params.require(:sucta_registration).permit(:expiration, :extended, :comments)
+  end
 end
 

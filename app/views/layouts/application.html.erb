@@ -1,37 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Gestión de Transportes</title>
+  <title>Odacor MS :P </title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+  
+  
+   
+  <link rel="stylesheet" media="all" href="/assets/date_picker/jquery.mobile.datepicker.css" />
+  <script src="/assets/date_picker/jquery.ui.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.mobile.datepicker.js"></script>
+  <script src="/assets/date_picker/jquery.ui.datepicker-es.js"></script>
+
 </head>
-<body>
-<table class="tabla_principal" align=center cellpadding=0 cellspacing=0 border=0>
-<tr class="tabla_principal_encabezado">
- <td class="tabla_principal_banner"></td>
- <td>
-<div class="links_autenticacion" width=100%>
- <% if signed_in? %>
-	  <%= current_user.name %> &nbsp; | &nbsp; <%= link_to "Cerrar sesión", signout_path, method: "delete" %>
-  <% else %>
-     <%= link_to "Ingresar", signin_path %>
-  <% end %>
-</div>
-</td></tr>
-<tr>
-<td colspan=2 class="tabla_principal_contenido">
-	<!-- Mensajes del controller de su ultima invocacion -->
-	<% flash.each do |key, value| %>
-      <% if key == 'success' || key == 'error' %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-        <% end %>
-  <% end %>
-<%= yield %>
 
-</td>
-</tr>
-</table>
-
-</body>
+   <%= yield %>
+    
 </html>

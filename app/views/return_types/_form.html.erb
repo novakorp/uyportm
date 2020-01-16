@@ -1,0 +1,29 @@
+﻿  
+<%= form_for @return_type do |f| %>
+ <% if @return_type.errors.any? %>
+  <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
+    <ul>
+    <% @return_type.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  <tr>
+  <th><%= f.label :description %></th>
+  <td>  <%= f.text_field :description %> </td>
+  </tr>
+    
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= f.submit t(:save) %>
+  </td>
+  </tr>
+  </table>
+  
+<% end %>
+
+

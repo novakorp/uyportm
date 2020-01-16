@@ -1,5 +1,15 @@
-﻿<h1> Ingresar Indicación de Entrega </h1>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Ingresar Indicación de Entrega" } do %>
+                  
   
-<%= render 'form' %>
+  <div role="main" class="ui-content">     
   
-<div class="links_form"><%= link_to 'Atrás', requested_cargo_path(@requested_cargo) %></div>
+    <%= render 'form' %>
+      
+    <div class="links_form"><%= link_to 'Salir', requested_cargo_path(@requested_cargo) %></div>
+
+  </div> <!-- /content -->
+  
+
+<% end %>

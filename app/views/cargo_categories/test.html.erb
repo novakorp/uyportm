@@ -1,0 +1,109 @@
+
+<body> 
+  
+    <!-- page_id , page_title se pasan como variable del layout -->    
+    <div id='_cargo_categories_new' data-role="page" class="ui-responsive-panel">
+      
+      <div data-role="header">
+        <h2 style="color:green"> Nueva Categoria de Carga</h2>    
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>    
+      </div><!-- /header -->
+      
+      
+           
+      
+                  
+  
+  <div role="main" class="ui-content">    
+
+    ﻿  
+<form class="new_cargo_category" id="new_cargo_category" action="/cargo_categories" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="uxlxXkvHSBNGtw4qj36GB+Fp1U0/BJcP6Kg5hk7h/dPLMHg7B1JxkMQWL1p17fFnSYgdZhuH7C+T4IyX+hj8Fw==" />
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+    <tr>
+    <th><label for="cargo_category_description">Descripción</label></th>
+    <td>  <input type="text" name="cargo_category[description]" id="cargo_category_description" /> </td>
+    </tr>
+     
+    <tr><td colspan=2 class="acciones_form">
+    <input type="submit" name="commit" value="Guardar" />
+    </td>
+    </tr>
+  </table>
+  
+</form>
+
+
+    
+
+    <div class="links_form"><a href="/cargo_categories">Salir</a></div>
+
+
+  </div><!-- /content -->
+  
+
+  
+          
+        <div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>            
+                <li><a href="/welcome/index">Inicio</a></li>
+                <li><a href="#panel-responsive-page2">Pedidos</a></li>
+                <li><a href="/agenda/agenda">Agenda</a></li>                 
+                <li><a href="#panel-responsive-page2">Viajes</a></li>
+                <li><a href="#panel-responsive-page2">Consultas</a></li>
+                <li><a href="#panel-responsive-page2">Ajustes</a></li>
+                <li><a href="#panel-responsive-page2">Salir</a></li> 
+        </ul>
+    </div><!-- /panel -->
+      
+
+  <div data-role="footer"> 
+      <h6 style="font-weight: normal;  font-size: 9pt;  color: #5F5F5F;"> Odacor S.A. </h6>  
+  </div><!-- /footer -->  
+
+      
+    </div> <!-- page -->
+    
+       <!-- Boton oculto para mostrar dialogo reusable --> 
+  <a id="show_generic_popup" style="display:none" href="#generic_popup" data-rel="popup" data-position-to="window"  data-transition="pop" 
+  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Show Generic Popup</a>
+ 
+  <!-- Dialogo reusable, se deja fuera de las paginas -->
+ 
+   <div data-role="popup" id="generic_popup" data-overlay-theme="b" data-theme="b" style="max-width:400px;">
+      <div data-role="header" data-theme="a">
+        <h1 id='generic_popup_title'></h1>
+      </div>
+      <div role="main" class="ui-content"> 
+        
+          <h3 id='generic_popup_content' class="ui-title"></h3>
+          
+          <input id="generic_popup_data" />
+          
+          <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancelar</a>
+           
+          <a id='generic_popup_action' href="javascript:eval($('#generic_popup_data').val())"  class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-transition="flow">Aceptar</a>
+      </div>  
+  </div>   
+</body>
+
+  
+<script>
+     
+  //  page_id se pasa como variable por parte de las paginas que utilizan este layout
+  
+  $( document ).on( "pagecreate", _cargo_categories_new, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+  
+  $( document ).on( "pageshow", _cargo_categories_new, function() {  
+      $( "#generic_popup" ).enhanceWithin().popup();
+  });
+</script>
+ 
+
+
+
+ 
+ 

@@ -1,4 +1,21 @@
-Hola <%= @user.name %>
+Vencimientos de SUCTA
 
-Este es un correo enviado por el sistema.
 
+<% if @sucta_vencidos.length > 0 %>
+Ya Vencidos
+    
+    <% @sucta_vencidos.each do |alert| %>
+    	<%= alert['texto'] %> + "\n"
+  	<% end %> 
+<% end %>
+    
+    
+<% if @sucta_a_vencer.length > 0 %>
+Por Vencer 
+
+    <% @sucta_a_vencer.each do |alert| %>
+    	<%= alert['texto'] %> + "\n"
+  	<% end %>
+
+<% end %>
+    

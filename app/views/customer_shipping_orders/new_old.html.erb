@@ -1,0 +1,59 @@
+ 
+<% @top_menu_selection="Pedidos" %>
+<%= render '/common/top_menu' %>
+
+
+<% @customer_shipping_orders_menu_selection="Pendientes" %>
+<%= render 'customer_shipping_orders_menu' %>
+
+<!-- Tabla contendora general -->
+<table class="tabla_contenedora_form" cellpadding=0 cellspacing=0>
+	<tr><td>		
+	
+	<!-- Tabla listado -->
+	<table class="tabla_listado" cellpadding=0 cellspacing=0>
+	  <tr class="tabla_listado_fila_cabezal">
+	  <th>Nota</th>	 
+	  <th>Fecha Trabajo</th>			
+		<th>Trabajo</th>		
+		<th>Desc</th>
+		<th># Viajes <br>Cmp/Ing/Sol</th>
+		<th>Carga</th>
+		<th>Q</th>  
+		<th></th>
+	  </tr>
+ 
+  
+  <% @shipping_requests.each do |shipping_request| %>
+    <tr class="tabla_listado_fila_contenido">
+     <td> <%= shipping_request.customer_shipping_order.order_number %> - <span class="dato_lista_1"><%= l shipping_request.customer_shipping_order.order_datetime.to_date %></span> <br>
+        <span class="dato_lista_2"><%= shipping_request.customer_shipping_order.customer.name %></span>
+     </td>
+     <td><%= l shipping_request.customer_shipping_order.shipping_date %></td>
+     <td> <nobr> 
+        <% if shipping_request.m_shipping_request != nil %>
+           <%=  shipping_request.m_shipping_request.name %>
+        <%  else %>
+            <%= t 'other' %>
+        <% end %>
+     </nobr> </td>
+     <td> <nobr> <%=  shipping_request.service.description %></nobr><br>
+        <span class="dato_lista_sec"> <%=  shipping_request.trip.description %> </span></td>
+     <td align=center> <%=  Shipment.where("shipping_request_id=? and status>=3", shipping_request.id).count %>/<%=  Shipment.where("shipping_request_id=?", shipping_request.id).count %>/<%=  shipping_request.trip_quantity %> </td>    
+     <td> <%=  shipping_request.cargo_type.description %> </td>
+     <td> <%=  shipping_request.cargo_quantity %> <%=  shipping_request.measure_unit.symbol %> </td>
+    
+	   <td><%= link_to image_tag(asset_path ('buttons/trip.gif'), options={"title" => "Ingresar Viaje"}), '/shipments/new/' + shipping_request.id.to_s %> &nbsp; <%= link_to image_tag(asset_path ('buttons/view.gif')), shipping_request %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipping_request_path(shipping_request) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+    </tr>     
+  <% end %>
+</table> 
+    </td></tr>
+    <tr><td>
+    	<div class="titulo_seccion_p" >Agregar Nota</div>
+    	<div style="border-color:#4BC438; border-style:solid; border-width:2px; margin-top:2px" >    
+			<%= render 'form_integrated' %>  	
+		</div> 
+	</td></tr> 
+</table>
+
+<br>    

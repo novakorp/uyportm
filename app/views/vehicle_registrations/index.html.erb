@@ -1,0 +1,63 @@
+﻿
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Vehículos" } do %> 
+
+  <div role="main" class="ui-content">     
+  
+    <table class="tabla_listado" cellpadding=0 cellspacing=0>
+      <tr class="tabla_listado_fila_cabezal">
+        <th>Empresa</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Matrícula</th> 
+        <th>Fecha</th> 
+	    <th>Prórroga 6M</th>
+      </tr>
+
+
+      <% @sucta_registrations.each do |sucta_registration| %>
+        <%  item_url = sucta_registration_path(sucta_registration)  
+            item_id=mobile_item_id(item_url) %> 
+	      
+		     <tr id="<%= item_id %>" class="tabla_listado_fila_contenido"> 
+  
+       <% if sucta_registration.vehicle != nil %>
+	      <td> <%= sucta_registration.vehicle.company.company_name  %> </td> 
+	      <td> 
+	      		<% if sucta_registration.vehicle.brand != nil %>
+	      	  	sucta_registration.vehicle.brand.abbreviation  
+	      	   <% end %>
+	      </td>  
+	      <td> 
+	      	  sucta_registration.vehicle.model   
+	      </td> 
+	      <td> 
+	      	  sucta_registration.vehicle.plate_number   
+	      </td> 
+	     <% else %>
+	     	<td>-</td>
+	     	<td>-</td>
+	     	<td>-</td>
+	     	<td>-</td>
+	     <% end %>	   
+          <td><%= sucta_registration.expiration.to_date %></td>	 
+	      <td> 
+	      	<% if sucta_registration.extended == 1 %>
+	      		Sí
+	      	<% else %>
+	      		No
+	      	<% end %>
+	      </td>
+	      <td><%= link_to 'Ver', sucta_registration %> &nbsp; <%= link_to 'Editar', edit_sucta_registration_path(sucta_registration) %> &nbsp; <%= link_to 'Eliminar', "javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"  %>  </td>  
+        </tr>
+      <% end %>
+    </table>
+
+    <div class="links_listado"><%= link_to 'Salir', "/sucta_registrations" %></div>  
+  </div><!-- /content -->  
+<% end %>
+ 
+
+
+
+

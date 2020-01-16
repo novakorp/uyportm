@@ -1,0 +1,62 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Consultar Moviles" } do %> 
+
+  <div role="main" class="ui-content">  
+
+	 <%= link_to 'Volver', '/gps' %>
+	<br>
+	Total Vehículos: <%= @wsdata.length %> <br />
+
+	<table cellpadding=3 cellspacing=5>
+		<tr>
+		
+			<td>ident numerico</td>		
+			<td>patente gps</td>
+			<td>ident descriptivo</td>	
+			<td></td>
+			<td>patente local</td>
+			<td>ident local</td>
+			<td>cambio</td>
+		</tr>
+	
+		<% @wsdata.each do |data| %>
+
+	
+			<% gps_vehic = GpsVehicle.first(:conditions => ["gps_numeric_ident = ?", data[:movil_id]]) %>
+				
+			<tr>
+		    	 <td>'<%=data[:movil_id]%>'</td>
+				 <td>'<%=data[:patente]%>'</td> 
+		      	 <td>'<%=data[:identificador]%>'</td>  
+		      	 <td></td>
+		      	 
+		      	 <% if gps_vehic %>
+		      		<td> '<%= gps_vehic.gps_plate_number %>'</td>
+		      	 	<td> '<%= gps_vehic.gps_descriptive_ident %>'</td>
+		      	 	
+		      	 	<% if gps_vehic.gps_plate_number != data[:patente]  || gps_vehic.gps_descriptive_ident != data[:identificador]  %>
+		      	 		<td> ****  CAMBIA  **** </td>
+		      	 	<% else %>
+		      	 		<td>  </td>
+		      	 	<% end %>
+		      	 <% else %>
+		      	 	<td>**</td>
+		      	 	<td>**</td>
+		      	 	<td> ****  NUEVO  **** </td>
+		      	 <% end %>	      	 	
+			</tr>
+	
+		<% end %>
+		
+	</table>
+
+	 <%= @msgs %>
+
+	<div class="links_listado"><%= link_to 'Volver', '/gps' %></div>
+
+
+  </div> <!-- /content --> 
+  
+<% end %>
+

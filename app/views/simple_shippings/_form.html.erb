@@ -1,0 +1,144 @@
+﻿  
+<%= form_for @simple_shipping do |f| %>
+ <% if @simple_shipping.errors.any? %>
+   <div id="error_explanation" class="form_errors">
+    <h2> <%= t :error_header %> </h2>
+    <ul>
+    <% @simple_shipping.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <%else%>
+    <div id="error_explanation" class="form_errors" style="display:none">
+      <h2> <%= t :error_header %> </h2>
+      <ul id="error_list">
+      
+      </ul>
+    </div>
+  
+  <% end %>
+  
+  
+  <!--    SEGUIR ADAPTANDO  FORM  A  SIMPLE_SHIPPING   -->
+     
+ 
+  <%= hidden_field_tag "back_option", @back_option %> 
+  
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+   
+  <tr>
+   <th><%= f.label :shipping_date %></th>
+  <td> <%= f.text_field :shipping_date %> </td> 
+  </tr>
+  <tr>
+    <th> <%= f.label :m_shipping_request_id %> </th>
+	<td> <%= text_field_tag(:m_shipping_request_select) %> 
+		<%= hidden_field_tag(:m_shipping_request_id) %> 
+	</td>
+  </tr>    
+  <tr>
+    <th><%= f.label :vehicle_id %></th>    
+	<td> <%= f.collection_select :vehicle_id, Vehicle.order(:plate_number).all, :id, :plate_number %> </td>    
+  </tr>
+  
+   <tr>
+    <th><%= f.label :coupled_vehicle_id %></th>     
+    <td> <%= f.collection_select :coupled_vehicle_id, Vehicle.joins(:vehicle_type).where(vehicle_types: {coupling_support: 1}), :id, :plate_number %>   </td>      
+  </tr>
+  
+  <tr>
+    <th><%= f.label :driver_id %></th>
+    <td>  <%= f.collection_select :driver_id, Employee.all, :id, :last_name  %> </td>
+  </tr>
+  
+  <tr>
+    <th><%= f.label :company_id %></th>
+    <td>  <%= f.collection_select :company_id, Company.all, :id, :company_name  %> </td>
+  </tr>
+  
+  <tr>
+  <th><%= f.label :amount %></th>
+  <td> <%= f.text_field :amount %> </td>
+  </tr>
+  
+   <tr>
+  <th><%= f.label :billing_unit_id %></th>
+  <td>  <%= f.collection_select :billing_unit_id, BillingUnit.all, :id, :description  %> </td>
+  </tr>
+  
+  <tr>
+  <th><%= f.label :unit_price %></th>
+  <td> <%= f.text_field :unit_price %> </td>
+  </tr>
+  
+   <tr>
+    <th><%= f.label :documents %></th>
+    <td> <%= f.text_field :documents %></td>
+  </tr>
+  
+   <tr>
+    <th><%= f.label :return_type_id %></th>
+	  <td>  <%= f.collection_select :return_type_id, ReturnType.all, :id, :description  %> </td>
+  </tr>
+  
+   <tr>
+    <th><%= f.label :comments %></th>
+    <td> <%= f.text_field :comments %></td>
+  </tr>
+  
+   <tr>
+    <th><%= f.label :invoice_number %></th>
+    <td> <%= f.text_field :invoice_number %></td>
+  </tr>
+
+  </table>
+  
+  
+  <br>
+  <table class="tabla_campos" cellpadding=0 cellspacing=0>
+  
+  <tr><td colspan=2 class="acciones_form">
+  <%= f.submit t(:save), onclick: 'return validarForm();' %>
+
+  </td>
+  </tr>
+  
+  </table>
+  
+  <script>
+    
+  
+  function mostrarMensajesErr (errores) {  
+  
+    var html = "<li>"  + errores.join("</li><li>") + "</li>";       
+    $("#error_list").html(html);      
+    $("#error_explanation").show();
+    
+    var offs = $("#error_explanation").offset();
+    
+    window.scrollTo(offs.left-5, offs.top-5);
+  }
+  
+      
+  
+	$(function() { 
+        
+        
+       $( "#shipping_date" ).datepicker({
+		  dateFormat: "dd-mm-yy",
+		  defaultDate: '<%= @date_select %>'
+	    });
+	    
+        
+   });
+        
+     
+     
+  </script>
+  
+ 
+  
+<% end %>
+
+

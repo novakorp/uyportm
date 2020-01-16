@@ -23,7 +23,7 @@
       <td> <%= shipment.shipping_request.customer_shipping_order.customer.name %> </td>
       <td> <nobr> <%=  shipment.shipping_request.service.description %></nobr><br>
         <span class="dato_lista_sec"> <%=  shipment.shipping_request.trip.description %> </span></td>	  
-     <td><%= shipment.vehicle.number_plate %> <br> <%= shipment.coupled_vehicle.number_plate %></td>
+     <td><%= shipment.vehicle.plate_number %> <br> <%= shipment.coupled_vehicle.plate_number %></td>
 	  <td><%= shipment.driver.first_name + " " + shipment.driver.last_name %> </td> 
 	  <td> <%= getShipmentStatusDesc(shipment.status) %> </td> 
 	  <td><%= link_to image_tag(asset_path ('buttons/view.gif')), shipment %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipment_path(shipment) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')), shipment_path(shipment), method: :delete, data: { confirm: '¿Está seguro?' } %></td>

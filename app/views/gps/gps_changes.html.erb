@@ -1,0 +1,112 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Información de Vehículos de GPS" } do %> 
+
+  <div role="main" class="ui-content">  
+
+
+	 <%= link_to 'Volver', "/gps" %> <br/></br>
+
+	Total Cambios: <%= @changes.length %> <br/>
+
+	<table class="tabla_listado" cellpadding=0 cellspacing=0>
+	  <tr class="tabla_listado_fila_cabezal">
+	
+			<th colspan="7" style="border-width:0 2px 0 0 ; border-color:white ; border-style:solid">Actual</th>
+			<th colspan="8">Anterior</th>
+		</tr>
+	 <tr class="tabla_listado_fila_cabezal">
+	
+      <th>fecha cambio</th>
+			<th>id gv</th>
+			<th>ident gps</th> 
+			<th>matr gps</th> 
+			<th style="border-width:0 2px 0 0 ; border-color:white ; border-style:solid">descripcion</th> 
+			<th>modelo</th>	  	
+      <th>matricula</th>     
+      <th></th> 
+      
+      <th>id gv</th> 
+      <th>matr gps</th> 
+      <th style="border-width:0 2px 0 0 ; border-color:white ; border-style:solid">descripcion</th> 
+      <th>modelo</th>     
+      <th>matricula</th>   
+      <th>fecha retiro</th>     
+      <th>motivo</th>   
+		</tr>
+	
+		<% @changes.each do |c| %> 
+			<tr>
+				<% gv = c.gps_vehicle %> 
+        <% gr = c.gps_retired_vehicle %>
+			
+        <td> <%= l c.created_at %> </td> 
+        <td><%= c.gps_vehicle_id %></td>
+				<% if ! gv.nil? %> 
+				 	<td><%= gv.gps_numeric_ident %></td>			 	
+				 	<td><%= gv.gps_plate_number %></td>
+				 	<td><%= gv.gps_descriptive_ident %></td>		 
+				 	
+          <% v = gv.vehicle %> 
+				 	<% if ! v.nil? %>	  
+            <td><%= v.model %></td>      
+            <td><%= v.plate_number %></td>   
+            
+          <% else %>
+            <td>**</td>      
+            <td>**</td>   
+				 	<% end %>
+				 	
+				<% else %>
+				 	<td>**</td>
+				 	<td>**</td>
+				 	<td>**</td>
+				 	<td>**</td>
+          <td>**</td> 
+				<% end %>
+				
+				<td> | </td>
+				
+        <td><%= c.gps_retired_vehicle_id %></td>  
+				<% if ! gr.nil? %>   
+          <td><%= gr.gps_plate_number %></td>
+          <td><%= gr.gps_descriptive_ident %></td>     
+          
+          <% v = gr.vehicle %> 
+          <% if ! v.nil? %>   
+            <td><%= v.model %></td>      
+            <td><%= v.plate_number %></td>   
+            
+          <% else %>
+            <td>**</td>      
+            <td>**</td>   
+          <% end %>
+          
+               
+          <td><%= l gr.retirement_date %></td>
+          <td><%= gps_h_get_retire_desc gr.retirement_reason %></td> 
+          
+			  <% else %>
+          <td>[NUEVO]</td>
+          <td>**</td>
+          <td>**</td> 
+          <td>**</td> 
+          <td>**</td>
+          <td>**</td> 
+          
+        <% end %>
+			</tr>	
+		 
+		<% end %>
+		
+	</table>
+
+
+	<div class="links_listado"><%= link_to 'Volver', "/gps" %></div>
+
+  </div> <!-- /content --> 
+  
+<% end %>
+	 
+
+	 

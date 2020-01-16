@@ -3,9 +3,12 @@
             @css_class="tabla_listado_fila_destacada" 
         else
             @css_class="tabla_listado_fila_contenido"
-        end %>
+        end 
+        
+          row_id = 'row_sr_' + shipping_request.id.to_s 
+        %>
 
-  <tr class=<%= @css_class %>>   
+  <tr id='<%= row_id %>' class=<%= @css_class %>>   
     <td> <nobr> 
     <% if shipping_request.m_shipping_request != nil %> 
          <%= shipping_request.m_shipping_request.name %>
@@ -20,8 +23,9 @@
  	<td> <%=  shipping_request.cargo_quantity %> <%=  shipping_request.measure_unit.symbol %> </td>
     
   
- 
-  <td> <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_shipping_request_path(shipping_request) %>  <%= link_to image_tag(asset_path ('buttons/delete.gif')), shipping_request_path(shipping_request), method: :delete, data: { confirm: '¿Está seguro?' } %>
+  <td> <%= link_to image_tag(asset_path('buttons/edit.gif')), edit_shipping_request_path(shipping_request), 'data-ajax' => 'false' %>  <%= link_to image_tag(asset_path ('buttons/delete.gif')),"javascript:ui_delete_object('" + shipping_request_path(shipping_request) + "')"  %>
+    
    </td>
+    
 
 </tr> 

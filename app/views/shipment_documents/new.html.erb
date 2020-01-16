@@ -1,6 +1,21 @@
-﻿<h1>o Documento</h1>
-  
-<%= render 'form' %>
+﻿
 
-<div class="links_form"><%= link_to 'Atrás', shipments_path(@shipment) %></div>
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => *** "Documento" } do %>
+                  
+  
+  <div role="main" class="ui-content">    
+ 
+  
+    <%= render 'form' %>
+
+    <div class="links_form"><%= link_to 'Salir', shipments_path(@shipment) %></div>
+
+
+  </div> <!-- /content -->
+  
+
+<% end %>
+ 
   

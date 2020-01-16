@@ -7,7 +7,7 @@ class ShipmentDocumentsController < ApplicationController
 	
 	def create
 		@shipment = Shipment.find(params[:shipment_id])
-		@shipment_document = ShipmentDocument.new(params[:shipment_document])
+		@shipment_document = ShipmentDocument.new(obj_params)
 		@shipment_document.shipment_id = @shipment.id
 		
 	  if @shipment_document.save
@@ -41,7 +41,19 @@ class ShipmentDocumentsController < ApplicationController
 	  @shipment = @shipment_document.shipment
 	  @shipment_document.destroy
 	 
-	  redirect_to @shipment
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @shipment }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 
+  private
+
+  def obj_params
+    params.require(:shipment_document).permit(:document_type, :number_text, :comments)
+  end
 end

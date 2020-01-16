@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  datetime: 
+  gps_partial_read: 1
+  gps_total_read: 1
+  gps_vehicle_id: MyString
+  vehicle_id: 1
+
+two:
+  datetime: 
+  gps_partial_read: 1
+  gps_total_read: 1
+  gps_vehicle_id: MyString
+  vehicle_id: 1

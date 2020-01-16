@@ -25,6 +25,25 @@
     
     <td>|</td>
     
+    <% if @top_menu_selection == "Flota" %>
+      <td class="link_inactivo">Flota</td>
+    <% else %>
+      <td><%= link_to "Flota", controller: "vehicles" %> </td>
+    <% end %>
+    
+    <td>|</td>
+    
+     <% if @top_menu_selection == "Consultas" %>
+      <td class="link_inactivo">Consultas</td>
+    <% else %>
+    
+     <td class="link_inactivo">Consultas</td>
+     
+     <!-- <td><%= link_to "Consultas", controller: "vehicles" %> </td>  -->
+    <% end %>
+    
+    <td>|</td>
+    
     <% if @top_menu_selection == "Configuracion" %>
       <td class="link_inactivo">Configuración</td>
     <% else %>

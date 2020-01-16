@@ -4,7 +4,7 @@ class StatesController < ApplicationController
 	end
 	
 	def create
-	  @state = State.new(params[:state])
+	  @state = State.new(obj_params)
 
 	  if @state.save
 		redirect_to @state
@@ -39,7 +39,19 @@ class StatesController < ApplicationController
 	  @state = State.find(params[:id])
 	  @state.destroy
 	 
-	  redirect_to states_path
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to states_path }
+      format.js { render "/common/action_result.js" }
+    end  
 	end
 	
+  private
+
+  def obj_params
+    params.require(:state).permit(:name, :country)
+  end
 end

@@ -6,7 +6,7 @@ class MRequestedDeliveriesController < ApplicationController
 	
 	def create
 		@m_requested_cargo = MRequestedCargo.find(params[:m_requested_cargo_id])
-		@m_requested_delivery = MRequestedDelivery.new(params[:m_requested_delivery])
+		@m_requested_delivery = MRequestedDelivery.new(obj_params)
 		@m_requested_delivery.m_requested_cargo_id = @m_requested_cargo.id
 		
 	  if @m_requested_delivery.save
@@ -39,8 +39,22 @@ class MRequestedDeliveriesController < ApplicationController
 	  @m_requested_delivery = MRequestedDelivery.find(params[:id])	
 	  @m_requested_cargo = @m_requested_delivery.m_requested_cargo
 	  @m_requested_delivery.destroy
-	 
-	  redirect_to @m_requested_cargo
+	    
+    @action_result_code="1"
+    @action_result_desc="OK"
+    @action_result_data="{}"
+      
+    respond_to do |format|
+      format.html { redirect_to @m_requested_cargo }
+      format.js { render "/common/action_result.js" }
+    end 
+    
+	   
 	end
 	
+  private
+
+  def obj_params
+    params.require(:m_requested_delivery).permit(:amount, :cargo_type_id, :measure_unit_id, :address_id, :comments)
+  end
 end
