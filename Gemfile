@@ -40,7 +40,7 @@ gem 'jquery-rails'
 
 #gem 'strong_parameters'
 
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 
 gem 'activerecord-postgresql-adapter'
 
