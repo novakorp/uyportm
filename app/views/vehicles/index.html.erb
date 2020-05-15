@@ -39,7 +39,7 @@
       
       	<% gps_pos = vehicle.get_last_position() %>
       	<% if vehicle.gps_numeric_ident != nil
-      		gps_vehic = vehicle.gps_vehicle
+      		gps_inst = vehicle.gps_installations.where('active=true').first
       	   end 
       	 %>
        
@@ -60,13 +60,14 @@
           </td>  
           <td>
             <div class="tabla_listado_titulo_fila_chico">&nbsp;</div>
-          	<%= vehicle.gps_numeric_ident %>  |  
-          	<% if gps_vehic != nil %>       
-              <%= gps_vehic.gps_descriptive_ident  %>           
-            <% end %>
-          	<% if gps_vehic != nil %>   |   		
-           		<%= gps_vehic.gps_plate_number  %>
+          	 
+          	<% if gps_inst != nil %>       
+              <%= gps_inst.gps_numeric_ident %>  | <%= gps_inst.gps_descriptive_ident  %> | <%= gps_inst.gps_plate_number  %>              
          	  <% end %>
+         	  
+         	  <% if gps_pos != nil %>
+         	      Last Pos: <%= l gps_pos.gps_datetime %>  <%= gps_pos.gps_longitude.to_s %>  <%= gps_pos.gps_latitude.to_s %>
+         	  <% end %> 
           </td>  
 	     <td><%= link_to image_tag(asset_path ('buttons/view.gif')), vehicle %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_vehicle_path(vehicle) %> &nbsp; <%= link_to(image_tag(asset_path('buttons/delete.gif')),"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')")  %>  </td> 
         

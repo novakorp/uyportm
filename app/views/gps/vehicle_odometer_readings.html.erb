@@ -9,8 +9,7 @@
 	Total Vehículos: <%= @data.length %> <br />
 
 	<table cellpadding=3 cellspacing=5>
-		<tr>
-			<td>id vehiculo</td>
+		<tr> 
 			<td>ident numerico GPS</td>
 			<td>patente GPS</td>		
 			<td>ident descriptivo GPS</td>		
@@ -21,12 +20,11 @@
 		</tr>
 	
 		<% @data.each do |data| %>
-		<tr>
-			 <td><%=  data.vehicle_id %> </td>
+		<tr> 
 			 <td><%=  data.gps_numeric_ident %> </td>
 			 <td><%=  data.gps_plate_number %> </td>
 			 <td><%=  data.gps_descriptive_ident %> </td>
-	    	 <td><%=  data.gps_datetime  %> </td>
+	    	 <td><%=  l data.gps_datetime  %> </td>
 	      	 <td><%=  data.gps_partial_read  %> </td>
 	      	 <td><%=  data.gps_total_read  %> </td>
 	      	 <td><%=  data.difference  %> </td>

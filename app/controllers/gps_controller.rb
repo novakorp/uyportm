@@ -6,24 +6,22 @@ class GpsController < ApplicationController
   end
   
   
-  def compare_gps_vehicles
-    gps_h_compare_gps_vehicles 
-    
-    gps_h_process_gps_changes
+  def compare_gps_installations
+    gps_h_compare_gps_installations  
   end
   
   
   def gps_changes
-    @changes = GpsChange.all
-     
+    @changes = GpsChange.where('pending=true')
   end
   
   
-  def update_gps_vehicles
-     # Definida en vehicles_helper
-    gps_h_update_gps_vehicles
+  # Actualiza datos de instalaciones GPS segun datos devueltos por GPS
+  
+  def update_gps_installations 
+    gps_h_update_gps_installations
     
-    @vehicles = GpsVehicle.all
+    @gps_installations = GpsInstallation.where('active=true').order(:gps_plate_number, :gps_descriptive_ident);
   end
   
   
@@ -32,6 +30,9 @@ class GpsController < ApplicationController
      @wsdata = gps_h_save_odometer_readings
   end
   
+  
+  
+  # Actualiza posiciones de vehiculos segun datos devueltos por GPS
   
   def update_positions 
   
@@ -48,7 +49,7 @@ class GpsController < ApplicationController
 #  end
   
   def vehicle_odometer_readings
-    @data = GpsOdometerReading.order("gps_numeric_ident desc, gps_datetime desc")
+    @data = GpsOdometerReading.order("gps_numeric_ident, gps_datetime desc")
     
   end
       
@@ -59,24 +60,27 @@ class GpsController < ApplicationController
     g_km_val = []
     i=0
      
-    resul = ActiveRecord::Base.connection.execute("SELECT plate_number, sum(difference) FROM vehicle_odometer_readings o join vehicles v on o.vehicle_id=v.id join vehicle_types vt on v.vehicle_type_id = vt.id Where vt.description like 'Cami%' or vt.description like 'Tractor%' GROUP BY plate_number order by 2 Desc")
-    resul2 = ActiveRecord::Base.connection.execute("SELECT min(date(gps_datetime)), max(date(gps_datetime)) FROM vehicle_odometer_readings ")
+    resul = ActiveRecord::Base.connection.execute("SELECT o.gps_plate_number, sum(o.difference) FROM gps_odometer_readings o join gps_installations i on o.gps_installation_id = i.id join vehicles v on i.vehicle_id=v.id join vehicle_types vt on v.vehicle_type_id = vt.id Where vt.description like 'Cami%' or vt.description like 'Tractor%' GROUP BY o.gps_plate_number order by 2 Desc")
+    resul2 = ActiveRecord::Base.connection.execute("SELECT min(date(gps_datetime)), max(date(gps_datetime)) FROM gps_odometer_readings ")
            
     @data = resul.values
     @dates = resul2.values
      
      
     @data.each do |row|
-    g_km_lab[i]=row[0]
-    g_km_val[i]=row[1]  
-        
-    i+=1
+      g_km_lab[i]=row[0]
+      g_km_val[i]=row[1]  
+          
+      i+=1
     end
      
+    puts "###################################  km labels: " + g_km_lab.to_s 
      
-    @g_km_labels = g_km_lab.to_s
-     
+    @g_km_labels = g_km_lab.to_s 
     @g_km_values=num_arr_to_json g_km_val
+    
+    
+    puts "###################################  km values: " + @g_km_values 
       
   end
  

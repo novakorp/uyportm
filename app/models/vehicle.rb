@@ -22,10 +22,9 @@ class Vehicle < ActiveRecord::Base
 	has_one :vehicle_registration
 	
 
-  has_one :gps_vehicle  
-  has_many :gps_vehicle_positions
-	has_many :gps_odometer_readings
-    
+  has_many :gps_installations
+  has_many :gps_vehicle_positions, through: :gps_installations  
+  has_many :gps_odometer_readings, through: :gps_installations   
  
 
    def get_near_location(gps_position)       
@@ -51,37 +50,26 @@ class Vehicle < ActiveRecord::Base
     
     def get_last_position()       
         
-        last_pos = self.gps_vehicle_positions.order(:gps_datetime).last
-            
+        last_pos=nil
+         
+        if self.gps_installations
+          
+          self.gps_installations.where('active=true').each do |gps_inst|
+             
+            if gps_inst.gps_vehicle_positions
+                last_pos = gps_inst.gps_vehicle_positions.order("gps_datetime desc").first 
+            end
+          end
+        end
+        
         return last_pos
-
     end
     
-    
-    
+     
     def description() 
         return self.plate_number + ' ' + self.vehicle_type.description 
     end
-    
-    
-    def create_retired_vehicle(retirement_date, retirement_reason)
-      
-      retired = RetiredVehicle.new
-      
-      retired.model = self.model
-      retired.plate_number = self.plate_number
-      retired.comments = self.comments
-      retired.company_id = self.company_id
-      retired.vehicle_type_id = self.vehicle_type_id
-      retired.vehicle_brand_id = self.vehicle_brand_id
-      
-      retired.retirement_date = retirement_date
-      retired.retirement_reason = retirement_reason
-      
-      retired.original_vehicle_id = self.id
-            
-      return retired
-    end
+     
            
 end 
 

@@ -3,10 +3,12 @@
             <li data-icon="delete"><a href="#" data-rel="close">Cerrar menu</a></li>            
                 <li><%= link_to "Inicio", controller: "welcome", action: "index"%></li>
                 <li><a href="#panel-responsive-page2">Pedidos</a></li>
-                <li><%= link_to "Agenda", controller: "agenda", action: "agenda"%></li>                 
+                <li><%= link_to "Agenda", controller: "agenda", action: "agenda"%></li>       
                 <li><a href="#panel-responsive-page2">Viajes</a></li>
                 <li><a href="#panel-responsive-page2">Consultas</a></li>
                 <li><a href="#panel-responsive-page2">Ajustes</a></li>
+                <li><%= link_to "Configuracion", controller: "welcome", action: "configuration"%></li> 
                 <li><a href="#panel-responsive-page2">Salir</a></li> 
+                
         </ul>
     </div><!-- /panel -->

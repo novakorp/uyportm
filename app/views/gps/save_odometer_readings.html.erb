@@ -12,14 +12,16 @@
 		<tr>		
 		
 			<td>id vehiculo</td>
-			<td>id gps device</td>
+			<td>id gps device</td> 
+            <td>desc gps device</td>
 			<td>ident numerico GPS</td>		
 			<td>patente gps</td>
 			<td>ident descriptivo gps</td>		
 			<td>fecha gps</td>
 			<td>od parcial</td>
 			<td>od total</td>
-			<td>ultima_lectura</td>
+			<td>ultima_lectura</td> 
+            <td>info ultima lectura</td>
 			<td>lectura guardada</td>	
 			<td>ultimo gps datetime</td>	
 			<td>diferencia</td>		
@@ -29,14 +31,16 @@
 	
 			<tr>
 				 <td><%= data[:vehicle_id]%> </td>
-				 <td><%= data[:gps_vehicle_id]%> </td>
+				 <td><%= data[:gps_installation_id]%> </td>				 
+                 <td><%= data[:gps_inst_desc]%> </td>
 		    	 <td><%=  data[:movil_id]  %> </td>
 				 <td><%=  data[:patente]  %> </td> 
 		      	 <td><%=  data[:identificador]  %> </td>      	 
 		      	 <td><%=  data[:fecha_gps]  %> </td> 
 		      	 <td><%=  data[:odometro_parcial]  %> </td>   	      	     	 
 		      	 <td><%=  data[:odometro_total]  %> </td> 	      	     	 
-		      	 <td><%=  data[:last_reading]  %> </td> 	      	     	 
+		      	 <td><%=  data[:last_reading]  %> </td> 			      	                
+                 <td><%=  data[:info_last_reading]  %> </td>            	     	 
 		      	 <td><%=  data[:reading_saved]  %> </td>            	     	 
 		      	 <td><%=  data[:last_datetime]  %> </td>   	     	 
 		      	 <td><%=  data[:difference]  %> </td>

@@ -80,6 +80,9 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
  
  #  -----  RUTAS  GPS -----
  
+ #  Actualiza datos de instalaciones de GPS
+ get 'gps/update_gps_installations', to: 'gps#update_gps_installations' 
+ 
  get 'gps/update_positions', to: 'gps#update_positions'
  
  get 'gps/save_odometer_readings', to: 'gps#save_odometer_readings'
@@ -87,13 +90,17 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
  
  get 'gps/top_kilometers_done', to: 'gps#top_kilometers_done'   
  get 'gps/vehicle_odometer_readings', to: 'gps#vehicle_odometer_readings'   
- get 'gps/update_vehicles_gps_data', to: 'gps#update_vehicles_gps_data'   
+ 
+
+ # Estas acciones no estan definidas en el controller 
  get 'gps/update_from_gps_data/:gps_vehicle_id', to: 'gps#update_gps_data'  
  get 'gps/create_from_gps_data/:gps_vehicle_id', to: 'gps#create_from_gps_data' 
- get 'gps/update_gps_vehicles', to: 'gps#update_gps_vehicles' 
+ 
+ 
  get 'gps/create_vehicles', to: 'gps#create_vehicles'  
  
- get 'gps/compare_gps_vehicles(.:format)', to: 'gps#compare_gps_vehicles'  
+ #  Compara datos de instalaciones de gps entre los datos devueltos por el web service y datos locales
+ get 'gps/compare_gps_installations(.:format)', to: 'gps#compare_gps_installations'  
  
  get 'gps/gps_changes(.:format)', to: 'gps#gps_changes' 
  get 'gps/vehicle_positions(.:format)', to: 'gps#vehicle_positions' 
@@ -127,11 +134,14 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
   resources :document_types
   resources :employees  
   
-  resources :gps_vehicles
+  resources :gps_installations
+  resources :gps_prev_installations
+  resources :gps_odometer_readings
   
   resources :locations 
   resources :measure_units
-  
+
+
   
   resources :shipments  do
     resources :shipment_supplies

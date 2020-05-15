@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191030123953) do
+ActiveRecord::Schema.define(version: 20200505220728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,38 +117,40 @@ ActiveRecord::Schema.define(version: 20191030123953) do
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
 
   create_table "gps_changes", force: :cascade do |t|
-    t.integer  "gps_vehicle_id"
-    t.integer  "gps_retired_vehicle_id"
+    t.integer  "gps_installation_id"
+    t.integer  "gps_prev_installation_id"
     t.datetime "date_changed"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "action_performed"
+    t.datetime "date_processed"
+    t.boolean  "pending"
+  end
+
+  create_table "gps_installations", force: :cascade do |t|
+    t.string   "gps_numeric_ident",     limit: 255
+    t.string   "gps_plate_number",      limit: 255
+    t.string   "gps_descriptive_ident", limit: 255
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "vehicle_id"
+    t.datetime "creation_date"
+    t.boolean  "active"
+    t.datetime "retirement_date"
+    t.integer  "retirement_reason"
   end
 
   create_table "gps_odometer_readings", force: :cascade do |t|
     t.datetime "gps_datetime"
     t.integer  "gps_partial_read"
     t.integer  "gps_total_read"
-    t.integer  "vehicle_id"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "difference"
     t.string   "gps_numeric_ident",     limit: 255
     t.string   "gps_plate_number",      limit: 255
     t.string   "gps_descriptive_ident", limit: 255
-    t.integer  "gps_vehicle_id"
-  end
-
-  create_table "gps_retired_vehicles", force: :cascade do |t|
-    t.string   "gps_numeric_ident",       limit: 255
-    t.string   "gps_plate_number",        limit: 255
-    t.string   "gps_descriptive_ident",   limit: 255
-    t.datetime "retirement_date"
-    t.integer  "retirement_reason"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "original_gps_vehicle_id"
-    t.integer  "vehicle_id"
-    t.datetime "creation_date"
+    t.integer  "gps_installation_id"
   end
 
   create_table "gps_vehicle_positions", force: :cascade do |t|
@@ -156,25 +158,12 @@ ActiveRecord::Schema.define(version: 20191030123953) do
     t.decimal  "gps_latitude",                      precision: 7, scale: 5
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
-    t.integer  "vehicle_id"
     t.string   "gps_numeric_ident",     limit: 255
     t.datetime "gps_datetime"
     t.string   "gps_descriptive_ident", limit: 255
     t.string   "gps_direction",         limit: 255
     t.string   "gps_speed",             limit: 255
-    t.integer  "gps_vehicle_id"
-  end
-
-  add_index "gps_vehicle_positions", ["vehicle_id"], name: "index_vehicle_positions_on_vehicle_id", using: :btree
-
-  create_table "gps_vehicles", force: :cascade do |t|
-    t.string   "gps_numeric_ident",     limit: 255
-    t.string   "gps_plate_number",      limit: 255
-    t.string   "gps_descriptive_ident", limit: 255
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.integer  "vehicle_id"
-    t.datetime "creation_date"
+    t.integer  "gps_installation_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -248,20 +237,6 @@ ActiveRecord::Schema.define(version: 20191030123953) do
     t.string   "symbol",     limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-  end
-
-  create_table "retired_vehicles", force: :cascade do |t|
-    t.string   "model",               limit: 255
-    t.string   "plate_number",        limit: 255
-    t.string   "comments",            limit: 255
-    t.integer  "company_id"
-    t.integer  "vehicle_type_id"
-    t.integer  "vehicle_brand_id"
-    t.datetime "retirement_date"
-    t.integer  "retirement_reason"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "original_vehicle_id"
   end
 
   create_table "return_types", force: :cascade do |t|

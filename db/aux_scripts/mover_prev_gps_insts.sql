@@ -1,0 +1,3 @@
+insert into gps_installations (id, gps_numeric_ident,gps_plate_number,gps_descriptive_ident,vehicle_id,creation_date,active,retirement_date,retirement_reason, created_at, updated_at) select  original_gps_installation_id, gps_numeric_ident, gps_plate_number,gps_descriptive_ident,vehicle_id,creation_date, false, retirement_date, retirement_reason,created_at, updated_at from gps_prev_installations where original_gps_installation_id is not null;
+
+drop table gps_prev_installations;

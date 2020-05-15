@@ -44,7 +44,7 @@
 		 <%= last_pos.gps_latitude.to_s %>          
 	      </td>
 	      <td>
-		 <%= last_pos.gps_datetime.to_s %>          
+		 <%= l last_pos.gps_datetime %>          
 	      </td>
 	      <td> 
 	      	<% pos_cercana = vehicle.get_near_location(last_pos)  %>

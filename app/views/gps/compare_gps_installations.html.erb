@@ -5,8 +5,7 @@
   <div role="main" class="ui-content">  
 
 	 <%= link_to 'Volver', '/gps' %>
-	<br>
-	Total Vehículos: <%= @wsdata.length %> <br />
+	<br>Total Vehículos: <%= @wsdata.length %> <br />
 
 	<table cellpadding=3 cellspacing=5>
 		<tr>
@@ -16,7 +15,8 @@
 			<td>ident descriptivo</td>	
 			<td></td>
 			<td>patente local</td>
-			<td>ident local</td>
+			<td>ident local</td> 
+            <td>vehicle_id</td>
 			<td>cambio</td>
 		</tr>
 	
@@ -24,7 +24,7 @@
 		<% @wsdata.each do |data| %>
 
 	
-			<% gps_vehic = GpsVehicle.where(["gps_numeric_ident = ?", data[:movil_id]]).first %>
+			<% gps_inst = GpsInstallation.where(["gps_numeric_ident = ? and active=true", data[:movil_id]]).first %>
 				
 			<tr>
 		    	 <td>'<%=data[:movil_id]%>'</td>
@@ -32,18 +32,20 @@
 		      	 <td>'<%=data[:identificador]%>'</td>  
 		      	 <td></td>
 		      	 
-		      	 <% if gps_vehic %>
-		      		<td> '<%= gps_vehic.gps_plate_number %>'</td>
-		      	 	<td> '<%= gps_vehic.gps_descriptive_ident %>'</td>
+		      	 <% if gps_inst %>
+		      		<td> '<%= gps_inst.gps_plate_number %>'</td>
+		      	 	<td> '<%= gps_inst.gps_descriptive_ident %>'</td>
+		      	 	<td> <%= gps_inst.vehicle_id %></td>
 		      	 	
-		      	 	<% if gps_vehic.gps_plate_number != data[:patente]  || gps_vehic.gps_descriptive_ident != data[:identificador]  %>
+		      	 	<% if gps_inst.gps_plate_number != data[:patente]  || gps_inst.gps_descriptive_ident != data[:identificador]  %>
 		      	 		<td> ****  CAMBIA  **** </td>
 		      	 	<% else %>
 		      	 		<td>  </td>
 		      	 	<% end %>
 		      	 <% else %>
 		      	 	<td>**</td>
-		      	 	<td>**</td>
+		      	 	<td>**</td> 
+                    <td>**</td>
 		      	 	<td> ****  NUEVO  **** </td>
 		      	 <% end %>	      	 	
 			</tr>
@@ -52,13 +54,7 @@
 		
 	</table>
 	
-	
-	<h3>Vehículos retirados</h3>
 	 
-	<% @retired_vehics.each  do |rv| %> 
-	   <%= rv %> <br>
-	<%end%>
-	<br>
 
 	 <%= @msgs %>
 

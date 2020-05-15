@@ -1,3 +1,3 @@
 class GpsOdometerReading < ActiveRecord::Base
-  belongs_to :vehicle
+  belongs_to :gps_installation  
 end

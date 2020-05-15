@@ -1,10 +1,10 @@
 ﻿  
-<%= form_for @gps_vehicle do |f| %>
- <% if @gps_vehicle.errors.any? %>
+<%= form_for @gps_installation do |f| %>
+ <% if @gps_installation.errors.any? %>
   <div id="error_explanation" class="form_errors">
   <h2> <%= t :error_header %> </h2>
     <ul>
-    <% @gps_vehicle.errors.full_messages.each do |msg| %>
+    <% @gps_installation.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

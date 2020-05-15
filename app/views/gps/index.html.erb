@@ -13,14 +13,15 @@
     <tr><th>Consultas</th><th>Reportes</th><th> Sincronización</th></tr>
     <tr> 
     <td>
-        <%= link_to 'Comparar Moviles GPS', '/gps/compare_gps_vehicles' %> <br>
-        <%= link_to 'Lectura KMs', '/gps/vehicle_odometer_readings' %> <br> <br>
+        <%= link_to 'Dispositivos GPS', '/gps_installations' %> <br>
+        <%= link_to 'Comparar Moviles GPS', '/gps/compare_gps_installations' %> <br>
+        <%= link_to 'Lectura KMs', '/gps/vehicle_odometer_readings', rel: :external %> <br> <br>
     </td>
     <td>     
         <%= link_to 'Reporte Kms', '/gps/top_kilometers_done' %> <br> 
     </td>
     <td>
-        <%= link_to 'Actualizar Moviles GPS', '/gps/update_gps_vehicles' %> <br>
+        <%= link_to 'Actualizar Instalaciones GPS', '/gps/update_gps_installations' %> <br>
         <%= link_to 'Actualizar Lectura KM', '/gps/save_odometer_readings' %> <br>
         <%= link_to 'Actualizar Posiciones', '/gps/update_positions' %> <br> 
         <%= link_to 'Crear Vehiculos', '/gps/create_vehicles' %> <br> <br>        

@@ -37,37 +37,37 @@
 	
 		<% @changes.each do |c| %> 
 			<tr>
-				<% gv = c.gps_vehicle %> 
-        <% gr = c.gps_retired_vehicle %>
+				<% gv = c.gps_installation %> 
+        <% gr = c.gps_prev_installation %>
 			
         <td> <%= l c.created_at %> </td> 
-        <td><%= c.gps_vehicle_id %></td>
-				<% if ! gv.nil? %> 
+        <td><%= c.gps_installation_id %></td>
+		<% if ! gv.nil? %> 
 				 	<td><%= gv.gps_numeric_ident %></td>			 	
 				 	<td><%= gv.gps_plate_number %></td>
 				 	<td><%= gv.gps_descriptive_ident %></td>		 
 				 	
           <% v = gv.vehicle %> 
-				 	<% if ! v.nil? %>	  
-            <td><%= v.model %></td>      
-            <td><%= v.plate_number %></td>   
-            
+			<% if ! v.nil? %>	  
+                <td><%= v.model %></td>      
+                <td><%= v.plate_number %></td>   
+                
           <% else %>
-            <td>**</td>      
-            <td>**</td>   
-				 	<% end %>
+                <td>**</td>      
+                <td>**</td>   
+          <% end %>
 				 	
-				<% else %>
-				 	<td>**</td>
-				 	<td>**</td>
-				 	<td>**</td>
-				 	<td>**</td>
-          <td>**</td> 
-				<% end %>
+		<% else %>
+    	 	<td>**</td>
+    	 	<td>**</td>
+    	 	<td>**</td>
+    	 	<td>**</td>
+            <td>**</td> 
+    	<% end %>
 				
 				<td> | </td>
 				
-        <td><%= c.gps_retired_vehicle_id %></td>  
+        <td><%= c.gps_prev_installation_id %></td>  
 				<% if ! gr.nil? %>   
           <td><%= gr.gps_plate_number %></td>
           <td><%= gr.gps_descriptive_ident %></td>     

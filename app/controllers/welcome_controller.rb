@@ -6,8 +6,8 @@
     @alerts = ag.get_alerts
     
     # Obtener pedidos recientes
-    dateQry = Date.today-100     
-    @pedidos = ShippingRequest.joins(:customer_shipping_order).where('order_datetime >= ?', dateQry).order('order_datetime DESC')
+    dateBegin = Date.today-20    
+    @pedidos = ShippingRequest.joins(:customer_shipping_order).where('order_datetime >= ?', dateBegin).order('order_datetime DESC')
     
     
   end

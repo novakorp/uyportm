@@ -23,7 +23,7 @@
 		<% @wsdata.each do |data| %>
 
 	
-			<% gps_vehic = GpsVehicle.first(:conditions => ["gps_numeric_ident = ?", data[:movil_id]]) %>
+			<% gps_vehic = GpsInstallation.first(:conditions => ["gps_numeric_ident = ? and active=true", data[:movil_id]]) %>
 				
 			<tr>
 		    	 <td>'<%=data[:movil_id]%>'</td>

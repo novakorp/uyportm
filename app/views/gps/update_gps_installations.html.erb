@@ -1,6 +1,6 @@
 
 <%=render :layout => 'common/mobile',
-          :locals => { :page_id => mobile_page_id() , :page_title => "Actualizar Posiciones de Vehículos" } do %> 
+          :locals => { :page_id => mobile_page_id() , :page_title => "Actualizar Instalaciones GPS" } do %> 
 
   <div role="main" class="ui-content"> 
 
@@ -8,7 +8,7 @@
 
 	 <%= link_to 'Volver', "/welcome/configuration" %>
 
-	Total Vehículos: <%= @vehicles.length %> <br />
+	<br/>Total Vehículos: <%= @gps_installations.length %> <br/>
 
 	<table cellpadding=3 cellspacing=5>
 		<tr>
@@ -19,7 +19,7 @@
 			<td>Id Vehiculo</td>
 		</tr>
 	
-		<% @vehicles.each do |data| %>
+		<% @gps_installations.each do |data| %>
 		<tr>
 		
          <td><%=  data.id  %> </td> 
