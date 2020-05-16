@@ -6,7 +6,7 @@ LC_ALL="en_US.UTF-8"
 
 gem 'rails', '4.2.8'
 
-gem 'rake', '10.4.2'
+gem 'rake', '12.3.3'
 
 
 gem "sprockets", ">= 3.7.2"
