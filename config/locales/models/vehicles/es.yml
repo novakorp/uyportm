@@ -13,6 +13,7 @@ es:
         vehicle_type_id: "Tipo de Vehículo"
         vehicle_brand_id: "Marca"
         brand: "Marca" 
+        year: "Año" 
         model: "Modelo"
         status: "Estado"
         plate_number: "Matrícula"

@@ -80,7 +80,7 @@ class VehiclesController < ApplicationController
 	def update
 	  @vehicle = Vehicle.find(params[:id])
 	 
-	 if @vehicle.update_attributes(params[:vehicle].permit(:company_id, :vehicle_type_id, :vehicle_brand_id, :model, :status, :plate_number, :default_driver_id, :gps_numeric_ident, :creation_date, :comments))
+	 if @vehicle.update_attributes(params[:vehicle].permit(:company_id, :vehicle_type_id, :vehicle_brand_id, :model, :year, :status, :plate_number, :default_driver_id, :gps_numeric_ident, :creation_date, :comments))
 		redirect_to @vehicle
 	 else
 		render 'edit'
@@ -115,7 +115,7 @@ class VehiclesController < ApplicationController
   private
 
   def obj_params
-    params.require(:vehicle).permit(:company_id, :vehicle_type_id, :vehicle_brand_id, :model, :status, :plate_number, :default_driver_id, :gps_numeric_ident, :creation_date, :comments)
+    params.require(:vehicle).permit(:company_id, :vehicle_type_id, :vehicle_brand_id, :model, :year, :status, :plate_number, :default_driver_id, :gps_numeric_ident, :creation_date, :comments)
   end
 
   

@@ -51,7 +51,9 @@
                 if vehicle.vehicle_brand != nil
                     vehicle.vehicle_brand.abbreviation
                 end
-            %> <%= vehicle.model %></td>
+            %> <%= vehicle.model %>
+             <div class="tabla_listado_titulo_fila_chico"><%= vehicle.year.to_s %></div>
+          </td>
           <td><div class="tabla_listado_titulo_fila_chico">&nbsp;</div><%= vehicle.plate_number %></td>
          
           <td>

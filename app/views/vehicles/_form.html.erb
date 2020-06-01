@@ -35,6 +35,11 @@
   </tr>
   
   <tr>
+    <th><%= f.label :year %></th>
+    <td> <%= f.text_field :year %></td>
+  </tr>
+  
+  <tr>
     <th><%= f.label :status %></th>
     <td> <%= f.select :status, get_vehicle_status_array() %> </td>
   </tr> 
