@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  business_entity_id: 
+  address_id: 
+  inspection_type: 1
+  comments: MyText
+
+two:
+  name: 
+  business_entity_id: 
+  address_id: 
+  inspection_type: 1
+  comments: MyText

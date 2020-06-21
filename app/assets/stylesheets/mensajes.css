@@ -23,3 +23,14 @@
 	font-weight: bold;
 }
 
+
+
+.alert-notice {
+    background-color: #F3FFEA;
+    border-color: #D5FFD1;
+    border-width: 1px;
+    border-style: solid;
+    color: #65C454;
+    font-weight: bold;
+}
+

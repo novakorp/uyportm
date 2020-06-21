@@ -1,0 +1,2 @@
+class BusinessEntitiesController < ApplicationController
+end

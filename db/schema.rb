@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200531212619) do
+ActiveRecord::Schema.define(version: 20200616024325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,18 +26,20 @@ ActiveRecord::Schema.define(version: 20200531212619) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "location_id"
-    t.string   "description",      limit: 255
-    t.string   "address_detail_1", limit: 255
-    t.string   "address_detail_2", limit: 255
-    t.string   "postal_code",      limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "description",        limit: 255
+    t.string   "address_detail_1",   limit: 255
+    t.string   "address_detail_2",   limit: 255
+    t.string   "postal_code",        limit: 255
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "customer_id"
-    t.string   "phone_number_1",   limit: 255
-    t.string   "phone_number_2",   limit: 255
+    t.string   "phone_number_1",     limit: 255
+    t.string   "phone_number_2",     limit: 255
     t.text     "comments"
+    t.integer  "business_entity_id"
   end
 
+  add_index "addresses", ["business_entity_id"], name: "index_addresses_on_business_entity_id", using: :btree
   add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
   add_index "addresses", ["location_id"], name: "index_addresses_on_location_id", using: :btree
 
@@ -46,6 +48,14 @@ ActiveRecord::Schema.define(version: 20200531212619) do
     t.string   "code",        limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "business_entities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "entity_type"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "cargo_categories", force: :cascade do |t|
@@ -232,6 +242,19 @@ ActiveRecord::Schema.define(version: 20200531212619) do
   add_index "m_shipping_requests", ["service_id"], name: "index_m_shipping_requests_on_service_id", using: :btree
   add_index "m_shipping_requests", ["trip_id"], name: "index_m_shipping_requests_on_trip_id", using: :btree
 
+  create_table "m_vehicle_inspections", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "business_entity_id"
+    t.integer  "address_id"
+    t.integer  "inspection_type"
+    t.text     "comments"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "m_vehicle_inspections", ["address_id"], name: "index_m_vehicle_inspections_on_address_id", using: :btree
+  add_index "m_vehicle_inspections", ["business_entity_id"], name: "index_m_vehicle_inspections_on_business_entity_id", using: :btree
+
   create_table "measure_units", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "symbol",     limit: 255
@@ -243,6 +266,13 @@ ActiveRecord::Schema.define(version: 20200531212619) do
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.text     "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade do |t|
@@ -383,6 +413,16 @@ ActiveRecord::Schema.define(version: 20200531212619) do
   add_index "trips", ["from_location_id"], name: "index_trips_on_from_location_id", using: :btree
   add_index "trips", ["to_location_id"], name: "index_trips_on_to_location_id", using: :btree
 
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "email",           limit: 255
@@ -402,6 +442,22 @@ ActiveRecord::Schema.define(version: 20200531212619) do
     t.datetime "updated_at",                    null: false
     t.string   "abbreviation",      limit: 255
   end
+
+  create_table "vehicle_inspections", force: :cascade do |t|
+    t.integer  "m_vehicle_inspection_id"
+    t.integer  "vehicle_id"
+    t.integer  "address_id"
+    t.datetime "insp_datetime"
+    t.integer  "status"
+    t.integer  "result"
+    t.integer  "employee_id"
+    t.text     "comments"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "business_entity_id"
+  end
+
+  add_index "vehicle_inspections", ["business_entity_id"], name: "index_vehicle_inspections_on_business_entity_id", using: :btree
 
   create_table "vehicle_registrations", force: :cascade do |t|
     t.string   "chassis",             limit: 255
@@ -447,4 +503,10 @@ ActiveRecord::Schema.define(version: 20200531212619) do
 
   add_index "vehicles", ["vehicle_brand_id"], name: "index_vehicles_on_vehicle_brand_id", using: :btree
 
+  add_foreign_key "addresses", "business_entities"
+  add_foreign_key "m_vehicle_inspections", "addresses"
+  add_foreign_key "m_vehicle_inspections", "business_entities"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
+  add_foreign_key "vehicle_inspections", "business_entities"
 end

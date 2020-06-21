@@ -10,6 +10,9 @@ es:
     attributes:
       user:
         name: "Nombre"
-        email: "Email"
+        email: "Email"        
         password: "Contraseña" 
         password_confirmation: "Confirmar contraseña"
+        current_password: "Contraseña actual"
+        new_password: "Nueva contraseña" 
+        roles: "Roles"

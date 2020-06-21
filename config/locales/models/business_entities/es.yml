@@ -1,0 +1,14 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      business_entity:
+        one: "Entidad de Negocio"
+        other: "Entidades de Negocio"
+    attributes:
+      business_entity:
+        name: "Nombre"
+        entity_type: "Tipo"
+        description: "Descripción"

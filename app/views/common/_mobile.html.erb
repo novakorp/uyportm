@@ -1,24 +1,33 @@
-
-<body> 
-  
-    <!-- page_id , page_title se pasan como variable del layout -->    
-    <div id='<%= page_id %>' data-role="page" class="ui-responsive-panel">
-      
-      <div data-role="header">
-        <h2 style="color:green"> <%= page_title %></h2>    
-        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>    
-      </div><!-- /header -->
-      
-      <%= render "/common/form_errors" %>
+<body>  
+    <div id='<%= page_id %>' data-role="page" class="ui-responsive-panel"> 
+        <div data-role="header"> 
+            <h2 style="color:green"> <%= page_title %></h2>     
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>  
+            <!-- show nav links -->
+            <% if current_user %>
+                <!-- current_user will return true if a user is logged in -->
+                <a href="#<%= page_id %>_user_menu" data-rel="popup"  class="ui-btn ui-icon-user ui-corner-all ui-btn-icon-notext ui-btn-inline">No Text</a>
+                <!-- Opciones usuario -->   
+                <div data-role="popup" id="<%= page_id %>_user_menu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;"> 
+                        <li data-role="list-divider"><%= current_user.name %></li>  
+                        <li><%=link_to 'Cambiar Contraseña', users_change_password_path, "data-ajax" => :false %></li>  
+                        <li><%=link_to 'Cerrar Sesión', signout_path, "data-ajax" => :false %></li>                
+                    </ul> 
+                </div>      
+            <% end %>   
+        </div>  <!-- /header -->
+       
            
-      <%= yield %>  
+        <%= yield %>  
           
-      <%= render "/common/nav_menu" %>
-      <%= render "/common/footer_generic" %>
+        <%= render "/common/nav_menu" %>
+        <%= render "/common/footer_generic" %>
       
     </div> <!-- page -->
     
-      <%= render '/common/generic_popup.html.erb'%> 
+    <%= render '/common/generic_popup.html.erb'%> 
+        
 </body>
 
   

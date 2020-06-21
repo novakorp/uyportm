@@ -52,6 +52,7 @@ gem 'tzinfo-data'
 
 gem 'rufus-scheduler'
 
+gem 'open_street_map'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,0 +1,33 @@
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Roles" } do %> 
+
+  <div role="main" class="ui-content">   
+
+	 <%= link_to 'Nuevo Rol', new_role_path %> &nbsp;&nbsp; <%= link_to 'Volver', "/welcome/configuration" %>
+	<table class="tabla_listado" cellpadding=0 cellspacing=0>
+	  <tr class="tabla_listado_fila_cabezal">
+	    <th>Nombre</th>
+	    <th>Comentarios</th> 
+		<th></th>
+	  </tr>
+	 
+	  <% @roles.each do |role| %>
+		<%  item_url = role_path(role)
+		    item_id=mobile_item_id(item_url) %>
+	      
+		<tr id="<%= item_id %>" class="tabla_listado_fila_contenido">
+
+	      <td><%= role.name %></td>
+	      <td><%= role.comments %></td>
+	      <td><%= link_to image_tag(asset_path ('buttons/view.gif')), role %> &nbsp; <%= link_to image_tag(asset_path ('buttons/edit.gif')), edit_role_path(role) %> &nbsp; <%= link_to image_tag(asset_path('buttons/delete.gif')),"javascript:list_delete_resource_dialog('" + item_url + "', '" + item_id + "')"    %></td>
+	 	
+	    </tr>
+	  <% end %>
+	</table>
+	<div class="links_listado"><%= link_to 'Volver', "/welcome/configuration" %></div>
+
+  </div> <!-- /content --> 
+  
+<% end %>
+

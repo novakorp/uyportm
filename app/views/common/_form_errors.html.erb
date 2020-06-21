@@ -2,4 +2,7 @@
     <% if key == 'success' || key == 'error' %>
       <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
+    <% if key == 'notice' %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %> 
   <% end %>

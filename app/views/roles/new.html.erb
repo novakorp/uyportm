@@ -1,0 +1,17 @@
+
+
+<%=render :layout => 'common/mobile',
+          :locals => { :page_id => mobile_page_id() , :page_title => "Nuevo Rol" } do %>
+                  
+  
+  <div role="main" class="ui-content"> 
+	  
+	<%= render 'form' %>
+
+	<div class="links_form"><%= link_to 'Salir', roles_path %></div> 
+
+
+  </div> <!-- /content -->
+  
+
+<% end %>

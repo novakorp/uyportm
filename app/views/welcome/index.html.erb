@@ -1,9 +1,11 @@
  
 <%=render :layout => 'common/mobile',
           :locals => { :page_id => mobile_page_id() , :page_title => "Inicio" } do %>
-   
+ 
+ 
   <div role="main" class="ui-content">   
        
+ <%= render "/common/form_errors" %>
 
 <% if @alerts.length > 0 %>
 

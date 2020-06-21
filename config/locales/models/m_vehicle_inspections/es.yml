@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  activerecord:
+    models:
+      m_vehicle_inspection:
+        one: "Modelo de Inspección de Vehículo"
+        other: "Modelos de Inspección de Vehículo"
+    attributes:
+      m_vehicle_inspection:
+        name: "Nombre" 
+        business_entity_id: "Entidad de Negocio" 
+        address_id: "Dirección" 
+        inspection_type: "Empresa" 
+        comments: "Observaciones" 
+        

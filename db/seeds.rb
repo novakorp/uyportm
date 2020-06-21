@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+#
+#
+#
+# Roles
+
+Role.create(name: 'sysadmin', comments: 'Administrador del Sistema');
+Role.create(name: 'config', comments: 'Configuracion')
+Role.create(name: 'hr', comments:'Recursos Humanos');
+Role.create(name: 'oper', comments:'Operativa');
+
+
+

@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+	include UsersHelper
+	
+  has_many :user_roles
+	has_many :roles, through: :user_roles 
+	
+	
 	before_save { self.email = email.downcase }
 	
 	validates :name,  :presence => true, length: { maximum: 50 }
@@ -12,6 +18,10 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+  
+  def has_role(p_role_name)
+    return user_h_has_role(self, p_role_name)
   end
 
   private

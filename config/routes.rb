@@ -113,7 +113,12 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
  
  
  get 'users/notify/:id', to: 'users#notify'  
- 
+  
+  
+ post 'users/change_password_submit', to: 'users#change_password_submit' 
+ get 'users/change_password_submit', to: 'welcome#index'  
+ get 'users/change_password', to: 'users#change_password'  
+  
   
   # Sample resource route (maps HTTP verbs to controller actions automatically):   
   
@@ -181,6 +186,15 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
   resources :vehicle_types  
   
   
+  resources :roles
+  
+  
+  resources :business_entities
+  resources :m_vehicle_inspections
+  resources :vehicle_inspections
+  
+  
+  
  # Requests particulares
  
  get 'customer_shipping_orders/:id/:sel_line_id', to: 'customer_shipping_orders#show'
@@ -188,13 +202,25 @@ get 'shipments/list_documents', to: 'shipments#list_documents'
   
   #  Autenticacion y Manejo de usuarios
   
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions
   resources :users
   resources :gps
   
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
+   
+  # log in page with form:
+  get '/signin', to: 'sessions#new'
+ 
+  # delete action to log out:
+ # delete '/signout' => 'sessions#destroy'   
+  get '/signout' => 'sessions#destroy' 
+  
+  
+  #get 'sessions/signout', to: 'sessions#destroy'
+  
+  #match '/signup',  to: 'users#new',            via: 'get'
+ # match '/signin',  to: 'sessions#new',         via: 'get'
+  #match '/signout', to: 'sessions#destroy',     via: 'delete'
+  
   
   # Sample resource route with options:
   #   resources :products do
